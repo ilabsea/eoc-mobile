@@ -3,20 +3,23 @@ import {} from 'react-native';
 
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
+import createStore from './stores';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist';
 
-import HomeScreen from './screens/HomeScreen';
-import SopDetailScreen from './screens/SopDetailScreen';
+import RootScreen from './containers/root/RootScreen';
+import GuideLineListScreen from './containers/guideline-list/GuideLineListScreen';
 
-const AppNavigator = createStackNavigator(
-  {
-    Home: HomeScreen,
-    SopDetail: SopDetailScreen,
-  },
-  {
-    initialRouteName: 'Home',
-  },
-);
+const {store, persistor} = createStore();
 
-const App = createAppContainer(AppNavigator);
+const App = () => {
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <RootScreen />
+      </PersistGate>
+    </Provider>
+  );
+};
 
 export default App;
