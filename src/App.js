@@ -1,8 +1,10 @@
 import React from 'react';
-import {} from 'react-native';
+import {Text} from 'react-native';
 
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
+import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import HomeScreen from './screens/HomeScreen';
 import SopDetailScreen from './screens/SopDetailScreen';
