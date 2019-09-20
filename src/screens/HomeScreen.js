@@ -16,7 +16,6 @@ class HomeScreen extends Component {
       data: []
     }
 
-    this.timeId = null
     this.handleSearch = this.handleSearch.bind(this)
     this.handleFetch = this.handleFetch.bind(this)
   }
@@ -31,16 +30,22 @@ class HomeScreen extends Component {
   };
 
   handleFetch = async (searchText) => {
-    console.log('fetch...', this.state.searchText)
-    let data = await axios.get('http://10.0.2.2:3000/sops.json', {
-                    params: {
-                      searchText: searchText
-                    }
-                  })
-                  .then(function (response) {
-                    return response.data
-                  })
-    this.setState({data})
+    try {
+      let data = await axios.get('http://10.0.2.2:3000/api/v1/sops.json', {
+                      params: {
+                        searchText: searchText
+                      }
+                    })
+                    .then(function (response) {
+                      return response.data
+                    })
+                    .catch(function (error) {
+                      return error
+                    })
+      this.setState({data})
+    } catch ( e ) {
+      console.log(e)
+    }
   }
 
   handleSearch = (searchText) => {
@@ -66,11 +71,11 @@ class HomeScreen extends Component {
         <Content>
           <List
             dataArray={this.state.data}
-            keyExtractor={item => item.id.toString()}
+            keyExtractor={item => item._source.id.toString()}
             renderRow={item => {
               return (
-                <ListItem onPress={() => this.handleListPress.bind(this, item)}>
-                  <Text>{item.name}</Text>
+                <ListItem onPress={() => this.handleListPress.bind(this, item._source)}>
+                  <Text>{item._source.name}</Text>
                 </ListItem>
               );
             }}
