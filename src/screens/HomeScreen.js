@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import {StyleSheet, Alert} from 'react-native';
+import {StyleSheet, Alert, ActivityIndicator, YellowBox} from 'react-native';
 import axios from 'axios'
 import {Container, Header, Item, Input, Left, Body, Right, Title, Button, Content, List, ListItem, Text, Icon} from 'native-base';
 // import { data } from '../data'
 
+
+YellowBox.ignoreWarnings(['Remote debugger'])
 
 class HomeScreen extends Component {
 
@@ -11,6 +13,7 @@ class HomeScreen extends Component {
     super(props)
 
     this.state = {
+      isFetching: false,
       from: 0,
       size: 15,
       searchText: '',
@@ -35,7 +38,7 @@ class HomeScreen extends Component {
 
     try {
       let data = await axios.get('http://10.0.2.2:3000/api/v1/sops.json', {
-                      params: { searchText, from, size}
+                      params: { searchText, from, size }
                     })
                     .then(function (response) {
                       return response.data
@@ -44,7 +47,6 @@ class HomeScreen extends Component {
                       return error
                     })
 
-      // this.setState({data})
       if( data.length > 0 ) {
         this.setState( (prev) => {
           return {
@@ -53,14 +55,17 @@ class HomeScreen extends Component {
           }
         })
       }
+      
+      this.setState({isFetching: false})
     } catch ( e ) {
       console.log(e)
     }
   }
 
   loadMore = () => {
-    let { searchText, from, size } = this.state
-    this.handleFetch(searchText)
+    console.log('loading..')
+    this.setState({isFetching: true})
+    this.handleFetch(this.state.searchText)
   }
 
   render() {
@@ -91,6 +96,11 @@ class HomeScreen extends Component {
               );
             }}
           />
+
+        <ActivityIndicator 
+          style={{opacity: this.state.isFetching ? 1.0 : 0.0}} 
+          size="large" color="#0000ff" animating={true} />
+        
       </Container>
     );
   } 
