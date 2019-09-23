@@ -5,8 +5,14 @@ import * as config from '../config/base'
 import {Container, Header, Item, Input, Left, Body, Right, Title, Button, Content, List, ListItem, Text, Icon} from 'native-base';
 // import { data } from '../data'
 
-
+// TOREMV
 YellowBox.ignoreWarnings(['Remote debugger'])
+
+const typeIcon = (docType) => {
+  let doc = { document: { icon: 'pdffile1', color: 'red' }, 
+              folder: { icon: 'folder1', color: 'orange' } }
+  return doc[docType]
+}
 
 class HomeScreen extends Component {
 
@@ -60,7 +66,6 @@ class HomeScreen extends Component {
   }
 
   loadMore = () => {
-    console.log('loading..')
     this.setState({isFetching: true})
     this.handleFetch(this.state.searchText)
   }
@@ -86,9 +91,20 @@ class HomeScreen extends Component {
             onEndReached={this.loadMore }
             onEndReachedThreshold={0.5}
             renderRow={item => {
+              let { icon, color } = typeIcon(item._source.document_type)
               return (
-                <ListItem onPress={() => this.handleListPress.bind(this, item._source)}>
-                  <Text>{item._source.name}</Text>
+                <ListItem icon onPress={() => this.handleListPress.bind(this, item._source)}>
+                  <Left>
+                    <Button style={{ backgroundColor: "#fff" }}>
+                      <Icon type="AntDesign" style={{ color }} name={ icon } />
+                    </Button>
+                  </Left>
+                  <Body>
+                    <Text>{item._source.name}</Text>
+                  </Body>
+                  <Right>
+                    <Icon name="arrow-forward" />
+                  </Right>
                 </ListItem>
               );
             }}
