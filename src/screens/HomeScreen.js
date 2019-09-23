@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, Alert, ActivityIndicator, YellowBox} from 'react-native';
 import axios from 'axios'
+import * as config from '../config/base'
 import {Container, Header, Item, Input, Left, Body, Right, Title, Button, Content, List, ListItem, Text, Icon} from 'native-base';
 // import { data } from '../data'
 
@@ -35,17 +36,13 @@ class HomeScreen extends Component {
 
   handleFetch = async (searchText) => {
     let { from, size } = this.state
+    let uri = `${config.host}:${config.port}/${config.sops_path}`
+    let params = { searchText, from, size }
 
     try {
-      let data = await axios.get('http://10.0.2.2:3000/api/v1/sops.json', {
-                      params: { searchText, from, size }
-                    })
-                    .then(function (response) {
-                      return response.data
-                    })
-                    .catch(function (error) {
-                      return error
-                    })
+      let data = await axios.get(uri, { params })
+                    .then( resp => resp.data )
+                    .catch( error => error)
 
       if( data.length > 0 ) {
         this.setState( (prev) => {
