@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, Alert, ActivityIndicator, YellowBox} from 'react-native';
 import axios from 'axios'
 import * as config from '../config/base'
+import moment from 'moment'
 import {Container, Header, Item, Input, Left, Body, Right, Title, Button, Content, List, ListItem, Text, Icon} from 'native-base';
 // import { data } from '../data'
 
@@ -60,10 +61,15 @@ class HomeScreen extends Component {
         })
       }
       
+      console.log(data)
       this.setState({isFetching: false})
     } catch ( e ) {
       console.log(e)
     }
+  }
+
+  componentDidMount() {
+    // this.handleFetch('name')
   }
 
   loadMore = () => {
@@ -91,8 +97,6 @@ class HomeScreen extends Component {
   }
 
   render() {
-    
-
     return (
       <Container>
         <Header searchBar rounded>
@@ -123,11 +127,12 @@ class HomeScreen extends Component {
                   </Left>
                   <Body>
                     <Text>{ 
-                      this.hl( item.highlight.name[0] ).map( (item, i) => {
+                      item.highlight && this.hl( item.highlight.name[0] ).map( (item, i) => {
                       return item 
                     }) }
                     </Text>
                     {/* <Text>{ item.highlight.tags && item.highlight.tags[0] }</Text> */}
+                    <Text>{ moment(item._source.created_at).fromNow() }</Text>
                   </Body>
                   <Right>
                     <Icon name="arrow-forward" />
