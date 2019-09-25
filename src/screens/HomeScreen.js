@@ -27,6 +27,7 @@ class HomeScreen extends Component {
       data: []
     }
 
+    this.hl = this.hl.bind(this)
     this.loadMore = this.loadMore.bind(this)
     this.handleFetch = this.handleFetch.bind(this)
   }
@@ -70,7 +71,28 @@ class HomeScreen extends Component {
     this.handleFetch(this.state.searchText)
   }
 
+  hl = ( str ) => {
+    let reg = /<em class='highlight'>.*<\/em>/
+    let items = str.split(reg)
+
+    result  = /<em class='highlight'>(.*)<\/em>/.exec(str)
+
+    search_value = result[1]
+    ele = React.createElement(Text, {key: 999, style: {color: 'green'}}, search_value)
+
+    let data = []
+    items.forEach((item, index) => {
+      data.push(React.createElement(Text, {key: index}, item))
+      if( index < items.length-1 )
+        data.push(ele)
+    });
+
+    return data
+  }
+
   render() {
+    
+
     return (
       <Container>
         <Header searchBar rounded>
@@ -100,7 +122,12 @@ class HomeScreen extends Component {
                     </Button>
                   </Left>
                   <Body>
-                    <Text>{item._source.name}</Text>
+                    <Text>{ 
+                      this.hl( item.highlight.name[0] ).map( (item, i) => {
+                      return item 
+                    }) }
+                    </Text>
+                    {/* <Text>{ item.highlight.tags && item.highlight.tags[0] }</Text> */}
                   </Body>
                   <Right>
                     <Icon name="arrow-forward" />
