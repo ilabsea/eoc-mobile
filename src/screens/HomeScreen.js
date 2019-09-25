@@ -29,6 +29,7 @@ class HomeScreen extends Component {
     }
 
     this.hl = this.hl.bind(this)
+    this.searchInput = React.createRef();
     this.loadMore = this.loadMore.bind(this)
     this.handleFetch = this.handleFetch.bind(this)
   }
@@ -69,7 +70,7 @@ class HomeScreen extends Component {
   }
 
   componentDidMount() {
-    // this.handleFetch('name')
+    this.searchInput.current._root.focus()
   }
 
   loadMore = () => {
@@ -102,7 +103,8 @@ class HomeScreen extends Component {
         <Header searchBar rounded>
           <Item>
             <Icon name="ios-menu" />
-            <Input placeholder="Search"
+            <Input ref={this.searchInput} 
+                placeholder="Search"
                 value={this.state.searchText}
                 onChangeText={(searchText) => this.setState({searchText}) } />
             <Icon name="ios-search" onPress={() => this.handleFetch(this.state.searchText)} />
