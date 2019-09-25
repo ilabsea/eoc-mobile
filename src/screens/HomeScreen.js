@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {StyleSheet, Alert, ActivityIndicator, YellowBox} from 'react-native';
+import {StyleSheet, View, Alert, ActivityIndicator, YellowBox} from 'react-native';
 import axios from 'axios'
 import * as config from '../config/base'
 import moment from 'moment'
-import {Container, Header, Item, Input, Left, Body, Right, Title, Button, Content, List, ListItem, Text, Icon} from 'native-base';
+import {Container, Header, Item, Input, Left, Body, Right, Title, Button, Content, List, ListItem, Text, Icon, H1, H3} from 'native-base';
 // import { data } from '../data'
 
 // TOREMV
@@ -32,6 +32,7 @@ class HomeScreen extends Component {
     this.searchInput = React.createRef();
     this.loadMore = this.loadMore.bind(this)
     this.handleFetch = this.handleFetch.bind(this)
+    this._renderRow = this._renderRow.bind(this)
   }
 
   handleListPress = item => {
@@ -85,16 +86,49 @@ class HomeScreen extends Component {
     result  = /<em class='highlight'>(.*)<\/em>/.exec(str)
 
     search_value = result[1]
-    ele = React.createElement(Text, {key: 999, style: {color: 'green'}}, search_value)
+    ele = React.createElement(H3, {key: 999, style: styles.searchResult}, search_value)
 
     let data = []
     items.forEach((item, index) => {
-      data.push(React.createElement(Text, {key: index}, item))
+      data.push(React.createElement(H3, {key: index}, item))
       if( index < items.length-1 )
         data.push(ele)
     });
 
     return data
+  }
+
+  _renderRow = (item) => {
+    let { icon, color } = typeIcon(item._source.document_type)
+    return (
+      <ListItem icon 
+        style={styles.listItem}
+        onPress={() => this.handleListPress.bind(this, item._source)}>
+        <Left style={styles.left}>
+          <Button style={styles.btnIcon}>
+            <Icon type="AntDesign" style={{ color, fontSize:30 }} name={ icon } />
+          </Button>
+        </Left>
+        <Body>
+          <View style={styles.title}>
+            <Text>
+            { 
+              item.highlight && 
+                this.hl( item.highlight.name[0] ).map( item => {
+                return item 
+              }) 
+            }
+            </Text>
+            <Text style={styles.timeago}>
+              { moment(item._source.created_at).fromNow() }
+            </Text>
+          </View>
+        </Body>
+        <Right>
+          <Icon name="arrow-forward" />
+        </Right>
+      </ListItem>
+    );
   }
 
   render() {
@@ -107,46 +141,28 @@ class HomeScreen extends Component {
                 placeholder="Search"
                 value={this.state.searchText}
                 onChangeText={(searchText) => this.setState({searchText}) } />
-            <Icon name="ios-search" onPress={() => this.handleFetch(this.state.searchText)} />
+            <Icon name="ios-search" 
+                  onPress={() => this.handleFetch(this.state.searchText)} />
           </Item>
           <Button transparent>
             <Text>Search</Text>
           </Button>
         </Header>
         <List
+            style={styles.list}
             dataArray={this.state.data}
             keyExtractor={item => item._source.id.toString()}
             onEndReached={this.loadMore }
             onEndReachedThreshold={0.5}
-            renderRow={item => {
-              let { icon, color } = typeIcon(item._source.document_type)
-              return (
-                <ListItem icon onPress={() => this.handleListPress.bind(this, item._source)}>
-                  <Left>
-                    <Button style={{ backgroundColor: "#fff" }}>
-                      <Icon type="AntDesign" style={{ color }} name={ icon } />
-                    </Button>
-                  </Left>
-                  <Body>
-                    <Text>{ 
-                      item.highlight && this.hl( item.highlight.name[0] ).map( (item, i) => {
-                      return item 
-                    }) }
-                    </Text>
-                    {/* <Text>{ item.highlight.tags && item.highlight.tags[0] }</Text> */}
-                    <Text>{ moment(item._source.created_at).fromNow() }</Text>
-                  </Body>
-                  <Right>
-                    <Icon name="arrow-forward" />
-                  </Right>
-                </ListItem>
-              );
-            }}
+            renderRow={ this._renderRow }
           />
 
-        <ActivityIndicator 
-          style={{opacity: this.state.isFetching ? 1.0 : 0.0}} 
-          size="large" color="#0000ff" animating={true} />
+        {
+          this.state.isFetching ? 
+            <ActivityIndicator 
+            style={{opacity: this.state.isFetching ? 1.0 : 0.0}} 
+            size="large" color="#0000ff" animating={true} /> : null
+        }
         
       </Container>
     );
@@ -154,11 +170,31 @@ class HomeScreen extends Component {
 };
 
 const styles = StyleSheet.create({
-  icon: {
-    color: '#fff',
-    fontSize: 26,
-    marginEnd: 10,
+  timeago: {
+    color: '#666666',
   },
+  title: { 
+    marginBottom: 15 
+  },
+  btnIcon: { 
+    backgroundColor: "#fff", 
+    width: 40, 
+    height:40 
+  },
+  listItem: {
+    marginBottom: 10, 
+    marginTop: 10
+  },
+  left: { 
+    width: 50 
+  },
+  searchResult: { 
+    color: '#4a148c', 
+    fontWeight: 'bold' 
+  },
+  list: { 
+    marginTop: 20 
+  }
 });
 
 HomeScreen.navigationOptions = {
