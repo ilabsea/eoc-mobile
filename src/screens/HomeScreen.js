@@ -28,8 +28,8 @@ class HomeScreen extends Component {
       isFetching: false,
       from: 0,
       size: 15,
-      searchText: 'name',
-      data: data
+      searchText: '',
+      data: []
     }
 
     this.searchInput = React.createRef();
@@ -122,8 +122,8 @@ class HomeScreen extends Component {
       <ListItem thumbnail 
         onPress={ () => this.handleListPress(item._source) }>
         <Left>
-          <Button style={styles.btnIcon}>
-            <Icon type="AntDesign" style={{ color, fontSize:30 }} name={ icon } />
+          <Button transparent style={styles.btnIcon}>
+            <Icon type="MaterialIcons" style={{ color, fontSize:42 }} name={ icon } />
           </Button>
         </Left>
         <Body>
@@ -204,6 +204,7 @@ const styles = StyleSheet.create({
   },
   btnIcon: { 
     backgroundColor: "#fff", 
+    borderWidth: 0
   },
   searchResult: { 
     color: "#4a148c", 

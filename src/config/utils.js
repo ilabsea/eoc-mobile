@@ -1,6 +1,6 @@
 const typeIcon = (docType) => {
-  let doc = { document: { icon: 'pdffile1', color: 'red' }, 
-              folder: { icon: 'folder1', color: 'orange' } }
+  let doc = { document: { icon: 'insert-drive-file', color: '#6E0505' }, 
+              folder: { icon: 'folder', color: 'gray' } }
   return doc[docType]
 }
 
