@@ -28,7 +28,7 @@ class HomeScreen extends Component {
       isFetching: false,
       from: 0,
       size: 15,
-      searchText: 'កម្ពុជា',
+      searchText: '',
       data: []
     }
 
@@ -110,8 +110,14 @@ class HomeScreen extends Component {
     return data
   }
 
+  _renderSubItem = (subItem, tag, fallback) => {
+    return subItem ? this.hl( subItem[0], tag ).map( item => item) : fallback
+  }
+
   _renderRow = (item) => {
     let { icon, color } = typeIcon(item._source.document_type)
+    let { name, tags } = item.highlight
+
     return (
       <ListItem thumbnail 
         onPress={ () => this.handleListPress(item._source) }>
@@ -124,24 +130,17 @@ class HomeScreen extends Component {
           <View>
             <Text>
             { 
-              item.highlight.name ? 
-                this.hl( item.highlight.name[0], H3 ).map( item => {
-                return item 
-              }) : <H3>{item._source.name}</H3>
+              this._renderSubItem(name, H3, <H3>{item._source.name}</H3>)
             }
             </Text>
 
             {
-              item.highlight.tags ?
+              tags ? 
               <Text>
-                tags: 
-                { 
-                  item.highlight.tags ?
-                    this.hl( item.highlight.tags[0], Text ).map( item => item) : null
-                }
-              </Text> : null
+                tags: { this._renderSubItem(tags, Text, null) }
+              </Text> 
+              : null
             }
-            
 
             <Text style={styles.timeago}>
               { moment(item._source.created_at).fromNow() }
