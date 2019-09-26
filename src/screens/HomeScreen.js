@@ -19,8 +19,9 @@ class HomeScreen extends Component {
       isFetching: false,
       from: 0,
       size: 15,
-      searchText: 'name',
-      data: data
+      searchText: 'កម្ពុជា',
+      // searchText: 'name',
+      data: []
     }
 
     this.hl = this.hl.bind(this)
@@ -28,6 +29,7 @@ class HomeScreen extends Component {
     this.loadMore = this.loadMore.bind(this)
     this.handleFetch = this.handleFetch.bind(this)
     this._renderRow = this._renderRow.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
   }
 
   handleListPress = sopGuide => {
@@ -72,16 +74,22 @@ class HomeScreen extends Component {
     this.handleFetch(this.state.searchText)
   }
 
-  tmplRegex = (pattern) => new RegExp(`<em class='highlight'>${pattern}<\/em>`)
+  tmplRegex = (pattern) => new RegExp(`<em class='highlight'>${pattern}<\/em>`, 'iu')
   eleCreator = (ele, props) => React.createElement(H3, props, ele)
+
+  handleSearch = () => {
+    this.setState({ from: 0, data: [], isFetching: true }, () => {
+      this.handleFetch(this.state.searchText)
+    })
+  }
 
   hl = ( hlStr ) => {
     let data = [],
-        pattern = '[\s\da-zA-Z]+',
+        pattern = '[^<>()]+',
         props = { style: styles.searchResult }
 
     let plainItems = hlStr.split( this.tmplRegex(pattern) ) // no highlight items
-    let hlValue  = this.tmplRegex(`([${pattern})`).exec(hlStr)[1] // highlighted word
+    let hlValue  = this.state.searchText 
 
     plainItems.forEach((item, index) => {
       data.push( this.eleCreator(item, {key: index}) )
@@ -138,7 +146,7 @@ class HomeScreen extends Component {
                 value={this.state.searchText}
                 onChangeText={(searchText) => this.setState({searchText}) } />
             <Icon name="ios-search" 
-                  onPress={() => this.handleFetch(this.state.searchText)} />
+                  onPress={ this.handleSearch } />
           </Item>
           <Button transparent>
             <Text>Search</Text>
