@@ -72,20 +72,24 @@ class HomeScreen extends Component {
     this.handleFetch(this.state.searchText)
   }
 
-  hl = ( str ) => {
-    let reg = /<em class='highlight'>[\s\da-zA-Z]+<\/em>/g
-    let items = str.split(reg)
+  tmplRegex = (pattern) => new RegExp(`<em class='highlight'>${pattern}<\/em>`)
+  eleCreator = (ele, props) => React.createElement(H3, props, ele)
 
-    result  = /<em class='highlight'>([\s\da-zA-Z]+)<\/em>/.exec(str)
+  hl = ( hlStr ) => {
+    let data = [],
+        pattern = '[\s\da-zA-Z]+',
+        props = { style: styles.searchResult }
 
-    search_value = result[1]
+    let plainItems = hlStr.split( this.tmplRegex(pattern) ) // no highlight items
+    let hlValue  = this.tmplRegex(`([${pattern})`).exec(hlStr)[1] // highlighted word
 
-    let data = []
-    items.forEach((item, index) => {
-      data.push(React.createElement(H3, {key: index}, item))
-      if( index < items.length-1 )
-        data.push( React.createElement(H3, {key: items.length + index, style: styles.searchResult}, search_value) )
-    });
+    plainItems.forEach((item, index) => {
+      data.push( this.eleCreator(item, {key: index}) )
+      if( index < plainItems.length-1 ) {
+        key = plainItems.length + index
+        data.push( this.eleCreator(hlValue, { ...props, key }) )
+      }
+    })
 
     return data
   }
