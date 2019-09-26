@@ -1,15 +1,18 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { Icon } from 'native-base'
+import moment from 'moment';
+import { typeIcon } from '../config/utils'
 
 const SopDetailScreen = props => {
   const sopGuide = props.navigation.getParam('sopGuide');
+  let { icon, color } = typeIcon(sopGuide.document_type)
 
   return (
     <View style={styles.screen}>
-      <Text>{sopGuide.description}</Text>
-      {
-        sopGuide.items.map(item => <Text key={item.id}>{item.desc}</Text>)
-      }
+      <Icon type="AntDesign" style={{ color, fontSize:30 }} name={ icon } />
+      <Text>{ sopGuide.tags }</Text>
+      <Text>created date: { moment(sopGuide.created_at).fromNow() }</Text>
     </View>
   );
 };
@@ -29,7 +32,7 @@ SopDetailScreen.navigationOptions = navigationData => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'center',
   },
 });

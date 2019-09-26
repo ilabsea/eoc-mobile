@@ -4,16 +4,13 @@ import axios from 'axios'
 import * as config from '../config/base'
 import moment from 'moment'
 import {Container, Header, Item, Input, Left, Body, Right, Title, Button, Content, List, ListItem, Text, Icon, H1, H3} from 'native-base';
-// import { data } from '../data'
+import { data } from '../data'
+import { typeIcon } from '../config/utils'
 
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger'])
 
-const typeIcon = (docType) => {
-  let doc = { document: { icon: 'pdffile1', color: 'red' }, 
-              folder: { icon: 'folder1', color: 'orange' } }
-  return doc[docType]
-}
+
 
 class HomeScreen extends Component {
 
@@ -24,8 +21,8 @@ class HomeScreen extends Component {
       isFetching: false,
       from: 0,
       size: 15,
-      searchText: '',
-      data: []
+      searchText: 'name',
+      data: data
     }
 
     this.hl = this.hl.bind(this)
@@ -103,7 +100,7 @@ class HomeScreen extends Component {
     return (
       <ListItem icon 
         style={styles.listItem}
-        onPress={() => this.handleListPress.bind(this, item._source)}>
+        onPress={ () => this.handleListPress(item._source) }>
         <Left style={styles.left}>
           <Button style={styles.btnIcon}>
             <Icon type="AntDesign" style={{ color, fontSize:30 }} name={ icon } />
@@ -179,7 +176,8 @@ const styles = StyleSheet.create({
   btnIcon: { 
     backgroundColor: "#fff", 
     width: 40, 
-    height:40 
+    height:40,
+    marginBottom: 20 
   },
   listItem: {
     marginBottom: 10, 
