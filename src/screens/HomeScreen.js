@@ -28,8 +28,8 @@ class HomeScreen extends Component {
       isFetching: false,
       from: 0,
       size: 15,
-      searchText: 'កម្ពុជា',
-      data: []
+      searchText: 'name',
+      data: data
     }
 
     this.searchInput = React.createRef();
@@ -207,7 +207,8 @@ const styles = StyleSheet.create({
   },
   searchResult: { 
     color: "#4a148c", 
-    fontWeight: "bold" 
+    backgroundColor: "yellow",
+    fontWeight: "bold",
   },
 });
 
