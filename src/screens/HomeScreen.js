@@ -28,7 +28,7 @@ class HomeScreen extends Component {
       isFetching: false,
       from: 0,
       size: 15,
-      searchText: '',
+      searchText: 'កម្ពុជា',
       data: []
     }
 
@@ -83,7 +83,7 @@ class HomeScreen extends Component {
   }
 
   tmplRegex = (pattern) => new RegExp(`<em class='highlight'>${pattern}<\/em>`, 'iu')
-  eleCreator = (ele, props) => React.createElement(H3, props, ele)
+  eleCreator = (ele, props, wrapper) => React.createElement(wrapper, props, ele)
 
   handleSearch = () => {
     this.setState({ from: 0, data: [], isFetching: true }, () => {
@@ -91,7 +91,7 @@ class HomeScreen extends Component {
     })
   }
 
-  hl = ( hlStr ) => {
+  hl = ( hlStr, wrapper ) => {
     let data = [],
         pattern = '[^<>()]+',
         props = { style: styles.searchResult }
@@ -100,10 +100,10 @@ class HomeScreen extends Component {
     let hlValue  = this.state.searchText 
 
     plainItems.forEach((item, index) => {
-      data.push( this.eleCreator(item, {key: index}) )
+      data.push( this.eleCreator(item, {key: index}, wrapper) )
       if( index < plainItems.length-1 ) {
         key = plainItems.length + index
-        data.push( this.eleCreator(hlValue, { ...props, key }) )
+        data.push( this.eleCreator(hlValue, { ...props, key }, wrapper) )
       }
     })
 
@@ -113,24 +113,36 @@ class HomeScreen extends Component {
   _renderRow = (item) => {
     let { icon, color } = typeIcon(item._source.document_type)
     return (
-      <ListItem icon 
-        style={styles.listItem}
+      <ListItem thumbnail 
         onPress={ () => this.handleListPress(item._source) }>
-        <Left style={styles.left}>
+        <Left>
           <Button style={styles.btnIcon}>
             <Icon type="AntDesign" style={{ color, fontSize:30 }} name={ icon } />
           </Button>
         </Left>
         <Body>
-          <View style={styles.title}>
+          <View>
             <Text>
             { 
-              item.highlight && 
-                this.hl( item.highlight.name[0] ).map( item => {
+              item.highlight.name ? 
+                this.hl( item.highlight.name[0], H3 ).map( item => {
                 return item 
-              }) 
+              }) : <H3>{item._source.name}</H3>
             }
             </Text>
+
+            {
+              item.highlight.tags ?
+              <Text>
+                tags: 
+                { 
+                  item.highlight.tags ?
+                    this.hl( item.highlight.tags[0], Text ).map( item => item) : null
+                }
+              </Text> : null
+            }
+            
+
             <Text style={styles.timeago}>
               { moment(item._source.created_at).fromNow() }
             </Text>
@@ -166,7 +178,6 @@ class HomeScreen extends Component {
           <EmptyList />
           :
           <List
-              style={styles.list}
               dataArray={this.state.data}
               keyExtractor={item => item._source.id.toString()}
               onEndReached={this.loadMore }
@@ -189,31 +200,16 @@ class HomeScreen extends Component {
 
 const styles = StyleSheet.create({
   timeago: {
-    color: '#666666',
-  },
-  title: { 
-    marginBottom: 15 
+    color: "#666666",
+    marginTop: 10
   },
   btnIcon: { 
     backgroundColor: "#fff", 
-    width: 40, 
-    height:40,
-    marginBottom: 20 
-  },
-  listItem: {
-    marginBottom: 10, 
-    marginTop: 10
-  },
-  left: { 
-    width: 50 
   },
   searchResult: { 
-    color: '#4a148c', 
-    fontWeight: 'bold' 
+    color: "#4a148c", 
+    fontWeight: "bold" 
   },
-  list: { 
-    marginTop: 20 
-  }
 });
 
 HomeScreen.navigationOptions = {
