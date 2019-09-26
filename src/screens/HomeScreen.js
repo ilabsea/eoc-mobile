@@ -10,6 +10,15 @@ import { data } from '../data'
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger'])
 
+const EmptyList = () => (
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ flexDirection: 'row' }}>
+      <Icon name="ios-heart-empty" style={{ marginRight: 15, marginTop: 2 }} />
+      <H1>Empty list</H1>
+    </View>
+  </View>
+)
+
 class HomeScreen extends Component {
 
   constructor(props) {
@@ -19,8 +28,7 @@ class HomeScreen extends Component {
       isFetching: false,
       from: 0,
       size: 15,
-      searchText: 'កម្ពុជា',
-      // searchText: 'name',
+      searchText: '',
       data: []
     }
 
@@ -152,14 +160,20 @@ class HomeScreen extends Component {
             <Text>Search</Text>
           </Button>
         </Header>
-        <List
-            style={styles.list}
-            dataArray={this.state.data}
-            keyExtractor={item => item._source.id.toString()}
-            onEndReached={this.loadMore }
-            onEndReachedThreshold={0.5}
-            renderRow={ this._renderRow }
-          />
+
+        {
+          this.state.data.length == 0 ?
+          <EmptyList />
+          :
+          <List
+              style={styles.list}
+              dataArray={this.state.data}
+              keyExtractor={item => item._source.id.toString()}
+              onEndReached={this.loadMore }
+              onEndReachedThreshold={0.5}
+              renderRow={ this._renderRow }
+            />
+        }
 
         {
           this.state.isFetching ? 
