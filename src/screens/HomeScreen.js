@@ -28,15 +28,15 @@ class HomeScreen extends Component {
       isFetching: false,
       from: 0,
       size: 15,
-      searchText: '',
+      searchText: 'កម្ពុជា',
       data: []
     }
 
-    this.hl = this.hl.bind(this)
     this.searchInput = React.createRef();
     this.loadMore = this.loadMore.bind(this)
-    this.handleFetch = this.handleFetch.bind(this)
     this._renderRow = this._renderRow.bind(this)
+    this.handleFetch = this.handleFetch.bind(this)
+    this.highlighter = this.highlighter.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
   }
 
@@ -91,7 +91,7 @@ class HomeScreen extends Component {
     })
   }
 
-  hl = ( hlStr, wrapper ) => {
+  highlighter = ( hlStr, wrapper ) => {
     let data = [],
         pattern = '[^<>()]+',
         props = { style: styles.searchResult }
@@ -111,7 +111,7 @@ class HomeScreen extends Component {
   }
 
   _renderSubItem = (subItem, tag, fallback) => {
-    return subItem ? this.hl( subItem[0], tag ).map( item => item) : fallback
+    return subItem ? this.highlighter( subItem[0], tag ).map( item => item) : fallback
   }
 
   _renderRow = (item) => {
