@@ -4,13 +4,11 @@ import axios from 'axios'
 import * as config from '../config/base'
 import moment from 'moment'
 import {Container, Header, Item, Input, Left, Body, Right, Title, Button, Content, List, ListItem, Text, Icon, H1, H3} from 'native-base';
-import { data } from '../data'
 import { typeIcon } from '../config/utils'
+import { data } from '../data'
 
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger'])
-
-
 
 class HomeScreen extends Component {
 
@@ -32,12 +30,10 @@ class HomeScreen extends Component {
     this._renderRow = this._renderRow.bind(this)
   }
 
-  handleListPress = item => {
+  handleListPress = sopGuide => {
     this.props.navigation.navigate({
       routeName: 'SopDetail',
-      params: {
-        sopGuide: item,
-      },
+      params: { sopGuide },
     });
   };
 
@@ -77,19 +73,18 @@ class HomeScreen extends Component {
   }
 
   hl = ( str ) => {
-    let reg = /<em class='highlight'>.*<\/em>/
+    let reg = /<em class='highlight'>[\s\da-zA-Z]+<\/em>/g
     let items = str.split(reg)
 
-    result  = /<em class='highlight'>(.*)<\/em>/.exec(str)
+    result  = /<em class='highlight'>([\s\da-zA-Z]+)<\/em>/.exec(str)
 
     search_value = result[1]
-    ele = React.createElement(H3, {key: 999, style: styles.searchResult}, search_value)
 
     let data = []
     items.forEach((item, index) => {
       data.push(React.createElement(H3, {key: index}, item))
       if( index < items.length-1 )
-        data.push(ele)
+        data.push( React.createElement(H3, {key: items.length + index, style: styles.searchResult}, search_value) )
     });
 
     return data
