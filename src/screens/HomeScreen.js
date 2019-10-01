@@ -86,9 +86,13 @@ class HomeScreen extends Component {
   eleCreator = (ele, props, wrapper) => React.createElement(wrapper, props, ele)
 
   handleSearch = () => {
-    this.setState({ from: 0, data: [], isFetching: true }, () => {
-      this.handleFetch(this.state.searchText)
-    })
+    const { searchText } = this.state
+
+    if( searchText != '' ) {
+      this.setState({ from: 0, data: [], isFetching: true }, () => {
+        this.handleFetch(searchText)
+      })
+    }
   }
 
   highlighter = ( hlStr, wrapper ) => {
