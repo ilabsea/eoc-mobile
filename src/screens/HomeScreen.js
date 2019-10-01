@@ -97,13 +97,13 @@ class HomeScreen extends Component {
         props = { style: styles.searchResult }
 
     let plainItems = hlStr.split( this.tmplRegex(pattern) ) // no highlight items
-    let hlValue  = this.state.searchText 
+    let hlValue  = this.tmplRegex(`(${pattern})`).exec(hlStr) //this.state.searchText
 
     plainItems.forEach((item, index) => {
       data.push( this.eleCreator(item, {key: index}, wrapper) )
       if( index < plainItems.length-1 ) {
         key = plainItems.length + index
-        data.push( this.eleCreator(hlValue, { ...props, key }, wrapper) )
+        data.push( this.eleCreator(hlValue[1], { ...props, key }, wrapper) )
       }
     })
 
