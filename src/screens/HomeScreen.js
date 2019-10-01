@@ -115,7 +115,7 @@ class HomeScreen extends Component {
   }
 
   _renderRow = (item) => {
-    let { icon, color } = typeIcon(item._source.document_type)
+    let { type, icon, color } = typeIcon(item._source.document_type)
     let { name, tags } = item.highlight
 
     return (
@@ -123,7 +123,7 @@ class HomeScreen extends Component {
         onPress={ () => this.handleListPress(item._source) }>
         <Left>
           <Button transparent style={styles.btnIcon}>
-            <Icon type="MaterialIcons" style={{ color, fontSize:42 }} name={ icon } />
+            <Icon type={type} style={{ color, fontSize:42 }} name={ icon } />
           </Button>
         </Left>
         <Body>

@@ -6,11 +6,11 @@ import { typeIcon } from '../config/utils'
 
 const SopDetailScreen = props => {
   const sopGuide = props.navigation.getParam('sopGuide');
-  let { icon, color } = typeIcon(sopGuide.document_type)
+  let { type, icon, color } = typeIcon(sopGuide.document_type)
 
   return (
     <View style={styles.screen}>
-      <Icon type="AntDesign" style={{ color, fontSize:30 }} name={ icon } />
+      <Icon type={type} style={{ color, fontSize:30 }} name={ icon } />
       <Text>{ sopGuide.tags }</Text>
       <Text>created date: { moment(sopGuide.created_at).fromNow() }</Text>
     </View>

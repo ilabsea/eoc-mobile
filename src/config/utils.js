@@ -1,6 +1,8 @@
 const typeIcon = (docType) => {
-  let doc = { document: { icon: 'insert-drive-file', color: '#6E0505' }, 
-              folder: { icon: 'folder', color: 'gray' } }
+  const type = 'MaterialIcons'
+
+  let doc = { document: { type, icon: 'insert-drive-file', color: '#6E0505' }, 
+              folder: { type, icon: 'folder', color: 'gray' } }
   return doc[docType]
 }
 
