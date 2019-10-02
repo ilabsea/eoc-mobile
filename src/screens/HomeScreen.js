@@ -10,11 +10,30 @@ import { data } from '../data'
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger'])
 
-const EmptyList = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+const EmptyList = ({ isFetching, data }) => (
+  <View style={{ 
+        flex: 1, 
+        justifyContent: 'center', 
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top:0,
+        bottom: 0,
+        alignItems: 'center', }}>
     <View style={{ flexDirection: 'row' }}>
-      <Icon name="ios-heart-empty" style={{ marginRight: 15, marginTop: 2 }} />
-      <H1>Empty list</H1>
+      {
+          isFetching ? 
+          <ActivityIndicator 
+            style={{opacity: isFetching ? 1.0 : 0.0}} 
+            size="large" color="#0000ff" animating={true} /> 
+          : 
+          data.length ==0 ?
+            <React.Fragment>
+              <Icon name="ios-heart-empty" style={{ marginRight: 15, marginTop: 2 }} />
+              <H1>Empty list</H1>
+            </React.Fragment>
+            : null
+      }
     </View>
   </View>
 )
@@ -176,9 +195,20 @@ class HomeScreen extends Component {
           </Button>
         </Header>
 
-        {
+
+          <EmptyList {...this.state} />
+          <List
+                dataArray={this.state.data}
+                keyExtractor={item => item._source.id.toString()}
+                onEndReached={this.loadMore }
+                onEndReachedThreshold={0.5}
+                renderRow={ this._renderRow }
+              />
+
+
+        {/* {
           this.state.data.length == 0 ?
-          <EmptyList />
+          <EmptyList isFetching={this.state.isFetching} />
           :
           <List
               dataArray={this.state.data}
@@ -187,15 +217,7 @@ class HomeScreen extends Component {
               onEndReachedThreshold={0.5}
               renderRow={ this._renderRow }
             />
-        }
-
-        {
-          this.state.isFetching ? 
-            <ActivityIndicator 
-            style={{opacity: this.state.isFetching ? 1.0 : 0.0}} 
-            size="large" color="#0000ff" animating={true} /> : null
-        }
-        
+        } */}
       </Container>
     );
   } 
