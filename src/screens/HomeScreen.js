@@ -5,6 +5,7 @@ import * as config from '../config/base'
 import moment from 'moment'
 import {Container, Header, Item, Input, Left, Body, Right, Title, Button, Content, List, ListItem, Text, Icon, H1, H3} from 'native-base';
 import { typeIcon } from '../config/utils'
+import { version } from '../../package.json'
 import { data } from '../data'
 
 // TOREMV
@@ -30,7 +31,7 @@ const EmptyList = ({ isFetching, data }) => (
           data.length ==0 ?
             <React.Fragment>
               <Icon name="ios-heart-empty" style={{ marginRight: 15, marginTop: 2 }} />
-              <H1>Empty list</H1>
+              <H1>Empty list v.{version}</H1>
             </React.Fragment>
             : null
       }
