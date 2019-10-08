@@ -172,7 +172,7 @@ class HomeScreen extends Component {
       <Container>
         <Header searchBar rounded>
           <Item>
-            <Icon name="ios-menu" />
+            <Icon name="ios-menu" onPress={() => this.props.navigation.openDrawer()} />
             <Input ref={this.searchInput} 
                 placeholder="Search"
                 value={this.state.searchText}
@@ -214,7 +214,11 @@ const styles = StyleSheet.create({
 });
 
 HomeScreen.navigationOptions = {
-  header:null
+  header:null,
+  drawerLabel: 'Home',
+  drawerIcon: ({ tintColor }) => (
+    <Icon name="ios-home" />
+  ),
   // headerTitle: 'Recent guideline',
   // headerStyle: {
   //   backgroundColor: '#f4511e',
