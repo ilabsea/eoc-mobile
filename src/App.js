@@ -51,7 +51,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const MyDrawerNavigator = createDrawerNavigator({
+const tabNavigator = createBottomTabNavigator({
+  Home: HomeScreen,
+  Download: DownloadScreen,
+  Notifications: NotificationScreen,
+  AboutUs: AboutUsScreen,
+})
+
+const DrawNavigator = createDrawerNavigator({
   Home: HomeScreen,
   Download: DownloadScreen,
   Notifications: NotificationScreen,
@@ -61,6 +68,6 @@ const MyDrawerNavigator = createDrawerNavigator({
 });
 
 // const App = createAppContainer(AppNavigator);
-const App = createAppContainer(MyDrawerNavigator);
+const App = createAppContainer(DrawNavigator );
 
 export default App;
