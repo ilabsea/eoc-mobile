@@ -1,46 +1,19 @@
-import React, {Component} from 'react';
-import {StyleSheet, View, Alert, ActivityIndicator, YellowBox} from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, View, YellowBox } from 'react-native';
 import axios from 'axios'
 import * as config from '../config/base'
 import moment from 'moment'
-import {Container, Header, Item, Input, Left, Body, Right, Title, Button, Content, List, ListItem, Text, Icon, H1, H3} from 'native-base';
+import { Container, Header, Item, Input, Left, Body, Right, 
+          Button, List, ListItem, Text, Icon, H3 } from 'native-base';
 import { typeIcon } from '../config/utils'
-import { version } from '../../package.json'
 import { data } from '../data'
+
+import EmptyList from './EmptyList'
 
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger'])
 
-const EmptyList = ({ isFetching, data }) => (
-  <View style={{ 
-        flex: 1, 
-        justifyContent: 'center', 
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        top:0,
-        bottom: 0,
-        alignItems: 'center', }}>
-    <View style={{ flexDirection: 'row' }}>
-      {
-          isFetching ? 
-          <ActivityIndicator 
-            style={{opacity: isFetching ? 1.0 : 0.0}} 
-            size="large" color="#0000ff" animating={true} /> 
-          : 
-          data.length ==0 ?
-            <React.Fragment>
-              <Icon name="ios-heart-empty" style={{ marginRight: 15, marginTop: 2 }} />
-              <H1>Empty list v.{version}</H1>
-            </React.Fragment>
-            : null
-      }
-    </View>
-  </View>
-)
-
 class HomeScreen extends Component {
-
   constructor(props) {
     super(props)
 
@@ -86,7 +59,6 @@ class HomeScreen extends Component {
         })
       }
       
-      console.log(data)
       this.setState({isFetching: false})
     } catch ( e ) {
       console.log(e)
@@ -120,8 +92,8 @@ class HomeScreen extends Component {
         pattern = '[^<>()]+',
         props = { style: styles.searchResult }
 
-    let plainItems = hlStr.split( this.tmplRegex(pattern) ) // no highlight items
-    let hlValue  = this.tmplRegex(`(${pattern})`).exec(hlStr) //this.state.searchText
+    let plainItems = hlStr.split( this.tmplRegex(pattern) )
+    let hlValue  = this.tmplRegex(`(${pattern})`).exec(hlStr)
 
     plainItems.forEach((item, index) => {
       data.push( this.eleCreator(item, {key: index}, wrapper) )
@@ -134,8 +106,28 @@ class HomeScreen extends Component {
     return data
   }
 
+  hl = (text, Tag) => {
+    let data = []
+    words = text.split(/\s/)
+    let regex = /class='highlight'>\w+<\/em>/
+
+    words.forEach( (word, index) => {
+      if( word == '<em' && regex.test(words[index+1]) ) return
+
+      if( regex.test(word) ) {
+        hl = />(\w+)</.exec(word)
+        data.push(<Tag key={index} style={styles.searchResult}>{hl[1]}</Tag>)
+      } else  {
+        data.push(<Tag key={index}>{word}</Tag>)
+      }
+      data.push(<Text key={index + Date.now()}>{' '}</Text>)
+    })
+
+    return data
+  }
+
   _renderSubItem = (subItem, tag, fallback) => {
-    return subItem ? this.highlighter( subItem[0], tag ).map( item => item) : fallback
+    return subItem ? this.hl( subItem[0], tag ).map( item => item ) : fallback
   }
 
   _renderRow = (item) => {
@@ -153,19 +145,11 @@ class HomeScreen extends Component {
         <Body>
           <View>
             <Text>
-            { 
-              this._renderSubItem(name, H3, <H3>{item._source.name}</H3>)
-            }
+              { this._renderSubItem(name, H3, <H3>{item._source.name}</H3>) }
             </Text>
-
             {
-              tags ? 
-              <Text>
-                tags: { this._renderSubItem(tags, Text, null) }
-              </Text> 
-              : null
+              tags ?  <Text> tags: { this._renderSubItem(tags, Text, null) } </Text>  : null
             }
-
             <Text style={styles.timeago}>
               { moment(item._source.created_at).fromNow() }
             </Text>
@@ -195,30 +179,14 @@ class HomeScreen extends Component {
             <Text>Search</Text>
           </Button>
         </Header>
-
-
           <EmptyList {...this.state} />
           <List
-                dataArray={this.state.data}
-                keyExtractor={item => item._source.id.toString()}
-                onEndReached={this.loadMore }
-                onEndReachedThreshold={0.5}
-                renderRow={ this._renderRow }
-              />
-
-
-        {/* {
-          this.state.data.length == 0 ?
-          <EmptyList isFetching={this.state.isFetching} />
-          :
-          <List
-              dataArray={this.state.data}
-              keyExtractor={item => item._source.id.toString()}
-              onEndReached={this.loadMore }
-              onEndReachedThreshold={0.5}
-              renderRow={ this._renderRow }
-            />
-        } */}
+            dataArray={this.state.data}
+            keyExtractor={item => item._source.id.toString()}
+            onEndReached={this.loadMore }
+            onEndReachedThreshold={0.5}
+            renderRow={ this._renderRow }
+          />
       </Container>
     );
   } 
