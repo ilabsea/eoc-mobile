@@ -21,7 +21,7 @@ class HomeScreen extends Component {
       isFetching: false,
       from: 0,
       size: 15,
-      searchText: '',
+      searchText: 'disease',
       data: []
     }
 
@@ -131,7 +131,8 @@ class HomeScreen extends Component {
   }
 
   _renderRow = (item) => {
-    let { type, icon, color } = typeIcon(item._source.document_type)
+    let { document_type } = item._source
+    let { type, icon, color } = typeIcon(document_type)
     let { name, tags } = item.highlight
 
     return (
@@ -156,7 +157,11 @@ class HomeScreen extends Component {
           </View>
         </Body>
         <Right>
-          <Icon name="arrow-forward" />
+          {
+            document_type == 'document' ?
+              <Icon name="arrow-forward" /> :
+              <Icon name="md-download" />
+          }
         </Right>
       </ListItem>
     );
