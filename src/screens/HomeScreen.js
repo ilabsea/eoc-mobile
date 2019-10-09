@@ -1,16 +1,29 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, YellowBox } from 'react-native';
+import { StyleSheet, View, YellowBox } from 'react-native'
 import axios from 'axios'
 import * as config from '../config/base'
 import moment from 'moment'
 import { Container, Header, Item, Input, Left, Body, Right, 
-          Button, List, ListItem, Text, Icon, H3 } from 'native-base';
+          Button, List, ListItem, Text, Icon, H3 } from 'native-base'
 import { typeIcon } from '../config/utils'
 import { data } from '../data'
 
 import EmptyList from './EmptyList'
-import RNBackgroundDownloader from 'react-native-background-downloader';
+import RNBackgroundDownloader from 'react-native-background-downloader'
 import RNFS from 'react-native-fs'
+import FileViewer from 'react-native-file-viewer'
+import { version } from "react-native-version"
+
+const url = 'http://www.pdf995.com/samples/pdf.pdf'
+const file = 'pdf.pdf'
+const localFile = `${RNFS.DocumentDirectoryPath}/${file}`
+
+const options = {
+  fromUrl: url,
+  toFile: localFile
+};
+
+
 
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger'])
@@ -20,6 +33,7 @@ class HomeScreen extends Component {
     super(props)
 
     this.state = {
+      version: '0.0.0',
       isFetching: false,
       from: 0,
       size: 15,
@@ -28,8 +42,10 @@ class HomeScreen extends Component {
     }
 
     this.task = null
-    this.searchInput = React.createRef();
+    this.searchInput = React.createRef()
     this.download = this.download.bind(this)
+    this.dl = this.dl.bind(this)
+    this.getAppVer = this.getAppVer.bind(this)
     this.loadMore = this.loadMore.bind(this)
     this._renderRow = this._renderRow.bind(this)
     this.handleFetch = this.handleFetch.bind(this)
@@ -70,22 +86,43 @@ class HomeScreen extends Component {
 
   componentDidMount() {
     this.searchInput.current._root.focus()
-    console.log("start download", RNBackgroundDownloader.directories.documents)
-    console.log("dir:", RNFS.DocumentDirectoryPath)
+    this.getAppVer()
     // this.download()
+    // this.dl()
+  }
+
+  getAppVer = async () => {
+    const ver = await version({
+      amend: true
+    })
+    console.log(ver)
+  }
+
+  dl = () => {
+    console.log("prepare do download")
+
+    RNFS.downloadFile(options).promise
+    .then(() => FileViewer.open(localFile))
+    .then(() => {
+      console.log('dl success')
+    })
+    .catch(error => {
+      console.log('dl err', error)
+    });
   }
 
   download = () => {
     this.task = RNBackgroundDownloader.download({
       id: 'file123',
-      url: 'http://www.pdf995.com/samples/pdf.pdf',
-      destination: `${RNBackgroundDownloader.directories.documents}/file.zip`
+      url: url,
+      destination: localFile
       }).begin((expectedBytes) => {
           console.log(`Going to download ${expectedBytes} bytes!`);
       }).progress((percent) => {
           console.log(`Downloaded: ${percent * 100}%`);
       }).done(() => {
-          console.log('Download is done!');
+          console.log('Download is done! & viewing');
+          FileViewer.open(localFile)
       }).error((error) => {
           console.log('Download canceled due to error: ', error);
       });
@@ -188,14 +225,17 @@ class HomeScreen extends Component {
             <Text>Search</Text>
           </Button>
         </Header>
-          <EmptyList {...this.state} />
-          <List
-            dataArray={this.state.data}
-            keyExtractor={item => item._source.id.toString()}
-            onEndReached={this.loadMore }
-            onEndReachedThreshold={0.5}
-            renderRow={ this._renderRow }
-          />
+        <Button full onPress={ this.download }>
+          <Text>Download</Text>
+        </Button>
+        <EmptyList {...this.state} />
+        <List
+          dataArray={this.state.data}
+          keyExtractor={item => item._source.id.toString()}
+          onEndReached={this.loadMore }
+          onEndReachedThreshold={0.5}
+          renderRow={ this._renderRow }
+        />
       </Container>
     );
   } 
