@@ -20,6 +20,7 @@
     "react-native-gesture-handler": "^1.4.1",
     "react-native-highlight-words": "^1.0.1",
     "react-native-reanimated": "^1.2.0",
+    "react-native-version-number": "^0.3.6",
     "react-navigation": "^4.0.5",
     "react-navigation-drawer": "^2.2.1",
     "react-navigation-stack": "^1.7.3",
@@ -35,7 +36,6 @@
     "eslint": "^6.4.0",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.56.0",
-    "react-native-version": "^3.2.0",
     "react-test-renderer": "16.8.6",
     "ws": ">=3.3.1"
   },

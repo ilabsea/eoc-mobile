@@ -34,6 +34,8 @@ target 'eocmobileapp' do
 
   pod 'RNFileViewer', :path => '../node_modules/react-native-file-viewer'
 
+  pod 'react-native-version-number', :path => '../node_modules/react-native-version-number'
+
   target 'eocmobileappTests' do
     inherit! :search_paths
     # Pods for testing
