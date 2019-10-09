@@ -37,17 +37,16 @@ class HomeScreen extends Component {
       isFetching: false,
       from: 0,
       size: 15,
-      searchText: 'disease',
+      keyword: 'disease',
       data: []
     }
 
     this.task = null
     this.searchInput = React.createRef()
     this.download = this.download.bind(this)
-    this.dl = this.dl.bind(this)
     this.getAppVer = this.getAppVer.bind(this)
     this.loadMore = this.loadMore.bind(this)
-    this._renderRow = this._renderRow.bind(this)
+    this.renderRow = this.renderRow.bind(this)
     this.handleFetch = this.handleFetch.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
   }
@@ -59,10 +58,10 @@ class HomeScreen extends Component {
     });
   };
 
-  handleFetch = async (searchText) => {
+  handleFetch = async (keyword) => {
     let { from, size } = this.state
     let uri = `${config.host.staging}:${config.port}/${config.sops_path}`
-    let params = { searchText, from, size }
+    let params = { keyword, from, size }
 
     try {
       let data = await axios.get(uri, { params })
@@ -88,26 +87,12 @@ class HomeScreen extends Component {
     this.searchInput.current._root.focus()
     this.getAppVer()
     // this.download()
-    // this.dl()
   }
 
   getAppVer = () => {
     this.setState({
       appVersion: VersionNumber.appVersion
     })
-  }
-
-  dl = () => {
-    console.log("prepare do download")
-
-    RNFS.downloadFile(options).promise
-    .then(() => FileViewer.open(localFile))
-    .then(() => {
-      console.log('dl success')
-    })
-    .catch(error => {
-      console.log('dl err', error)
-    });
   }
 
   download = () => {
@@ -129,15 +114,15 @@ class HomeScreen extends Component {
 
   loadMore = () => {
     this.setState({isFetching: true})
-    this.handleFetch(this.state.searchText)
+    this.handleFetch(this.state.keyword)
   }
 
   handleSearch = () => {
-    const { searchText } = this.state
+    const { keyword } = this.state
 
-    if( searchText != '' ) {
+    if( keyword != '' ) {
       this.setState({ from: 0, data: [], isFetching: true }, () => {
-        this.handleFetch(searchText)
+        this.handleFetch(keyword)
       })
     }
   }
@@ -166,7 +151,7 @@ class HomeScreen extends Component {
     return esHighlightStr ? this.highlight( esHighlightStr[0], tag ).map( item => item ) : fallbackComponent
   }
 
-  _renderRow = (item) => {
+  renderRow = (item) => {
     let { document_type } = item._source
     let { type, icon, color } = typeIcon(document_type)
     let { name, tags } = item.highlight
@@ -215,8 +200,8 @@ class HomeScreen extends Component {
             <Icon name="ios-menu" onPress={() => this.props.navigation.openDrawer()} />
             <Input ref={this.searchInput} 
                 placeholder="Search"
-                value={this.state.searchText}
-                onChangeText={(searchText) => this.setState({searchText}) } />
+                value={this.state.keyword}
+                onChangeText={(keyword) => this.setState({keyword}) } />
             <Icon name="ios-search" 
                   onPress={ this.handleSearch } />
           </Item>
@@ -224,16 +209,13 @@ class HomeScreen extends Component {
             <Text>Search</Text>
           </Button>
         </Header>
-        <Button full onPress={ this.download }>
-          <Text>Download</Text>
-        </Button>
         <EmptyList {...this.state} />
         <List
           dataArray={this.state.data}
           keyExtractor={item => item._source.id.toString()}
           onEndReached={this.loadMore }
           onEndReachedThreshold={0.5}
-          renderRow={ this._renderRow }
+          renderRow={ this.renderRow }
         />
       </Container>
     );
