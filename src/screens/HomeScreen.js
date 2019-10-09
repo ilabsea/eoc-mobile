@@ -9,6 +9,7 @@ import { typeIcon } from '../config/utils'
 import { data } from '../data'
 
 import EmptyList from './EmptyList'
+import RNBackgroundDownloader from 'react-native-background-downloader';
 
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger'])
@@ -25,7 +26,9 @@ class HomeScreen extends Component {
       data: []
     }
 
+    this.task = null
     this.searchInput = React.createRef();
+    this.download = this.download.bind(this)
     this.loadMore = this.loadMore.bind(this)
     this._renderRow = this._renderRow.bind(this)
     this.handleFetch = this.handleFetch.bind(this)
@@ -66,6 +69,24 @@ class HomeScreen extends Component {
 
   componentDidMount() {
     this.searchInput.current._root.focus()
+    console.log("start download", RNBackgroundDownloader.directories.documents)
+    this.download()
+  }
+
+  download = () => {
+    this.task = RNBackgroundDownloader.download({
+      id: 'file123',
+      url: 'http://www.pdf995.com/samples/pdf.pdf',
+      destination: `${RNBackgroundDownloader.directories.documents}/file.zip`
+      }).begin((expectedBytes) => {
+          console.log(`Going to download ${expectedBytes} bytes!`);
+      }).progress((percent) => {
+          console.log(`Downloaded: ${percent * 100}%`);
+      }).done(() => {
+          console.log('Download is done!');
+      }).error((error) => {
+          console.log('Download canceled due to error: ', error);
+      });
   }
 
   loadMore = () => {
