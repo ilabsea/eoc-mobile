@@ -128,9 +128,13 @@ class HomeScreen extends Component {
             {
               tags ?  <Text> tags: { this._renderSubItem(tags, Text, null) } </Text>  : null
             }
-            <Text style={styles.timeago}>
-              { moment(item._source.created_at).fromNow() }
-            </Text>
+
+            <View style={{ flexDirection: 'row', alignItems:'center', marginTop: 10 }}>
+              <Icon name="md-time" style={{ fontSize: 20, marginRight: 5, color: "#666666" }} />
+              <Text style={{color: "#666666"}}>
+                { moment(item._source.created_at).fromNow() }
+              </Text>
+            </View>
           </View>
         </Body>
         <Right>
@@ -175,10 +179,6 @@ class HomeScreen extends Component {
 };
 
 const styles = StyleSheet.create({
-  timeago: {
-    color: "#666666",
-    marginTop: 10
-  },
   btnIcon: { 
     backgroundColor: "#fff", 
     borderWidth: 0
