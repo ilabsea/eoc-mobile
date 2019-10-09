@@ -30,6 +30,8 @@ target 'eocmobileapp' do
 
 
 
+  pod 'RNFS', :path => '../node_modules/react-native-fs'
+
   target 'eocmobileappTests' do
     inherit! :search_paths
     # Pods for testing

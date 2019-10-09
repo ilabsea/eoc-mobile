@@ -10,6 +10,7 @@ import { data } from '../data'
 
 import EmptyList from './EmptyList'
 import RNBackgroundDownloader from 'react-native-background-downloader';
+import RNFS from 'react-native-fs'
 
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger'])
@@ -70,7 +71,8 @@ class HomeScreen extends Component {
   componentDidMount() {
     this.searchInput.current._root.focus()
     console.log("start download", RNBackgroundDownloader.directories.documents)
-    this.download()
+    console.log("dir:", RNFS.DocumentDirectoryPath)
+    // this.download()
   }
 
   download = () => {
