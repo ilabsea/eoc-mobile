@@ -14,6 +14,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.eko.RNBackgroundDownloaderPackage;
+import com.nozbe.watermelondb.WatermelonDBPackage;
 
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
       // packages.add(new MyReactNativePackage());
       // packages.add(new RNBackgroundDownloaderPackage());
         // packages.add(new RNFSPackage());
+      packages.add(new WatermelonDBPackage());
       return packages;
     }
 

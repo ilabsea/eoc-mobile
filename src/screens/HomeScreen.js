@@ -13,6 +13,7 @@ import RNBackgroundDownloader from 'react-native-background-downloader'
 import RNFS from 'react-native-fs'
 import FileViewer from 'react-native-file-viewer'
 import VersionNumber from 'react-native-version-number'
+import database from '../model/db'
 
 const url = 'http://www.pdf995.com/samples/pdf.pdf'
 const file = 'pdf.pdf'
@@ -86,6 +87,7 @@ class HomeScreen extends Component {
   componentDidMount() {
     this.searchInput.current._root.focus()
     this.getAppVer()
+    console.log(database)
     // this.download()
   }
 

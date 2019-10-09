@@ -1,4 +1,5 @@
 apply plugin: "com.android.application"
+apply plugin: 'kotlin-android'
 
 import com.android.build.OutputFile
 
@@ -196,6 +197,7 @@ android {
 }
 
 dependencies {
+    implementation project(':watermelondb')
     implementation project(':react-native-version-number')
     implementation project(':react-native-file-viewer')
     implementation project(':react-native-fs')
