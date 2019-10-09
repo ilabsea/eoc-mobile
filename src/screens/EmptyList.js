@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, ActivityIndicator, View } from 'react-native'
 import {H1, Icon} from 'native-base'
 
-const EmptyList = ({ isFetching, data, appVersion }) => (
+const EmptyList = ({ isFetching, data }) => (
   <View style={styles.container}>
     <View style={{ flexDirection: 'row' }}>
       {
@@ -14,7 +14,7 @@ const EmptyList = ({ isFetching, data, appVersion }) => (
         data.length ==0 ?
           <React.Fragment>
             <Icon name="ios-heart-empty" style={{ marginRight: 15, marginTop: 2 }} />
-            <H1>Empty list v.{appVersion}</H1>
+            <H1>Empty list v.</H1>
           </React.Fragment>
           : null
       }

@@ -196,7 +196,6 @@ android {
 }
 
 dependencies {
-    implementation project(':react-native-version-number')
     implementation project(':react-native-file-viewer')
     implementation project(':react-native-fs')
     implementation fileTree(dir: "libs", include: ["*.jar"])

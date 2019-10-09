@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, YellowBox } from 'react-native'
 import axios from 'axios'
 import * as config from '../config/base'
-import moment, { version } from 'moment'
+import moment from 'moment'
 import { Container, Header, Item, Input, Left, Body, Right, 
           Button, List, ListItem, Text, Icon, H3 } from 'native-base'
 import { typeIcon } from '../config/utils'
@@ -12,7 +12,7 @@ import EmptyList from './EmptyList'
 import RNBackgroundDownloader from 'react-native-background-downloader'
 import RNFS from 'react-native-fs'
 import FileViewer from 'react-native-file-viewer'
-import VersionNumber from 'react-native-version-number'
+import { version } from "react-native-version"
 
 const url = 'http://www.pdf995.com/samples/pdf.pdf'
 const file = 'pdf.pdf'
@@ -33,7 +33,7 @@ class HomeScreen extends Component {
     super(props)
 
     this.state = {
-      appVersion: '0.0.0',
+      version: '0.0.0',
       isFetching: false,
       from: 0,
       size: 15,
@@ -91,11 +91,11 @@ class HomeScreen extends Component {
     // this.dl()
   }
 
-  getAppVer = () => {
-    console.log(VersionNumber)
-    this.setState({
-      appVersion: VersionNumber.appVersion
+  getAppVer = async () => {
+    const ver = await version({
+      amend: true
     })
+    console.log(ver)
   }
 
   dl = () => {
