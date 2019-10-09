@@ -1,11 +1,10 @@
 import React from 'react';
-import { Text, StyleSheet, Button, Image, YellowBox } from 'react-native';
+import { YellowBox } from 'react-native';
 import { Icon } from 'native-base'
 
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator } from 'react-navigation-drawer';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import HomeScreen from './screens/HomeScreen';
 import SopDetailScreen from './screens/SopDetailScreen';
@@ -15,59 +14,52 @@ import NotificationScreen from './screens/NotificationScreen'
 
 YellowBox.ignoreWarnings(['Warning'])
 
-const AppNavigator = createStackNavigator(
-  {
-    Home: HomeScreen,
-    SopDetail: SopDetailScreen,
-  },
-  {
-    initialRouteName: 'Home',
-  },
-);
-
-
-class MyNotificationsScreen extends React.Component {
-  static navigationOptions = {
-    drawerLabel: 'Notifications',
-    drawerIcon: ({ tintColor }) => (
-      <Icon name="ios-notifications" />
-    ),
-  };
-
-  render() {
-    return (
-      <Button
-        onPress={() => this.props.navigation.goBack()}
-        title="Go back home"
-      />
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  icon: {
-    width: 24,
-    height: 24,
-  },
-});
-
-const tabNavigator = createBottomTabNavigator({
+const HomeStack = createStackNavigator({
   Home: HomeScreen,
-  Download: DownloadScreen,
-  Notifications: NotificationScreen,
-  AboutUs: AboutUsScreen,
+  SopDetail: SopDetailScreen,
 })
 
 const DrawNavigator = createDrawerNavigator({
-  Home: HomeScreen,
-  Download: DownloadScreen,
-  Notifications: NotificationScreen,
-  AboutUs: AboutUsScreen,
+  Home: {
+    screen: HomeStack,
+    navigationOptions: {
+      drawerLabel: 'Home',
+      drawerIcon: ({ tintColor }) => (
+        <Icon name="ios-home" />
+      ),
+    }
+  },
+  Download: {
+    screen: DownloadScreen,
+    navigationOptions: {
+      drawerLabel: 'Downloads',
+      drawerIcon: ({ tintColor }) => (
+        <Icon name="md-download" />
+      ),
+    }
+  },
+  Notifications: {
+    screen: NotificationScreen,
+    navigationOptions: {
+      drawerLabel: 'Notifications',
+      drawerIcon: ({ tintColor }) => (
+        <Icon name="md-notifications" />
+      ),
+    }
+  },
+  AboutUs: {
+    screen: AboutUsScreen,
+    navigationOptions: {
+      drawerLabel: 'About us',
+      drawerIcon: ({ tintColor }) => (
+        <Icon name="md-people" />
+      ),
+    }
+  },
 }, {
   drawerPosition: 'left'
 });
 
-// const App = createAppContainer(AppNavigator);
-const App = createAppContainer(DrawNavigator );
+const App = createAppContainer(DrawNavigator);
 
 export default App;

@@ -215,10 +215,6 @@ const styles = StyleSheet.create({
 
 HomeScreen.navigationOptions = {
   header:null,
-  drawerLabel: 'Home',
-  drawerIcon: ({ tintColor }) => (
-    <Icon name="ios-home" />
-  ),
   // headerTitle: 'Recent guideline',
   // headerStyle: {
   //   backgroundColor: '#f4511e',
