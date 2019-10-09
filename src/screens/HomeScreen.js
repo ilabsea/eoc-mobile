@@ -29,7 +29,6 @@ class HomeScreen extends Component {
     this.loadMore = this.loadMore.bind(this)
     this._renderRow = this._renderRow.bind(this)
     this.handleFetch = this.handleFetch.bind(this)
-    this.highlighter = this.highlighter.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
   }
 
@@ -74,9 +73,6 @@ class HomeScreen extends Component {
     this.handleFetch(this.state.searchText)
   }
 
-  tmplRegex = (pattern) => new RegExp(`<em class='highlight'>${pattern}<\/em>`, 'iu')
-  eleCreator = (ele, props, wrapper) => React.createElement(wrapper, props, ele)
-
   handleSearch = () => {
     const { searchText } = this.state
 
@@ -87,26 +83,7 @@ class HomeScreen extends Component {
     }
   }
 
-  highlighter = ( hlStr, wrapper ) => {
-    let data = [],
-        pattern = '[^<>()]+',
-        props = { style: styles.searchResult }
-
-    let plainItems = hlStr.split( this.tmplRegex(pattern) )
-    let hlValue  = this.tmplRegex(`(${pattern})`).exec(hlStr)
-
-    plainItems.forEach((item, index) => {
-      data.push( this.eleCreator(item, {key: index}, wrapper) )
-      if( index < plainItems.length-1 ) {
-        key = plainItems.length + index
-        data.push( this.eleCreator(hlValue[1], { ...props, key }, wrapper) )
-      }
-    })
-
-    return data
-  }
-
-  hl = (text, Tag) => {
+  highlight = (text, Tag) => {
     let data = []
     words = text.split(/\s/)
     let regex = /class='highlight'>\w+<\/em>/
@@ -126,8 +103,8 @@ class HomeScreen extends Component {
     return data
   }
 
-  _renderSubItem = (subItem, tag, fallback) => {
-    return subItem ? this.hl( subItem[0], tag ).map( item => item ) : fallback
+  _renderSubItem = (esHighlightStr, tag, fallbackComponent) => {
+    return esHighlightStr ? this.highlight( esHighlightStr[0], tag ).map( item => item ) : fallbackComponent
   }
 
   _renderRow = (item) => {

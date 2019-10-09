@@ -57,7 +57,8 @@ const DrawNavigator = createDrawerNavigator({
     }
   },
 }, {
-  drawerPosition: 'left'
+  drawerPosition: 'left',
+  hideStatusBar: false
 });
 
 const App = createAppContainer(DrawNavigator);
