@@ -1,6 +1,6 @@
 import React from 'react'
-import { View } from 'react-native'
-import { Icon, List, ListItem, Text } from 'native-base'
+import { Icon, List, ListItem, Text, Footer, Header, H3, Title,
+          Content, Container, Body, Left, Right, Subtitle } from 'native-base'
 import database from '../model/db'
 
 class DownloadScreen extends React.Component {
@@ -24,20 +24,30 @@ class DownloadScreen extends React.Component {
   }
 
   render() {
-    return (
-      <View>
-        <Text>Found { this.state.downloads.length } downloads</Text>
+    const { downloads } = this.state
 
-        <List>
-          {
-            this.state.downloads.map ( d => {
-              return <ListItem>
-                <Text>{ d[0].name }</Text>
-              </ListItem>
-            })
-          }
-        </List>
-      </View>
+    return (
+      <Container>
+        <Header>
+          <Left />
+          <Body>
+            <Title>Found { downloads.length } files</Title>
+          </Body>
+          <Right />
+        </Header>
+
+        <Content padder>
+          <List>
+            {
+              downloads.map ( d => {
+                return <ListItem>
+                  <Text>{ d[0].name }</Text>
+                </ListItem>
+              })
+            }
+          </List>
+        </Content>
+      </Container>
     )
   }
 }
