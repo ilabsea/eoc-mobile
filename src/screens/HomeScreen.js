@@ -50,6 +50,9 @@ class HomeScreen extends Component {
     this.renderRow = this.renderRow.bind(this)
     this.handleFetch = this.handleFetch.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
+
+    // Collection
+    this.downloadCollection = database.collections.get('downloads')
   }
 
   handleListPress = sopGuide => {
@@ -87,7 +90,7 @@ class HomeScreen extends Component {
   componentDidMount() {
     this.searchInput.current._root.focus()
     this.getAppVer()
-    console.log(database)
+    console.log(this.getDownload())
     // this.download()
   }
 
@@ -97,7 +100,12 @@ class HomeScreen extends Component {
     })
   }
 
-  download = () => {
+  getDownload = async () => {
+    const all = await this.downloadCollection.query().fetch()
+    console.log(all)
+  }
+
+  download = async () => {
     this.task = RNBackgroundDownloader.download({
       id: 'file123',
       url: url,
@@ -106,9 +114,17 @@ class HomeScreen extends Component {
           console.log(`Going to download ${expectedBytes} bytes!`);
       }).progress((percent) => {
           console.log(`Downloaded: ${percent * 100}%`);
-      }).done(() => {
+      }).done(async () => {
           console.log('Download is done! & viewing');
-          FileViewer.open(localFile)
+          // FileViewer.open(localFile)
+          const db = await database.action(async () => {
+            const newDownload = await this.downloadCollection.create(download => {
+              download.remoteUrl = url
+              download.localUrl = localFile
+              download.name = file
+            })
+            console.log('created')
+          })
       }).error((error) => {
           console.log('Download canceled due to error: ', error);
       });
@@ -211,6 +227,9 @@ class HomeScreen extends Component {
             <Text>Search</Text>
           </Button>
         </Header>
+        <Button full onPress={ this.download }>
+          <Text>DL</Text>
+        </Button>
         <EmptyList {...this.state} />
         <List
           dataArray={this.state.data}
