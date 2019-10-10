@@ -88,10 +88,10 @@ class DownloadScreen extends React.Component {
 
                   <Right>
                     <View style={{flexDirection: 'row'}}>
-                      <Button small primary onPress={this.view.bind(this, d[0].name )}>
+                      <Button small rounded onPress={this.view.bind(this, d[0].name )}>
                         <Icon name="md-eye" />
                       </Button>
-                      <Button small danger 
+                      <Button small rounded
                               onPress={this.remove.bind(this, d[0].id )}
                               style={{ marginLeft: 5 }}>
                         <Icon name="md-remove-circle-outline" />

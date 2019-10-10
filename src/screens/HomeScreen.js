@@ -169,6 +169,10 @@ class HomeScreen extends Component {
     return esHighlightStr ? this.highlight( esHighlightStr[0], tag ).map( item => item ) : fallbackComponent
   }
 
+  dl() {
+    console.log('dl')
+  }
+
   renderRow = (item) => {
     let { document_type } = item._source
     let { type, icon, color } = typeIcon(document_type)
@@ -202,8 +206,8 @@ class HomeScreen extends Component {
         <Right>
           {
             document_type == 'document' ?
-              <Icon name="arrow-forward" /> :
-              <Icon name="md-download" />
+            <Icon name="md-download" onPress={this.dl.bind(this)}/> :
+            <Icon name="arrow-forward" />
           }
         </Right>
       </ListItem>
@@ -227,9 +231,9 @@ class HomeScreen extends Component {
             <Text>Search</Text>
           </Button>
         </Header>
-        <Button full onPress={ this.download }>
+        {/* <Button full onPress={ this.download }>
           <Text>DL</Text>
-        </Button>
+        </Button> */}
         <EmptyList {...this.state} />
         <List
           dataArray={this.state.data}

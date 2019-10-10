@@ -57,7 +57,7 @@ const DrawNavigator = createDrawerNavigator({
     }
   },
 }, {
-  initialRouteName: 'Download',
+  initialRouteName: 'Home',
   drawerPosition: 'left',
   hideStatusBar: false
 });
