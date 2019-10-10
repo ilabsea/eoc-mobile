@@ -115,16 +115,16 @@ class HomeScreen extends Component {
       }).progress((percent) => {
           console.log(`Downloaded: ${percent * 100}%`);
       }).done(async () => {
-          console.log('Download is done! & viewing');
-          // FileViewer.open(localFile)
-          const db = await database.action(async () => {
-            const newDownload = await this.downloadCollection.create(download => {
-              download.remoteUrl = url
-              download.localUrl = localFile
-              download.name = file
-            })
-            console.log('created')
+        console.log('Download is done! & viewing');
+        // FileViewer.open(localFile)
+        const db = await database.action(async () => {
+          const newDownload = await this.downloadCollection.create(download => {
+            download.remoteUrl = url
+            download.localUrl = localFile
+            download.name = file
           })
+          console.log('created')
+        })
       }).error((error) => {
           console.log('Download canceled due to error: ', error);
       });

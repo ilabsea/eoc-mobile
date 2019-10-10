@@ -1,7 +1,10 @@
 import React from 'react'
+import { View } from 'react-native'
 import { Icon, List, ListItem, Text, Footer, Header, H3, Title, Button,
           Content, Container, Body, Left, Right, Subtitle } from 'native-base'
 import database from '../model/db'
+import RNFS from 'react-native-fs'
+import FileViewer from 'react-native-file-viewer'
 
 class DownloadScreen extends React.Component {
   constructor(props) {
@@ -50,6 +53,11 @@ class DownloadScreen extends React.Component {
       .catch( e => console.log('error caught: ', e))
   }
 
+  view(name) {
+    let localFile = `${RNFS.DocumentDirectoryPath}/${name}`
+    FileViewer.open(localFile)
+  }
+
   render() {
     const { downloads } = this.state
 
@@ -64,9 +72,11 @@ class DownloadScreen extends React.Component {
         </Header>
 
         <Content padder>
-          <Button full onPress={ this.gen.bind(this) }>
-            <Text>Gen.</Text>
-          </Button>
+          {
+            /* <Button full onPress={ this.gen.bind(this) }>
+                <Text>Gen.</Text>
+              </Button> */
+          }
 
           <List>
             {
@@ -75,10 +85,18 @@ class DownloadScreen extends React.Component {
                   <Left>
                     <Text>{ d[0].name }</Text>
                   </Left>
+
                   <Right>
-                    <Button small danger onPress={this.remove.bind(this, d[0].id )}>
-                      <Icon name="md-remove-circle-outline" />
-                    </Button>
+                    <View style={{flexDirection: 'row'}}>
+                      <Button small primary onPress={this.view.bind(this, d[0].name )}>
+                        <Icon name="md-eye" />
+                      </Button>
+                      <Button small danger 
+                              onPress={this.remove.bind(this, d[0].id )}
+                              style={{ marginLeft: 5 }}>
+                        <Icon name="md-remove-circle-outline" />
+                      </Button>
+                    </View>
                   </Right>
                 </ListItem>
               })
