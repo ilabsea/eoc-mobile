@@ -29,7 +29,8 @@ class HomeScreen extends Component {
       size: 15,
       keyword: 'disease',
       data: [],
-      downloads: []
+      downloads: [],
+      downloadeds: []
     }
 
     this.task = null
@@ -79,6 +80,15 @@ class HomeScreen extends Component {
   componentDidMount() {
     this.searchInput.current._root.focus()
     this.getAppVer()
+    
+    this.all()
+  }
+
+  async all() {
+    const all = await this.downloadCollection.query().fetch()
+    this.setState({
+      downloadeds: all.map(m=>m.name)
+    })
   }
 
   getAppVer = () => {
@@ -126,6 +136,10 @@ class HomeScreen extends Component {
     return esHighlightStr ? this.highlight( esHighlightStr[0], tag ).map( item => item ) : fallbackComponent
   }
 
+  handleOpen(item) {
+    console.log('open')
+  }
+
   handleDownload(item) {
     const url = `${config.host.staging}:${config.port}${item.file.url}`
     const file = basename(url)
@@ -158,6 +172,10 @@ class HomeScreen extends Component {
             download.localUrl = localFile
             download.name = file
           })
+
+          this.setState((prev) => ({
+            downloadeds: [...prev.downloadeds]
+          }))
 
           // Add a Toast on screen.
           let toast = Toast.show('File downloaded!', {
@@ -212,13 +230,21 @@ class HomeScreen extends Component {
           </View>
         </Body>
         <Right>
+          
           {
             document_type == 'document' ?
-            <Button rounded 
-                    onPress={() => this.handleDownload(item._source)}>
-              { this.state.downloads }
-              <Icon name="md-download" /> 
-            </Button>
+            
+            this.state.downloadeds.includes( basename(item._source.file.url)) ?
+
+              <Button rounded 
+                  onPress={() => this.handleOpen(item._source.file.url)}>
+                  <Icon name="md-eye" /> 
+              </Button>
+              : 
+              <Button rounded
+                  onPress={() => this.handleDownload(item._source)}>
+                <Icon name="md-download" /> 
+              </Button>
             :
             <Button rounded
                     onPress={() => this.handleListPress(item._source)}>
