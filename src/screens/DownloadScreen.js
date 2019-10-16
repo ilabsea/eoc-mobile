@@ -6,6 +6,7 @@ import database from '../model/db'
 import RNFS from 'react-native-fs'
 import FileViewer from 'react-native-file-viewer'
 import { realname } from '../config/utils'
+import { withNavigation } from 'react-navigation'
 
 class DownloadScreen extends React.Component {
   constructor(props) {
@@ -19,7 +20,16 @@ class DownloadScreen extends React.Component {
   }
 
   componentDidMount() {
-    this.getAllDownloads()
+    this.didBlurSubscription = this.props.navigation.addListener(
+      'didFocus', payload => {
+        console.log('didFocus', payload);
+        this.getAllDownloads()
+      }
+    );
+  }
+
+  componentWillUnmount() {
+    this.didBlurSubscription.remove()
   }
 
   getAllDownloads = async () => {
@@ -104,4 +114,4 @@ DownloadScreen.navigationOptions = {
   ),
 };
 
-export default DownloadScreen
+export default withNavigation(DownloadScreen)

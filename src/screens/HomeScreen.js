@@ -28,7 +28,8 @@ class HomeScreen extends Component {
       from: 0,
       size: 15,
       keyword: 'disease',
-      data: []
+      data: [],
+      downloads: []
     }
 
     this.task = null
@@ -135,11 +136,21 @@ class HomeScreen extends Component {
       url: url,
       destination: localFile
       }).begin((expectedBytes) => {
-          console.log(`Going to download ${expectedBytes} bytes!`);
+
+        this.setState((prev) => {
+          return {
+            downloads: [...prev.downloads, {
+              id: item.id,
+              task: this.task
+            }]
+          }
+        })
+
+        console.log(`Going to download ${expectedBytes} bytes!`);
       }).progress((percent) => {
-          console.log(`Downloaded: ${percent * 100}%`);
+        console.log(`Downloaded: ${percent * 100}%`);
       }).done(async () => {
-        console.log('Download is done! & viewing');
+        console.log('Download is done! & viewing', this.state.downloads);
 
         const db = await database.action(async () => {
           const newDownload = await this.downloadCollection.create(download => {
@@ -156,18 +167,6 @@ class HomeScreen extends Component {
             animation: true,
             hideOnPress: true,
             delay: 0,
-            onShow: () => {
-                // calls on toast\`s appear animation start
-            },
-            onShown: () => {
-                // calls on toast\`s appear animation end.
-            },
-            onHide: () => {
-                // calls on toast\`s hide animation start.
-            },
-            onHidden: () => {
-                // calls on toast\`s hide animation end.
-            }
           });
 
           // You can manually hide the Toast, or it will automatically disappear after a `duration` ms timeout.
@@ -179,6 +178,8 @@ class HomeScreen extends Component {
       }).error((error) => {
         console.log('Download canceled due to error: ', error);
       });
+
+    
   }
 
   renderRow = (item) => {
@@ -215,6 +216,7 @@ class HomeScreen extends Component {
             document_type == 'document' ?
             <Button rounded 
                     onPress={() => this.handleDownload(item._source)}>
+              { this.state.downloads }
               <Icon name="md-download" /> 
             </Button>
             :
