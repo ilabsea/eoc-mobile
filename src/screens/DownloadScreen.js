@@ -29,17 +29,6 @@ class DownloadScreen extends React.Component {
     this.setState({ downloads })
   }
 
-  async gen() {
-    const db = await database.action(async () => {
-      const newDownload = await this.downloadCollection.create(dl => {
-        dl.remoteUrl = 'test remote url'
-        dl.localUrl = 'test local url'
-        dl.name = 'test name'
-      })
-      console.log('created')
-    })
-  }
-
   async remove(id) {
     await this.downloadCollection.find(id)
       .then( async (r) => {
@@ -74,11 +63,6 @@ class DownloadScreen extends React.Component {
         </Header>
 
         <Content padder>
-          {
-            /* <Button full onPress={ this.gen.bind(this) }>
-                <Text>Gen.</Text>
-              </Button> */
-          }
 
           <List>
             {

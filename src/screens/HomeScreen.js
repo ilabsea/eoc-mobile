@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, YellowBox } from 'react-native'
+import { StyleSheet, View, YellowBox, Alert } from 'react-native'
 import axios from 'axios'
 import * as config from '../config/base'
 import moment from 'moment'
@@ -183,8 +183,7 @@ class HomeScreen extends Component {
     let { name, tags } = item.highlight
 
     return (
-      <ListItem thumbnail 
-        onPress={ () => this.handleListPress(item._source) }>
+      <ListItem thumbnail>
         <Left>
           <Button transparent style={styles.btnIcon}>
             <Icon type={type} style={{ color, fontSize:42 }} name={ icon } />
@@ -210,8 +209,15 @@ class HomeScreen extends Component {
         <Right>
           {
             document_type == 'document' ?
-            <Icon name="md-download" onPress={this.handleDownload.bind(this, item._source)}/> :
-            <Icon name="arrow-forward" />
+            <Button rounded 
+                    onPress={() => this.handleDownload(item._source)}>
+              <Icon name="md-download" /> 
+            </Button>
+            :
+            <Button rounded
+                    onPress={() => this.handleListPress(item._source)}>
+              <Icon name="arrow-forward" />
+            </Button>
           }
         </Right>
       </ListItem>
