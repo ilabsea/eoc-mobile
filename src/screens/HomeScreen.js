@@ -12,6 +12,7 @@ import RNBackgroundDownloader from 'react-native-background-downloader'
 import RNFS from 'react-native-fs'
 import VersionNumber from 'react-native-version-number'
 import database from '../model/db'
+import Toast from 'react-native-root-toast'
 
 
 // TOREMV
@@ -146,7 +147,34 @@ class HomeScreen extends Component {
             download.localUrl = localFile
             download.name = file
           })
-          console.log('created')
+
+          // Add a Toast on screen.
+          let toast = Toast.show('File downloaded!', {
+            duration: Toast.durations.LONG,
+            position: Toast.positions.BOTTOM,
+            shadow: true,
+            animation: true,
+            hideOnPress: true,
+            delay: 0,
+            onShow: () => {
+                // calls on toast\`s appear animation start
+            },
+            onShown: () => {
+                // calls on toast\`s appear animation end.
+            },
+            onHide: () => {
+                // calls on toast\`s hide animation start.
+            },
+            onHidden: () => {
+                // calls on toast\`s hide animation end.
+            }
+          });
+
+          // You can manually hide the Toast, or it will automatically disappear after a `duration` ms timeout.
+          setTimeout(function () {
+            Toast.hide(toast);
+          }, 3000);
+
         })
       }).error((error) => {
         console.log('Download canceled due to error: ', error);
