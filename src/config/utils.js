@@ -6,4 +6,13 @@ const typeIcon = (docType) => {
   return doc[docType]
 }
 
-export { typeIcon }
+const basename = (path) => {
+  return path.split('/').reverse()[0]
+}
+
+const realname = (path) => {
+  const reg = /-(.*)\.{0,3}$/.exec(path)
+  return reg[1]
+}
+
+export { typeIcon, basename, realname }

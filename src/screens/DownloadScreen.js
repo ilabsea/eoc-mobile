@@ -5,6 +5,7 @@ import { Icon, List, ListItem, Text, Footer, Header, H3, Title, Button,
 import database from '../model/db'
 import RNFS from 'react-native-fs'
 import FileViewer from 'react-native-file-viewer'
+import { realname } from '../config/utils'
 
 class DownloadScreen extends React.Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class DownloadScreen extends React.Component {
 
   getAllDownloads = async () => {
     const all = await this.downloadCollection.query().fetch()
+    console.log('get downloads', all)
     const downloads = all.map(d => [{ id: d.id, name: d.name, localUrl: d.localUrl }])
     this.setState({ downloads })
   }
@@ -83,7 +85,7 @@ class DownloadScreen extends React.Component {
               downloads.map ( d => {
                 return <ListItem key={d[0].name}>
                   <Left>
-                    <Text>{ d[0].name }</Text>
+                    <Text>{ realname(d[0].name) }</Text>
                   </Left>
 
                   <Right>

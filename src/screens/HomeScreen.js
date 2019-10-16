@@ -5,7 +5,7 @@ import * as config from '../config/base'
 import moment from 'moment'
 import { Container, Header, Item, Input, Left, Body, Right, 
           Button, List, ListItem, Text, Icon, H3 } from 'native-base'
-import { typeIcon } from '../config/utils'
+import { typeIcon, basename, realname } from '../config/utils'
 import { data } from '../data'
 
 import EmptyList from './EmptyList'
@@ -14,15 +14,6 @@ import RNFS from 'react-native-fs'
 import FileViewer from 'react-native-file-viewer'
 import VersionNumber from 'react-native-version-number'
 import database from '../model/db'
-
-const url = 'http://www.pdf995.com/samples/pdf.pdf'
-const file = 'pdf.pdf'
-const localFile = `${RNFS.DocumentDirectoryPath}/${file}`
-
-const options = {
-  fromUrl: url,
-  toFile: localFile
-};
 
 
 
@@ -90,7 +81,7 @@ class HomeScreen extends Component {
   componentDidMount() {
     this.searchInput.current._root.focus()
     this.getAppVer()
-    console.log(this.getDownload())
+    // console.log(this.getDownload())
     // this.download()
   }
 
@@ -106,28 +97,7 @@ class HomeScreen extends Component {
   }
 
   download = async () => {
-    this.task = RNBackgroundDownloader.download({
-      id: 'file123',
-      url: url,
-      destination: localFile
-      }).begin((expectedBytes) => {
-          console.log(`Going to download ${expectedBytes} bytes!`);
-      }).progress((percent) => {
-          console.log(`Downloaded: ${percent * 100}%`);
-      }).done(async () => {
-        console.log('Download is done! & viewing');
-        // FileViewer.open(localFile)
-        const db = await database.action(async () => {
-          const newDownload = await this.downloadCollection.create(download => {
-            download.remoteUrl = url
-            download.localUrl = localFile
-            download.name = file
-          })
-          console.log('created')
-        })
-      }).error((error) => {
-          console.log('Download canceled due to error: ', error);
-      });
+    
   }
 
   loadMore = () => {
@@ -169,8 +139,42 @@ class HomeScreen extends Component {
     return esHighlightStr ? this.highlight( esHighlightStr[0], tag ).map( item => item ) : fallbackComponent
   }
 
-  dl() {
-    console.log('dl')
+  handleDownload(item) {
+    // const url = 'http://www.pdf995.com/samples/pdf.pdf'
+    // const file = 'pdf.pdf'
+    // const localFile = `${RNFS.DocumentDirectoryPath}/${file}`
+    
+    const url = `${config.host.staging}:${config.port}${item.file.url}`
+    const file = basename(url)
+    const localFile = `${RNFS.DocumentDirectoryPath}/${file}`
+
+    console.log('handle download', url, file, localFile)
+
+    this.task = RNBackgroundDownloader.download({
+      id: file,
+      url: url,
+      destination: localFile
+      }).begin((expectedBytes) => {
+          console.log(`Going to download ${expectedBytes} bytes!`);
+      }).progress((percent) => {
+          console.log(`Downloaded: ${percent * 100}%`);
+      }).done(async () => {
+        console.log('Download is done! & viewing');
+        // FileViewer.open(localFile)
+
+        console.log('local to watermelon')
+
+        const db = await database.action(async () => {
+          const newDownload = await this.downloadCollection.create(download => {
+            download.remoteUrl = url
+            download.localUrl = localFile
+            download.name = file
+          })
+          console.log('created')
+        })
+      }).error((error) => {
+        console.log('Download canceled due to error: ', error);
+      });
   }
 
   renderRow = (item) => {
@@ -206,7 +210,7 @@ class HomeScreen extends Component {
         <Right>
           {
             document_type == 'document' ?
-            <Icon name="md-download" onPress={this.dl.bind(this)}/> :
+            <Icon name="md-download" onPress={this.handleDownload.bind(this, item._source)}/> :
             <Icon name="arrow-forward" />
           }
         </Right>
