@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
-import { Icon, List, ListItem, Text, Footer, Header, H3, Title, Button,
-          Content, Container, Body, Left, Right, Subtitle } from 'native-base'
+import { Icon, List, ListItem, Text, Header, Title, Button,
+          Content, Container, Body, Left, Right } from 'native-base'
 import database from '../model/db'
 import RNFS from 'react-native-fs'
 import FileViewer from 'react-native-file-viewer'
@@ -55,7 +55,9 @@ class DownloadScreen extends React.Component {
     return (
       <Container>
         <Header>
-          <Left />
+          <Left>
+            <Icon name="ios-menu" onPress={() => this.props.navigation.openDrawer()} />
+          </Left>
           <Body>
             <Title>Found { downloads.length } files</Title>
           </Body>

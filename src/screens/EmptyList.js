@@ -13,7 +13,7 @@ const EmptyList = ({ isFetching, data, appVersion }) => (
         : 
         data.length ==0 ?
           <React.Fragment>
-            <Icon name="ios-heart-empty" style={{ marginRight: 15, marginTop: 2 }} />
+            {/* <Icon name="ios-heart-empty" style={{ marginRight: 15, marginTop: 2 }} /> */}
             <H1>Empty list v.{ appVersion }</H1>
           </React.Fragment>
           : null

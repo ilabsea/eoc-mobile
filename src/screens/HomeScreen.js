@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, YellowBox, Alert } from 'react-native'
+import { StyleSheet, View, YellowBox } from 'react-native'
 import axios from 'axios'
 import * as config from '../config/base'
 import moment from 'moment'
 import { Container, Header, Item, Input, Left, Body, Right, 
           Button, List, ListItem, Text, Icon, H3 } from 'native-base'
-import { typeIcon, basename, realname } from '../config/utils'
-import { data } from '../data'
+import { typeIcon, basename } from '../config/utils'
 
 import EmptyList from './EmptyList'
 import RNBackgroundDownloader from 'react-native-background-downloader'
 import RNFS from 'react-native-fs'
-import FileViewer from 'react-native-file-viewer'
 import VersionNumber from 'react-native-version-number'
 import database from '../model/db'
-
 
 
 // TOREMV
@@ -35,7 +32,6 @@ class HomeScreen extends Component {
 
     this.task = null
     this.searchInput = React.createRef()
-    this.download = this.download.bind(this)
     this.getAppVer = this.getAppVer.bind(this)
     this.loadMore = this.loadMore.bind(this)
     this.renderRow = this.renderRow.bind(this)
@@ -81,23 +77,12 @@ class HomeScreen extends Component {
   componentDidMount() {
     this.searchInput.current._root.focus()
     this.getAppVer()
-    // console.log(this.getDownload())
-    // this.download()
   }
 
   getAppVer = () => {
     this.setState({
       appVersion: VersionNumber.appVersion
     })
-  }
-
-  getDownload = async () => {
-    const all = await this.downloadCollection.query().fetch()
-    console.log(all)
-  }
-
-  download = async () => {
-    
   }
 
   loadMore = () => {
@@ -140,15 +125,9 @@ class HomeScreen extends Component {
   }
 
   handleDownload(item) {
-    // const url = 'http://www.pdf995.com/samples/pdf.pdf'
-    // const file = 'pdf.pdf'
-    // const localFile = `${RNFS.DocumentDirectoryPath}/${file}`
-    
     const url = `${config.host.staging}:${config.port}${item.file.url}`
     const file = basename(url)
     const localFile = `${RNFS.DocumentDirectoryPath}/${file}`
-
-    console.log('handle download', url, file, localFile)
 
     this.task = RNBackgroundDownloader.download({
       id: file,
@@ -160,9 +139,6 @@ class HomeScreen extends Component {
           console.log(`Downloaded: ${percent * 100}%`);
       }).done(async () => {
         console.log('Download is done! & viewing');
-        // FileViewer.open(localFile)
-
-        console.log('local to watermelon')
 
         const db = await database.action(async () => {
           const newDownload = await this.downloadCollection.create(download => {
@@ -241,9 +217,6 @@ class HomeScreen extends Component {
             <Text>Search</Text>
           </Button>
         </Header>
-        {/* <Button full onPress={ this.download }>
-          <Text>DL</Text>
-        </Button> */}
         <EmptyList {...this.state} />
         <List
           dataArray={this.state.data}
