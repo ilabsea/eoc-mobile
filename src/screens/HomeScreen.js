@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, YellowBox } from 'react-native'
 import axios from 'axios'
-import * as config from '../config/base'
+import * as config from '../config/connectionBase'
 import moment from 'moment'
 import { Container, Header, Item, Input, Left, Body, Right, 
           Button, List, ListItem, Text, Icon, H3 } from 'native-base'
