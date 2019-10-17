@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { Alert, View } from 'react-native'
 import { Icon, List, ListItem, Text, Header, Title, Button,
           Content, Container, Body, Left, Right } from 'native-base'
 import database from '../model/db'
@@ -7,11 +7,15 @@ import RNFS from 'react-native-fs'
 import FileViewer from 'react-native-file-viewer'
 import { realname } from '../config/utils'
 import { withNavigation } from 'react-navigation'
+import { ConfirmDialog } from 'react-native-simple-dialogs'
+import Toast from 'react-native-root-toast'
 
 class DownloadScreen extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      id: 0,
+      dialogVisible: false,
       downloads: []
     }
 
@@ -40,16 +44,35 @@ class DownloadScreen extends React.Component {
   }
 
   async remove(id) {
-    await this.downloadCollection.find(id)
-      .then( async (r) => {
+    this.setState({
+      id: id,
+      dialogVisible: true
+    })
+  }
 
+  async destroy() {
+    await this.downloadCollection.find(this.state.id)
+      .then( async (r) => {
         await database.action(async () => {
           await r.markAsDeleted()
           await r.destroyPermanently()
         })
-
-        console.log('removed')
+        this.setState({ id: 0 })
         this.getAllDownloads()
+
+        let toast = Toast.show('Removed one item', {
+          duration: Toast.durations.LONG,
+          position: Toast.positions.BOTTOM,
+          shadow: true,
+          animation: true,
+          hideOnPress: true,
+          delay: 0,
+        });
+
+        setTimeout(function () {
+          Toast.hide(toast);
+        }, 3000);
+
       })
       .catch( e => console.log('error caught: ', e))
   }
@@ -75,7 +98,22 @@ class DownloadScreen extends React.Component {
         </Header>
 
         <Content padder>
-
+          <ConfirmDialog
+              title="Confirm Dialog"
+              message="Are you sure about that?"
+              visible={this.state.dialogVisible}
+              onTouchOutside={() => this.setState({dialogVisible: false})}
+              positiveButton={{
+                  title: "YES",
+                onPress: () => {
+                  this.destroy()
+                  this.setState({ dialogVisible: false })
+                }
+              }}
+              negativeButton={{
+                  title: "NO",
+                  onPress: () => this.setState({ dialogVisible: false })
+              }} />
           <List>
             {
               downloads.map ( d => {
