@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Header, Item, Icon, 
-          Input, Button, Text } from 'native-base'
+          Input, Button, Text, Content } from 'native-base'
 
 import { basename } from '../config/utils'
 import { service } from '../services'
@@ -45,6 +45,10 @@ class Root extends React.Component {
             <Text>Search</Text>
           </Button>
         </Header>
+
+        <Content>
+          { this.props.children }
+        </Content>
       </Container>
     )
   }
