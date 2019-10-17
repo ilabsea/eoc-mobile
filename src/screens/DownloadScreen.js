@@ -2,7 +2,7 @@ import React from 'react'
 import { Alert, View } from 'react-native'
 import { Icon, List, ListItem, Text, Header, Title, Button,
           Content, Container, Body, Left, Right } from 'native-base'
-import database from '../model/db'
+import database from '../models/db'
 import RNFS from 'react-native-fs'
 import FileViewer from 'react-native-file-viewer'
 import { realname } from '../config/utils'
@@ -19,7 +19,7 @@ class DownloadScreen extends React.Component {
       downloads: []
     }
 
-    this.downloadCollection = database.collections.get('downloads')
+    this.downloadCollection = database.collections.get('downloads') // redux
     this.getAllDownloads = this.getAllDownloads.bind(this)
   }
 

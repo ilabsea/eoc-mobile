@@ -1,6 +1,7 @@
 import { appSchema, tableSchema } from '@nozbe/watermelondb'
 
-const schema = appSchema({
+export const dbName = 'db_eoc_mobile'
+export const schema = appSchema({
   version: 1,
   tables: [
     tableSchema({
@@ -15,5 +16,3 @@ const schema = appSchema({
     }),
   ]
 })
-
-export default schema

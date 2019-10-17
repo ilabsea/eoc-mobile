@@ -11,7 +11,7 @@ import EmptyList from './EmptyList'
 import RNBackgroundDownloader from 'react-native-background-downloader'
 import RNFS from 'react-native-fs'
 import VersionNumber from 'react-native-version-number'
-import database from '../model/db'
+import database from '../models/db'
 import Toast from 'react-native-root-toast'
 import FileViewer from 'react-native-file-viewer'
 
