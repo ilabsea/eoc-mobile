@@ -13,6 +13,7 @@ import RNFS from 'react-native-fs'
 import VersionNumber from 'react-native-version-number'
 import database from '../model/db'
 import Toast from 'react-native-root-toast'
+import FileViewer from 'react-native-file-viewer'
 
 
 // TOREMV
@@ -137,7 +138,9 @@ class HomeScreen extends Component {
   }
 
   handleOpen(item) {
-    console.log('open')
+    const file = basename(item.file.url)
+    const localFile = `${RNFS.DocumentDirectoryPath}/${file}`
+    FileViewer.open(localFile)
   }
 
   handleDownload(item) {
@@ -237,7 +240,7 @@ class HomeScreen extends Component {
             this.state.downloadeds.includes( basename(item._source.file.url)) ?
 
               <Button rounded 
-                  onPress={() => this.handleOpen(item._source.file.url)}>
+                  onPress={() => this.handleOpen(item._source)}>
                   <Icon name="md-eye" /> 
               </Button>
               : 
