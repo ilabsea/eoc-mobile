@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { YellowBox, AsyncStorage, Alert } from 'react-native'
+import { YellowBox, Alert } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 import axios from 'axios'
 import * as config from '../config/connectionBase'
 import { Container, Header, Item, Input, 

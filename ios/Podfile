@@ -38,6 +38,8 @@ target 'eocmobileapp' do
 
   pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
   target 'eocmobileappTests' do
     inherit! :search_paths
     # Pods for testing
