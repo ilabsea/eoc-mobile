@@ -5,7 +5,7 @@ import * as config from '../config/connectionBase'
 import moment from 'moment'
 import { Container, Header, Item, Input, Left, Body, Right, 
           Button, List, ListItem, Text, Icon, H3 } from 'native-base'
-import { typeIcon, basename } from '../config/utils'
+import { typeIcon, basename, highlight } from '../config/utils'
 import EmptyList from './EmptyList'
 import { service } from '../services'
 
@@ -83,28 +83,10 @@ class HomeScreen extends Component {
     }
   }
 
-  highlight = (text, Tag) => {
-    let data = []
-    words = text.split(/\s/)
-    let regex = /class='highlight'>\w+<\/em>/
-
-    words.forEach( (word, index) => {
-      if( word == '<em' && regex.test(words[index+1]) ) return
-
-      if( regex.test(word) ) {
-        hl = />(\w+)</.exec(word)
-        data.push(<Tag key={index} style={styles.searchResult}>{hl[1]}</Tag>)
-      } else  {
-        data.push(<Tag key={index}>{word}</Tag>)
-      }
-      data.push(<Text key={index + Date.now()}>{' '}</Text>)
-    })
-
-    return data
-  }
-
   _renderSubItem = (esHighlightStr, tag, fallbackComponent) => {
-    return esHighlightStr ? this.highlight( esHighlightStr[0], tag ).map( item => item ) : fallbackComponent
+    return esHighlightStr ? 
+            highlight( esHighlightStr[0], tag ) 
+            : fallbackComponent
   }
 
   handleDownload(item) {
@@ -148,7 +130,6 @@ class HomeScreen extends Component {
           
           {
             document_type == 'document' ?
-            
             <Button rounded
                 onPress={() => this.handleDownload(item._source)}>
               <Icon name="md-download" /> 
@@ -199,21 +180,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff", 
     borderWidth: 0
   },
-  searchResult: { 
-    color: "#4a148c", 
-    backgroundColor: "yellow",
-    fontWeight: "bold",
-  },
 });
-
-HomeScreen.navigationOptions = {
-  header:null,
-  // headerTitle: 'Recent guideline',
-  // headerStyle: {
-  //   backgroundColor: '#f4511e',
-  // },
-  // headerTintColor: '#fff',
-  // headerRight: <Icon name="md-search" style={styles.icon} />,
-};
 
 export default HomeScreen;
