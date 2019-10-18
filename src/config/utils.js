@@ -1,3 +1,5 @@
+import VersionNumber from 'react-native-version-number'
+
 const typeIcon = (docType) => {
   const type = 'MaterialIcons'
 
@@ -15,4 +17,6 @@ const realname = (path) => {
   return reg[1]
 }
 
-export { typeIcon, basename, realname }
+const appVersion = VersionNumber.appVersion
+
+export { typeIcon, basename, realname, appVersion }

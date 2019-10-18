@@ -1,8 +1,9 @@
 import React from 'react'
 import { StyleSheet, ActivityIndicator, View } from 'react-native'
-import {H1, Icon} from 'native-base'
+import { H1 } from 'native-base'
+import { appVersion } from '../config/utils'
 
-const EmptyList = ({ isFetching, data, appVersion }) => (
+const EmptyList = ({ isFetching, data }) => (
   <View style={styles.container}>
     <View style={{ flexDirection: 'row' }}>
       {

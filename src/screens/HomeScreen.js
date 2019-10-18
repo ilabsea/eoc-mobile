@@ -6,14 +6,7 @@ import moment from 'moment'
 import { Container, Header, Item, Input, Left, Body, Right, 
           Button, List, ListItem, Text, Icon, H3 } from 'native-base'
 import { typeIcon, basename } from '../config/utils'
-
 import EmptyList from './EmptyList'
-// import RNBackgroundDownloader from 'react-native-background-downloader'
-import RNFS from 'react-native-fs'
-import VersionNumber from 'react-native-version-number'
-// import database from '../models/db'
-// import Toast from 'react-native-root-toast'
-import FileViewer from 'react-native-file-viewer'
 import { service } from '../services'
 
 
@@ -25,26 +18,18 @@ class HomeScreen extends Component {
     super(props)
 
     this.state = {
-      appVersion: '0.0.0',
       isFetching: false,
       from: 0,
       size: 15,
       keyword: 'disease',
       data: [],
-      downloads: [],
-      downloadeds: []
     }
 
-    this.task = null
     this.searchInput = React.createRef()
-    this.getAppVer = this.getAppVer.bind(this)
     this.loadMore = this.loadMore.bind(this)
     this.renderRow = this.renderRow.bind(this)
     this.handleFetch = this.handleFetch.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
-
-    // Collection
-    // this.downloadCollection = database.collections.get('downloads')
   }
 
   handleListPress = sopGuide => {
@@ -81,22 +66,6 @@ class HomeScreen extends Component {
 
   componentDidMount() {
     this.searchInput.current._root.focus()
-    this.getAppVer()
-    
-    //this.all()
-  }
-
-  // async all() {
-  //   const all = await this.downloadCollection.query().fetch()
-  //   this.setState({
-  //     downloadeds: all.map(m=>m.name)
-  //   })
-  // }
-
-  getAppVer = () => {
-    this.setState({
-      appVersion: VersionNumber.appVersion
-    })
   }
 
   loadMore = () => {
@@ -136,12 +105,6 @@ class HomeScreen extends Component {
 
   _renderSubItem = (esHighlightStr, tag, fallbackComponent) => {
     return esHighlightStr ? this.highlight( esHighlightStr[0], tag ).map( item => item ) : fallbackComponent
-  }
-
-  handleOpen(item) {
-    const file = basename(item.file.url)
-    const localFile = `${RNFS.DocumentDirectoryPath}/${file}`
-    FileViewer.open(localFile)
   }
 
   handleDownload(item) {
