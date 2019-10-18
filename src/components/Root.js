@@ -16,13 +16,7 @@ class Root extends React.Component {
   }
 
   render() {
-    return (
-      <Container>
-        <Content>
-          { this.props.children }
-        </Content>
-      </Container>
-    )
+    return this.props.children
   }
 }
 

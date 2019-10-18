@@ -36,6 +36,8 @@ target 'eocmobileapp' do
 
   pod 'react-native-version-number', :path => '../node_modules/react-native-version-number'
 
+  pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
+
   target 'eocmobileappTests' do
     inherit! :search_paths
     # Pods for testing
