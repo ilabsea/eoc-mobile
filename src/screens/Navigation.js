@@ -13,10 +13,7 @@ const Notification = () => {
 
 
 import HomeScreen from './HomeScreen'
-
-const About = () => {
-  return <H1>About</H1>
-}
+import SopDetailScreen from './SopDetailScreen'
 
 const stack = (props) => createStackNavigator({
   Home: {
@@ -28,7 +25,15 @@ const stack = (props) => createStackNavigator({
     },
     navigationOptions: { title: "Guidelines" }
   },
-  About: About,
+  SopDetail: {
+    screen: ({ navigation }) => {
+      const { database } = props;
+      return <Root>
+                <SopDetailScreen database={database} navigation={navigation}/>
+              </Root>
+    },
+    navigationOptions: { title: "Sop detail" }
+  },
 }, {
   initialRouteName: 'Home',
   initialRouteParams: props,

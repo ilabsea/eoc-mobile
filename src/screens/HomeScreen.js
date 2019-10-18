@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, YellowBox } from 'react-native'
+import { YellowBox } from 'react-native'
 import axios from 'axios'
 import * as config from '../config/connectionBase'
-import moment from 'moment'
-import { Container, Header, Item, Input, Left, Body, Right, 
-          Button, List, ListItem, Text, Icon, H3 } from 'native-base'
-import { typeIcon, basename, highlight } from '../config/utils'
-import EmptyList from './EmptyList'
-import { service } from '../services'
 
+import { Container, Header, Item, Input, 
+          Button, List, Text, Icon } from 'native-base'
+import EmptyList from './EmptyList'
+
+import RowItem from './RowItem'
 
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger'])
@@ -31,13 +30,6 @@ class HomeScreen extends Component {
     this.handleFetch = this.handleFetch.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
   }
-
-  handleListPress = sopGuide => {
-    this.props.navigation.navigate({
-      routeName: 'SopDetail',
-      params: { sopGuide },
-    });
-  };
 
   handleFetch = async (keyword) => {
     let { from, size } = this.state
@@ -83,66 +75,8 @@ class HomeScreen extends Component {
     }
   }
 
-  _renderSubItem = (esHighlightStr, tag, fallbackComponent) => {
-    return esHighlightStr ? 
-            highlight( esHighlightStr[0], tag ) 
-            : fallbackComponent
-  }
-
-  handleDownload(item) {
-    let remoteURL = `${config.host.staging}:${config.port}${item.file.url}`
-    let filename = basename(remoteURL)
-
-    service.downloadManager.download( remoteURL, filename )
-    service.toastManager.show(`Downloaded completed!`)
-  }
-
   renderRow = (item) => {
-    let { document_type } = item._source
-    let { type, icon, color } = typeIcon(document_type)
-    let { name, tags } = item.highlight
-
-    return (
-      <ListItem thumbnail>
-        <Left>
-          <Button transparent style={styles.btnIcon}>
-            <Icon type={type} style={{ color, fontSize:42 }} name={ icon } />
-          </Button>
-        </Left>
-        <Body>
-          <View>
-            <Text>
-              { this._renderSubItem(name, H3, <H3>{item._source.name}</H3>) }
-            </Text>
-            {
-              tags ?  <Text> tags: { this._renderSubItem(tags, Text, null) } </Text>  : null
-            }
-
-            <View style={{ flexDirection: 'row', alignItems:'center', marginTop: 10 }}>
-              <Icon name="md-time" style={{ fontSize: 20, marginRight: 5, color: "#666666" }} />
-              <Text style={{color: "#666666"}}>
-                { moment(item._source.created_at).fromNow() }
-              </Text>
-            </View>
-          </View>
-        </Body>
-        <Right>
-          
-          {
-            document_type == 'document' ?
-            <Button rounded
-                onPress={() => this.handleDownload(item._source)}>
-              <Icon name="md-download" /> 
-            </Button>
-            :
-            <Button rounded
-                    onPress={() => this.handleListPress(item._source)}>
-              <Icon name="arrow-forward" />
-            </Button>
-          }
-        </Right>
-      </ListItem>
-    );
+    return <RowItem item={item} />
   }
 
   render() {
@@ -166,20 +100,13 @@ class HomeScreen extends Component {
         <List
           dataArray={this.state.data}
           keyExtractor={item => item._source.id.toString()}
-          onEndReached={this.loadMore }
+          onEndReached={this.loadMore}
           onEndReachedThreshold={0.5}
-          renderRow={ this.renderRow }
+          renderRow={(item) => this.renderRow(item)}
         />
       </Container>
     );
   } 
 };
-
-const styles = StyleSheet.create({
-  btnIcon: { 
-    backgroundColor: "#fff", 
-    borderWidth: 0
-  },
-});
 
 export default HomeScreen;
