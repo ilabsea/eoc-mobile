@@ -8,12 +8,13 @@ import { Container, Header, Item, Input, Left, Body, Right,
 import { typeIcon, basename } from '../config/utils'
 
 import EmptyList from './EmptyList'
-import RNBackgroundDownloader from 'react-native-background-downloader'
+// import RNBackgroundDownloader from 'react-native-background-downloader'
 import RNFS from 'react-native-fs'
 import VersionNumber from 'react-native-version-number'
-import database from '../models/db'
-import Toast from 'react-native-root-toast'
+// import database from '../models/db'
+// import Toast from 'react-native-root-toast'
 import FileViewer from 'react-native-file-viewer'
+import { service } from '../services'
 
 
 // TOREMV
@@ -43,7 +44,7 @@ class HomeScreen extends Component {
     this.handleSearch = this.handleSearch.bind(this)
 
     // Collection
-    this.downloadCollection = database.collections.get('downloads')
+    // this.downloadCollection = database.collections.get('downloads')
   }
 
   handleListPress = sopGuide => {
@@ -82,15 +83,15 @@ class HomeScreen extends Component {
     this.searchInput.current._root.focus()
     this.getAppVer()
     
-    this.all()
+    //this.all()
   }
 
-  async all() {
-    const all = await this.downloadCollection.query().fetch()
-    this.setState({
-      downloadeds: all.map(m=>m.name)
-    })
-  }
+  // async all() {
+  //   const all = await this.downloadCollection.query().fetch()
+  //   this.setState({
+  //     downloadeds: all.map(m=>m.name)
+  //   })
+  // }
 
   getAppVer = () => {
     this.setState({
@@ -144,63 +145,11 @@ class HomeScreen extends Component {
   }
 
   handleDownload(item) {
-    const url = `${config.host.staging}:${config.port}${item.file.url}`
-    const file = basename(url)
-    const localFile = `${RNFS.DocumentDirectoryPath}/${file}`
+    let remoteURL = `${config.host.staging}:${config.port}${item.file.url}`
+    let filename = basename(remoteURL)
 
-    this.task = RNBackgroundDownloader.download({
-      id: file,
-      url: url,
-      destination: localFile
-      }).begin((expectedBytes) => {
-
-        this.setState((prev) => {
-          return {
-            downloads: [...prev.downloads, {
-              id: item.id,
-              task: this.task
-            }]
-          }
-        })
-
-        console.log(`Going to download ${expectedBytes} bytes!`);
-      }).progress((percent) => {
-        console.log(`Downloaded: ${percent * 100}%`);
-      }).done(async () => {
-        console.log('Download is done! & viewing', this.state.downloads);
-
-        const db = await database.action(async () => {
-          const newDownload = await this.downloadCollection.create(download => {
-            download.remoteUrl = url
-            download.localUrl = localFile
-            download.name = file
-          })
-
-          this.setState((prev) => ({
-            downloadeds: [...prev.downloadeds]
-          }))
-
-          // Add a Toast on screen.
-          let toast = Toast.show('File downloaded!', {
-            duration: Toast.durations.LONG,
-            position: Toast.positions.BOTTOM,
-            shadow: true,
-            animation: true,
-            hideOnPress: true,
-            delay: 0,
-          });
-
-          // You can manually hide the Toast, or it will automatically disappear after a `duration` ms timeout.
-          setTimeout(function () {
-            Toast.hide(toast);
-          }, 3000);
-
-        })
-      }).error((error) => {
-        console.log('Download canceled due to error: ', error);
-      });
-
-    
+    service.downloadManager.download( remoteURL, filename )
+    service.toastManager.show(`Downloaded completed!`)
   }
 
   renderRow = (item) => {
@@ -237,17 +186,10 @@ class HomeScreen extends Component {
           {
             document_type == 'document' ?
             
-            this.state.downloadeds.includes( basename(item._source.file.url)) ?
-
-              <Button rounded 
-                  onPress={() => this.handleOpen(item._source)}>
-                  <Icon name="md-eye" /> 
-              </Button>
-              : 
-              <Button rounded
-                  onPress={() => this.handleDownload(item._source)}>
-                <Icon name="md-download" /> 
-              </Button>
+            <Button rounded
+                onPress={() => this.handleDownload(item._source)}>
+              <Icon name="md-download" /> 
+            </Button>
             :
             <Button rounded
                     onPress={() => this.handleListPress(item._source)}>

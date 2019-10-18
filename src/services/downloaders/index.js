@@ -14,7 +14,7 @@ export const download = (remoteURL, filename) => {
     }).progress((percent) => {
       console.log(`Downloaded: ${percent * 100}%`);
     }).done(async () => {
-      console.log('Download is done!');
+      console.log(`Download ${filename} is done!`);
     }).error((error) => {
       console.log('Download canceled due to error: ', error);
     });

@@ -11,9 +11,8 @@ const Notification = () => {
   return <H1>Notification</H1>
 }
 
-const Home = () => {
-  return <H1>Home</H1>
-}
+
+import HomeScreen from './HomeScreen'
 
 const About = () => {
   return <H1>About</H1>
@@ -23,8 +22,8 @@ const stack = (props) => createStackNavigator({
   Home: {
     screen: ({ navigation }) => {
       const { database } = props;
-      return <Root database={database} navigation={navigation}>
-                <Home />
+      return <Root>
+                <HomeScreen database={database} navigation={navigation}/>
               </Root>
     },
     navigationOptions: { title: "Guidelines" }

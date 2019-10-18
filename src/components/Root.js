@@ -16,14 +16,6 @@ class Root extends React.Component {
 
   async componentDidMount() {
     await service.permissionManager.requestStorage()
-    this.downloadImage()
-  }
-
-  downloadImage = () => {
-    let remoteURL = 'https://reactnativecode.com/wp-content/uploads/2018/02/motorcycle.jpg'
-    let filename = basename(remoteURL)
-
-    service.downloadManager.download( remoteURL, filename )
   }
 
   render() {
@@ -31,7 +23,7 @@ class Root extends React.Component {
 
     return (
       <Container>
-        <Header searchBar rounded>
+        {/* <Header searchBar rounded>
           <Item>
             <Icon name="ios-menu" onPress={() => navigation.openDrawer()} />
             <Input ref={this.searchInput} 
@@ -44,7 +36,7 @@ class Root extends React.Component {
           <Button transparent>
             <Text>Search</Text>
           </Button>
-        </Header>
+        </Header> */}
 
         <Content>
           { this.props.children }
