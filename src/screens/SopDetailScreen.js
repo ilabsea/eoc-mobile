@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Container, Button, Content, Header, Left, Right, Body, Title, Icon } from 'native-base'
+import { Container, Button, Content, Header, Left, 
+          Right, Body, Title, Icon } from 'native-base'
 import moment from 'moment';
 import { typeIcon } from '../config/utils'
 

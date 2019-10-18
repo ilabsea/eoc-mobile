@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { YellowBox } from 'react-native'
 import axios from 'axios'
 import * as config from '../config/connectionBase'
-
 import { Container, Header, Item, Input, 
           Button, List, Text, Icon } from 'native-base'
 import EmptyList from './EmptyList'
@@ -10,7 +9,7 @@ import EmptyList from './EmptyList'
 import RowItem from './RowItem'
 
 // TOREMV
-YellowBox.ignoreWarnings(['Remote debugger'])
+YellowBox.ignoreWarnings(['Remote debugger', 'Warning'])
 
 class HomeScreen extends Component {
   constructor(props) {
