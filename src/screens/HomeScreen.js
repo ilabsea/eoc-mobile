@@ -10,6 +10,7 @@ import EmptyList from './EmptyList'
 import RowItem from './RowItem'
 
 import firebase from 'react-native-firebase'
+import { service } from '../services';
 
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle'])
@@ -128,11 +129,21 @@ class HomeScreen extends Component {
   async getToken() {
     let fcmToken = await AsyncStorage.getItem('fcmToken');
     if (!fcmToken) {
-        fcmToken = await firebase.messaging().getToken();
-        if (fcmToken) {
-            console.log('fcmToken', fcmToken)
-            await AsyncStorage.setItem('fcmToken', fcmToken);
-        }
+      fcmToken = await firebase.messaging().getToken();
+      if (fcmToken) {
+        console.log('fcmToken', fcmToken)
+        await AsyncStorage.setItem('fcmToken', fcmToken);
+        service.apiManager.save_token(fcmToken)
+      }
+    }
+  }
+
+  async requestPermission() {
+    try {
+      await firebase.messaging().requestPermission();
+      this.getToken();
+    } catch (error) {
+      console.log('permission rejected');
     }
   }
 

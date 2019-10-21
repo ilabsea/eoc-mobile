@@ -5,5 +5,6 @@ const host = {
 }
 const port = 3000
 const sops_path = 'api/v1/sops.json'
+const tokens_path = 'api/v1/tokens'
 
-export { host, port, sops_path }
+export { host, port, sops_path, tokens_path }
