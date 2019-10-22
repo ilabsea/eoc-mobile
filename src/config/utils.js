@@ -25,13 +25,13 @@ const appVersion = VersionNumber.appVersion
 const highlight = (text, Tag) => {
   let data = []
   words = text.split(/\s/)
-  let regex = /class='highlight'>\w+<\/em>/
+  let regex = /class='highlight'>.+<\/em>/
 
   words.forEach( (word, index) => {
     if( word == '<em' && regex.test(words[index+1]) ) return
 
     if( regex.test(word) ) {
-      hl = />(\w+)</.exec(word)
+      hl = />(.+)</.exec(word)
       data.push(<Tag key={index} style={styleUtils.searchResult}>{hl[1]}</Tag>)
     } else  {
       data.push(<Tag key={index}>{word}</Tag>)
