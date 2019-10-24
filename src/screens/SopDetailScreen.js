@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Button, Content, Header, Left, H3,
+import { Container, Button, Content, Header, Left, H3, H1,
           Right, Body, Title, Icon, List } from 'native-base'
 
 import { service } from '../services';
@@ -33,6 +33,7 @@ class SopDetailScreen extends React.Component {
 
   render() {
     let { navigation } = this.props
+    let { sops, children } = this.state
     const sopGuide = navigation.getParam('sopGuide')
 
     return (
@@ -49,7 +50,9 @@ class SopDetailScreen extends React.Component {
           <Right />
         </Header>
         <Content padder>
-          <H3>Sops:</H3>
+          {
+            sops.length > 0 ? <H3>Sops:</H3> : null
+          }
           <List>
             {
               this.state.sops.map( c => {
@@ -60,7 +63,9 @@ class SopDetailScreen extends React.Component {
             }
           </List>
 
-          <H3>Children:</H3>
+          {
+            sops.length > 0 ? <H3>Children:</H3> : null
+          }
           <List>
             {
               
@@ -72,6 +77,11 @@ class SopDetailScreen extends React.Component {
               
             }
           </List>
+
+          {
+            (sops.length==0) && (children.length==0) ? <H1>No items</H1> : null
+          }
+          
         </Content>
       </Container>
     )
