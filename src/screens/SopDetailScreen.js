@@ -59,6 +59,7 @@ class SopDetailScreen extends React.Component {
                 return <ListComponent key={c.id} item={c} 
                                 typeIcon="insert-drive-file" 
                                 actionIcon="file-download" 
+                                action="download"
                                 navigation={navigation} /> })
             }
           </List>
@@ -73,6 +74,7 @@ class SopDetailScreen extends React.Component {
                 return <ListComponent key={c.id} item={c} 
                           typeIcon="folder" 
                           actionIcon="arrow-forward" 
+                          action="navigate"
                           navigation={navigation} /> })
               
             }

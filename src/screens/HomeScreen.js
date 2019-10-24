@@ -37,7 +37,7 @@ class HomeScreen extends Component {
 
   handleFetch = async (keyword) => {
     let { from, size } = this.state
-    let uri = `${config.host.dev}:${config.port}/${config.sops_path}`
+    let uri = `${config.host.staging}:${config.port}/${config.sops_path}`
     let params = { keyword, from, size }
 
     try {
