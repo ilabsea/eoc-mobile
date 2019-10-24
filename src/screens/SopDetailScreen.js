@@ -1,49 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
 import { Container, Button, Content, Header, Left, H3,
-          Right, Body, Title, Icon, List, ListItem } from 'native-base'
-import moment from 'moment';
+          Right, Body, Title, Icon, List } from 'native-base'
+
 import { service } from '../services';
 import { withNavigation } from 'react-navigation'
-import styleUtils from '../config/styles'
-
-class Item extends React.Component {
-
-  constructor(props) {
-    super(props)
-  }
-
-  render() {
-    return (<ListItem thumbnail>
-      <Left>
-        <Button transparent style={styleUtils.btnIcon}>
-          <Icon style={{ fontSize:42 }} />
-        </Button>
-      </Left>
-      <Body>
-        <View>
-          <Text>
-            <H3>{name}</H3>
-          </Text>
-
-          <View style={{ flexDirection: 'row', alignItems:'center', marginTop: 10 }}>
-            <Icon name="md-time" style={{ fontSize: 20, marginRight: 5, color: "#666666" }} />
-            <Text style={{color: "#666666"}}>
-              { moment(created_at).fromNow() }
-            </Text>
-          </View>
-        </View>
-      </Body>
-      <Right>
-        <Button rounded
-                onPress={() => this.navigate(id)}>
-          <Icon name="arrow-forward" />
-        </Button>
-      </Right>
-    </ListItem>
-    )
-  }
-}
+import ListComponent from '../components/ListComponent'
 
 class SopDetailScreen extends React.Component {
   constructor(props) {
@@ -70,11 +31,6 @@ class SopDetailScreen extends React.Component {
     }
   }
 
-  navigate(c) {
-    console.log("c", c)
-    this.props.navigation.push('SopDetail', { sopGuide: c, id: c.id })
-  }
-
   render() {
     let { navigation } = this.props
     const sopGuide = navigation.getParam('sopGuide')
@@ -97,74 +53,23 @@ class SopDetailScreen extends React.Component {
           <List>
             {
               this.state.sops.map( c => {
-                return <ListItem thumbnail key={c.id}>
-                  <Left>
-                    <Button transparent style={styleUtils.btnIcon}>
-                      <Icon type="MaterialIcons" style={{ fontSize:42 }} name="insert-drive-file" color="#6E0505" />
-                    </Button>
-                  </Left>
-
-                  <Body>
-                    <View>
-                      <Text>
-                        <H3>{c.name}</H3>
-                      </Text>
-
-                      <View style={{ flexDirection: 'row', alignItems:'center', marginTop: 10 }}>
-                        <Icon name="md-time" style={{ fontSize: 20, marginRight: 5, color: "#666666" }} />
-                        <Text style={{color: "#666666"}}>
-                          { moment(c.created_at).fromNow() }
-                        </Text>
-                      </View>
-                    </View>
-                  </Body>
-
-                  <Right>
-                    <Button rounded
-                            onPress={() => this.navigate(c)}>
-                      <Icon type="MaterialIcons" name="file-download" />
-                    </Button>
-                  </Right>
-
-                </ListItem>
-              })
+                return <ListComponent key={c.id} item={c} 
+                                typeIcon="insert-drive-file" 
+                                actionIcon="file-download" 
+                                navigation={navigation} /> })
             }
           </List>
 
           <H3>Children:</H3>
           <List>
             {
+              
               this.state.children.map( c => {
-                return <ListItem thumbnail key={c.id}>
-                  <Left>
-                    <Button transparent style={styleUtils.btnIcon}>
-                      <Icon style={{ fontSize:42 }} name="folder" color="gray" />
-                    </Button>
-                  </Left>
-
-                  <Body>
-                    <View>
-                      <Text>
-                        <H3>{c.name}</H3>
-                      </Text>
-
-                      <View style={{ flexDirection: 'row', alignItems:'center', marginTop: 10 }}>
-                        <Icon name="md-time" style={{ fontSize: 20, marginRight: 5, color: "#666666" }} />
-                        <Text style={{color: "#666666"}}>
-                          { moment(c.created_at).fromNow() }
-                        </Text>
-                      </View>
-                    </View>
-                  </Body>
-
-                  <Right>
-                    <Button rounded
-                            onPress={() => this.navigate(c)}>
-                      <Icon type="MaterialIcons" name="arrow-forward" />
-                    </Button>
-                  </Right>
-                </ListItem>
-              })
+                return <ListComponent key={c.id} item={c} 
+                          typeIcon="folder" 
+                          actionIcon="arrow-forward" 
+                          navigation={navigation} /> })
+              
             }
           </List>
         </Content>
