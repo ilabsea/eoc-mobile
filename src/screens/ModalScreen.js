@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Content, Text, Button, List, ListItem } from 'native-base'
+import { Container, Content, Text, Button, List, ListItem, Header, Left, Icon, Body, Title, Right } from 'native-base'
 import RNFS from 'react-native-fs'
 import FileViewer from 'react-native-file-viewer'
 import { service } from '../services'
@@ -61,6 +61,17 @@ class ModalScreen extends React.Component {
 
   render() {
     return <Container>
+      <Header>
+        <Left>
+          <Button onPress={ () => this.props.navigation.goBack() }>
+            <Icon name="md-arrow-back" />
+          </Button>
+        </Left>
+        <Body>
+          <Title>Back</Title>
+        </Body>
+        <Right />
+      </Header>
       <Content padder>
         <List>
           {
@@ -71,10 +82,6 @@ class ModalScreen extends React.Component {
             })
           }
         </List>
-
-        <Button onPress={ () => this.props.navigation.goBack() }>
-          <Text>Back</Text>
-        </Button>
       </Content>
     </Container>
   }
