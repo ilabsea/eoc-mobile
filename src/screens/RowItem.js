@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import moment from 'moment'
 import { Left, Body, Right, Button, 
           ListItem, Text, Icon, H3 } from 'native-base'
-import { basename, typeIcon, highlight } from '../config/utils'
+import { basename, highlight } from '../config/utils'
 import * as config from '../config/connectionBase'
 import { service } from '../services'
 import styleUtils from '../config/styles'
@@ -28,23 +28,21 @@ class RowItem extends React.Component {
     service.toastManager.show(`Downloaded completed!`)
   }
 
-  handleListPress = sopGuide => {
+  handleListPress = item => {
     this.props.navigation.navigate({
       routeName: 'SopDetail',
-      params: { sopGuide },
+      params: { sopGuide: item._source, id: item._id },
     });
   };
 
   render() {
     let { item } = this.props
-    let { document_type } = item._source
-    let { type, icon, color } = typeIcon(document_type)
     let { name, tags } = item.highlight
 
     return (<ListItem thumbnail>
       <Left>
         <Button transparent style={styleUtils.btnIcon}>
-          <Icon type={type} style={{ color, fontSize:42 }} name={ icon } />
+          <Icon style={{ fontSize:42 }} />
         </Button>
       </Left>
       <Body>
@@ -65,18 +63,10 @@ class RowItem extends React.Component {
         </View>
       </Body>
       <Right>
-        {
-          document_type == 'document' ?
-          <Button rounded
-              onPress={() => this.handleDownload(item._source)}>
-            <Icon name="md-download" /> 
-          </Button>
-          :
-          <Button rounded
-                  onPress={() => this.handleListPress(item._source)}>
-            <Icon name="arrow-forward" />
-          </Button>
-        }
+        <Button rounded
+                onPress={() => this.handleListPress(item)}>
+          <Icon name="arrow-forward" />
+        </Button>
       </Right>
     </ListItem> )
   }

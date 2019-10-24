@@ -6,5 +6,6 @@ const host = {
 const port = 3000
 const sops_path = 'api/v1/sops.json'
 const tokens_path = 'api/v1/tokens'
+const category_path = (id) => `api/v1/categories/${id}`
 
-export { host, port, sops_path, tokens_path }
+export { host, port, sops_path, tokens_path, category_path }

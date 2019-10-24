@@ -1,9 +1,10 @@
 import axios from 'axios'
 import * as config from '../../config/connectionBase'
 
-export const save_token = async (token) => {
+const URI = `${config.host.dev}:${config.port}`
 
-  let uri = `${config.host.dev}:${config.port}/${config.tokens_path}`
+export const save_token = async (token) => {
+  let uri = `${URI}/${config.tokens_path}`
 
   try {
     let data = await axios.post(uri, { firebase: { token } })
@@ -13,5 +14,22 @@ export const save_token = async (token) => {
   } catch ( e ) {
     console.log(e)
   }
-  
+}
+
+export const fetch_category_children = async (category_id) => {
+  let uri = `${URI}/${config.category_path(category_id)}`
+
+  try {
+    let data = await axios.get(uri)
+              .then( resp => {
+                return resp.data
+              } )
+              .catch( err => {
+                return err
+              } )
+
+    return data
+  } catch(e) {
+    console.error(e)
+  }
 }
