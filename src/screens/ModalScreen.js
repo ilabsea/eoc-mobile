@@ -1,6 +1,8 @@
 import React from 'react'
 import { Container, Content, Text, Button, List, ListItem } from 'native-base'
 import RNFS from 'react-native-fs'
+import FileViewer from 'react-native-file-viewer'
+import { service } from '../services'
 
 class ModalScreen extends React.Component {
   constructor(props) {
@@ -21,7 +23,7 @@ class ModalScreen extends React.Component {
       console.log('GOT RESULT', result);
 
       this.setState({
-        contents: result.map(r => ({ name: r.name }))
+        contents: result
       })
 
       // stat the first file
@@ -44,13 +46,26 @@ class ModalScreen extends React.Component {
     });
   }
 
+  handleView(path) {
+    FileViewer.open(path)
+      .then(() => {
+        // success
+        console.log('success')
+      })
+      .catch(error => {
+        // error
+        console.log(error.message)
+        service.toastManager.show(error.message)
+      });
+  }
+
   render() {
     return <Container>
       <Content padder>
         <List>
           {
             this.state.contents.map(c => {
-              return <ListItem key={c.name}>
+              return <ListItem key={c.name} onPress={() => this.handleView(c.path)}>
               <Text>{c.name}</Text>
             </ListItem>
             })
