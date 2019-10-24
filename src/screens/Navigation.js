@@ -11,6 +11,8 @@ const Notification = () => {
 
 import HomeScreen from './HomeScreen'
 import SopDetailScreen from './SopDetailScreen'
+import DownloadDirScreen from './DownloadDirScreen'
+import ModalScreen from './ModalScreen'
 
 const stack = (props) => createStackNavigator({
   Home: {
@@ -31,9 +33,22 @@ const stack = (props) => createStackNavigator({
     },
     navigationOptions: { title: "Sop detail" }
   },
+  DownloadDir: {
+    screen: ({ navigation }) => {
+      const { database } = props;
+      return <Root>
+                <DownloadDirScreen database={database} navigation={navigation}/>
+              </Root>
+    },
+    navigationOptions: { title: "Download directory" }
+  },
+  MyModal: {
+    screen: ModalScreen,
+  }
 }, {
   initialRouteName: 'Home',
   initialRouteParams: props,
+  mode: 'modal',
   headerMode: 'none',
   navigationOptions: {
     title: "Guidelines"
@@ -44,7 +59,6 @@ export const createNavigation = props =>
   createAppContainer(
     createDrawerNavigator({
       Root: stack(props),
-
       Notification: {
         screen: ({ navigation }) => {
           const { database } = props;

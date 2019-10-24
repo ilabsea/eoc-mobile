@@ -10,7 +10,8 @@ import EmptyList from './EmptyList'
 import RowItem from './RowItem'
 
 import firebase from 'react-native-firebase'
-import { service } from '../services';
+import { service } from '../services'
+import RNFS from 'react-native-fs'
 
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle'])
@@ -166,6 +167,33 @@ class HomeScreen extends Component {
     return <RowItem item={item} />
   }
 
+  openDir = () => {
+    this.props.navigation.navigate('MyModal')
+    // Alert.alert('opendir')
+    // RNFS.readDir(`${RNFS.ExternalStorageDirectoryPath}/Download`) // On Android, use "RNFS.DocumentDirectoryPath" (MainBundlePath is not defined)
+    // .then((result) => {
+    //   console.log('GOT RESULT', result);
+
+    //   // stat the first file
+    //   return Promise.all([RNFS.stat(result[0].path), result[0].path]);
+    // })
+    // .then((statResult) => {
+    //   if (statResult[0].isFile()) {
+    //     // if we have a file, read it
+    //     return RNFS.readFile(statResult[1], 'utf8');
+    //   }
+
+    //   return 'no file';
+    // })
+    // .then((contents) => {
+    //   // log the file contents
+    //   console.log(contents);
+    // })
+    // .catch((err) => {
+    //   console.log(err.message, err.code);
+    // });
+  }
+
   render() {
     return (
       <Container>
@@ -178,6 +206,9 @@ class HomeScreen extends Component {
                 onChangeText={(keyword) => this.setState({keyword}) } />
             <Icon name="ios-search" 
                   onPress={ this.handleSearch } />
+            <Icon type="MaterialIcons" 
+                  name="open-in-new" 
+                  onPress={() => this.openDir()} />
           </Item>
           <Button transparent>
             <Text>Search</Text>
