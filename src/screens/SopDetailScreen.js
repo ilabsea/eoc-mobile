@@ -5,6 +5,7 @@ import { Container, Button, Content, Header, Left, H3, H1,
 import { service } from '../services';
 import { withNavigation } from 'react-navigation'
 import ListComponent from '../components/ListComponent'
+import { iconMapping } from '../config/utils'
 
 class SopDetailScreen extends React.Component {
   constructor(props) {
@@ -60,6 +61,7 @@ class SopDetailScreen extends React.Component {
                                 typeIcon="insert-drive-file" 
                                 actionIcon="file-download" 
                                 action="download"
+                                color='#b1090c'
                                 navigation={navigation} /> })
             }
           </List>
@@ -75,6 +77,7 @@ class SopDetailScreen extends React.Component {
                           typeIcon="folder" 
                           actionIcon="arrow-forward" 
                           action="navigate"
+                          color='#f39c24' 
                           navigation={navigation} /> })
               
             }

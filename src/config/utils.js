@@ -3,11 +3,22 @@ import VersionNumber from 'react-native-version-number'
 import styleUtils from './styles'
 import { Text } from 'native-base'
 
-const typeIcon = (docType) => {
+const iconMapping = (docType) => {
   const type = 'MaterialIcons'
 
-  let doc = { document: { type, icon: 'insert-drive-file', color: '#6E0505' }, 
-              folder: { type, icon: 'folder', color: 'gray' } }
+  let doc = { sops: { 
+                type, 
+                typeIcon: 'picture-as-pdf', 
+                actionIcon: "file-download", 
+                action: "download",
+                color: '#b1090c' }, 
+              categories: { 
+                type, 
+                typeIcon: 'folder', 
+                actionIcon: "arrow-forward", 
+                action: "navigate",
+                color: '#f39c24' 
+              } }
   return doc[docType]
 }
 
@@ -42,4 +53,4 @@ const highlight = (text, Tag) => {
   return data
 }
 
-export { typeIcon, basename, realname, appVersion, highlight }
+export { iconMapping, basename, realname, appVersion, highlight }

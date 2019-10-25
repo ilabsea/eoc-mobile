@@ -12,6 +12,8 @@ import RowItem from './RowItem'
 import firebase from 'react-native-firebase'
 import { service } from '../services'
 import RNFS from 'react-native-fs'
+import ListComponent from '../components/ListComponent';
+import { iconMapping } from '../config/utils'
 
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle'])
@@ -61,6 +63,8 @@ class HomeScreen extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props.database)
+
     this.searchInput.current._root.focus()
     this.checkPermission()
     this.createNotificationListeners()
@@ -164,7 +168,16 @@ class HomeScreen extends Component {
   }
 
   renderRow = (item) => {
-    return <RowItem item={item} />
+    let { typeIcon, actionIcon, action, color } = iconMapping(item._index)
+    console.log(item)
+
+    return <ListComponent 
+                item={item._source} 
+                typeIcon={typeIcon}
+                actionIcon={actionIcon}
+                navigation={this.props.navigation}
+                color={color}
+                action={action} />
   }
 
   openDir = () => {
@@ -183,9 +196,9 @@ class HomeScreen extends Component {
                 onChangeText={(keyword) => this.setState({keyword}) } />
             <Icon name="ios-search" 
                   onPress={ this.handleSearch } />
-            <Icon type="MaterialIcons" 
+            {/* <Icon type="MaterialIcons" 
                   name="open-in-new" 
-                  onPress={() => this.openDir()} />
+                  onPress={() => this.openDir()} /> */}
           </Item>
           <Button transparent>
             <Text>Search</Text>
