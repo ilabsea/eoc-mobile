@@ -8,7 +8,6 @@ import * as config from '../config/connectionBase'
 import { service } from '../services'
 import { basename } from '../config/utils'
 import { Q, withObservables } from "@nozbe/watermelondb"
-import { catchClause } from '@babel/types'
 import RNFS from 'react-native-fs'
 import FileViewer from 'react-native-file-viewer'
 
@@ -20,6 +19,8 @@ class ListComponent extends React.Component {
       isOpen: false,
       TextProgress: ''
     }
+
+    this.expectedBytes = 0
   }
   
   init = {
@@ -54,6 +55,7 @@ class ListComponent extends React.Component {
         this.setState({
           TextProgress: `${expectedBytes} b`
         })
+        this.expectedBytes = expectedBytes
         console.log(`Going to download ${expectedBytes} bytes!`);
       }).progress((percent) => {
         this.setState({
@@ -61,7 +63,7 @@ class ListComponent extends React.Component {
         })
         console.log(`Downloaded: ${percent * 100}%`);
       }).done(async () => {
-        this.saveToLocalDB(item.name, filename)
+        this.saveToLocalDB(item.name, this.expectedBytes, filename)
         // service.toastManager.show(`Downloaded completed!`)
         console.log(`Download ${filename} is done!`);
         this.setState({
@@ -72,7 +74,7 @@ class ListComponent extends React.Component {
       });
   }
 
-  async saveToLocalDB(name, filename) {
+  async saveToLocalDB(name, size, filename) {
     console.log('saving to local')
 
     let db = this.props.database
@@ -81,9 +83,12 @@ class ListComponent extends React.Component {
     let downloadDir = `${RNFS.ExternalStorageDirectoryPath}/Download`
     let localURL = `${downloadDir}/${filename}`
 
+    console.log('size', size)
+
     await db.action(async () => {
       await downloadsCollection.create(dl => {
         dl.name = name
+        dl.size = size
         dl.localUrl = localURL
       })
       console.log('new download', name, localURL)

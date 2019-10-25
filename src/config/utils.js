@@ -53,4 +53,10 @@ const highlight = (text, Tag) => {
   return data
 }
 
-export { iconMapping, basename, realname, appVersion, highlight }
+const colors = {
+  primary: '',
+  secondary: '',
+  default: ''
+}
+
+export { iconMapping, basename, realname, appVersion, highlight, colors }
