@@ -6,7 +6,7 @@ export const download = (remoteURL, filename) => {
   let localURL = `${downloadDir}/${filename}`
 
   return RNBackgroundDownloader.download({
-    id: 'TEST_ID',
+    id: filename,
     url: remoteURL,
     destination: localURL
     })

@@ -160,6 +160,7 @@ class ListComponent extends React.Component {
                     <Icon type="MaterialIcons" name={actionIcon} />
           </Button> 
         :
+        // navigate
         <Button transparent
                 onPress={() => this.performance(action) }>
           <Icon type="MaterialIcons" name={actionIcon} />

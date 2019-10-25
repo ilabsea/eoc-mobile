@@ -27,7 +27,7 @@ class HomeScreen extends Component {
       isFetching: false,
       from: 0,
       size: 15,
-      keyword: 'cat 1',
+      keyword: 'cat 1 as',
       data: [],
     }
 
@@ -188,7 +188,7 @@ class HomeScreen extends Component {
       await downloadsCollection.query().markAllAsDeleted() // syncable
       await downloadsCollection.query().destroyAllPermanently() // permanent
 
-      console.log('destroy collection')
+      Alert.alert('destroy collection')
     })
   }
 
