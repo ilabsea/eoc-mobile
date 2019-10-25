@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import axios from 'axios'
 import * as config from '../config/connectionBase'
 import { Container, Header, Item, Input, 
-          Button, List, Text, Icon } from 'native-base'
+          Button, List, Text, Icon, Content, ListItem } from 'native-base'
 import EmptyList from './EmptyList'
 
 import RowItem from './RowItem'
@@ -14,6 +14,7 @@ import { service } from '../services'
 import RNFS from 'react-native-fs'
 import ListComponent from '../components/ListComponent';
 import { iconMapping } from '../config/utils'
+import { download } from 'react-native-background-downloader';
 
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle'])
@@ -63,8 +64,6 @@ class HomeScreen extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.database)
-
     this.searchInput.current._root.focus()
     this.checkPermission()
     this.createNotificationListeners()
@@ -169,9 +168,9 @@ class HomeScreen extends Component {
 
   renderRow = (item) => {
     let { typeIcon, actionIcon, action, color } = iconMapping(item._index)
-    console.log(item)
 
     return <ListComponent 
+                database={this.props.database}
                 item={item._source} 
                 typeIcon={typeIcon}
                 actionIcon={actionIcon}
@@ -180,8 +179,17 @@ class HomeScreen extends Component {
                 action={action} />
   }
 
-  openDir = () => {
-    this.props.navigation.navigate('MyModal')
+  openDir = async () => {
+    // this.props.navigation.navigate('MyModal')
+    let db = this.props.database
+    let downloadsCollection = db.collections.get('downloads')
+
+    await db.action(async () => {
+      await downloadsCollection.query().markAllAsDeleted() // syncable
+      await downloadsCollection.query().destroyAllPermanently() // permanent
+
+      console.log('destroy collection')
+    })
   }
 
   render() {
@@ -196,9 +204,9 @@ class HomeScreen extends Component {
                 onChangeText={(keyword) => this.setState({keyword}) } />
             <Icon name="ios-search" 
                   onPress={ this.handleSearch } />
-            {/* <Icon type="MaterialIcons" 
+            <Icon type="MaterialIcons" 
                   name="open-in-new" 
-                  onPress={() => this.openDir()} /> */}
+                  onPress={() => this.openDir()} />
           </Item>
           <Button transparent>
             <Text>Search</Text>

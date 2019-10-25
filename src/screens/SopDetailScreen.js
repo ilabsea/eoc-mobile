@@ -5,7 +5,6 @@ import { Container, Button, Content, Header, Left, H3, H1,
 import { service } from '../services';
 import { withNavigation } from 'react-navigation'
 import ListComponent from '../components/ListComponent'
-import { iconMapping } from '../config/utils'
 
 class SopDetailScreen extends React.Component {
   constructor(props) {
@@ -58,6 +57,7 @@ class SopDetailScreen extends React.Component {
             {
               this.state.sops.map( c => {
                 return <ListComponent key={c.id} item={c} 
+                                database={this.props.database}
                                 typeIcon="insert-drive-file" 
                                 actionIcon="file-download" 
                                 action="download"

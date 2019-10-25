@@ -1,17 +1,25 @@
 import React from 'react'
 import styleUtils from '../config/styles'
 import moment from 'moment'
-import { View, Text } from 'react-native'
+import { View, Text, Alert } from 'react-native'
 import { Button, Left, H3,
   Right, Body, Icon, ListItem } from 'native-base'
 import * as config from '../config/connectionBase'
 import { service } from '../services'
 import { basename } from '../config/utils'
+import { Q, withObservables } from "@nozbe/watermelondb"
+import { catchClause } from '@babel/types'
+import RNFS from 'react-native-fs'
+import FileViewer from 'react-native-file-viewer'
 
 class ListComponent extends React.Component {
 
   constructor(props) {
     super(props)
+    this.state = {
+      isOpen: false,
+      TextProgress: ''
+    }
   }
   
   init = {
@@ -19,20 +27,95 @@ class ListComponent extends React.Component {
     download: () => this.handleDownload()
   }
 
+  async componentDidMount() {
+    let db = this.props.database
+    let downloadsCollection = db.collections.get('downloads')
+    let { name } = this.props.item
+
+    const collection = await downloadsCollection.query(Q.where('name', name)).fetch()
+    if( collection.length > 0 ) {
+      console.log(collection)
+      this.setState({
+        isOpen: true
+      })
+    }
+  }
+
   handleDownload = () => {
     let { item } = this.props
 
     let remoteURL = `${config.host.staging}:${config.port}${item.file.url}`
     let filename = basename(remoteURL)
-    console.log(remoteURL, filename)
 
-    service.downloadManager.download( remoteURL, filename )
-    service.toastManager.show(`Downloaded completed!`)
+    service.downloadManager
+      .download(remoteURL, filename)
+      .begin((expectedBytes) => {
+        this.setState({
+          TextProgress: `${expectedBytes} b`
+        })
+        console.log(`Going to download ${expectedBytes} bytes!`);
+      }).progress((percent) => {
+        this.setState({
+          TextProgress: `${percent * 100}%`
+        })
+        console.log(`Downloaded: ${percent * 100}%`);
+      }).done(async () => {
+        this.saveToLocalDB(item.name, filename)
+        // service.toastManager.show(`Downloaded completed!`)
+        console.log(`Download ${filename} is done!`);
+        this.setState({
+          TextProgress: ``
+        })
+      }).error((error) => {
+        console.log('Download canceled due to error: ', error);
+      });
+  }
+
+  async saveToLocalDB(name, filename) {
+    console.log('saving to local')
+
+    let db = this.props.database
+    let downloadsCollection = await db.collections.get('downloads')
+
+    let downloadDir = `${RNFS.ExternalStorageDirectoryPath}/Download`
+    let localURL = `${downloadDir}/${filename}`
+
+    await db.action(async () => {
+      await downloadsCollection.create(dl => {
+        dl.name = name
+        dl.localUrl = localURL
+      })
+      console.log('new download', name, localURL)
+      this.setState({
+        isOpen: true
+      })
+    })
   }
 
   handleNavigation = () => {
-    let { item } = this.props
-    this.props.navigation.push('SopDetail', { sopGuide: item, id: item.id }) 
+    Alert.alert('hi')
+    // let { item } = this.props
+    // this.props.navigation.push('SopDetail', { sopGuide: item, id: item.id }) 
+  }
+
+  async handleView(name) {
+    let db = this.props.database
+    let downloadsCollection = db.collections.get('downloads')
+    // let result = await downloadsCollection.query().fetch()
+
+    const collection = await downloadsCollection.query(Q.where('name', name)).fetch()
+
+    if( collection.length > 0 ) {
+
+      FileViewer.open(collection[0]._raw.local_url)
+      .then(() => {
+        console.log('success')
+      })
+      .catch(error => {
+        console.log(error.message)
+        service.toastManager.show(error.message)
+      });
+    }
   }
 
   performance = (action) => {
@@ -64,15 +147,22 @@ class ListComponent extends React.Component {
     </Body>
 
     <Right>
+      <Text>{this.state.TextProgress}</Text>
       {
         action == 'download' ? 
-        <Button rounded
-        onPress={() => this.performance(action) }>
-          <Icon type="MaterialIcons" name={actionIcon} />
-        </Button> 
+        this.state.isOpen ?
+          <Button transparent 
+                  onPress={() => this.handleView(name) }>
+            <Text>Open</Text>
+          </Button>
+          :
+          <Button transparent
+                  onPress={() => this.performance(action) }>
+                    <Icon type="MaterialIcons" name={actionIcon} />
+          </Button> 
         :
         <Button transparent
-              onPress={() => this.performance(action) }>
+                onPress={() => this.performance(action) }>
           <Icon type="MaterialIcons" name={actionIcon} />
         </Button>
       }
