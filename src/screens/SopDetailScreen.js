@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Button, Content, Header, Left, H3, H1,
           Right, Body, Title, Icon, List } from 'native-base'
-
+import { ActivityIndicator } from 'react-native'
 import { service } from '../services';
 import { withNavigation } from 'react-navigation'
 import ListComponent from '../components/ListComponent'
@@ -10,12 +10,16 @@ class SopDetailScreen extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      isLoading: false,
       sops: [],
       children: []
     }
   }
 
   async componentDidMount() {
+    this.setState({
+      isLoading: true
+    })
     try {
       let { navigation } = this.props
       const sopGuide = navigation.getParam('sopGuide')
@@ -28,6 +32,10 @@ class SopDetailScreen extends React.Component {
       })
     } catch( e) {
       console.log(e)
+    } finally {
+      this.setState({
+        isLoading: false
+      })
     }
   }
 
@@ -78,13 +86,18 @@ class SopDetailScreen extends React.Component {
                           actionIcon="arrow-forward" 
                           action="navigate"
                           color='#f39c24' 
+                          database={this.props.database}
                           navigation={navigation} /> })
               
             }
           </List>
 
           {
-            (sops.length==0) && (children.length==0) ? <H1>No items</H1> : null
+            this.state.isLoading ? 
+              <ActivityIndicator /> 
+              :
+              (sops.length==0) && (children.length==0) ? 
+              <H1>No items</H1> : null
           }
           
         </Content>

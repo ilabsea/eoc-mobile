@@ -93,9 +93,8 @@ class ListComponent extends React.Component {
   }
 
   handleNavigation = () => {
-    Alert.alert('hi')
-    // let { item } = this.props
-    // this.props.navigation.push('SopDetail', { sopGuide: item, id: item.id }) 
+    let { item } = this.props
+    this.props.navigation.push('SopDetail', { sopGuide: item, id: item.id }) 
   }
 
   async handleView(name) {
