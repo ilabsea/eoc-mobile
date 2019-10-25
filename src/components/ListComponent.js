@@ -47,8 +47,9 @@ class ListComponent extends React.Component {
     let remoteURL = `${config.host.staging}:${config.port}${item.file.url}`
     let filename = basename(remoteURL)
 
+    let digest = filename.match(/\w+/)[0]
     service.downloadManager
-      .download(remoteURL, filename)
+      .download(remoteURL, digest, filename)
       .begin((expectedBytes) => {
         this.setState({
           TextProgress: `${expectedBytes} b`

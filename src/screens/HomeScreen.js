@@ -198,7 +198,9 @@ class HomeScreen extends Component {
         <Header searchBar rounded>
           <Item>
             <Icon name="ios-menu" onPress={() => this.props.navigation.openDrawer()} />
-            <Input ref={this.searchInput} 
+            <Input 
+                onSubmitEditing={ this.handleSearch }
+                ref={this.searchInput} 
                 placeholder="Search"
                 value={this.state.keyword}
                 onChangeText={(keyword) => this.setState({keyword}) } />
