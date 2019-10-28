@@ -56,7 +56,7 @@ const stack = (props) => createStackNavigator({
     screen: ModalScreen,
   }
 }, {
-  initialRouteName: 'Home',
+  initialRouteName: 'SopDetail',
   initialRouteParams: props,
   mode: 'modal',
   headerMode: 'none',
