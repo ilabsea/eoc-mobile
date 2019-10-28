@@ -59,7 +59,7 @@ class ListComponent extends React.Component {
         console.log(`Going to download ${expectedBytes} bytes!`);
       }).progress((percent) => {
         this.setState({
-          TextProgress: `${percent * 100}%`
+          TextProgress: `${(percent * 100).toFixed(2)}%`
         })
         console.log(`Downloaded: ${percent * 100}%`);
       }).done(async () => {
@@ -100,7 +100,7 @@ class ListComponent extends React.Component {
 
   handleNavigation = () => {
     let { item } = this.props
-    this.props.navigation.push('SopDetail', { sopGuide: item, id: item.id }) 
+    this.props.navigation.push('Category', { sopGuide: item, id: item.id }) 
   }
 
   async handleView(name) {
@@ -127,11 +127,16 @@ class ListComponent extends React.Component {
     this.init[action]()
   }
 
+  showDetail() {
+    const { item } = this.props
+    this.props.navigation.navigate('SopDetail', { item })
+  }
+
   render() {
     let { item, typeIcon, actionIcon, navigation, action, color } = this.props
     let { name, created_at } = item
 
-    return <ListItem thumbnail>
+    return <ListItem thumbnail onPress={() => this.showDetail()}>
     <Left>
       <Button transparent style={styleUtils.btnIcon}>
         <Icon type="MaterialIcons" style={{ fontSize:42, color: color }} name={typeIcon} />

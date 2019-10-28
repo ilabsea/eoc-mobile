@@ -10,6 +10,7 @@ const Notification = () => {
 }
 
 import HomeScreen from './HomeScreen'
+import CategoryScreen from './CategoryScreen'
 import SopDetailScreen from './SopDetailScreen'
 import DownloadDirScreen from './DownloadDirScreen'
 import ModalScreen from './ModalScreen'
@@ -23,6 +24,15 @@ const stack = (props) => createStackNavigator({
               </Root>
     },
     navigationOptions: { title: "Guidelines" }
+  },
+  Category: {
+    screen: ({ navigation }) => {
+      const { database } = props;
+      return <Root>
+                <CategoryScreen database={database} navigation={navigation}/>
+              </Root>
+    },
+    navigationOptions: { title: "Category" }
   },
   SopDetail: {
     screen: ({ navigation }) => {

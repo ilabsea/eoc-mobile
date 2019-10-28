@@ -7,7 +7,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 
 import HomeScreen from './screens/HomeScreen';
-import SopDetailScreen from './screens/SopDetailScreen';
+import CategoryScreen from './screens/CategoryScreen';
 import DownloadScreen from './screens/DownloadScreen'
 import AboutUsScreen from './screens/AboutUsScreen'
 import NotificationScreen from './screens/NotificationScreen'
@@ -16,7 +16,7 @@ YellowBox.ignoreWarnings(['Warning'])
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
-  SopDetail: SopDetailScreen,
+  CategoryScreen: CategoryScreen,
 })
 
 const DrawNavigator = createDrawerNavigator({

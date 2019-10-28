@@ -5,6 +5,8 @@
   "scripts": {
     "start": "react-native start",
     "test": "jest",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
     "lint": "eslint .",
     "postversion": "react-native-version"
   },
