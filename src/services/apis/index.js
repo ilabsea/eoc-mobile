@@ -1,9 +1,9 @@
 import axios from 'axios'
 import * as config from '../../config/connectionBase'
 
-const URI = `${config.host.staging}:${config.port}`
+const URI = `${config.host.dev}:${config.port}`
 
-export const save_token = async (token) => {
+export const saveToken = async (token) => {
   let uri = `${URI}/${config.tokens_path}`
 
   try {
