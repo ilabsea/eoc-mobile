@@ -1,32 +1,56 @@
 import React from 'react';
 import { Container, Button, Content, Header, Left, H3, H1,
           Right, Body, Title, Icon, List } from 'native-base'
-import { ActivityIndicator } from 'react-native'
+          
 import { service } from '../services';
 import { withNavigation } from 'react-navigation'
 import ListComponent from '../components/ListComponent'
 
+import DownloadComponent from '../components/DownloadComponent'
+import NavigateComponent from '../components/NavigateComponent'
+
+const ListGroup = ({title, data, Component, database, navigation, color, typeIcon}) => {
+  return <>
+    { data.length > 0 ? <H3>{title}:</H3> : null }
+    <List>
+      {
+        data.map( item => {
+          return <ListComponent key={item.id} 
+                          item={item} 
+                          database={database}
+                          typeIcon={typeIcon}
+                          color={color}
+                          actionComponent={<Component item={item} />}
+                          navigation={navigation} /> })
+      }
+    </List>
+  </>
+}
 class CategoryScreen extends React.Component {
   constructor(props) {
     super(props)
+
     this.state = {
-      isLoading: false,
+      isFetching: false,
       sops: [],
       children: []
     }
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.setState({
-      isLoading: true
+      isFetching: true
     })
+    this.fetchChildren()
+  }
+
+  async fetchChildren() {
     try {
       let { navigation } = this.props
       const sopGuide = navigation.getParam('sopGuide')
-      console.log(sopGuide)
-      const id = navigation.getParam('id')
 
-      let { sops, children } = await service.apiManager.fetch_category_children(sopGuide.id)
+      let { sops, children } = await service.apiManager
+                                      .fetch_category_children(sopGuide.id)
       this.setState({
         sops, children
       })
@@ -34,7 +58,7 @@ class CategoryScreen extends React.Component {
       console.log(e)
     } finally {
       this.setState({
-        isLoading: false
+        isFetching: false
       })
     }
   }
@@ -58,60 +82,30 @@ class CategoryScreen extends React.Component {
           <Right />
         </Header>
         <Content padder>
-          {
-            sops.length > 0 ? <H3>Sops:</H3> : null
-          }
-          <List>
-            {
-              this.state.sops.map( c => {
-                return <ListComponent key={c.id} item={c} 
-                                database={this.props.database}
-                                typeIcon="insert-drive-file" 
-                                actionIcon="file-download" 
-                                action="download"
-                                color='#b1090c'
-                                navigation={navigation} /> })
-            }
-          </List>
+          <ListGroup 
+            {...this.props}
+            title='Sops' 
+            typeIcon="insert-drive-file" 
+            color='#b1090c'
+            data={sops} 
+            Component={DownloadComponent}/>
 
-          {
-            sops.length > 0 ? <H3>Children:</H3> : null
-          }
-          <List>
-            {
-              
-              this.state.children.map( c => {
-                return <ListComponent key={c.id} item={c} 
-                          typeIcon="folder" 
-                          actionIcon="arrow-forward" 
-                          action="navigate"
-                          color='#f39c24' 
-                          database={this.props.database}
-                          navigation={navigation} /> })
-              
-            }
-          </List>
-
-          {
-            this.state.isLoading ? 
-              <ActivityIndicator /> 
-              :
-              (sops.length==0) && (children.length==0) ? 
-              <H1>No items</H1> : null
-          }
+          <ListGroup 
+            {...this.props}
+            title='Subs' 
+            typeIcon="folder" 
+            color='#f39c24'
+            data={children} 
+            Component={NavigateComponent}/>
           
+          {
+            <EmptyList 
+              isFetching={isFetching} 
+              data={[...sops, ...children]} />
+          }
         </Content>
       </Container>
     )
-  }
-}
-
-CategoryScreen.navigationOptions = navigationData => {
-  return {
-    headerStyle: {
-      backgroundColor: '#6b52ae',
-    },
-    headerTintColor: '#fff',
   }
 }
 

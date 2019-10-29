@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, ActivityIndicator, View } from 'react-native'
+import { StyleSheet, ActivityIndicator, View, Text } from 'react-native'
 import { H1 } from 'native-base'
 import { appVersion } from '../config/utils'
 
@@ -12,10 +12,13 @@ const EmptyList = ({ isFetching, data }) => (
           style={{opacity: isFetching ? 1.0 : 0.0}} 
           size="large" color="#0000ff" animating={true} /> 
         : 
-        data.length ==0 ?
+        data.length == 0 ?
           <React.Fragment>
             {/* <Icon name="ios-heart-empty" style={{ marginRight: 15, marginTop: 2 }} /> */}
-            <H1>Empty list v.{ appVersion }</H1>
+            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+              <H1>No related items</H1>
+              <Text>App version: { appVersion }</Text>
+            </View>
           </React.Fragment>
           : null
       }
