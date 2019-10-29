@@ -3,6 +3,25 @@ import VersionNumber from 'react-native-version-number'
 import styleUtils from './styles'
 import { Text } from 'native-base'
 
+import * as config from '../config/connectionBase'
+import RNFS from 'react-native-fs'
+
+export const fileInfo = (source) => {
+  let uri = `${config.host.dev}:${config.port}`
+  let remotePath = source.file.url
+  let fileName = basename(remotePath)
+  let downloadDir = `${RNFS.ExternalStorageDirectoryPath}/Download`
+  let digest = fileName.match(/\w+/)[0]
+
+  return {
+    remoteUrl: `${uri}${remotePath}`,
+    sopName: source.name,
+    fileName: fileName,
+    fileDigest: digest,
+    localUrl: `${downloadDir}/${fileName}`,
+  }
+}
+
 const iconMapping = (docType) => {
   const type = 'MaterialIcons'
 
