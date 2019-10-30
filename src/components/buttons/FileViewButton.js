@@ -1,12 +1,25 @@
 import React from 'react'
 import { Button, Icon } from 'native-base'
-import { Alert } from 'react-native'
+import FileViewer from 'react-native-file-viewer'
 
 import { icons } from '../../constants/icons'
+import { service } from '../../services'
 
-const FileViewerButton = () => (
+const viewFile = (localUrl) => {
+  FileViewer.open(localUrl)
+    .then(() => {
+      console.log('success')
+    })
+    .catch(error => {
+      let { message } = error
+      console.log(message)
+      service.toastManager.show(message)
+    })
+}
+
+const FileViewerButton = ({ localUrl }) => (
   <Button transparent
-          onPress={ () => Alert.alert('file view') }>
+          onPress={ () => viewFile(localUrl) }>
     <Icon style={icons.styles} type={icons.type} name={icons.name.fileView} />
   </Button>
 )

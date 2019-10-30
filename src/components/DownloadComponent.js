@@ -13,13 +13,13 @@ import FileViewButton from './buttons/FileViewButton'
 import DownloadButton from './buttons/DownloadButton'
 import ProgressButton from './buttons/ProgressButton'
 
-const DownloadControl = ({status, progressedBytes, handleDownload, isDisabled}) => {
+const DownloadControl = ({status, progressedBytes, localUrl, handleDownload, isDisabled}) => {
   switch(status) {
     case '__BEGIN__':
     case '__PROGRESS__':
       return <ProgressButton progress={progressedBytes}/>
     case '__DONE__':
-      return <FileViewButton />
+      return <FileViewButton localUrl={localUrl}/>
     default:
       return <DownloadButton handleDownload={handleDownload} 
                           isDisabled={isDisabled} />
@@ -35,13 +35,14 @@ class DownloadComponent extends React.Component {
       status: '__IDLE__',
       progressedBytes: 0.0,
       error: null,
-      expectedBytes: 0.0
+      expectedBytes: 0.0,
+      localUrl: ''
     }
   }
 
   handleDownload () {
     let { item } = this.props
-    let { remoteUrl, localUrl, fileDigest } = fileInfo(item._source)
+    let { remoteUrl, localUrl, fileDigest } = fileInfo(item)
 
     this.setState({ isDisabled: true })
 
@@ -61,7 +62,7 @@ class DownloadComponent extends React.Component {
         // service.toastManager.show(`Downloaded completed!`)
         let isDisabled = false
         let status = '__DONE__'
-        this.setState({ isDisabled, status })
+        this.setState({ isDisabled, localUrl, status })
       })
       .error( (error) => {
         let status = '__ERROR__'
