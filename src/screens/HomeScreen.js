@@ -217,13 +217,17 @@ class HomeScreen extends Component {
           </Button>
         </Header>
         <EmptyList {...this.state} />
-        <List
-          dataArray={this.state.data}
-          keyExtractor={item => `${item._index}-${item._source.id.toString()}`}
-          onEndReached={this.loadMore}
-          onEndReachedThreshold={0.5}
-          renderRow={(item) => this.renderRow(item)}
-        />
+        {
+          this.state.data.length > 0 ?
+          <List
+            dataArray={this.state.data}
+            keyExtractor={item => `${item._index}-${item._source.id.toString()}`}
+            onEndReached={this.loadMore}
+            onEndReachedThreshold={0.5}
+            renderRow={(item) => this.renderRow(item)}
+          />: null
+        }
+        
       </Container>
     );
   } 

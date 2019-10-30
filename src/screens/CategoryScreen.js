@@ -1,4 +1,5 @@
 import React from 'react'
+import { View } from 'react-native'
 import { Container, Button, Content, Header, Left, H3, H1,
           Right, Body, Title, Icon, List } from 'native-base'
           
@@ -82,7 +83,8 @@ class CategoryScreen extends React.Component {
           </Body>
           <Right />
         </Header>
-        <Content padder>
+
+        <View style={{flex: 1, padding: 10}}>
           <ListGroup 
             {...this.props}
             title='Sops' 
@@ -102,7 +104,7 @@ class CategoryScreen extends React.Component {
           <EmptyList 
             isFetching={isFetching} 
             data={[...sops, ...children]} />
-        </Content>
+        </View>
       </Container>
     )
   }
