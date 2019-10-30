@@ -11,8 +11,8 @@ class ListComponent extends React.Component {
   }
 
   showDetail() {
-    const { item, navigation } = this.props
-    navigation.navigate('SopDetail', { item })
+    const { item, database, navigation } = this.props
+    navigation.navigate('SopDetail', { item, database })
   }
 
   render() {
