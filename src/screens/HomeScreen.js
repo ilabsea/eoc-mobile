@@ -4,17 +4,15 @@ import AsyncStorage from '@react-native-community/async-storage'
 import axios from 'axios'
 import * as config from '../config/connectionBase'
 import { Container, Header, Item, Input, 
-          Button, List, Text, Icon, Content, ListItem } from 'native-base'
+          Button, List, Text, Icon } from 'native-base'
 import EmptyList from './EmptyList'
-
-import RowItem from './RowItem'
 
 import firebase from 'react-native-firebase'
 import { service } from '../services'
-import RNFS from 'react-native-fs'
 import ListComponent from '../components/ListComponent';
 import { iconMapping } from '../config/utils'
-import { download } from 'react-native-background-downloader';
+import NavigateComponent from '../components/NavigateComponent'
+import DownloadComponent from '../components/DownloadComponent';
 
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle'])
@@ -137,7 +135,7 @@ class HomeScreen extends Component {
       if (fcmToken) {
         console.log('fcmToken', fcmToken)
         await AsyncStorage.setItem('fcmToken', fcmToken);
-        service.apiManager.save_token(fcmToken)
+        service.apiManager.saveToken(fcmToken)
       }
     }
   }
@@ -168,6 +166,9 @@ class HomeScreen extends Component {
 
   renderRow = (item) => {
     let { typeIcon, actionIcon, action, color } = iconMapping(item._index)
+    let { database } = this.props
+
+    const Action = (action == 'download') ? DownloadComponent : NavigateComponent
 
     return <ListComponent 
                 database={this.props.database}
@@ -176,6 +177,7 @@ class HomeScreen extends Component {
                 actionIcon={actionIcon}
                 navigation={this.props.navigation}
                 color={color}
+                actionComponent={<Action item={item._source} database={database} />}
                 action={action} />
   }
 

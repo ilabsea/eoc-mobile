@@ -16,7 +16,7 @@ const ListGroup = ({title, data, Component, database, navigation, color, typeIco
       {
         data.map( item => {
           return <ListComponent key={item.id} 
-                          item={item} 
+                          item={item._source} 
                           database={database}
                           typeIcon={typeIcon}
                           color={color}
