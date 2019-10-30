@@ -37,11 +37,13 @@ class SopDetailScreen extends React.Component {
           <Text>{item.description}</Text>
 
           <View style={{ flexDirection: 'row' }}>
-            <Button rounded warning 
-              style={{marginRight: 10}}
-              onPress={() => Alert.alert('favourite')}>
-              <Icon name="star" />
-            </Button>
+            {
+              /* <Button rounded warning 
+                  style={{marginRight: 10}}
+                  onPress={() => Alert.alert('favourite')}>
+                  <Icon name="star" />
+                </Button> */
+            }
 
             <DownloadComponent item={item} database={database} />
           </View>

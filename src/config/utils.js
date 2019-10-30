@@ -7,7 +7,7 @@ import * as config from '../config/connectionBase'
 import RNFS from 'react-native-fs'
 
 export const fileInfo = (source) => {
-  let uri = `${config.host.dev}:${config.port}`
+  let uri = `${config.host.staging}:${config.port}`
   let remotePath = source.file.url
   let fileName = basename(remotePath)
   let downloadDir = `${RNFS.ExternalStorageDirectoryPath}/Download`
