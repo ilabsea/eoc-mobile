@@ -25,7 +25,7 @@ class HomeScreen extends Component {
       isFetching: false,
       from: 0,
       size: 15,
-      keyword: 'cat 1 as',
+      keyword: 'cat 1',
       data: [],
     }
 
@@ -166,7 +166,7 @@ class HomeScreen extends Component {
 
   renderRow = (item) => {
     let { typeIcon, actionIcon, action, color } = iconMapping(item._index)
-    let { database } = this.props
+    let { database, navigation } = this.props
 
     const Action = (action == 'download') ? DownloadComponent : NavigateComponent
 
@@ -177,7 +177,7 @@ class HomeScreen extends Component {
                 actionIcon={actionIcon}
                 navigation={this.props.navigation}
                 color={color}
-                actionComponent={<Action item={item._source} database={database} />}
+                actionComponent={<Action item={item._source} navigation={navigation} database={database} />}
                 action={action} />
   }
 
@@ -219,7 +219,7 @@ class HomeScreen extends Component {
         <EmptyList {...this.state} />
         <List
           dataArray={this.state.data}
-          keyExtractor={item => item._source.id.toString()}
+          keyExtractor={item => `${item._index}-${item._source.id.toString()}`}
           onEndReached={this.loadMore}
           onEndReachedThreshold={0.5}
           renderRow={(item) => this.renderRow(item)}

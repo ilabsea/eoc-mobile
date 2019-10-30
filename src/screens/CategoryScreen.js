@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { Container, Button, Content, Header, Left, H3, H1,
           Right, Body, Title, Icon, List } from 'native-base'
           
@@ -8,6 +8,7 @@ import ListComponent from '../components/ListComponent'
 
 import DownloadComponent from '../components/DownloadComponent'
 import NavigateComponent from '../components/NavigateComponent'
+import EmptyList from './EmptyList'
 
 const ListGroup = ({title, data, Component, database, navigation, color, typeIcon}) => {
   return <>
@@ -16,11 +17,11 @@ const ListGroup = ({title, data, Component, database, navigation, color, typeIco
       {
         data.map( item => {
           return <ListComponent key={item.id} 
-                          item={item._source} 
+                          item={item} 
                           database={database}
                           typeIcon={typeIcon}
                           color={color}
-                          actionComponent={<Component item={item} />}
+                          actionComponent={<Component item={item} navigation={navigation} />}
                           navigation={navigation} /> })
       }
     </List>
@@ -65,7 +66,7 @@ class CategoryScreen extends React.Component {
 
   render() {
     let { navigation } = this.props
-    let { sops, children } = this.state
+    let { isFetching, sops, children } = this.state
     const sopGuide = navigation.getParam('sopGuide')
 
     return (
@@ -98,11 +99,9 @@ class CategoryScreen extends React.Component {
             data={children} 
             Component={NavigateComponent}/>
           
-          {
-            <EmptyList 
-              isFetching={isFetching} 
-              data={[...sops, ...children]} />
-          }
+          <EmptyList 
+            isFetching={isFetching} 
+            data={[...sops, ...children]} />
         </Content>
       </Container>
     )
