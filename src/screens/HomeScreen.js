@@ -62,6 +62,8 @@ class HomeScreen extends Component {
   }
 
   componentDidMount() {
+    service.firebaseManager.setCurrentScreen('HomeScreen', 'HomeScreen')
+
     this.searchInput.current._root.focus()
     this.checkPermission()
     this.createNotificationListeners()

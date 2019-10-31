@@ -2,7 +2,6 @@ import React from 'react'
 import VersionNumber from 'react-native-version-number'
 import styleUtils from './styles'
 import { Text } from 'native-base'
-
 import * as config from '../config/connectionBase'
 import RNFS from 'react-native-fs'
 
