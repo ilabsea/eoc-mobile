@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 
-import { fileInfo } from '../config/utils'
+import { fileInfo, basename } from '../config/utils'
 import { service } from '../services'
 
 // todo: add global config
@@ -21,8 +21,9 @@ const DownloadControl = ({status, progressedBytes, localUrl, handleDownload, isD
     case '__DONE__':
       return <FileViewButton localUrl={localUrl}/>
     default:
-      return <DownloadButton handleDownload={handleDownload} 
-                          isDisabled={isDisabled} />
+      return <DownloadButton  handleDownload={handleDownload} 
+                              fileName={ basename(localUrl) }
+                              isDisabled={isDisabled} />
   }
 }
 
