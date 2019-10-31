@@ -1,6 +1,7 @@
 import React from 'react'
 import { Container, Content } from 'native-base'
 import { service } from '../services'
+import firebase from 'react-native-firebase'
 
 class Root extends React.Component {
   constructor(props) {
@@ -12,7 +13,13 @@ class Root extends React.Component {
   }
 
   async componentDidMount() {
+    console.log('anlytics', firebase.analytics())
     await service.permissionManager.requestStorage()
+    this.logAppOpen()
+  }
+
+  async logAppOpen() {
+    await firebase.analytics().setCurrentScreen('ROOT_TEST', 'Root')
   }
 
   render() {

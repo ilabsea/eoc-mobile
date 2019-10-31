@@ -8,7 +8,6 @@ import com.facebook.hermes.reactexecutor.HermesExecutorFactory;
 import com.facebook.react.bridge.JavaScriptExecutorFactory;
 import com.facebook.react.ReactApplication;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
-import io.invertase.firebase.RNFirebasePackage;
 import com.apsl.versionnumber.RNVersionNumberPackage;
 import com.vinzscam.reactnativefileviewer.RNFileViewerPackage;
 import com.rnfs.RNFSPackage;
@@ -17,8 +16,11 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.eko.RNBackgroundDownloaderPackage;
 import com.nozbe.watermelondb.WatermelonDBPackage;
+
+import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
+import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
 
 import java.util.List;
 
@@ -41,6 +43,8 @@ public class MainApplication extends Application implements ReactApplication {
       packages.add(new WatermelonDBPackage());
       packages.add(new RNFirebaseMessagingPackage());
       packages.add(new RNFirebaseNotificationsPackage());
+      packages.add(new RNFirebaseAnalyticsPackage());
+
       return packages;
     }
 
