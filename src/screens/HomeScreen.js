@@ -163,6 +163,8 @@ class HomeScreen extends Component {
       this.setState({ from: 0, data: [], isFetching: true }, () => {
         this.handleFetch(keyword)
       })
+
+      service.firebaseManager.logEvent('handleSearch', { keyword })
     }
   }
 
