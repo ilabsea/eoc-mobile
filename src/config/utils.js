@@ -1,19 +1,29 @@
 import React from 'react'
+import { Alert } from 'react-native'
 import VersionNumber from 'react-native-version-number'
 import styleUtils from './styles'
 import { Text } from 'native-base'
 import * as config from '../config/connectionBase'
 import RNFS from 'react-native-fs'
 
+export const showAlert = (title, body) => {
+  Alert.alert(
+    title, body,
+    [
+      { text: 'OK', onPress: () => console.log('OK Pressed') },
+    ],
+    { cancelable: false }
+  );
+}
+
 export const fileInfo = (source) => {
-  let uri = `${config.host.staging}:${config.port}`
   let remotePath = source.file.url
   let fileName = basename(remotePath)
   let downloadDir = `${RNFS.ExternalStorageDirectoryPath}/Download`
   let digest = fileName.match(/\w+/)[0]
 
   return {
-    remoteUrl: `${uri}${remotePath}`,
+    remoteUrl: `${config.uri}${remotePath}`,
     sopName: source.name,
     fileName: fileName,
     fileDigest: digest,

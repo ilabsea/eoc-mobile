@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { YellowBox, Alert } from 'react-native'
-import AsyncStorage from '@react-native-community/async-storage'
+
 import axios from 'axios'
 import * as config from '../config/connectionBase'
 import { Container, Header, Item, Input, 
           Button, List, Text, Icon } from 'native-base'
-import EmptyList from './EmptyList'
 
-import firebase from 'react-native-firebase'
 import { service } from '../services'
-import ListComponent from '../components/ListComponent';
 import { iconMapping } from '../config/utils'
+          
+import EmptyList  from './EmptyList'
+import ListComponent from '../components/ListComponent';
 import NavigateComponent from '../components/NavigateComponent'
 import DownloadComponent from '../components/DownloadComponent';
 
@@ -38,7 +38,7 @@ class HomeScreen extends Component {
 
   handleFetch = async (keyword) => {
     let { from, size } = this.state
-    let uri = `${config.host.staging}:${config.port}/${config.sops_path}`
+    let uri = `${config.uri}/${config.sops_path}`
     let params = { keyword, from, size }
 
     try {
@@ -63,92 +63,7 @@ class HomeScreen extends Component {
 
   componentDidMount() {
     service.firebaseManager.setCurrentScreen('HomeScreen', 'HomeScreen')
-
     this.searchInput.current._root.focus()
-    this.checkPermission()
-    this.createNotificationListeners()
-  }
-
-  componentWillUnmount() {
-    this.notificationListener();
-    this.notificationOpenedListener();
-  }
-
-  async createNotificationListeners() {
-    /*
-    * Triggered when a particular notification has been received in foreground
-    * */
-    this.notificationListener = firebase.notifications().onNotification((notification) => {
-        const { title, body } = notification;
-        this.showAlert(title, body);
-    });
-  
-    /*
-    * If your app is in background, you can listen for when a notification is clicked / tapped / opened as follows:
-    * */
-    this.notificationOpenedListener = firebase.notifications().onNotificationOpened((notificationOpen) => {
-        const { title, body } = notificationOpen.notification;
-        this.showAlert(title, body);
-    });
-  
-    /*
-    * If your app is closed, you can check if it was opened by a notification being clicked / tapped / opened as follows:
-    * */
-    const notificationOpen = await firebase.notifications().getInitialNotification();
-    if (notificationOpen) {
-        const { title, body } = notificationOpen.notification;
-        this.showAlert(title, body);
-    }
-    /*
-    * Triggered for data only payload in foreground
-    * */
-    this.messageListener = firebase.messaging().onMessage((message) => {
-      //process data message
-      console.log(JSON.stringify(message));
-    });
-  }
-  
-  showAlert(title, body) {
-    Alert.alert(
-      title, body,
-      [
-        { text: 'OK', onPress: () => console.log('OK Pressed') },
-      ],
-      { cancelable: false }
-    );
-  }
-  
-  checkPermission() {
-    firebase.messaging().hasPermission()
-    .then(enabled => {
-      if (enabled) {
-        this.getToken();
-      } else {
-        console.log('user doesn\'t have permission')
-        this.request()
-      } 
-    });
-  }
-
-  async getToken() {
-    let fcmToken = await AsyncStorage.getItem('fcmToken');
-    if (!fcmToken) {
-      fcmToken = await firebase.messaging().getToken();
-      if (fcmToken) {
-        console.log('fcmToken', fcmToken)
-        await AsyncStorage.setItem('fcmToken', fcmToken);
-        service.apiManager.saveToken(fcmToken)
-      }
-    }
-  }
-
-  async requestPermission() {
-    try {
-      await firebase.messaging().requestPermission();
-      this.getToken();
-    } catch (error) {
-      console.log('permission rejected');
-    }
   }
 
   loadMore = () => {
@@ -181,21 +96,10 @@ class HomeScreen extends Component {
                 actionIcon={actionIcon}
                 navigation={this.props.navigation}
                 color={color}
-                actionComponent={<Action item={item._source} navigation={navigation} database={database} />}
+                actionComponent={<Action item={item._source} 
+                                          navigation={navigation} 
+                                          database={database} />}
                 action={action} />
-  }
-
-  openDir = async () => {
-    // this.props.navigation.navigate('MyModal')
-    let db = this.props.database
-    let downloadsCollection = db.collections.get('downloads')
-
-    await db.action(async () => {
-      await downloadsCollection.query().markAllAsDeleted() // syncable
-      await downloadsCollection.query().destroyAllPermanently() // permanent
-
-      Alert.alert('destroy collection')
-    })
   }
 
   render() {
@@ -212,9 +116,6 @@ class HomeScreen extends Component {
                 onChangeText={(keyword) => this.setState({keyword}) } />
             <Icon name="ios-search" 
                   onPress={ this.handleSearch } />
-            <Icon type="MaterialIcons" 
-                  name="open-in-new" 
-                  onPress={() => this.openDir()} />
           </Item>
           <Button transparent>
             <Text>Search</Text>
