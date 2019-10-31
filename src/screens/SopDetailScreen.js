@@ -3,11 +3,16 @@ import { View, Text, Alert } from 'react-native'
 import { Container, Content, Header, 
       Left, Right, Body, Title, Button, Icon, H1 } from 'native-base'
 import DownloadComponent from '../components/DownloadComponent';
+import { service } from '../services'
 
 class SopDetailScreen extends React.Component {
   
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    service.firebaseManager.setCurrentScreen('SopDetailScreen', 'SopDetailScreen')
   }
 
   render() {
