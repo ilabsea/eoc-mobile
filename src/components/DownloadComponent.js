@@ -35,35 +35,40 @@ class DownloadComponent extends React.Component {
     }
   }
 
-  handleDownload () {
-    let { item } = this.props
-    let { remoteUrl, localUrl, fileDigest, fileName } = fileInfo(item)
+  async handleDownload () {
+    let granted = await service.permissionManager.requestStorage()
 
-    this.setState({ isDisabled: true, localUrl })
-    service.firebaseManager.logEvent('evtDownload', { fileName })
+    if( granted ) {
+      let { item } = this.props
+      let { remoteUrl, localUrl, fileDigest, fileName } = fileInfo(item)
 
-    service.downloadManager
-      .download(remoteUrl, localUrl, fileDigest)
-      .begin((expectedBytes) => {
-        let status = '__BEGIN__'
-        let isDisabled = true
-        this.setState({ isDisabled, expectedBytes, status})
-      })
-      .progress((progressedBytes) => {
-        let status = '__PROGRESS__'
-        this.setState({ status, progressedBytes })
-      })
-      .done(() => {
-        // this.saveToLocalDB(item.name, this.expectedBytes, filename)
-        // service.toastManager.show(`Downloaded completed!`)
-        let isDisabled = false
-        let status = '__DONE__'
-        this.setState({ isDisabled, localUrl, status })
-      })
-      .error( (error) => {
-        let status = '__ERROR__'
-        this.setState({ status, error }) 
-      })
+      this.setState({ isDisabled: true, localUrl })
+      service.firebaseManager.logEvent('evtDownload', { fileName })
+
+      service.downloadManager
+        .download(remoteUrl, localUrl, fileDigest)
+        .begin((expectedBytes) => {
+          let status = '__BEGIN__'
+          let isDisabled = true
+          this.setState({ isDisabled, expectedBytes, status})
+        })
+        .progress((progressedBytes) => {
+          let status = '__PROGRESS__'
+          this.setState({ status, progressedBytes })
+        })
+        .done(() => {
+          // this.saveToLocalDB(item.name, this.expectedBytes, filename)
+          // service.toastManager.show(`Downloaded completed!`)
+          let isDisabled = false
+          let status = '__DONE__'
+          this.setState({ isDisabled, localUrl, status })
+        })
+        .error( (error) => {
+          let status = '__ERROR__'
+          this.setState({ status, error }) 
+          console.log('download error:', error)
+        })
+    }
   }
 
 
