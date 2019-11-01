@@ -2,7 +2,7 @@ import { PermissionsAndroid } from 'react-native'
 
 // Constants
 const TITLE = 'Storage Permission!'
-const REQ_MESSAGE = 'App needs access to your storage to store downloaded file'
+const REQ_MESSAGE = 'App needs access to your storage to store file'
 const GRANTED_MESSAGE = 'Storage Permission Granted'
 const NOT_GRANTED_MESSAGE = 'Storage Permission Not Granted'
 

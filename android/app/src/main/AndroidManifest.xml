@@ -44,6 +44,7 @@
               android:resource="@xml/file_viewer_provider_paths"
               />
       </provider>
+      <service android:name="io.invertase.firebase.messaging.RNFirebaseBackgroundMessagingService" />
     </application>
 
 </manifest>

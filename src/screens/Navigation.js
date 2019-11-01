@@ -19,8 +19,8 @@ const stack = (props) => createStackNavigator({
   Home: {
     screen: ({ navigation }) => {
       const { database } = props;
-      return <Root>
-                <HomeScreen database={database} navigation={navigation}/>
+      return <Root database={database} navigation={navigation}>
+                <HomeScreen database={database} navigation={navigation} />
               </Root>
     },
     navigationOptions: { title: "Guidelines" }
@@ -28,7 +28,7 @@ const stack = (props) => createStackNavigator({
   Category: {
     screen: ({ navigation }) => {
       const { database } = props;
-      return <Root>
+      return <Root database={database} navigation={navigation}>
                 <CategoryScreen database={database} navigation={navigation}/>
               </Root>
     },
@@ -37,7 +37,7 @@ const stack = (props) => createStackNavigator({
   SopDetail: {
     screen: ({ navigation }) => {
       const { database } = props;
-      return <Root>
+      return <Root database={database} navigation={navigation}>
                 <SopDetailScreen database={database} navigation={navigation}/>
               </Root>
     },
@@ -46,7 +46,7 @@ const stack = (props) => createStackNavigator({
   DownloadDir: {
     screen: ({ navigation }) => {
       const { database } = props;
-      return <Root>
+      return <Root database={database} navigation={navigation}>
                 <DownloadDirScreen database={database} navigation={navigation}/>
               </Root>
     },

@@ -63,16 +63,17 @@ class Root extends React.Component {
     * Triggered when a particular notification has been received in foreground
     * */
     this.notificationListener = firebase.notifications().onNotification((notification) => {
-        const { title, body } = notification;
-        showAlert(title, body);
+      const { title, body } = notification;
+      showAlert(title, `onNotify: ${body}`);
+      // service.toastManager.show('New notification!')
     });
   
     /*
     * If your app is in background, you can listen for when a notification is clicked / tapped / opened as follows:
     * */
     this.notificationOpenedListener = firebase.notifications().onNotificationOpened((notificationOpen) => {
-        const { title, body } = notificationOpen.notification;
-        showAlert(title, body);
+      const { title, body } = notificationOpen.notification;
+      showAlert(title, `onNotifyOpened: ${body}`);
     });
   
     /*
@@ -80,9 +81,19 @@ class Root extends React.Component {
     * */
     const notificationOpen = await firebase.notifications().getInitialNotification();
     if (notificationOpen) {
-        const { title, body } = notificationOpen.notification;
-        showAlert(title, body);
+      const { title, body } = notificationOpen.notification;
+      showAlert(title, `init: ${body}`);
     }
+
+    /*
+    * called by #notify_with_key
+    */
+    this.messageListener = firebase.messaging().onMessage((message) => {
+      let { database, navigation } = this.props
+      let data = { payload: message._data, navigation, database }
+      service.toastManager.show('New notification!', data)
+    })
+
   }
 
   render() {
