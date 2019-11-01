@@ -1,33 +1,16 @@
 import React from 'react'
 import { View } from 'react-native'
-import { Container, Button, Content, Header, Left, H3, H1,
-          Right, Body, Title, Icon, List } from 'native-base'
+import { Container, Button, Header, Left,
+          Right, Body, Title, Icon } from 'native-base'
           
 import { service } from '../services';
 import { withNavigation } from 'react-navigation'
-import ListComponent from '../components/ListComponent'
 
 import DownloadComponent from '../components/DownloadComponent'
 import NavigateComponent from '../components/NavigateComponent'
 import EmptyList from './EmptyList'
+import ListGroup from './ListGroup'
 
-const ListGroup = ({title, data, Component, database, navigation, color, typeIcon}) => {
-  return <>
-    { data.length > 0 ? <H3>{title}:</H3> : null }
-    <List>
-      {
-        data.map( item => {
-          return <ListComponent key={item.id} 
-                          item={item} 
-                          database={database}
-                          typeIcon={typeIcon}
-                          color={color}
-                          actionComponent={<Component item={item} navigation={navigation} />}
-                          navigation={navigation} /> })
-      }
-    </List>
-  </>
-}
 class CategoryScreen extends React.Component {
   constructor(props) {
     super(props)
@@ -69,7 +52,8 @@ class CategoryScreen extends React.Component {
     let { navigation } = this.props
     let { isFetching, sops, children } = this.state
     const sopGuide = navigation.getParam('sopGuide')
-
+    const database = navigation.getParam('database')
+    console.log('-> database: ', database)
     return (
       <Container>
         <Header>
@@ -86,19 +70,21 @@ class CategoryScreen extends React.Component {
 
         <View style={{flex: 1, padding: 10}}>
           <ListGroup 
-            {...this.props}
             title='Sops' 
             typeIcon="picture-as-pdf" 
             color='#b1090c'
             data={sops} 
+            database={database}
+            navigation={navigation}
             Component={DownloadComponent}/>
 
           <ListGroup 
-            {...this.props}
             title='Subs' 
             typeIcon="folder" 
             color='#f39c24'
             data={children} 
+            database={database}
+            navigation={navigation}
             Component={NavigateComponent}/>
           
           <EmptyList 

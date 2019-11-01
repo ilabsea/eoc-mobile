@@ -4,8 +4,8 @@ import { service } from '../services'
 
 class NavigateComponent extends React.Component {
   navigate() {
-    let { item, navigation } = this.props
-    navigation.push('Category', { sopGuide: item, id: item.id }) 
+    let { item, navigation, database } = this.props
+    navigation.push('Category', { sopGuide: item, database }) 
     service.firebaseManager.logEvent('evtNestedNavigation', { id: item.id })
   }
 

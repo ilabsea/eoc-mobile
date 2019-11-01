@@ -64,7 +64,7 @@ class Root extends React.Component {
     * */
     this.notificationListener = firebase.notifications().onNotification((notification) => {
       const { title, body } = notification;
-      showAlert(title, `onNotify: ${body}`);
+      console.log(title, `onNotify: ${body}`);
       // service.toastManager.show('New notification!')
     });
   
@@ -73,7 +73,7 @@ class Root extends React.Component {
     * */
     this.notificationOpenedListener = firebase.notifications().onNotificationOpened((notificationOpen) => {
       const { title, body } = notificationOpen.notification;
-      showAlert(title, `onNotifyOpened: ${body}`);
+      console.log(title, `onNotifyOpened: ${body}`);
     });
   
     /*
@@ -82,7 +82,7 @@ class Root extends React.Component {
     const notificationOpen = await firebase.notifications().getInitialNotification();
     if (notificationOpen) {
       const { title, body } = notificationOpen.notification;
-      showAlert(title, `init: ${body}`);
+      console.log(title, `init: ${body}`);
     }
 
     /*
