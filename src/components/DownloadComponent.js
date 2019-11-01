@@ -1,13 +1,8 @@
 import React from 'react'
 import { View } from 'react-native'
 
-import { fileInfo, basename } from '../config/utils'
+import { fileInfo } from '../config/utils'
 import { service } from '../services'
-
-// todo: add global config
-// global : color, icon, ...
-// how to embed information, can still view even file rename
-// i18n
 
 import FileViewButton from './buttons/FileViewButton'
 import DownloadButton from './buttons/DownloadButton'
@@ -22,7 +17,6 @@ const DownloadControl = ({status, progressedBytes, localUrl, handleDownload, isD
       return <FileViewButton localUrl={localUrl}/>
     default:
       return <DownloadButton  handleDownload={handleDownload} 
-                              fileName={ basename(localUrl) }
                               isDisabled={isDisabled} />
   }
 }
@@ -43,9 +37,10 @@ class DownloadComponent extends React.Component {
 
   handleDownload () {
     let { item } = this.props
-    let { remoteUrl, localUrl, fileDigest } = fileInfo(item)
+    let { remoteUrl, localUrl, fileDigest, fileName } = fileInfo(item)
 
-    this.setState({ isDisabled: true })
+    this.setState({ isDisabled: true, localUrl })
+    service.firebaseManager.logEvent('evtDownload', { fileName })
 
     service.downloadManager
       .download(remoteUrl, localUrl, fileDigest)

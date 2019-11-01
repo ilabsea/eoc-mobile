@@ -1,12 +1,8 @@
 import React from 'react'
 import { Button, Icon } from 'native-base'
-
 import { icons } from '../../constants/icons'
-import { service } from '../../services'
 
-const DownloadButton = ({ handleDownload, fileName, isDisabled }) => {
-  
-  service.firebaseManager.logEvent('handleDownload', { fileName })
+const DownloadButton = ({ handleDownload, isDisabled }) => {
   return <Button transparent
           disabled={isDisabled}
           onPress={ handleDownload }>

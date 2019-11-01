@@ -17,6 +17,7 @@ class Root extends React.Component {
     this.checkPermission()
     this.createNotificationListeners()
     await service.permissionManager.requestStorage()
+    await firebase.analytics().setAnalyticsCollectionEnabled(true)
   }
 
   checkPermission() {

@@ -88,7 +88,7 @@ class CategoryScreen extends React.Component {
           <ListGroup 
             {...this.props}
             title='Sops' 
-            typeIcon="insert-drive-file" 
+            typeIcon="picture-as-pdf" 
             color='#b1090c'
             data={sops} 
             Component={DownloadComponent}/>

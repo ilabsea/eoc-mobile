@@ -1,7 +1,6 @@
 import firebase from 'react-native-firebase'
 
 const analytics = firebase.analytics()
-const notification = firebase.notifications()
 
 export const setCurrentScreen = async (screenName, screenClass) => {
   await analytics.setCurrentScreen(screenName, screenClass)
@@ -11,8 +10,4 @@ export const setCurrentScreen = async (screenName, screenClass) => {
 export const logEvent = async (eventName, params) => {
   await analytics.logEvent(eventName, params)
   console.log(eventName, params)
-}
-
-export const notify = () => {
-
 }

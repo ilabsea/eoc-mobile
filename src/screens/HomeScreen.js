@@ -79,7 +79,7 @@ class HomeScreen extends Component {
         this.handleFetch(keyword)
       })
 
-      service.firebaseManager.logEvent('handleSearch', { keyword })
+      service.firebaseManager.logEvent('evtSearch', { keyword })
     }
   }
 
