@@ -1,11 +1,12 @@
 import React from 'react'
+import { StyleSheet } from 'react-native'
 import { List, H3 } from 'native-base'
 import ListComponent from '../components/ListComponent'
 
 const ListGroup = (props) => {
   let { Component, navigation, database } = props
   return <>
-    { props.data.length > 0 ? <H3>{props.title}:</H3> : null }
+    { props.data.length > 0 ? <H3 style={styles.header}>{props.title}:</H3> : null }
     <List>
       {
         props.data.map( item => {
@@ -20,5 +21,12 @@ const ListGroup = (props) => {
     </List>
   </>
 }
+
+const styles = StyleSheet.create({
+  header: {
+    fontWeight: 'bold',
+    padding: 5
+  }
+})
 
 export default ListGroup

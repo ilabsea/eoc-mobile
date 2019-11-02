@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { ScrollView, View, StyleSheet } from 'react-native'
 import { Container, Button, Header, Left,
           Right, Body, Title, Icon } from 'native-base'
           
@@ -68,7 +68,7 @@ class CategoryScreen extends React.Component {
           <Right />
         </Header>
 
-        <View style={{flex: 1, padding: 10}}>
+        <ScrollView style={{flex: 1, padding: 10}}>
           <ListGroup 
             title='Sops' 
             typeIcon="picture-as-pdf" 
@@ -78,6 +78,8 @@ class CategoryScreen extends React.Component {
             navigation={navigation}
             Component={DownloadComponent}/>
 
+          <View style={styles.separator}></View>
+          
           <ListGroup 
             title='Subs' 
             typeIcon="folder" 
@@ -90,10 +92,16 @@ class CategoryScreen extends React.Component {
           <EmptyList 
             isFetching={isFetching} 
             data={[...sops, ...children]} />
-        </View>
+        </ScrollView>
       </Container>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  separator: {
+    marginTop: 10
+  }
+})
 
 export default withNavigation(CategoryScreen)
