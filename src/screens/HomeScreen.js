@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { YellowBox, Alert } from 'react-native'
+import { YellowBox } from 'react-native'
 
 import axios from 'axios'
 import * as config from '../config/connectionBase'
@@ -23,9 +23,8 @@ class HomeScreen extends Component {
 
     this.state = {
       isFetching: false,
-      from: 0,
-      size: 15,
-      keyword: 'cat 1',
+      page: 1,
+      q: 'cat 1',
       data: [],
     }
 
@@ -36,10 +35,10 @@ class HomeScreen extends Component {
     this.handleSearch = this.handleSearch.bind(this)
   }
 
-  handleFetch = async (keyword) => {
-    let { from, size } = this.state
+  handleFetch = async (q) => {
+    let { page } = this.state
     let uri = `${config.uri}/${config.sops_path}`
-    let params = { keyword, from, size }
+    let params = { q, page }
 
     try {
       let data = await axios.get(uri, { params })
@@ -50,7 +49,7 @@ class HomeScreen extends Component {
         this.setState( (prev) => {
           return {
             data: [...prev.data, ...data],
-            from: prev.from + prev.size
+            page: prev.page + 1
           }
         })
       }
@@ -68,18 +67,18 @@ class HomeScreen extends Component {
 
   loadMore = () => {
     this.setState({isFetching: true})
-    this.handleFetch(this.state.keyword)
+    this.handleFetch(this.state.q)
   }
 
   handleSearch = () => {
-    const { keyword } = this.state
+    const { q } = this.state
 
-    if( keyword != '' ) {
-      this.setState({ from: 0, data: [], isFetching: true }, () => {
-        this.handleFetch(keyword)
+    if( q != '' ) {
+      this.setState({ page: 1, data: [], isFetching: true }, () => {
+        this.handleFetch(q)
       })
 
-      service.firebaseManager.logEvent('evtSearch', { keyword })
+      service.firebaseManager.logEvent('evtSearch', { q })
     }
   }
 
@@ -112,8 +111,8 @@ class HomeScreen extends Component {
                 onSubmitEditing={ this.handleSearch }
                 ref={this.searchInput} 
                 placeholder="Search"
-                value={this.state.keyword}
-                onChangeText={(keyword) => this.setState({keyword}) } />
+                value={this.state.q}
+                onChangeText={(q) => this.setState({q}) } />
             <Icon name="ios-search" 
                   onPress={ this.handleSearch } />
           </Item>
