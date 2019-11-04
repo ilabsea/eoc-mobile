@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { YellowBox } from 'react-native'
+import { YellowBox, FlatList, View } from 'react-native'
 
 import axios from 'axios'
 import * as config from '../config/connectionBase'
@@ -74,7 +74,7 @@ class HomeScreen extends Component {
     const { q } = this.state
 
     if( q != '' ) {
-      this.setState({ page: 1, data: [], isFetching: true }, () => {
+      this.setState({ page: 1, data: [] }, () => {
         this.handleFetch(q)
       })
 
@@ -87,7 +87,6 @@ class HomeScreen extends Component {
     let { database, navigation } = this.props
 
     const Action = (action == 'download') ? DownloadComponent : NavigateComponent
-
     return <ListComponent 
                 database={this.props.database}
                 item={item._source} 
@@ -123,15 +122,16 @@ class HomeScreen extends Component {
         <EmptyList {...this.state} />
         {
           this.state.data.length > 0 ?
-          <List
-            dataArray={this.state.data}
+          <FlatList
+            data={this.state.data}
             keyExtractor={item => `${item._index}-${item._source.id.toString()}`}
             onEndReached={this.loadMore}
             onEndReachedThreshold={0.5}
-            renderRow={(item) => this.renderRow(item)}
+            renderItem={({item}) => this.renderRow(item)}
+            contentContainerStyle={{ paddingBottom: 20}}
           />: null
         }
-        
+
       </Container>
     );
   } 

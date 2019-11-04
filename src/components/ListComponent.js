@@ -1,12 +1,13 @@
 import React from 'react'
 import styleUtils from '../config/styles'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Button, Left, H3,
   Right, Body, Icon, ListItem } from 'native-base'
 import TimeAgoComponent from '../components/TimeAgoComponent'
+import CardView from 'react-native-cardview'
 
 const Textile = ({ parent_id, text }) => (
-  parent_id === undefined ? <Text>{text}</Text> : null 
+  (parent_id===undefined && text!='') ? <Text>{text}</Text> : null 
 )
 
 class ListComponent extends React.Component {
@@ -22,30 +23,51 @@ class ListComponent extends React.Component {
   render() {
     let { item, typeIcon, color } = this.props
     let { parent_id, name, tags, description, created_at } = item
-    console.log(item, parent_id)
 
-    return <ListItem thumbnail onPress={() => this.showDetail()}>
-    <Left>
-      <Button transparent style={styleUtils.btnIcon}>
-        <Icon type="MaterialIcons" style={{ fontSize:42, color: color }} name={typeIcon} />
-      </Button>
-    </Left>
+    return <TouchableOpacity onPress={() => this.showDetail()}>
+      <CardView
+            cardElevation={5}
+            cardMaxElevation={2}
+            style={{margin: 10, padding: 10, marginBottom: 0}}
+            cornerRadius={5}>
+      <View style={styles.wrapper}>
+        <View style={styles.center}>
+          <Button transparent style={styleUtils.btnIcon}>
+            <Icon type="MaterialIcons" style={{ fontSize:42, color: color }} name={typeIcon} />
+          </Button>
+        </View>
 
-    <Body>
-      <View>
-        <H3>{name}</H3>
-        <Textile parent_id={parent_id} text={tags} />
-        <Textile parent_id={parent_id} text={description} />
-        <TimeAgoComponent time={created_at} />
+        <View style={{ flex: 3 }}>
+          <H3 style={styles.header}>{name}</H3>
+          <Textile parent_id={parent_id} text={description} />
+        </View>
+
+        <View style={styles.center}>
+          { this.props.actionComponent }
+        </View>
       </View>
-    </Body>
 
-    <Right>
-      { this.props.actionComponent }
-    </Right>
-
-  </ListItem>
+  </CardView>
+  </TouchableOpacity>
   }
 }
+
+const styles = StyleSheet.create({
+  wrapper: { 
+    flex: 1, 
+    flexDirection: 'row' 
+  },
+  center: { 
+    flex: 1, 
+    justifyContent: 'center', 
+    alignItems: 'center' 
+  },
+  header: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    marginTop: 5,
+    marginBottom: 5
+  }
+})
 
 export default ListComponent
