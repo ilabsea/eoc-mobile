@@ -8,11 +8,9 @@ import { service } from '../../services'
 const viewFile = (localUrl) => {
   FileViewer.open(localUrl)
     .then(() => {
-      console.log('success')
     })
     .catch(error => {
       let { message } = error
-      console.log(message)
       service.toastManager.show(message)
     })
 }

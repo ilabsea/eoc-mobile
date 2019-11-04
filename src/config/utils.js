@@ -1,20 +1,9 @@
 import React from 'react'
-import { Alert } from 'react-native'
 import VersionNumber from 'react-native-version-number'
 import styleUtils from './styles'
 import { Text } from 'native-base'
 import * as config from '../config/connectionBase'
 import RNFS from 'react-native-fs'
-
-export const showAlert = (title, body) => {
-  Alert.alert(
-    title, body,
-    [
-      { text: 'OK', onPress: () => console.log('OK Pressed') },
-    ],
-    { cancelable: false }
-  );
-}
 
 export const fileInfo = (source) => {
   let remotePath = source.file.url

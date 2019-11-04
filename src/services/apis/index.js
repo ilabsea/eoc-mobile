@@ -1,16 +1,16 @@
 import axios from 'axios'
 import * as config from '../../config/connectionBase'
+import { service } from '../../services'
 
 export const saveToken = async (token) => {
   let tokensPath = `${config.uri}/${config.tokens_path}`
 
   try {
-    let data = await axios.post(tokensPath, { firebase: { token } })
-                    .then( resp => resp.data )
-                    .catch( error => error)
-    console.log(data)
+    await axios.post(tokensPath, { firebase: { token } })
+                .then( resp => resp.data )
+                .catch( error => error)
   } catch ( e ) {
-    console.log(e)
+    service.toastManager.show(e)
   }
 }
 
@@ -28,6 +28,6 @@ export const fetch_category_children = async (category_id) => {
 
     return data
   } catch(e) {
-    console.error(e)
+    service.toastManager.show(e)
   }
 }

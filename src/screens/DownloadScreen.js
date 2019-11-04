@@ -26,7 +26,6 @@ class DownloadScreen extends React.Component {
   componentDidMount() {
     this.didBlurSubscription = this.props.navigation.addListener(
       'didFocus', payload => {
-        console.log('didFocus', payload);
         this.getAllDownloads()
       }
     );
@@ -38,7 +37,6 @@ class DownloadScreen extends React.Component {
 
   getAllDownloads = async () => {
     const all = await this.downloadCollection.query().fetch()
-    console.log('get downloads', all)
     const downloads = all.map(d => [{ id: d.id, name: d.name, localUrl: d.localUrl }])
     this.setState({ downloads })
   }
@@ -74,7 +72,6 @@ class DownloadScreen extends React.Component {
         }, 3000);
 
       })
-      .catch( e => console.log('error caught: ', e))
   }
 
   view(name) {

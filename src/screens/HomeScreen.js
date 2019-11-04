@@ -56,8 +56,8 @@ class HomeScreen extends Component {
       }
       
       this.setState({isFetching: false})
-    } catch ( e ) {
-      console.log(e)
+    } catch(e) {
+      service.toastManager.show(e)
     }
   }
 

@@ -16,15 +16,12 @@ const requestStorage = async () => {
       }
     )
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log(GRANTED_MESSAGE)
       return true
     }
     else {
-      console.log(NOT_GRANTED_MESSAGE)
       return false
     }
   } catch (err) {
-    console.warn(err)
     return false
   }
 }

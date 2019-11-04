@@ -39,8 +39,6 @@ class CategoryScreen extends React.Component {
       this.setState({
         sops, children
       })
-    } catch( e) {
-      console.log(e)
     } finally {
       this.setState({
         isFetching: false
@@ -53,7 +51,6 @@ class CategoryScreen extends React.Component {
     let { isFetching, sops, children } = this.state
     const sopGuide = navigation.getParam('sopGuide')
     const database = navigation.getParam('database')
-    console.log('-> database: ', database)
     return (
       <Container>
         <Header>

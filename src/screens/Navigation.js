@@ -13,7 +13,6 @@ import HomeScreen from './HomeScreen'
 import CategoryScreen from './CategoryScreen'
 import SopDetailScreen from './SopDetailScreen'
 import DownloadDirScreen from './DownloadDirScreen'
-import ModalScreen from './ModalScreen'
 
 const stack = (props) => createStackNavigator({
   Home: {
@@ -51,9 +50,6 @@ const stack = (props) => createStackNavigator({
               </Root>
     },
     navigationOptions: { title: "Download directory" }
-  },
-  MyModal: {
-    screen: ModalScreen,
   }
 }, {
   initialRouteName: 'Home',

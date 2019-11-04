@@ -46,7 +46,6 @@ class DownloadComponent extends React.Component {
         })
         .error( (error) => {
           this.setState({ status: '__ERROR__', error }) 
-          console.log('download error:', error)
           service.toastManager.show(`${error}, please try again later!`)
         })
     }
@@ -64,7 +63,6 @@ class DownloadComponent extends React.Component {
         dl.name = fileName
         dl.size = expectedBytes
       })
-      console.log('save to local')
     })
   }
 

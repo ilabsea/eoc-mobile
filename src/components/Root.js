@@ -2,7 +2,6 @@ import React from 'react'
 import { service } from '../services'
 import firebase from 'react-native-firebase'
 import AsyncStorage from '@react-native-community/async-storage'
-import { showAlert } from '../config/utils'
 
 class Root extends React.Component {
   constructor(props) {
@@ -26,7 +25,6 @@ class Root extends React.Component {
       if (enabled) {
         this.getToken();
       } else {
-        console.log('user doesn\'t have permission')
         this.requestPermission()
       } 
     });
@@ -37,7 +35,6 @@ class Root extends React.Component {
     if (!fcmToken) {
       fcmToken = await firebase.messaging().getToken();
       if (fcmToken) {
-        console.log('fcmToken', fcmToken)
         await AsyncStorage.setItem('fcmToken', fcmToken);
         service.apiManager.saveToken(fcmToken)
       }
@@ -48,8 +45,8 @@ class Root extends React.Component {
     try {
       await firebase.messaging().requestPermission();
       this.getToken();
-    } catch (error) {
-      console.log('permission rejected');
+    } catch (e) {
+      service.toastManager.show(e)
     }
   }
 
@@ -64,7 +61,6 @@ class Root extends React.Component {
     * */
     this.notificationListener = firebase.notifications().onNotification((notification) => {
       const { title, body } = notification;
-      console.log(title, `onNotify: ${body}`);
       // service.toastManager.show('New notification!')
     });
   
@@ -73,7 +69,6 @@ class Root extends React.Component {
     * */
     this.notificationOpenedListener = firebase.notifications().onNotificationOpened((notificationOpen) => {
       const { title, body } = notificationOpen.notification;
-      console.log(title, `onNotifyOpened: ${body}`);
     });
   
     /*
@@ -82,7 +77,6 @@ class Root extends React.Component {
     const notificationOpen = await firebase.notifications().getInitialNotification();
     if (notificationOpen) {
       const { title, body } = notificationOpen.notification;
-      console.log(title, `init: ${body}`);
     }
 
     /*
