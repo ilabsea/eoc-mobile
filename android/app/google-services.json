@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "939048060549",
+    "firebase_url": "https://eoc-mobile-f7c38.firebaseio.com",
+    "project_id": "eoc-mobile-f7c38",
+    "storage_bucket": "eoc-mobile-f7c38.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:939048060549:android:7ac545bca410ac41d78bec",
+        "android_client_info": {
+          "package_name": "com.eocmobileapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "939048060549-rjmd0l41tpbq043bti1gserabjqn6plu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALYc1pW6V7eA_SMqfxU4uSOU-MzMqU8n8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "939048060549-rjmd0l41tpbq043bti1gserabjqn6plu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
