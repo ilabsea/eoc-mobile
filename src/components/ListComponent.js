@@ -1,9 +1,13 @@
 import React from 'react'
 import styleUtils from '../config/styles'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 import { Button, Left, H3,
   Right, Body, Icon, ListItem } from 'native-base'
 import TimeAgoComponent from '../components/TimeAgoComponent'
+
+const Textile = ({ parent_id, text }) => (
+  parent_id === undefined ? <Text>{text}</Text> : null 
+)
 
 class ListComponent extends React.Component {
   constructor(props) {
@@ -17,7 +21,8 @@ class ListComponent extends React.Component {
 
   render() {
     let { item, typeIcon, color } = this.props
-    let { name, created_at } = item
+    let { parent_id, name, tags, description, created_at } = item
+    console.log(item, parent_id)
 
     return <ListItem thumbnail onPress={() => this.showDetail()}>
     <Left>
@@ -29,6 +34,8 @@ class ListComponent extends React.Component {
     <Body>
       <View>
         <H3>{name}</H3>
+        <Textile parent_id={parent_id} text={tags} />
+        <Textile parent_id={parent_id} text={description} />
         <TimeAgoComponent time={created_at} />
       </View>
     </Body>
