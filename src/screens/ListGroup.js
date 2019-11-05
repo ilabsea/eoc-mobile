@@ -6,7 +6,6 @@ import ListComponent from '../components/ListComponent'
 const ListGroup = (props) => {
   let { Component, navigation, database } = props
   return <>
-    {/* { props.data.length > 0 ? <H3 style={styles.header}>{props.title}:</H3> : null } */}
     <List>
       {
         props.data.map( item => {
