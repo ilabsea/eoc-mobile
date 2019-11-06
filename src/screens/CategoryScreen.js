@@ -55,7 +55,7 @@ class CategoryScreen extends React.Component {
       <Container>
         <Header>
           <Left>
-            <Button onPress={ () => navigation.goBack() }>
+            <Button transparent onPress={ () => navigation.goBack() }>
               <Icon name="md-arrow-back" />
             </Button>
           </Left>
@@ -65,31 +65,39 @@ class CategoryScreen extends React.Component {
           <Right />
         </Header>
 
-        <ScrollView style={{flex: 1, padding: 10}}>
-          <ListGroup 
-            title='Sops' 
-            typeIcon="picture-as-pdf" 
-            color='#b1090c'
-            data={sops} 
-            database={database}
-            navigation={navigation}
-            Component={DownloadComponent}/>
+        {
+          (sops.length > 0 || children.length > 0)
+          ?
+          <ScrollView style={{flex: 1}}>
+            <ListGroup 
+              title='Sops' 
+              typeIcon="picture-as-pdf" 
+              color='#b1090c'
+              data={sops} 
+              database={database}
+              navigation={navigation}
+              Component={DownloadComponent}/>
 
-          <View style={styles.separator}></View>
-          
-          <ListGroup 
-            title='Subs' 
-            typeIcon="folder" 
-            color='#f39c24'
-            data={children} 
-            database={database}
-            navigation={navigation}
-            Component={NavigateComponent}/>
-          
+            <View style={styles.separator}></View>
+            
+            <ListGroup 
+              title='Subs' 
+              typeIcon="folder" 
+              color='#f39c24'
+              data={children} 
+              database={database}
+              navigation={navigation}
+              Component={NavigateComponent}/>
+            
+            <View style={{ paddingBottom: 20}}></View>
+          </ScrollView>
+          : 
           <EmptyList 
-            isFetching={isFetching} 
-            data={[...sops, ...children]} />
-        </ScrollView>
+              isFetching={isFetching} 
+              data={[...sops, ...children]} />
+        }
+        
+        
       </Container>
     )
   }

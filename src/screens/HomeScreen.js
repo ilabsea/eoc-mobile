@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { YellowBox, Alert } from 'react-native'
+import { YellowBox, FlatList, View } from 'react-native'
 
 import axios from 'axios'
 import * as config from '../config/connectionBase'
@@ -23,9 +23,8 @@ class HomeScreen extends Component {
 
     this.state = {
       isFetching: false,
-      from: 0,
-      size: 15,
-      keyword: 'cat 1',
+      page: 1,
+      q: 'flu',
       data: [],
     }
 
@@ -36,10 +35,10 @@ class HomeScreen extends Component {
     this.handleSearch = this.handleSearch.bind(this)
   }
 
-  handleFetch = async (keyword) => {
-    let { from, size } = this.state
+  handleFetch = async (q) => {
+    let { page } = this.state
     let uri = `${config.uri}/${config.sops_path}`
-    let params = { keyword, from, size }
+    let params = { q, page }
 
     try {
       let data = await axios.get(uri, { params })
@@ -50,7 +49,7 @@ class HomeScreen extends Component {
         this.setState( (prev) => {
           return {
             data: [...prev.data, ...data],
-            from: prev.from + prev.size
+            page: prev.page + 1
           }
         })
       }
@@ -68,18 +67,18 @@ class HomeScreen extends Component {
 
   loadMore = () => {
     this.setState({isFetching: true})
-    this.handleFetch(this.state.keyword)
+    this.handleFetch(this.state.q)
   }
 
   handleSearch = () => {
-    const { keyword } = this.state
+    const { q } = this.state
 
-    if( keyword != '' ) {
-      this.setState({ from: 0, data: [], isFetching: true }, () => {
-        this.handleFetch(keyword)
+    if( q != '' ) {
+      this.setState({ page: 1, data: [] }, () => {
+        this.handleFetch(q)
       })
 
-      service.firebaseManager.logEvent('evtSearch', { keyword })
+      service.firebaseManager.logEvent('evtSearch', { q })
     }
   }
 
@@ -88,7 +87,6 @@ class HomeScreen extends Component {
     let { database, navigation } = this.props
 
     const Action = (action == 'download') ? DownloadComponent : NavigateComponent
-
     return <ListComponent 
                 database={this.props.database}
                 item={item._source} 
@@ -107,13 +105,13 @@ class HomeScreen extends Component {
       <Container>
         <Header searchBar rounded>
           <Item>
-            <Icon name="ios-menu" onPress={() => this.props.navigation.openDrawer()} />
+            {/* <Icon name="ios-menu" onPress={() => this.props.navigation.openDrawer()} /> */}
             <Input 
                 onSubmitEditing={ this.handleSearch }
                 ref={this.searchInput} 
                 placeholder="Search"
-                value={this.state.keyword}
-                onChangeText={(keyword) => this.setState({keyword}) } />
+                value={this.state.q}
+                onChangeText={(q) => this.setState({q}) } />
             <Icon name="ios-search" 
                   onPress={ this.handleSearch } />
           </Item>
@@ -124,15 +122,16 @@ class HomeScreen extends Component {
         <EmptyList {...this.state} />
         {
           this.state.data.length > 0 ?
-          <List
-            dataArray={this.state.data}
+          <FlatList
+            data={this.state.data}
             keyExtractor={item => `${item._index}-${item._source.id.toString()}`}
             onEndReached={this.loadMore}
             onEndReachedThreshold={0.5}
-            renderRow={(item) => this.renderRow(item)}
+            renderItem={({item}) => this.renderRow(item)}
+            contentContainerStyle={{ paddingBottom: 20}}
           />: null
         }
-        
+
       </Container>
     );
   } 

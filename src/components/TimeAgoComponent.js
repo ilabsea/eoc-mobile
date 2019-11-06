@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     marginRight: 5, 
     color: "#666666" 
   },
-  time: { color: "#666666" }
+  time: { color: "#666666", fontSize: 14 }
 })
 
 export default TimeAgoComponent

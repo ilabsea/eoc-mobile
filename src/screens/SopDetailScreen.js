@@ -4,6 +4,7 @@ import { Container, Content, Header,
       Left, Right, Body, Title, Button, Icon, H1 } from 'native-base'
 import DownloadComponent from '../components/DownloadComponent';
 import { service } from '../services'
+import { regexHtml } from '../config/utils' 
 
 class SopDetailScreen extends React.Component {
   
@@ -35,13 +36,15 @@ class SopDetailScreen extends React.Component {
       </Header>
 
       <Content contentContainerStyle={{ justifyContent: 'center', flex: 1 }}>
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ justifyContent: 'center', alignItems: 'center', padding: 10 }}>
 
           <H1 style={{ marginBottom: 15 }}>{item.name}</H1>
           <Text>{item.tags}</Text>
-          <Text>{item.description}</Text>
+          <Text style={{ fontSize: 18, lineHeight: 30, textAlign: 'center' }}>
+            {item.description.replace(regexHtml, '')}
+          </Text>
 
-          <View style={{ flexDirection: 'row' }}>
+          <View style={{ flexDirection: 'row', marginTop: 20 }}>
             {
               /* <Button rounded warning 
                   style={{marginRight: 10}}
@@ -50,7 +53,7 @@ class SopDetailScreen extends React.Component {
                 </Button> */
             }
 
-            <DownloadComponent item={item} database={database} />
+            <DownloadComponent item={item} database={database} isTransparent={false} />
           </View>
         </View>
       </Content>
