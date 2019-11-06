@@ -43,18 +43,6 @@ class SopDetailScreen extends React.Component {
           <Text style={{ fontSize: 18, lineHeight: 30, textAlign: 'center' }}>
             {item.description.replace(regexHtml, '')}
           </Text>
-
-          <View style={{ flexDirection: 'row', marginTop: 20 }}>
-            {
-              /* <Button rounded warning 
-                  style={{marginRight: 10}}
-                  onPress={() => Alert.alert('favourite')}>
-                  <Icon name="star" />
-                </Button> */
-            }
-
-            <DownloadComponent item={item} database={database} isTransparent={false} />
-          </View>
         </View>
       </Content>
     </Container>
