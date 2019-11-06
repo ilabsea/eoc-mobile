@@ -9,7 +9,12 @@ import { regexHtml } from '../config/utils'
 
 
 const Textile = ({ parent_id, text }) => (
-  (parent_id===undefined && text!='') ? <Text numberOfLines={3} ellipsizeMode={'tail'}>{text.replace(regexHtml, '')}</Text> : null 
+  (parent_id===undefined && text!='') ? 
+    <Text numberOfLines={3} 
+          ellipsizeMode={'tail'}>
+      {text.replace(regexHtml, '')}
+    </Text> 
+    : null 
 )
 
 class ListComponent extends React.Component {

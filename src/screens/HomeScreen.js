@@ -24,7 +24,7 @@ class HomeScreen extends Component {
     this.state = {
       isFetching: false,
       page: 1,
-      q: 'cat 1',
+      q: 'flu',
       data: [],
     }
 
