@@ -1,6 +1,6 @@
 import React from 'react'
 import styleUtils from '../config/styles'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native'
 import { Button, Left, H3,
   Right, Body, Icon, ListItem } from 'native-base'
 import TimeAgoComponent from '../components/TimeAgoComponent'
@@ -26,7 +26,7 @@ class ListComponent extends React.Component {
     let { item, typeIcon, color } = this.props
     let { parent_id, name, tags, description, created_at } = item
 
-    return <TouchableOpacity onPress={() => this.showDetail()}>
+    return <TouchableWithoutFeedback onPress={() => this.showDetail()}>
       <CardView
             cardElevation={5}
             cardMaxElevation={2}
@@ -50,7 +50,7 @@ class ListComponent extends React.Component {
       </View>
 
   </CardView>
-  </TouchableOpacity>
+  </TouchableWithoutFeedback>
   }
 }
 

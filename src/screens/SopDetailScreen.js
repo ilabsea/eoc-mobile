@@ -44,7 +44,7 @@ class SopDetailScreen extends React.Component {
             {item.description.replace(regexHtml, '')}
           </Text>
 
-          <View style={{ flexDirection: 'row' }}>
+          <View style={{ flexDirection: 'row', marginTop: 20 }}>
             {
               /* <Button rounded warning 
                   style={{marginRight: 10}}
