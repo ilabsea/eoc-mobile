@@ -44,6 +44,7 @@ class DownloadComponent extends React.Component {
         .done(() => {
           this.saveToLocalDB()
           this.setState({ isDisabled: false, localUrl, status: '__DONE__' })
+          service.toastManager.show(`Download completed!`)
         })
         .error( (error) => {
           this.setState({ status: '__ERROR__', error }) 

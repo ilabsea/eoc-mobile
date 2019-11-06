@@ -31,7 +31,7 @@ class ListComponent extends React.Component {
     let { item, typeIcon, color } = this.props
     let { parent_id, name, tags, description, created_at } = item
 
-    return <TouchableWithoutFeedback onPress={() => this.showDetail()}>
+    return <TouchableWithoutFeedback onPress={() => item.description && this.showDetail()}>
       <CardView
             cardElevation={5}
             cardMaxElevation={2}
@@ -44,9 +44,14 @@ class ListComponent extends React.Component {
           </Button>
         </View>
 
-        <View style={{ flex: 3 }}>
+        <View style={{ flex: 3, justifyContent: 'center' }}>
           <H3 style={styles.header}>{name}</H3>
-          <Textile parent_id={parent_id} text={description} />
+          {
+            description ?
+            <Textile parent_id={parent_id} text={description} />
+            : null
+          }
+          
         </View>
 
         <View style={styles.center}>
