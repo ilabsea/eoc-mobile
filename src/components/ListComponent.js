@@ -6,8 +6,9 @@ import { Button, Left, H3,
 import TimeAgoComponent from '../components/TimeAgoComponent'
 import CardView from 'react-native-cardview'
 
+const regex = /(<([^>]+)>)/ig
 const Textile = ({ parent_id, text }) => (
-  (parent_id===undefined && text!='') ? <Text>{text}</Text> : null 
+  (parent_id===undefined && text!='') ? <Text numberOfLines={3} ellipsizeMode={'tail'}>{text.replace(regex, '')}</Text> : null 
 )
 
 class ListComponent extends React.Component {
