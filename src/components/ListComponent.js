@@ -5,10 +5,11 @@ import { Button, Left, H3,
   Right, Body, Icon, ListItem } from 'native-base'
 import TimeAgoComponent from '../components/TimeAgoComponent'
 import CardView from 'react-native-cardview'
+import { regexHtml } from '../config/utils' 
 
-const regex = /(<([^>]+)>)/ig
+
 const Textile = ({ parent_id, text }) => (
-  (parent_id===undefined && text!='') ? <Text numberOfLines={3} ellipsizeMode={'tail'}>{text.replace(regex, '')}</Text> : null 
+  (parent_id===undefined && text!='') ? <Text numberOfLines={3} ellipsizeMode={'tail'}>{text.replace(regexHtml, '')}</Text> : null 
 )
 
 class ListComponent extends React.Component {

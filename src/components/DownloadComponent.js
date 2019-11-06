@@ -11,6 +11,7 @@ class DownloadComponent extends React.Component {
     super(props)
 
     this.state = {
+      isTransparent: props.isTransparent,
       isDisabled: false,
       status: '__IDLE__',
       progressedBytes: 0.0,

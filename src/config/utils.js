@@ -5,6 +5,8 @@ import { Text } from 'native-base'
 import * as config from '../config/connectionBase'
 import RNFS from 'react-native-fs'
 
+export const regexHtml = /(<([^>]+)>)/ig
+
 export const fileInfo = (source) => {
   let remotePath = source.file.url
   let fileName = basename(remotePath)

@@ -13,6 +13,7 @@ const DownloadControl = (props) => {
       return <FileViewButton localUrl={props.localUrl}/>
     default:
       return <DownloadButton  handleDownload={props.handleDownload} 
+                              isTransparent={props.isTransparent}
                               isDisabled={props.isDisabled} />
   }
 }
