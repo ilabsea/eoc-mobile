@@ -100,6 +100,10 @@ class HomeScreen extends Component {
                 action={action} />
   }
 
+  openFilter = () => {
+    this.props.navigation.navigate('PopupModal')
+  }
+
   render() {
     return (
       <Container>
@@ -114,6 +118,9 @@ class HomeScreen extends Component {
                 onChangeText={(q) => this.setState({q}) } />
             <Icon name="ios-search" 
                   onPress={ this.handleSearch } />
+            <Icon type="MaterialIcons" 
+                  name="filter-list" 
+                  onPress={() => this.openFilter()} />
           </Item>
           <Button transparent>
             <Text>Search</Text>

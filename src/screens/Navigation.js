@@ -12,7 +12,7 @@ const Notification = () => {
 import HomeScreen from './HomeScreen'
 import CategoryScreen from './CategoryScreen'
 import SopDetailScreen from './SopDetailScreen'
-import DownloadDirScreen from './DownloadDirScreen'
+import PopupModalScreen from './PopupModalScreen'
 
 const stack = (props) => createStackNavigator({
   Home: {
@@ -42,11 +42,11 @@ const stack = (props) => createStackNavigator({
     },
     navigationOptions: { title: "Sop detail" }
   },
-  DownloadDir: {
+  PopupModal: {
     screen: ({ navigation }) => {
       const { database } = props;
       return <Root database={database} navigation={navigation}>
-                <DownloadDirScreen database={database} navigation={navigation}/>
+                <PopupModalScreen database={database} navigation={navigation}/>
               </Root>
     },
     navigationOptions: { title: "Download directory" }
