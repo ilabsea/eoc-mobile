@@ -24,6 +24,10 @@ class HomeScreen extends Component {
     service.firebaseManager.setCurrentScreen("HomeScreen", "HomeScreen")
   }
 
+  openFilter = () => {
+    this.props.navigation.navigate('PopupModal')
+  }
+
   render() {
     return <RenderComponent q="" shouldLoad={true} />
   } 
