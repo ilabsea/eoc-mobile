@@ -7,6 +7,7 @@ import com.facebook.react.PackageList;
 import com.facebook.hermes.reactexecutor.HermesExecutorFactory;
 import com.facebook.react.bridge.JavaScriptExecutorFactory;
 import com.facebook.react.ReactApplication;
+import com.RNFetchBlob.RNFetchBlobPackage;
 import com.kishanjvaghela.cardview.RNCardViewPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.apsl.versionnumber.RNVersionNumberPackage;
