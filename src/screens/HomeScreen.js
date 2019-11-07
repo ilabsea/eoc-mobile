@@ -101,7 +101,8 @@ class HomeScreen extends Component {
   }
 
   openFilter = () => {
-    this.props.navigation.navigate('PopupModal')
+    let { navigation } = this.props
+    navigation.navigate('PopupModal', { returnRoute: navigation.state })
   }
 
   render() {
