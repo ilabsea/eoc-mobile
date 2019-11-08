@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { YellowBox, FlatList, View } from 'react-native'
+import { YellowBox, FlatList, View, TextInput } from 'react-native'
 
 import axios from 'axios'
 import * as config from '../config/connectionBase'
-import { Container, Header, Item, Input, 
-          Button, List, Text, Icon } from 'native-base'
+import { Container, Header, Item, Input, Left, H1, Body, H3,
+          Button, List, Text, Icon, Right } from 'native-base'
 
 import { service } from '../services'
 import { iconMapping } from '../config/utils'
@@ -22,15 +22,17 @@ class HomeScreen extends Component {
     super(props)
 
     this.state = {
-      isFetching: false,
+      isSearchClick: false,
+      isFetching: true,
       page: 1,
+      q: '',
       data: [],
     }
 
+    this._textInput = React.createRef()
     this.loadMore = this.loadMore.bind(this)
     this.renderRow = this.renderRow.bind(this)
     this.handleFetch = this.handleFetch.bind(this)
-    this.handleSearch = this.handleSearch.bind(this)
   }
 
   handleFetch = async (q) => {
@@ -53,23 +55,19 @@ class HomeScreen extends Component {
       }
       
       this.setState({isFetching: false})
-    } catch(e) {
-      service.toastManager.show(e)
+    } catch(error) {
+      service.toastManager.show(error)
     }
   }
 
   componentDidMount() {
-    service.firebaseManager.setCurrentScreen('HomeScreen', 'HomeScreen')
     this.handleFetch('')
+    service.firebaseManager.setCurrentScreen('HomeScreen', 'HomeScreen')
   }
 
   loadMore = () => {
     this.setState({isFetching: true})
-    this.handleFetch('')
-  }
-
-  handleSearch = () => {
-    this.props.navigation.navigate('Search')
+    this.handleFetch(this.state.q)
   }
 
   renderRow = (item) => {
@@ -90,35 +88,73 @@ class HomeScreen extends Component {
                 action={action} />
   }
 
+  handleSearch = () => {
+    this.setState({ isSearchClick: true })
+  }
+
+  back = () => {
+    this.setState({q: '', isSearchClick: false, page: 1, data: []}, () => {
+      this.handleFetch('')
+    })
+  }
+
+  submit() {
+    let { q } = this.state
+
+    this.setState({page: 1, data: []}, () => {
+      this.handleFetch(q)
+    })
+  }
+
   render() {
     return (
       <Container>
+         <Header>
+          <Left style={{flex: 1}}>
+            <Button 
+              transparent
+              onPress={() => this.back() }>
+              {
+                this.state.isSearchClick ?
+                <Icon name="md-arrow-round-back" /> : null
+              }
+            </Button>
+          </Left>
 
-        <Header searchBar rounded>
-          <Item>
-            {/* <Icon name="ios-menu" onPress={() => this.props.navigation.openDrawer()} /> */}
-            <Input 
-                onSubmitEditing={ this.handleSearch }
-                ref={this.searchInput} 
-                placeholder="Search"
-                value={this.state.q}
-                onChangeText={(q) => this.textChange(q) } />
-            <Icon name="ios-search" 
-                  onPress={ this.handleSearch } />
-            {/* <Icon type="MaterialIcons" 
-                  name="filter-list" 
-                  onPress={() => this.openFilter()} /> */}
-          </Item>
-          <Button transparent>
-            <Text>Search</Text>
-          </Button>
+          <Body style={{flex: 6}}>
+            {
+              this.state.isSearchClick ?
+              <TextInput 
+                  onSubmitEditing={ () => this.submit() }
+                  style={{ color: 'white', 
+                    fontSize: 21, 
+                    flex: 1,
+                    margin:0, 
+                    padding:0, 
+                    width: '100%', }}
+                  ref={this._textInput}
+                  placeholder="Search"
+                  placeholderTextColor= "white"
+                  value={this.state.q}
+                  onChangeText={(q) => this.setState({q}) } />
+              :
+              <Text style={{ color: 'white',fontSize: 21 }}>Guidelines</Text>
+            }
+          </Body>
+
+          <Right style={{flex: 1}}>
+            {
+              !this.state.isSearchClick ?
+              <Button 
+                transparent 
+                onPress={() => this.handleSearch() }>
+                <Icon name="ios-search" />
+              </Button> : null
+            }
+            
+          </Right>
         </Header>
 
-        {/* <Header>
-          <Button transparent iconLeft onPress={ this.handleSearch }>
-            <Icon name="ios-search" />
-          </Button>
-        </Header> */}
         <EmptyList {...this.state} />
         {
           this.state.data.length > 0 ?
