@@ -28,7 +28,7 @@ class DownloadComponent extends React.Component {
       let { item } = this.props
       let { remoteUrl, localUrl, fileName, mime } = fileInfo(item)
       this.setState({ isDisabled: true, localUrl })
-      service.firebaseManager.logEvent('evtDownload', { fileName })
+      service.firebaseManager.logEvent('EVENT_DOWNLOAD', { fileName })
 
       service.downloadManager.inTrayDownload(remoteUrl, fileName, mime)
     }

@@ -6,7 +6,7 @@ class NavigateComponent extends React.Component {
   navigate() {
     let { item, navigation, database } = this.props
     navigation.push('Category', { sopGuide: item, database }) 
-    service.firebaseManager.logEvent('evtNestedNavigation', { id: item.id })
+    service.firebaseManager.logEvent('EVENT_NAVIGATE', { id: item.id })
   }
 
   render() {

@@ -78,7 +78,7 @@ class HomeScreen extends Component {
         this.handleFetch(q)
       })
 
-      service.firebaseManager.logEvent('evtSearch', { q })
+      service.firebaseManager.logEvent('EVENT_SEARCH', { q })
     }
   }
 
