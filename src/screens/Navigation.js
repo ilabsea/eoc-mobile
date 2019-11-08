@@ -14,6 +14,7 @@ import { createStore } from 'redux'
 // Screens
 import Root from '../components/Root' 
 import HomeScreen from './HomeScreen'
+import SearchScreen from './SearchScreen'
 import CategoryScreen from './CategoryScreen'
 import SopDetailScreen from './SopDetailScreen'
 import PopupModalScreen from './PopupModalScreen'
@@ -23,6 +24,10 @@ const StackNavigator = createStackNavigator({
   Home: {
     screen: HomeScreen,
     navigationOptions: { title: "Guidelines" }
+  },
+  Search: {
+    screen: SearchScreen,
+    navigationOptions: { title: "Search" }
   },
   Category: {
     screen: CategoryScreen,

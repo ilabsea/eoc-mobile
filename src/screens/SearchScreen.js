@@ -17,16 +17,18 @@ import DownloadComponent from '../components/DownloadComponent';
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle'])
 
-class HomeScreen extends Component {
+class SearchScreen extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
       isFetching: false,
       page: 1,
+      q: 'flu',
       data: [],
     }
 
+    this.searchInput = React.createRef()
     this.loadMore = this.loadMore.bind(this)
     this.renderRow = this.renderRow.bind(this)
     this.handleFetch = this.handleFetch.bind(this)
@@ -59,17 +61,25 @@ class HomeScreen extends Component {
   }
 
   componentDidMount() {
-    service.firebaseManager.setCurrentScreen('HomeScreen', 'HomeScreen')
-    this.handleFetch('')
+    service.firebaseManager.setCurrentScreen('SearchScreen', 'SearchScreen')
+    this.searchInput.current._root.focus()
   }
 
   loadMore = () => {
     this.setState({isFetching: true})
-    this.handleFetch('')
+    this.handleFetch(this.state.q)
   }
 
   handleSearch = () => {
-    this.props.navigation.navigate('Search')
+    const { q } = this.state
+
+    if( q != '' ) {
+      this.setState({ page: 1, data: [] }, () => {
+        this.handleFetch(q)
+      })
+
+      service.firebaseManager.logEvent('EVENT_SEARCH', { q })
+    }
   }
 
   renderRow = (item) => {
@@ -90,10 +100,19 @@ class HomeScreen extends Component {
                 action={action} />
   }
 
+  openFilter = () => {
+    let { navigation } = this.props
+    navigation.navigate('PopupModal', { returnRoute: navigation.state })
+  }
+
+  textChange = (q) => {
+    if ( q== '' ) this.props.navigation.goBack()
+    this.setState({q})
+  }
+
   render() {
     return (
       <Container>
-
         <Header searchBar rounded>
           <Item>
             {/* <Icon name="ios-menu" onPress={() => this.props.navigation.openDrawer()} /> */}
@@ -105,20 +124,14 @@ class HomeScreen extends Component {
                 onChangeText={(q) => this.textChange(q) } />
             <Icon name="ios-search" 
                   onPress={ this.handleSearch } />
-            {/* <Icon type="MaterialIcons" 
+            <Icon type="MaterialIcons" 
                   name="filter-list" 
-                  onPress={() => this.openFilter()} /> */}
+                  onPress={() => this.openFilter()} />
           </Item>
           <Button transparent>
             <Text>Search</Text>
           </Button>
         </Header>
-
-        {/* <Header>
-          <Button transparent iconLeft onPress={ this.handleSearch }>
-            <Icon name="ios-search" />
-          </Button>
-        </Header> */}
         <EmptyList {...this.state} />
         {
           this.state.data.length > 0 ?
@@ -137,4 +150,4 @@ class HomeScreen extends Component {
   } 
 };
 
-export default HomeScreen;
+export default SearchScreen;
