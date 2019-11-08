@@ -6,6 +6,10 @@ import * as config from '../config/connectionBase'
 import RNFS from 'react-native-fs'
 
 export const regexHtml = /(<([^>]+)>)/ig
+const MIMES = {
+  pdf: 'application/pdf',
+  zip: 'application/zip'
+}
 
 export const fileInfo = (source) => {
   let remotePath = source.file.url
@@ -19,6 +23,7 @@ export const fileInfo = (source) => {
     fileName: fileName,
     fileDigest: digest,
     localUrl: `${downloadDir}/${fileName}`,
+    mime: MIMES[extname(fileName)]
   }
 }
 
@@ -41,9 +46,10 @@ const iconMapping = (docType) => {
   return doc[docType]
 }
 
-const basename = (path) => {
-  return path.split('/').reverse()[0]
-}
+const array_reverse = (str, splitter) => str.split(splitter).reverse()
+
+const basename = path => array_reverse(path, '/')[0]
+const extname = name => array_reverse(name, '.')[0]
 
 const realname = (path) => {
   const reg = /-(.*)\.{0,3}$/.exec(path)
