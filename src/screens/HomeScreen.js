@@ -28,6 +28,24 @@ class HomeScreen extends Component {
     this.props.navigation.navigate('PopupModal')
   }
 
+  handleSearch = () => {
+    this.setState({ isSearchClick: true })
+  }
+
+  back = () => {
+    this.setState({q: '', isSearchClick: false, page: 1, data: []}, () => {
+      this.handleFetch('')
+    })
+  }
+
+  submit() {
+    let { q } = this.state
+
+    this.setState({page: 1, data: []}, () => {
+      this.handleFetch(q)
+    })
+  }
+
   render() {
     return <RenderComponent q="" shouldLoad={true} />
   } 
