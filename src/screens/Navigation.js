@@ -1,19 +1,18 @@
 import React from 'react'
 
+// Navigation
 import { createAppContainer } from "react-navigation"
 import { createStackNavigator } from 'react-navigation-stack'
 import { createDrawerNavigator } from 'react-navigation-drawer'
-import { H1 } from 'native-base'
-import Root from '../components/Root' 
 
-import { Database } from '@nozbe/watermelondb'
-import SQLiteAdapter from "@nozbe/watermelondb/adapters/sqlite"
-import { dbName, schema } from "../../src/models/schema"
-import { modelClasses } from "../../src/models/index"
+import database from '../models/database'
 
+// State
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
+// Screens
+import Root from '../components/Root' 
 import HomeScreen from './HomeScreen'
 import CategoryScreen from './CategoryScreen'
 import SopDetailScreen from './SopDetailScreen'
@@ -44,16 +43,6 @@ const StackNavigator = createStackNavigator({
   navigationOptions: {
     title: "Guidelines"
   }
-})
-
-
-
-const adapter = new SQLiteAdapter({
-  dbName, schema
-})
-
-const database = new Database({
-  adapter, modelClasses, actionsEnabled: true
 })
 
 let Navigate = createAppContainer(

@@ -57,7 +57,6 @@ class DownloadComponent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   let { database } = state
   return { database }
 }
