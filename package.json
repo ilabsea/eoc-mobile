@@ -36,9 +36,14 @@
     "react-navigation-drawer": "^2.2.1",
     "react-navigation-stack": "^1.7.3",
     "react-navigation-tabs": "^2.5.5",
+<<<<<<< HEAD
     "react-redux": "^7.1.1",
     "redux": "^4.0.4",
     "rn-fetch-blob": "^0.11.2"
+=======
+    "react-redux": "^7.1.3",
+    "redux": "^4.0.4"
+>>>>>>> integrate redux
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",

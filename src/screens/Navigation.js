@@ -1,59 +1,44 @@
 import React from 'react'
+
 import { createAppContainer } from "react-navigation"
 import { createStackNavigator } from 'react-navigation-stack'
 import { createDrawerNavigator } from 'react-navigation-drawer'
 import { H1 } from 'native-base'
 import Root from '../components/Root' 
 
-const Notification = () => {
-  return <H1>Notification</H1>
-}
+import { Database } from '@nozbe/watermelondb'
+import SQLiteAdapter from "@nozbe/watermelondb/adapters/sqlite"
+import { dbName, schema } from "../../src/models/schema"
+import { modelClasses } from "../../src/models/index"
+
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
 
 import HomeScreen from './HomeScreen'
 import CategoryScreen from './CategoryScreen'
 import SopDetailScreen from './SopDetailScreen'
 import PopupModalScreen from './PopupModalScreen'
+import Notification from './NotificationScreen'
 
-const stack = (props) => createStackNavigator({
+const StackNavigator = createStackNavigator({
   Home: {
-    screen: ({ navigation }) => {
-      const { database } = props;
-      return <Root database={database} navigation={navigation}>
-                <HomeScreen database={database} navigation={navigation} />
-              </Root>
-    },
+    screen: HomeScreen,
     navigationOptions: { title: "Guidelines" }
   },
   Category: {
-    screen: ({ navigation }) => {
-      const { database } = props;
-      return <Root database={database} navigation={navigation}>
-                <CategoryScreen database={database} navigation={navigation}/>
-              </Root>
-    },
+    screen: CategoryScreen,
     navigationOptions: { title: "Category" }
   },
   SopDetail: {
-    screen: ({ navigation }) => {
-      const { database } = props;
-      return <Root database={database} navigation={navigation}>
-                <SopDetailScreen database={database} navigation={navigation}/>
-              </Root>
-    },
+    screen: SopDetailScreen,
     navigationOptions: { title: "Sop detail" }
   },
   PopupModal: {
-    screen: ({ navigation }) => {
-      const { database } = props;
-      return <Root database={database} navigation={navigation}>
-                <PopupModalScreen database={database} navigation={navigation}/>
-              </Root>
-    },
-    navigationOptions: { title: "Download directory" }
+    screen: PopupModalScreen,
+    navigationOptions: { title: "Filter" }
   }
 }, {
   initialRouteName: 'Home',
-  initialRouteParams: props,
   mode: 'modal',
   headerMode: 'none',
   navigationOptions: {
@@ -61,21 +46,36 @@ const stack = (props) => createStackNavigator({
   }
 })
 
-export const createNavigation = props => 
-  createAppContainer(
-    createDrawerNavigator({
-      Root: stack(props),
-      Notification: {
-        screen: ({ navigation }) => {
-          const { database } = props;
-          return <Root database={database} navigation={navigation}>
-                    <Notification />
-                  </Root>
-        },
-        navigationOptions: { title: "Notifications" }
-      }
-    }, {
-      initialRouteName: "Root",
-      initialRouteParams: props
-    })
-  )
+
+
+const adapter = new SQLiteAdapter({
+  dbName, schema
+})
+
+const database = new Database({
+  adapter, modelClasses, actionsEnabled: true
+})
+
+let Navigate = createAppContainer(
+      createDrawerNavigator({
+        Root: StackNavigator,
+        Notification: {
+          screen: Notification,
+          navigationOptions: { title: "Notifications" }
+        }
+      }, {
+        initialRouteName: "Root",
+      })
+    )
+
+const initialState = { database }
+const reducer = (state = initialState, action) => state
+const store = createStore( reducer )
+
+export const createNavigation = () => {
+  return <Provider store={store}>
+    <Root>
+      <Navigate />
+    </Root>
+  </Provider>
+}

@@ -1,6 +1,7 @@
 import React from 'react'
 import { fileInfo } from '../config/utils'
 import { service } from '../services'
+import { connect } from 'react-redux'
 import DownloadControl from './DownloadController'
 
 class DownloadComponent extends React.Component {
@@ -55,4 +56,10 @@ class DownloadComponent extends React.Component {
   }
 }
 
-export default DownloadComponent
+const mapStateToProps = (state) => {
+  console.log(state)
+  let { database } = state
+  return { database }
+}
+
+export default connect(mapStateToProps)(DownloadComponent)
