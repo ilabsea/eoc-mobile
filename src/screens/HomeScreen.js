@@ -1,42 +1,32 @@
-import React, { Component } from 'react';
-import { YellowBox, FlatList, View } from 'react-native'
+import React, { Component } from "react";
+import { YellowBox, FlatList, View, StyleSheet } from "react-native"
 
-import axios from 'axios'
-import * as config from '../config/connectionBase'
-import { Container, H3, Button, Icon } from 'native-base'
+import axios from "axios"
+import * as config from "../config/connectionBase"
+import { Container, H3, Button, Icon } from "native-base"
 
-import { service } from '../services'
-import { iconMapping } from '../config/utils'
+import { service } from "../services"
+import { iconMapping } from "../config/utils"
           
-import EmptyList  from './EmptyList'
-import ListComponent from '../components/ListComponent';
-import NavigateComponent from '../components/NavigateComponent'
-import DownloadComponent from '../components/DownloadComponent';
+import EmptyList  from "./EmptyList"
+import ListComponent from "../components/ListComponent";
+import NavigateComponent from "../components/NavigateComponent"
+import DownloadComponent from "../components/DownloadComponent";
 
 // TOREMV
-YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle'])
-
-const IconSearch = ({ navigation }) => {
-  return <Button 
-    transparent 
-    onPress={() => navigation.navigate('Search') }>
-    <Icon name="ios-search" />
-  </Button>
-}
-
-const HeaderSearch = ({ navigation }) => (
-  <View style={{ flex: 1, 
-                flexDirection: 'row', 
-                justifyContent: 'space-between', alignItems: 'center' }}>
-    <H3>Guidelines</H3>
-    <IconSearch navigation={navigation} />
-  </View>
-)
+YellowBox.ignoreWarnings(["Remote debugger", "Warning", "Require cycle"])
 
 class HomeScreen extends Component {
-  static navigationOptions = ({navigation, screenProps}) => {
+  static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: () => <HeaderSearch navigation={navigation} />
+      headerTitle: () => <View style={styles.headerTitle}>
+                            <H3>Guidelines</H3>
+                            <Button 
+                                transparent 
+                                onPress={() => navigation.navigate("Search") }>
+                                <Icon name="ios-search" />
+                              </Button>
+                          </View>
     }
   }
 
@@ -47,7 +37,7 @@ class HomeScreen extends Component {
       isSearchClick: false,
       isFetching: true,
       page: 1,
-      q: '',
+      q: "",
       data: [],
     }
 
@@ -83,8 +73,8 @@ class HomeScreen extends Component {
   }
 
   componentDidMount() {
-    this.handleFetch('')
-    service.firebaseManager.setCurrentScreen('HomeScreen', 'HomeScreen')
+    this.handleFetch("")
+    service.firebaseManager.setCurrentScreen("HomeScreen", "HomeScreen")
   }
 
   loadMore = () => {
@@ -94,19 +84,14 @@ class HomeScreen extends Component {
 
   renderRow = (item) => {
     let { typeIcon, actionIcon, action, color } = iconMapping(item._index)
-    let { database, navigation } = this.props
 
-    const Action = (action == 'download') ? DownloadComponent : NavigateComponent
+    const Action = (action == "download") ? DownloadComponent : NavigateComponent
     return <ListComponent 
-                database={this.props.database}
                 item={item._source} 
                 typeIcon={typeIcon}
                 actionIcon={actionIcon}
-                navigation={this.props.navigation}
                 color={color}
-                actionComponent={<Action item={item._source} 
-                                          navigation={navigation} 
-                                          database={database} />}
+                actionComponent={<Action item={item._source} />}
                 action={action} />
   }
 
@@ -115,8 +100,8 @@ class HomeScreen extends Component {
   }
 
   back = () => {
-    this.setState({q: '', isSearchClick: false, page: 1, data: []}, () => {
-      this.handleFetch('')
+    this.setState({q: "", isSearchClick: false, page: 1, data: []}, () => {
+      this.handleFetch("")
     })
   }
 
@@ -148,5 +133,14 @@ class HomeScreen extends Component {
     );
   } 
 };
+
+const styles = StyleSheet.create({
+  headerTitle: { 
+    flex: 1, 
+    flexDirection: "row", 
+    justifyContent: "space-between", 
+    alignItems: "center" 
+  }
+})
 
 export default HomeScreen;

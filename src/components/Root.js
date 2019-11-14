@@ -83,8 +83,7 @@ class Root extends React.Component {
     * called by #notify_with_key
     */
     this.messageListener = firebase.messaging().onMessage((message) => {
-      let { database, navigation } = this.props
-      let data = { payload: message._data, navigation, database }
+      let data = { payload: message._data }
       service.toastManager.show('New notification!', data)
     })
 

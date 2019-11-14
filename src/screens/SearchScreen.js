@@ -102,19 +102,14 @@ class SearchScreen extends Component {
 
   renderRow = (item) => {
     let { typeIcon, actionIcon, action, color } = iconMapping(item._index)
-    let { database, navigation } = this.props
 
     const Action = (action == 'download') ? DownloadComponent : NavigateComponent
     return <ListComponent 
-                database={this.props.database}
                 item={item._source} 
                 typeIcon={typeIcon}
                 actionIcon={actionIcon}
-                navigation={this.props.navigation}
                 color={color}
-                actionComponent={<Action item={item._source} 
-                                          navigation={navigation} 
-                                          database={database} />}
+                actionComponent={<Action item={item._source} />}
                 action={action} />
   }
 
@@ -124,7 +119,7 @@ class SearchScreen extends Component {
   }
 
   textChange = (q) => {
-    if ( q== '' ) this.props.navigation.goBack()
+    if ( q == '' ) this.props.navigation.goBack()
     this.setState({q})
   }
 

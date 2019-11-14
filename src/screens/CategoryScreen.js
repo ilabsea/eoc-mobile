@@ -45,9 +45,7 @@ class CategoryScreen extends React.Component {
   }
 
   render() {
-    let { navigation } = this.props
     let { isFetching, sops, children } = this.state
-    const database = navigation.getParam('database')
 
     return (
       <Container>
@@ -60,8 +58,6 @@ class CategoryScreen extends React.Component {
               typeIcon="picture-as-pdf" 
               color='#b1090c'
               data={sops} 
-              database={database}
-              navigation={navigation}
               Component={DownloadComponent}/>
 
             <View style={styles.separator}></View>
@@ -71,8 +67,6 @@ class CategoryScreen extends React.Component {
               typeIcon="folder" 
               color='#f39c24'
               data={children} 
-              database={database}
-              navigation={navigation}
               Component={NavigateComponent} />
             
             <View style={{ paddingBottom: 20}}></View>

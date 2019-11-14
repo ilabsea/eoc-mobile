@@ -17,22 +17,19 @@ class SopDetailScreen extends React.Component {
   }
 
   render() {
-    let { navigation } = this.props
-    let item = navigation.getParam('item')
-    let database = navigation.getParam('database')
+    let item = this.props.navigation.getParam('item')
 
     return <Container>
-      <Content contentContainerStyle={{ justifyContent: 'center', flex: 1 }}>
-        <View style={{ justifyContent: 'center', alignItems: 'center', padding: 10 }}>
-
-          <H1 style={{ marginBottom: 15 }}>{item.name}</H1>
-          <Text>{item.tags}</Text>
-          <Text style={{ fontSize: 18, lineHeight: 30, textAlign: 'center' }}>
-            {item.description.replace(regexHtml, '')}
-          </Text>
-        </View>
-      </Content>
-    </Container>
+            <Content contentContainerStyle={{ justifyContent: 'center', flex: 1 }}>
+              <View style={{ justifyContent: 'center', alignItems: 'center', padding: 10 }}>
+                <H1 style={{ marginBottom: 15 }}>{item.name}</H1>
+                <Text>{item.tags}</Text>
+                <Text style={{ fontSize: 18, lineHeight: 30, textAlign: 'center' }}>
+                  {item.description.replace(regexHtml, '')}
+                </Text>
+              </View>
+            </Content>
+          </Container>
   }
 }
 

@@ -1,11 +1,12 @@
 import React from 'react'
 import { Button, Icon } from 'native-base'
 import { service } from '../services'
+import { withNavigation } from 'react-navigation'
 
 class NavigateComponent extends React.Component {
   navigate() {
-    let { item, navigation, database } = this.props
-    navigation.push('Category', { sopGuide: item, database }) 
+    let { item, navigation } = this.props
+    navigation.push('Category', { sopGuide: item }) 
     service.firebaseManager.logEvent('EVENT_NAVIGATE', { id: item.id })
   }
 
@@ -17,4 +18,4 @@ class NavigateComponent extends React.Component {
   }
 }
 
-export default NavigateComponent
+export default withNavigation(NavigateComponent)

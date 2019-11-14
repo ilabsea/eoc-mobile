@@ -1,11 +1,12 @@
-import React from 'react'
-import styleUtils from '../config/styles'
+import React from "react"
+import styleUtils from "../config/styles"
 import { View, StyleSheet, 
-          TouchableWithoutFeedback } from 'react-native'
-import { Button, H3, Icon } from 'native-base'
-import CardView from 'react-native-cardview'
+          TouchableWithoutFeedback } from "react-native"
+import { Button, H3, Icon } from "native-base"
+import CardView from "react-native-cardview"
+import { withNavigation } from 'react-navigation'
 
-import Textile from '../components/TextileComponent'
+import Textile from "../components/TextileComponent"
 
 class ListComponent extends React.Component {
   constructor(props) {
@@ -13,8 +14,8 @@ class ListComponent extends React.Component {
   }
 
   showDetail() {
-    const { item, database, navigation } = this.props
-    navigation.navigate('SopDetail', { item, database })
+    const { item, navigation } = this.props
+    navigation.navigate("SopDetail", { item })
   }
 
   render() {
@@ -59,16 +60,16 @@ class ListComponent extends React.Component {
 const styles = StyleSheet.create({
   wrapper: { 
     flex: 1, 
-    flexDirection: 'row' 
+    flexDirection: "row" 
   },
   center: { 
     flex: 1, 
-    justifyContent: 'center', 
-    alignItems: 'center' 
+    justifyContent: "center", 
+    alignItems: "center" 
   },
   header: {
     fontSize: 17,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: 5,
     marginBottom: 5
   },
@@ -80,11 +81,11 @@ const styles = StyleSheet.create({
   },
   descriptionWrapper: { 
     flex: 3, 
-    justifyContent: 'center' 
+    justifyContent: "center" 
   },
   icon: {
     fontSize: 42
   }
 })
 
-export default ListComponent
+export default withNavigation(ListComponent)
