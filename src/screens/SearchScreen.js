@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { YellowBox, FlatList, View, TextInput, StyleSheet } from 'react-native'
+import { YellowBox, FlatList } from 'react-native'
 
 import axios from 'axios'
 import * as config from '../config/connectionBase'
-import { Container, Button, Icon } from 'native-base'
+import { Container } from 'native-base'
 
 import { service } from '../services'
 import { iconMapping } from '../config/utils'
@@ -12,27 +12,10 @@ import EmptyList  from './EmptyList'
 import ListComponent from '../components/ListComponent';
 import NavigateComponent from '../components/NavigateComponent'
 import DownloadComponent from '../components/DownloadComponent';
+import HeaderComponent from '../components/HeaderComponent'
 
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle'])
-
-const HeaderSearch = ({ handleSearch, handleQ }) => {
-  return <View style={styles.headerWrapper}>
-      <TextInput 
-        onSubmitEditing={ handleSearch }
-        style={styles.searchInput}
-        placeholder="Search"
-        autoFocus={true}
-        placeholderTextColor= "white"
-        onChangeText={(keyword) => handleQ(keyword) } />
-
-    <Button 
-      transparent 
-      onPress={ handleSearch }>
-      <Icon name="ios-search" />
-    </Button>
-  </View>
-}
 
 class SearchScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -62,7 +45,7 @@ class SearchScreen extends Component {
 
   setNavigationParams = () => {
     this.props.navigation.setParams({
-      headerTitle: <HeaderSearch 
+      headerTitle: <HeaderComponent 
                       handleSearch={ this.handleSearch }
                       handleQ={(q) => { 
                         this.setState({ q })
@@ -165,21 +148,5 @@ class SearchScreen extends Component {
     );
   } 
 };
-
-const styles = StyleSheet.create({
-  headerWrapper: { 
-    flex: 1, 
-    flexDirection: 'row', 
-    justifyContent: 'space-between', 
-    alignItems: 'center' 
-  },
-  searchInput: { 
-    fontSize: 21, 
-    flex: 1,
-    margin:0, 
-    padding:0, 
-    width: '100%'
-  }
-})
 
 export default SearchScreen;
