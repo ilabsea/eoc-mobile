@@ -1,10 +1,8 @@
 import React from 'react'
 import { ScrollView, View, StyleSheet } from 'react-native'
-import { Container, Button, Header, Left,
-          Right, Body, Title, Icon } from 'native-base'
+import { Container } from 'native-base'
           
 import { service } from '../services';
-import { withNavigation } from 'react-navigation'
 
 import DownloadComponent from '../components/DownloadComponent'
 import NavigateComponent from '../components/NavigateComponent'
@@ -49,22 +47,10 @@ class CategoryScreen extends React.Component {
   render() {
     let { navigation } = this.props
     let { isFetching, sops, children } = this.state
-    const sopGuide = navigation.getParam('sopGuide')
     const database = navigation.getParam('database')
+
     return (
       <Container>
-        <Header>
-          <Left>
-            <Button transparent onPress={ () => navigation.goBack() }>
-              <Icon name="md-arrow-back" />
-            </Button>
-          </Left>
-          <Body>
-            <Title>{ sopGuide.name }</Title>
-          </Body>
-          <Right />
-        </Header>
-
         {
           (sops.length > 0 || children.length > 0)
           ?
@@ -87,7 +73,7 @@ class CategoryScreen extends React.Component {
               data={children} 
               database={database}
               navigation={navigation}
-              Component={NavigateComponent}/>
+              Component={NavigateComponent} />
             
             <View style={{ paddingBottom: 20}}></View>
           </ScrollView>
@@ -109,4 +95,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default withNavigation(CategoryScreen)
+export default CategoryScreen

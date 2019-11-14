@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { YellowBox, FlatList, View, TextInput } from 'react-native'
+import { YellowBox, FlatList, View } from 'react-native'
 
 import axios from 'axios'
 import * as config from '../config/connectionBase'
-import { Container, Header, Item, Input, Left, H1, Body, H3,
-          Button, List, Text, Icon, Right } from 'native-base'
+import { Container, H3, Button, Icon } from 'native-base'
 
 import { service } from '../services'
 import { iconMapping } from '../config/utils'
@@ -17,7 +16,30 @@ import DownloadComponent from '../components/DownloadComponent';
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle'])
 
+const IconSearch = ({ navigation }) => {
+  return <Button 
+    transparent 
+    onPress={() => navigation.navigate('Search') }>
+    <Icon name="ios-search" />
+  </Button>
+}
+
+const HeaderSearch = ({ navigation }) => (
+  <View style={{ flex: 1, 
+                flexDirection: 'row', 
+                justifyContent: 'space-between', alignItems: 'center' }}>
+    <H3>Guidelines</H3>
+    <IconSearch navigation={navigation} />
+  </View>
+)
+
 class HomeScreen extends Component {
+  static navigationOptions = ({navigation, screenProps}) => {
+    return {
+      headerTitle: () => <HeaderSearch navigation={navigation} />
+    }
+  }
+
   constructor(props) {
     super(props)
 
@@ -109,52 +131,6 @@ class HomeScreen extends Component {
   render() {
     return (
       <Container>
-         <Header>
-          <Left style={{flex: 1}}>
-            <Button 
-              transparent
-              onPress={() => this.back() }>
-              {
-                this.state.isSearchClick ?
-                <Icon name="md-arrow-round-back" /> : null
-              }
-            </Button>
-          </Left>
-
-          <Body style={{flex: 6}}>
-            {
-              this.state.isSearchClick ?
-              <TextInput 
-                  onSubmitEditing={ () => this.submit() }
-                  style={{ color: 'white', 
-                    fontSize: 21, 
-                    flex: 1,
-                    margin:0, 
-                    padding:0, 
-                    width: '100%', }}
-                  ref={this._textInput}
-                  placeholder="Search"
-                  placeholderTextColor= "white"
-                  value={this.state.q}
-                  onChangeText={(q) => this.setState({q}) } />
-              :
-              <Text style={{ color: 'white',fontSize: 21 }}>Guidelines</Text>
-            }
-          </Body>
-
-          <Right style={{flex: 1}}>
-            {
-              !this.state.isSearchClick ?
-              <Button 
-                transparent 
-                onPress={() => this.handleSearch() }>
-                <Icon name="ios-search" />
-              </Button> : null
-            }
-            
-          </Right>
-        </Header>
-
         <EmptyList {...this.state} />
         {
           this.state.data.length > 0 ?

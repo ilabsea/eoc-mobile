@@ -44,10 +44,7 @@ const StackNavigator = createStackNavigator({
 }, {
   initialRouteName: 'Home',
   mode: 'modal',
-  headerMode: 'none',
-  navigationOptions: {
-    title: "Guidelines"
-  }
+  headerMode: 'float',
 })
 
 let Navigate = createAppContainer(

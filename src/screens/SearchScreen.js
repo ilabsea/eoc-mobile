@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { YellowBox, FlatList, View } from 'react-native'
+import { YellowBox, FlatList, View, TextInput } from 'react-native'
 
 import axios from 'axios'
 import * as config from '../config/connectionBase'
@@ -17,7 +17,42 @@ import DownloadComponent from '../components/DownloadComponent';
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle'])
 
+const HeaderSearch = ({ handleSearch, handleQ }) => {
+  return <View style={{ flex: 1, 
+                flexDirection: 'row', 
+                justifyContent: 'space-between', 
+                alignItems: 'center' }}>
+
+      <TextInput 
+        onSubmitEditing={ handleSearch }
+        style={{ 
+          fontSize: 21, 
+          flex: 1,
+          margin:0, 
+          padding:0, 
+          width: '100%', }}
+        placeholder="Search"
+        autoFocus={true}
+        placeholderTextColor= "white"
+        onChangeText={(keyword) => handleQ(keyword) } />
+
+    <Button 
+      transparent 
+      onPress={() => Alert.alert('search') }>
+      <Icon name="ios-search" />
+    </Button>
+  </View>
+}
+
 class SearchScreen extends Component {
+  static navigationOptions = ({ navigation, screenProps }) => {
+    const params = navigation.state.params || {}
+
+    return {
+      headerTitle: params.headerTitle
+    }
+  }
+
   constructor(props) {
     super(props)
 
@@ -33,6 +68,17 @@ class SearchScreen extends Component {
     this.renderRow = this.renderRow.bind(this)
     this.handleFetch = this.handleFetch.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
+  }
+
+  setNavigationParams = () => {
+    this.props.navigation.setParams({
+      headerTitle: <HeaderSearch 
+                      q={this.state.q}
+                      handleSearch={ this.handleSearch }
+                      handleQ={(q) => { 
+                        this.setState({ q })
+                      }} />
+    })
   }
 
   handleFetch = async (q) => {
@@ -61,8 +107,8 @@ class SearchScreen extends Component {
   }
 
   componentDidMount() {
+    this.setNavigationParams()
     service.firebaseManager.setCurrentScreen('SearchScreen', 'SearchScreen')
-    this.searchInput.current._root.focus()
   }
 
   loadMore = () => {
@@ -113,25 +159,6 @@ class SearchScreen extends Component {
   render() {
     return (
       <Container>
-        <Header searchBar rounded>
-          <Item>
-            {/* <Icon name="ios-menu" onPress={() => this.props.navigation.openDrawer()} /> */}
-            <Input 
-                onSubmitEditing={ this.handleSearch }
-                ref={this.searchInput} 
-                placeholder="Search"
-                value={this.state.q}
-                onChangeText={(q) => this.textChange(q) } />
-            <Icon name="ios-search" 
-                  onPress={ this.handleSearch } />
-            <Icon type="MaterialIcons" 
-                  name="filter-list" 
-                  onPress={() => this.openFilter()} />
-          </Item>
-          <Button transparent>
-            <Text>Search</Text>
-          </Button>
-        </Header>
         <EmptyList {...this.state} />
         {
           this.state.data.length > 0 ?

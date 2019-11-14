@@ -22,19 +22,6 @@ class SopDetailScreen extends React.Component {
     let database = navigation.getParam('database')
 
     return <Container>
-      <Header>
-        <Left>
-          <Button transparent 
-                  onPress={ () => navigation.goBack() }>
-            <Icon name="md-arrow-back" />
-          </Button>
-        </Left>
-        <Body>
-          <Title>{item.name}</Title>
-        </Body>
-        <Right />
-      </Header>
-
       <Content contentContainerStyle={{ justifyContent: 'center', flex: 1 }}>
         <View style={{ justifyContent: 'center', alignItems: 'center', padding: 10 }}>
 
