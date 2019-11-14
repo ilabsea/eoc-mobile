@@ -1,21 +1,11 @@
 import React from 'react'
 import styleUtils from '../config/styles'
-import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native'
-import { Button, Left, H3,
-  Right, Body, Icon, ListItem } from 'native-base'
-import TimeAgoComponent from '../components/TimeAgoComponent'
+import { View, StyleSheet, 
+          TouchableWithoutFeedback } from 'react-native'
+import { Button, H3, Icon } from 'native-base'
 import CardView from 'react-native-cardview'
-import { regexHtml } from '../config/utils' 
 
-
-const Textile = ({ parent_id, text }) => (
-  (parent_id===undefined && text!='') ? 
-    <Text numberOfLines={3} 
-          ellipsizeMode={'tail'}>
-      {text.replace(regexHtml, '')}
-    </Text> 
-    : null 
-)
+import Textile from '../components/TextileComponent'
 
 class ListComponent extends React.Component {
   constructor(props) {
@@ -29,38 +19,40 @@ class ListComponent extends React.Component {
 
   render() {
     let { item, typeIcon, color } = this.props
-    let { parent_id, name, tags, description, created_at } = item
+    let { parent_id, name, description } = item
 
-    return <TouchableWithoutFeedback onPress={() => item.description && this.showDetail()}>
-      <CardView
-            cardElevation={5}
-            cardMaxElevation={2}
-            style={{margin: 10, paddingTop: 10, paddingBottom: 10, marginBottom: 0}}
-            cornerRadius={5}>
-      <View style={styles.wrapper}>
-        <View style={styles.center}>
-          <Button transparent style={styleUtils.btnIcon}>
-            <Icon type="MaterialIcons" style={{ fontSize:42, color: color }} name={typeIcon} />
-          </Button>
-        </View>
+    return <TouchableWithoutFeedback 
+              onPress={() => item.description && this.showDetail()}>
+              <CardView
+                    cardElevation={5}
+                    cardMaxElevation={2}
+                    style={styles.cardview}
+                    cornerRadius={5}>
+                <View style={styles.wrapper}>
+                  <View style={styles.center}>
+                    <Button transparent style={styleUtils.btnIcon}>
+                      <Icon 
+                        type="MaterialIcons" 
+                        style={[styles.icon, { color: color }]} 
+                        name={typeIcon} />
+                    </Button>
+                  </View>
 
-        <View style={{ flex: 3, justifyContent: 'center' }}>
-          <H3 style={styles.header}>{name}</H3>
-          {
-            description ?
-            <Textile parent_id={parent_id} text={description} />
-            : null
-          }
-          
-        </View>
+                  <View style={styles.descriptionWrapper}>
+                    <H3 style={styles.header}>{name}</H3>
+                    {
+                      description ?
+                      <Textile parent_id={parent_id} text={description} />
+                      : null
+                    }
+                  </View>
 
-        <View style={styles.center}>
-          { this.props.actionComponent }
-        </View>
-      </View>
-
-  </CardView>
-  </TouchableWithoutFeedback>
+                  <View style={styles.center}>
+                    { this.props.actionComponent }
+                  </View>
+                </View>
+              </CardView>
+            </TouchableWithoutFeedback>
   }
 }
 
@@ -79,6 +71,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 5,
     marginBottom: 5
+  },
+  cardview: {
+    margin: 10, 
+    paddingTop: 10, 
+    paddingBottom: 10, 
+    marginBottom: 0
+  },
+  descriptionWrapper: { 
+    flex: 3, 
+    justifyContent: 'center' 
+  },
+  icon: {
+    fontSize: 42
   }
 })
 
