@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import { YellowBox, FlatList } from 'react-native'
+import React, { Component } from "react";
+import { YellowBox, FlatList } from "react-native"
 
-import axios from 'axios'
-import * as config from '../config/connectionBase'
-import { Container } from 'native-base'
+import axios from "axios"
+import * as config from "../config/connectionBase"
+import { Container } from "native-base"
 
-import { service } from '../services'
-import { iconMapping } from '../config/utils'
+import { service } from "../services"
+import { iconMapping } from "../config/utils"
           
-import EmptyList  from './EmptyList'
-import ListComponent from '../components/ListComponent';
-import NavigateComponent from '../components/NavigateComponent'
-import DownloadComponent from '../components/DownloadComponent';
-import HeaderComponent from '../components/HeaderComponent'
+import EmptyList  from "./EmptyList"
+import ListComponent from "../components/ListComponent";
+import NavigateComponent from "../components/NavigateComponent"
+import DownloadComponent from "../components/DownloadComponent";
+import HeaderComponent from "../components/HeaderComponent"
 
 // TOREMV
-YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle'])
+YellowBox.ignoreWarnings(["Remote debugger", "Warning", "Require cycle"])
 
 class SearchScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -32,11 +32,10 @@ class SearchScreen extends Component {
     this.state = {
       isFetching: false,
       page: 1,
-      q: 'flu',
+      q: "flu",
       data: [],
     }
 
-    this.searchInput = React.createRef()
     this.loadMore = this.loadMore.bind(this)
     this.renderRow = this.renderRow.bind(this)
     this.handleFetch = this.handleFetch.bind(this)
@@ -80,7 +79,7 @@ class SearchScreen extends Component {
 
   componentDidMount() {
     this.setNavigationParams()
-    service.firebaseManager.setCurrentScreen('SearchScreen', 'SearchScreen')
+    service.firebaseManager.setCurrentScreen("SearchScreen", "SearchScreen")
   }
 
   loadMore = () => {
@@ -91,19 +90,19 @@ class SearchScreen extends Component {
   handleSearch = () => {
     const { q } = this.state
 
-    if( q != '' ) {
+    if( q != "" ) {
       this.setState({ page: 1, data: [], isFetching: true }, () => {
         this.handleFetch(q)
       })
 
-      service.firebaseManager.logEvent('EVENT_SEARCH', { q })
+      service.firebaseManager.logEvent("EVENT_SEARCH", { q })
     }
   }
 
   renderRow = (item) => {
     let { typeIcon, actionIcon, action, color } = iconMapping(item._index)
 
-    const Action = (action == 'download') ? DownloadComponent : NavigateComponent
+    const Action = (action == "download") ? DownloadComponent : NavigateComponent
     return <ListComponent 
                 item={item._source} 
                 typeIcon={typeIcon}
@@ -111,16 +110,6 @@ class SearchScreen extends Component {
                 color={color}
                 actionComponent={<Action item={item._source} />}
                 action={action} />
-  }
-
-  openFilter = () => {
-    let { navigation } = this.props
-    navigation.navigate('PopupModal', { returnRoute: navigation.state })
-  }
-
-  textChange = (q) => {
-    if ( q == '' ) this.props.navigation.goBack()
-    this.setState({q})
   }
 
   render() {
@@ -138,7 +127,6 @@ class SearchScreen extends Component {
             contentContainerStyle={{ paddingBottom: 20}}
           />: null
         }
-
       </Container>
     );
   } 

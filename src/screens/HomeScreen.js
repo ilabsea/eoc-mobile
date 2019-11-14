@@ -21,9 +21,8 @@ class HomeScreen extends Component {
     return {
       headerTitle: () => <View style={styles.headerTitle}>
                             <H3>Guidelines</H3>
-                            <Button 
-                                transparent 
-                                onPress={() => navigation.navigate("Search") }>
+                            <Button transparent 
+                                    onPress={() => navigation.navigate("Search") }>
                                 <Icon name="ios-search" />
                               </Button>
                           </View>
@@ -34,14 +33,12 @@ class HomeScreen extends Component {
     super(props)
 
     this.state = {
-      isSearchClick: false,
       isFetching: true,
       page: 1,
       q: "",
       data: [],
     }
 
-    this._textInput = React.createRef()
     this.loadMore = this.loadMore.bind(this)
     this.renderRow = this.renderRow.bind(this)
     this.handleFetch = this.handleFetch.bind(this)
@@ -95,24 +92,6 @@ class HomeScreen extends Component {
                 action={action} />
   }
 
-  handleSearch = () => {
-    this.setState({ isSearchClick: true })
-  }
-
-  back = () => {
-    this.setState({q: "", isSearchClick: false, page: 1, data: []}, () => {
-      this.handleFetch("")
-    })
-  }
-
-  submit() {
-    let { q } = this.state
-
-    this.setState({page: 1, data: []}, () => {
-      this.handleFetch(q)
-    })
-  }
-
   render() {
     return (
       <Container>
@@ -128,7 +107,6 @@ class HomeScreen extends Component {
             contentContainerStyle={{ paddingBottom: 20}}
           />: null
         }
-
       </Container>
     );
   } 
