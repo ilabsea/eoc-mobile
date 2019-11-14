@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { YellowBox, FlatList, View, TextInput } from 'react-native'
+import { YellowBox, FlatList, View, TextInput, StyleSheet } from 'react-native'
 
 import axios from 'axios'
 import * as config from '../config/connectionBase'
-import { Container, Header, Item, Input, 
-          Button, List, Text, Icon } from 'native-base'
+import { Container, Button, Icon } from 'native-base'
 
 import { service } from '../services'
 import { iconMapping } from '../config/utils'
@@ -18,19 +17,10 @@ import DownloadComponent from '../components/DownloadComponent';
 YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle'])
 
 const HeaderSearch = ({ handleSearch, handleQ }) => {
-  return <View style={{ flex: 1, 
-                flexDirection: 'row', 
-                justifyContent: 'space-between', 
-                alignItems: 'center' }}>
-
+  return <View style={styles.headerWrapper}>
       <TextInput 
         onSubmitEditing={ handleSearch }
-        style={{ 
-          fontSize: 21, 
-          flex: 1,
-          margin:0, 
-          padding:0, 
-          width: '100%', }}
+        style={styles.searchInput}
         placeholder="Search"
         autoFocus={true}
         placeholderTextColor= "white"
@@ -38,14 +28,14 @@ const HeaderSearch = ({ handleSearch, handleQ }) => {
 
     <Button 
       transparent 
-      onPress={() => Alert.alert('search') }>
+      onPress={ handleSearch }>
       <Icon name="ios-search" />
     </Button>
   </View>
 }
 
 class SearchScreen extends Component {
-  static navigationOptions = ({ navigation, screenProps }) => {
+  static navigationOptions = ({ navigation }) => {
     const params = navigation.state.params || {}
 
     return {
@@ -73,7 +63,6 @@ class SearchScreen extends Component {
   setNavigationParams = () => {
     this.props.navigation.setParams({
       headerTitle: <HeaderSearch 
-                      q={this.state.q}
                       handleSearch={ this.handleSearch }
                       handleQ={(q) => { 
                         this.setState({ q })
@@ -176,5 +165,21 @@ class SearchScreen extends Component {
     );
   } 
 };
+
+const styles = StyleSheet.create({
+  headerWrapper: { 
+    flex: 1, 
+    flexDirection: 'row', 
+    justifyContent: 'space-between', 
+    alignItems: 'center' 
+  },
+  searchInput: { 
+    fontSize: 21, 
+    flex: 1,
+    margin:0, 
+    padding:0, 
+    width: '100%'
+  }
+})
 
 export default SearchScreen;
