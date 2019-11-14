@@ -50,8 +50,8 @@ class HomeScreen extends Component {
   }
 
   back = () => {
-    this.setState({q: '', isSearchClick: false, page: 1, data: []}, () => {
-      this.handleFetch('')
+    this.setState({q: "", isSearchClick: false, page: 1, data: []}, () => {
+      this.handleFetch("")
     })
   }
 
