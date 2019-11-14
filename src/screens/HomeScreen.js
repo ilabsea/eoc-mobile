@@ -7,6 +7,23 @@ import RenderComponent from './RenderComponent'
 // TOREMV
 YellowBox.ignoreWarnings(["Remote debugger", "Warning", "Require cycle"])
 
+const IconSearch = ({ navigation }) => {
+  return <Button 
+    transparent 
+    onPress={() => navigation.navigate('Search') }>
+    <Icon name="ios-search" />
+  </Button>
+}
+
+const HeaderSearch = ({ navigation }) => (
+  <View style={{ flex: 1, 
+                flexDirection: 'row', 
+                justifyContent: 'space-between', alignItems: 'center' }}>
+    <H3>Guidelines</H3>
+    <IconSearch navigation={navigation} />
+  </View>
+)
+
 class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
