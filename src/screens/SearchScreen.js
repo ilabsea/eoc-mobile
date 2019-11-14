@@ -120,7 +120,7 @@ class SearchScreen extends Component {
     const { q } = this.state
 
     if( q != '' ) {
-      this.setState({ page: 1, data: [] }, () => {
+      this.setState({ page: 1, data: [], isFetching: true }, () => {
         this.handleFetch(q)
       })
 
