@@ -1,18 +1,8 @@
 import React, { Component } from "react";
-import { YellowBox, FlatList } from "react-native"
-
-import axios from "axios"
-import * as config from "../config/connectionBase"
-import { Container } from "native-base"
-
+import { YellowBox } from "react-native"
 import { service } from "../services"
-import { iconMapping } from "../config/utils"
-          
-import EmptyList  from "./EmptyList"
-import ListComponent from "../components/ListComponent";
-import NavigateComponent from "../components/NavigateComponent"
-import DownloadComponent from "../components/DownloadComponent";
 import HeaderComponent from "../components/HeaderComponent"
+import RenderComponent from "./RenderComponent";
 
 // TOREMV
 YellowBox.ignoreWarnings(["Remote debugger", "Warning", "Require cycle"])
@@ -28,53 +18,17 @@ class SearchScreen extends Component {
 
   constructor(props) {
     super(props)
-
-    this.state = {
-      isFetching: false,
-      page: 1,
-      q: "flu",
-      data: [],
-    }
-
-    this.loadMore = this.loadMore.bind(this)
-    this.renderRow = this.renderRow.bind(this)
-    this.handleFetch = this.handleFetch.bind(this)
+    this.state = { q: "" }
     this.handleSearch = this.handleSearch.bind(this)
+    this.renderer = React.createRef()
   }
 
   setNavigationParams = () => {
     this.props.navigation.setParams({
       headerTitle: <HeaderComponent 
                       handleSearch={ this.handleSearch }
-                      handleQ={(q) => { 
-                        this.setState({ q })
-                      }} />
+                      handleQ={(q) => this.setState({ q }) } />
     })
-  }
-
-  handleFetch = async (q) => {
-    let { page } = this.state
-    let uri = `${config.uri}/${config.sops_path}`
-    let params = { q, page }
-
-    try {
-      let data = await axios.get(uri, { params })
-                    .then( resp => resp.data )
-                    .catch( error => error)
-
-      if( data.length > 0 ) {
-        this.setState( (prev) => {
-          return {
-            data: [...prev.data, ...data],
-            page: prev.page + 1
-          }
-        })
-      }
-      
-      this.setState({isFetching: false})
-    } catch(e) {
-      service.toastManager.show(e)
-    }
   }
 
   componentDidMount() {
@@ -82,53 +36,13 @@ class SearchScreen extends Component {
     service.firebaseManager.setCurrentScreen("SearchScreen", "SearchScreen")
   }
 
-  loadMore = () => {
-    this.setState({isFetching: true})
-    this.handleFetch(this.state.q)
-  }
-
   handleSearch = () => {
-    const { q } = this.state
-
-    if( q != "" ) {
-      this.setState({ page: 1, data: [], isFetching: true }, () => {
-        this.handleFetch(q)
-      })
-
-      service.firebaseManager.logEvent("EVENT_SEARCH", { q })
-    }
-  }
-
-  renderRow = (item) => {
-    let { typeIcon, actionIcon, action, color } = iconMapping(item._index)
-
-    const Action = (action == "download") ? DownloadComponent : NavigateComponent
-    return <ListComponent 
-                item={item._source} 
-                typeIcon={typeIcon}
-                actionIcon={actionIcon}
-                color={color}
-                actionComponent={<Action item={item._source} />}
-                action={action} />
+    this.renderer.current.handleSearch()
   }
 
   render() {
-    return (
-      <Container>
-        <EmptyList {...this.state} />
-        {
-          this.state.data.length > 0 ?
-          <FlatList
-            data={this.state.data}
-            keyExtractor={item => `${item._index}-${item._source.id.toString()}`}
-            onEndReached={this.loadMore}
-            onEndReachedThreshold={0.5}
-            renderItem={({item}) => this.renderRow(item)}
-            contentContainerStyle={{ paddingBottom: 20}}
-          />: null
-        }
-      </Container>
-    );
+    let { q } = this.state
+    return <RenderComponent ref={this.renderer} q={q} />
   } 
 };
 
