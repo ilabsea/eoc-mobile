@@ -35,7 +35,7 @@ class ListComponent extends React.Component {
       <CardView
             cardElevation={5}
             cardMaxElevation={2}
-            style={{margin: 10, padding: 10, marginBottom: 0}}
+            style={{margin: 10, paddingTop: 10, paddingBottom: 10, marginBottom: 0}}
             cornerRadius={5}>
       <View style={styles.wrapper}>
         <View style={styles.center}>
