@@ -9,10 +9,8 @@ YellowBox.ignoreWarnings(["Remote debugger", "Warning", "Require cycle"])
 
 class SearchScreen extends Component {
   static navigationOptions = ({ navigation }) => {
-    const params = navigation.state.params || {}
-
     return {
-      headerTitle: params.headerTitle
+      headerTitle: navigation.getParam("headerTitle")
     }
   }
 
@@ -25,14 +23,17 @@ class SearchScreen extends Component {
 
   setNavigationParams = () => {
     this.props.navigation.setParams({
-      headerTitle: <HeaderComponent 
-                      handleSearch={ this.handleSearch }
-                      handleQ={(q) => this.setState({ q }) } />
+      headerTitle: () => <HeaderComponent 
+                            handleSearch={ this.handleSearch }
+                            handleQ={(q) => this.setState({ q }) } />
     })
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.setNavigationParams()
+  }
+
+  componentDidMount() {
     service.firebaseManager.setCurrentScreen("SearchScreen", "SearchScreen")
   }
 
