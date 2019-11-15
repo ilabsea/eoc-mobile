@@ -25,7 +25,7 @@ class HomeScreen extends Component {
   }
 
   render() {
-    return <RenderComponent q="" />
+    return <RenderComponent q="" shouldLoad={true} />
   } 
 };
 

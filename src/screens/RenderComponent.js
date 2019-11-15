@@ -75,10 +75,10 @@ class RenderComponent extends React.Component {
   }
 
   handleSearch = () => {
-    let { q } = this.props
-
-    this.setState({ page: 1, data: [], isFetching: true }, () => {
-      this.handleFetch(q)
+    let { q, shouldLoad } = this.props
+    
+    this.setState({ page: 1, data: [], isFetching: !!shouldLoad }, () => {
+      if( !!shouldLoad ) this.handleFetch(q)
       if(q != "") {
         service.firebaseManager.logEvent("EVENT_SEARCH", { q })
       }

@@ -16,7 +16,7 @@ class SearchScreen extends Component {
 
   constructor(props) {
     super(props)
-    this.state = { q: "" }
+    this.state = { q: "", shouldLoad: false }
     this.handleSearch = this.handleSearch.bind(this)
     this.renderer = React.createRef()
   }
@@ -38,12 +38,14 @@ class SearchScreen extends Component {
   }
 
   handleSearch = () => {
-    this.renderer.current.handleSearch()
+    this.setState({ shouldLoad: true }, () => {
+      this.renderer.current.handleSearch()
+    })
   }
 
   render() {
-    let { q } = this.state
-    return <RenderComponent ref={this.renderer} q={q} />
+    let { q, shouldLoad } = this.state
+    return <RenderComponent ref={this.renderer} q={q} shouldLoad={shouldLoad} />
   } 
 };
 
