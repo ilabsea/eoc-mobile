@@ -7,7 +7,10 @@ import { service } from '../services'
 import { regexHtml } from '../config/utils' 
 
 class SopDetailScreen extends React.Component {
-  
+  static navigationOptions = {
+    title: "Detail"
+  }
+
   constructor(props) {
     super(props);
   }

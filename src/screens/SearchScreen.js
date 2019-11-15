@@ -12,7 +12,6 @@ class SearchScreen extends Component {
     const params = navigation.state.params || {}
 
     return {
-      headerTintColor: 'white',
       headerTitle: params.headerTitle
     }
   }

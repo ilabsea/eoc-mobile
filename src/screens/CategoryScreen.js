@@ -10,6 +10,14 @@ import EmptyList from './EmptyList'
 import ListGroup from './ListGroup'
 
 class CategoryScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => {
+    let title = navigation.getParam("sopGuide").name
+    
+    return {
+      title
+    }
+  }
+
   constructor(props) {
     super(props)
 
