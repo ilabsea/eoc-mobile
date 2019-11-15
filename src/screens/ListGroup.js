@@ -4,8 +4,7 @@ import ListComponent from '../components/ListComponent'
 
 const ListGroup = (props) => {
   let { Component } = props
-  return <>
-    <List>
+  return <List>
       {
         props.data.map( item => {
           return <ListComponent 
@@ -17,7 +16,6 @@ const ListGroup = (props) => {
         })
       }
     </List>
-  </>
 }
 
 export default ListGroup
