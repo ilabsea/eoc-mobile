@@ -17,34 +17,30 @@ import HomeScreen from './HomeScreen'
 import SearchScreen from './SearchScreen'
 import CategoryScreen from './CategoryScreen'
 import SopDetailScreen from './SopDetailScreen'
-import PopupModalScreen from './PopupModalScreen'
 import Notification from './NotificationScreen'
 
 const StackNavigator = createStackNavigator({
   Home: {
     screen: HomeScreen,
-    navigationOptions: { title: "Guidelines" }
   },
   Search: {
     screen: SearchScreen,
-    navigationOptions: { title: "Search" }
   },
   Category: {
     screen: CategoryScreen,
-    navigationOptions: { title: "Category" }
   },
   SopDetail: {
     screen: SopDetailScreen,
-    navigationOptions: { title: "Sop detail" }
   },
-  PopupModal: {
-    screen: PopupModalScreen,
-    navigationOptions: { title: "Filter" }
-  }
 }, {
-  initialRouteName: 'Home',
-  mode: 'modal',
-  headerMode: 'float',
+  initialRouteName: "Home",
+  mode: "modal",
+  headerMode: "float",
+  defaultNavigationOptions: {
+    headerStyle: {
+      backgroundColor: "#3F51B5",
+    }
+  }
 })
 
 let Navigate = createAppContainer(
