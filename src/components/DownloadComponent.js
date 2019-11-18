@@ -24,7 +24,6 @@ class DownloadComponent extends React.Component {
   async handleDownload() {
     let granted = await service.permissionManager.requestStorage();
 
-<<<<<<< HEAD
     if( granted ) {
       let { item } = this.props
       let { remoteUrl, localUrl, fileName, mime } = fileInfo(item)
@@ -32,32 +31,6 @@ class DownloadComponent extends React.Component {
       service.firebaseManager.logEvent('EVENT_DOWNLOAD', { fileName })
 
       service.downloadManager.inTrayDownload(remoteUrl, fileName, mime)
-=======
-    if (granted) {
-      let {item} = this.props;
-      let {remoteUrl, localUrl, fileDigest, fileName} = fileInfo(item);
-
-      this.setState({isDisabled: true, localUrl});
-      service.firebaseManager.logEvent('EVENT_DOWNLOAD', {fileName});
-
-      service.downloadManager
-        .download(remoteUrl, localUrl, fileDigest)
-        .begin(expectedBytes => {
-          this.setState({isDisabled: true, expectedBytes, status: '__BEGIN__'});
-        })
-        .progress(progressedBytes => {
-          this.setState({status: '__PROGRESS__', progressedBytes});
-        })
-        .done(() => {
-          this.saveToLocalDB();
-          this.setState({isDisabled: false, localUrl, status: '__DONE__'});
-          service.toastManager.show('Download completed!');
-        })
-        .error(error => {
-          this.setState({status: '__ERROR__', error});
-          service.toastManager.show(`${error}, please try again later!`);
-        });
->>>>>>> fix eslint DownloadComponent
     }
   }
 
