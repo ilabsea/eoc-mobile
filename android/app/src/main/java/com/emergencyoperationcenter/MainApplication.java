@@ -1,4 +1,4 @@
-package com.eocmobileapp;
+package com.emergencyoperationcenter;
 
 import android.app.Application;
 import android.util.Log;
