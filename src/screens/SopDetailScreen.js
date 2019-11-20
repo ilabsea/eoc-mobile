@@ -19,7 +19,6 @@ class SopDetailScreen extends React.Component {
   render() {
     let { navigation } = this.props
     let item = navigation.getParam('item')
-    let database = navigation.getParam('database')
 
     return <Container>
       <Header>

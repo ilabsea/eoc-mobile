@@ -51,43 +51,42 @@ class Root extends React.Component {
   }
 
   componentWillUnmount() {
-    this.notificationListener();
-    this.notificationOpenedListener();
+    this.removeNotificationListener();
+    this.removeNotificationOpenedListener();
+  }
+
+  handleDetailNavigate(listener) {
+    if( listener ) {
+      const { data } = listener.notification
+      let item = JSON.parse(data.item)
+      this.props.navigation.navigate("SopDetail", { item })
+    }
   }
 
   async createNotificationListeners() {
     /*
-    * Triggered when a particular notification has been received in foreground
+    * app is in foreground
     * */
-    this.notificationListener = firebase.notifications().onNotification((notification) => {
-      const { title, body } = notification;
-      // service.toastManager.show('New notification!')
+    this.removeNotificationListener = firebase.notifications().onNotification((notification) => {
+      const { data } = notification;
+      let params = { payload: data, navigation: this.props.navigation }
+      service.toastManager.show("New notification!", params)
     });
   
     /*
-    * If your app is in background, you can listen for when a notification is clicked / tapped / opened as follows:
+    * app is in background
     * */
-    this.notificationOpenedListener = firebase.notifications().onNotificationOpened((notificationOpen) => {
-      const { title, body } = notificationOpen.notification;
+    this.removeNotificationOpenedListener = firebase.notifications().onNotificationOpened((notificationOpen) => {
+      this.handleDetailNavigate(notificationOpen)
     });
   
     /*
-    * If your app is closed, you can check if it was opened by a notification being clicked / tapped / opened as follows:
+    * app is closed
     * */
-    const notificationOpen = await firebase.notifications().getInitialNotification();
-    if (notificationOpen) {
-      const { title, body } = notificationOpen.notification;
-    }
-
-    /*
-    * called by #notify_with_key
-    */
-    this.messageListener = firebase.messaging().onMessage((message) => {
-      let { database, navigation } = this.props
-      let data = { payload: message._data, navigation, database }
-      service.toastManager.show('New notification!', data)
-    })
-
+    firebase.notifications().getInitialNotification()
+      .then(notificationInitial => {
+        this.handleDetailNavigate(notificationInitial)
+      })
   }
 
   render() {

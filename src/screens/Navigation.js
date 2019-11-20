@@ -40,6 +40,7 @@ const stack = (props) => createStackNavigator({
                 <SopDetailScreen database={database} navigation={navigation}/>
               </Root>
     },
+    path: "eoc://detail/:sopId",
     navigationOptions: { title: "Sop detail" }
   },
   DownloadDir: {
@@ -61,10 +62,17 @@ const stack = (props) => createStackNavigator({
   }
 })
 
-export const createNavigation = props => 
-  createAppContainer(
+
+
+export const createNavigation = props => {
+  const StackNavigator = stack(props)
+
+  return createAppContainer(
     createDrawerNavigator({
-      Root: stack(props),
+      Root: {
+        screen: StackNavigator,
+        path: 'eoc://'
+      },
       Notification: {
         screen: ({ navigation }) => {
           const { database } = props;
@@ -79,3 +87,4 @@ export const createNavigation = props =>
       initialRouteParams: props
     })
   )
+}
