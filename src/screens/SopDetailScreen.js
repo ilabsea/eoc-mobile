@@ -18,7 +18,8 @@ class SopDetailScreen extends React.Component {
   }
 
   render() {
-    let item = this.props.navigation.getParam("item")
+    let { navigation } = this.props
+    let item = navigation.getParam('item')
 
     return <Container>
             <Content contentContainerStyle={{ justifyContent: "center", flex: 1 }}>

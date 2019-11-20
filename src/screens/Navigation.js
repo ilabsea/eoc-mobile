@@ -31,6 +31,8 @@ const StackNavigator = createStackNavigator({
   },
   SopDetail: {
     screen: SopDetailScreen,
+    path: "eoc://detail/:sopId",
+    navigationOptions: { title: "Sop detail" }
   },
 }, {
   initialRouteName: "Home",

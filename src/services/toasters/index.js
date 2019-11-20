@@ -1,9 +1,9 @@
-import Toast from 'react-native-root-toast'
+import Toast from "react-native-root-toast"
 
-const viewDetail = ({ payload, database, navigation, android, path, mime }) => {
+const viewDetail = ({ payload, navigation, android, path, mime }) => {
   if(payload) {
     let item = JSON.parse(payload.item)
-    navigation.navigate('SopDetail', { item, database })
+    navigation.navigate("SopDetail", { item })
   } else if ( android ) {
     android.actionViewIntent(path, mime)
   }
