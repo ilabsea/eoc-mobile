@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { YellowBox, FlatList, View } from 'react-native'
+import Config from "react-native-config"
 
 import axios from 'axios'
 import * as config from '../config/connectionBase'
@@ -39,13 +40,16 @@ class HomeScreen extends Component {
     let { page } = this.state
     let uri = `${config.uri}/${config.sops_path}`
     let params = { q, page }
+    let headers = { "Authorization": `bearer ${Config.SERVER_SECRET_KEY_BASE}` }
 
     try {
-      let data = await axios.get(uri, { params })
+      let data = await axios.get(uri, { params, headers })
                     .then( resp => resp.data )
                     .catch( error => error)
-
-      if( data.length > 0 ) {
+    
+      if(data.status == "bad_request") {
+        service.toastManager.show(data.error)
+      } else if( data.length > 0 ) {
         this.setState( (prev) => {
           return {
             data: [...prev.data, ...data],
