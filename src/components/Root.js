@@ -31,11 +31,11 @@ class Root extends React.Component {
   }
 
   async getToken() {
-    let fcmToken = await AsyncStorage.getItem('fcmToken');
+    let fcmToken = await AsyncStorage.getItem("fcmToken");
     if (!fcmToken) {
       fcmToken = await firebase.messaging().getToken();
       if (fcmToken) {
-        await AsyncStorage.setItem('fcmToken', fcmToken);
+        await AsyncStorage.setItem("fcmToken", fcmToken);
         service.apiManager.saveToken(fcmToken)
       }
     }
@@ -63,7 +63,7 @@ class Root extends React.Component {
     }
   }
 
-  async createNotificationListeners() {
+  createNotificationListeners() {
     /*
     * app is in foreground
     * */
