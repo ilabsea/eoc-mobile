@@ -199,17 +199,9 @@ android {
 }
 
 dependencies {
-    implementation project(':rn-fetch-blob')
-    implementation project(':react-native-cardview')
-    implementation project(':@react-native-community_async-storage')
-    implementation project(':react-native-firebase')
     implementation project(':watermelondb')
-    implementation project(':react-native-version-number')
-    implementation project(':react-native-file-viewer')
-    implementation project(':react-native-fs')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
-    implementation project(':react-native-background-downloader')
 
     // Firebase dependencies
     implementation "com.google.android.gms:play-services-base:16.1.0"
