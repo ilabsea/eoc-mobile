@@ -1,5 +1,5 @@
 import React from 'react'
-import { Alert, View } from 'react-native'
+import { View } from 'react-native'
 import { Icon, List, ListItem, Text, Header, Title, Button,
           Content, Container, Body, Left, Right } from 'native-base'
 import database from '../models/db'

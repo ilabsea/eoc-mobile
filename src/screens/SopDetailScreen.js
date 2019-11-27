@@ -1,8 +1,7 @@
 import React from 'react'
-import { View, Text, Alert } from 'react-native'
+import { View, Text } from 'react-native'
 import { Container, Content, Header, 
       Left, Right, Body, Title, Button, Icon, H1 } from 'native-base'
-import DownloadComponent from '../components/DownloadComponent';
 import { service } from '../services'
 import { regexHtml } from '../config/utils' 
 

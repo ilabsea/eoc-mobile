@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import { List, H3 } from 'native-base'
+import { List } from 'native-base'
 import ListComponent from '../components/ListComponent'
 
 const ListGroup = (props) => {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { YellowBox, FlatList, View } from 'react-native'
+import { YellowBox, FlatList } from 'react-native'
 import Config from "react-native-config"
 
 import axios from 'axios'
