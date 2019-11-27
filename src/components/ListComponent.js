@@ -11,6 +11,8 @@ import Textile from "../components/TextileComponent"
 class ListComponent extends React.Component {
   constructor(props) {
     super(props)
+
+    this.show = this.show.bind(this)
   }
 
   showDetail() {
