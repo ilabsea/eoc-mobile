@@ -40,7 +40,7 @@ class ListComponent extends React.Component {
       <View style={styles.wrapper}>
         <View style={styles.center}>
           <Button transparent style={styleUtils.btnIcon}>
-            <Icon type="MaterialIcons" style={{ fontSize:42, color: color }} name={typeIcon} />
+            <Icon type="MaterialIcons" style={{ fontSize:32, color: color }} name={typeIcon} />
           </Button>
         </View>
 
