@@ -9,7 +9,6 @@ import { Database } from '@nozbe/watermelondb'
 import SQLiteAdapter from "@nozbe/watermelondb/adapters/sqlite"
 import { dbName, schema } from "./src/models/schema"
 import { modelClasses } from "./src/models/index"
-import App from './App'
 
 import { createNavigation } from "./src/screens/Navigation"
 
