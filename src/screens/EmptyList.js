@@ -6,7 +6,7 @@ import { appVersion } from '../config/utils'
 const EmptyList = ({ isFetching, data }) => (
   isFetching ? 
   <View style={styles.container}>
-    <View style={{ flexDirection: 'row' }}>
+    <View testID="loading" style={{ flexDirection: 'row' }}>
       <ActivityIndicator 
         style={{opacity: isFetching ? 1.0 : 0.0}} 
         size="large" color="#0000ff" animating={true} /> 
@@ -15,7 +15,7 @@ const EmptyList = ({ isFetching, data }) => (
   : 
   data.length == 0 ?
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <H1>No related items</H1>
+    <H1 testID="emptyMsg">No related items</H1>
     <Text>App version: { appVersion }</Text>
   </View>
   : null

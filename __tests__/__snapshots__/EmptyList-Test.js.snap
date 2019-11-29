@@ -18,6 +18,7 @@ exports[`render correctly 1`] = `
         "lineHeight": 32,
       }
     }
+    testID="emptyMsg"
   >
     No related items
   </Text>
