@@ -12,6 +12,11 @@ it('render correctly', () => {
     }
   }
 
-  console.log( utils.fileInfo(source) )
-  expect(true).toBe(true)
+  const expected = ["remoteUrl", "sopName", "fileName", "fileDigest", "localUrl", "mime"]
+  const response = utils.fileInfo(source)
+
+  expect( response ).toHaveProperty('remoteUrl')
+  expect( response ).toHaveProperty('sopName', 'sop name')
+  expect( Object.keys(response) )
+    .toEqual( expect.arrayContaining(expected) )
 })
