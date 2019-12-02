@@ -20,3 +20,26 @@ it('render correctly', () => {
   expect( Object.keys(response) )
     .toEqual( expect.arrayContaining(expected) )
 })
+
+describe('#iconMapping', () => {
+  it('bases on `sops` type', () => {
+    expect( utils.iconMapping('sops') ).toMatchObject({
+      type: 'MaterialIcons',
+      typeIcon: 'picture-as-pdf',
+      actionIcon: 'file-download',
+      action: 'download',
+      color: '#b1090c'
+    })
+  })
+
+  it('bases on `categories` type', () => {
+    expect( utils.iconMapping('categories') ).toMatchObject({
+      type: 'MaterialIcons', 
+      typeIcon: 'folder', 
+      actionIcon: "arrow-forward", 
+      action: "navigate",
+      color: '#f39c24'
+    })
+  })
+})
+
