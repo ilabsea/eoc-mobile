@@ -43,3 +43,7 @@ describe('#iconMapping', () => {
   })
 })
 
+it('returns real name', () => {
+  expect( utils.realname('digest_string-real-name.pdf') ).toEqual('real-name.pdf')
+})
+
