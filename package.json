@@ -61,13 +61,6 @@
     "transformIgnorePatterns": [
       "node_modules/(?!(jest-)?react-native|react-navigation|native-base|rn-fetch-blob|static-container)"
     ],
-    "setupFiles": [
-      "./__mocks__/react-native-firebase.js",
-      "./__mocks__/react-native-fs.js",
-      "./__mocks__/react-native-fetch-blob.js",
-      "./__mocks__/RNBackgroundDownloader.js",
-      "./__mocks__/react-navigation.js",
-      "./node_modules/react-native/Libraries/EventEmitter/__mocks__/NativeEventEmitter.js"
-    ]
+    "setupFiles": []
   }
 }
