@@ -8,36 +8,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:939048060549:android:3527112a6226e4eed78bec",
-        "android_client_info": {
-          "package_name": "com.emergencyoperationcenter"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "939048060549-rjmd0l41tpbq043bti1gserabjqn6plu.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyALYc1pW6V7eA_SMqfxU4uSOU-MzMqU8n8"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "939048060549-rjmd0l41tpbq043bti1gserabjqn6plu.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:939048060549:android:481ceddd61a2b5c6d78bec",
+        "mobilesdk_app_id": "1:939048060549:android:d668c3d3e7599dc7d78bec",
         "android_client_info": {
           "package_name": "org.ilab.instedd.eoc"
         }
