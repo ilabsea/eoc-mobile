@@ -1,10 +1,11 @@
 import React from "react"
 import styleUtils from "../config/styles"
-import { View, StyleSheet, 
+import { View, StyleSheet, Text,
           TouchableWithoutFeedback } from "react-native"
 import { Button, H3, Icon } from "native-base"
 import CardView from "react-native-cardview"
 import { withNavigation } from 'react-navigation'
+import { regexHtml } from "../config/utils" 
 
 import Textile from "../components/TextileComponent"
 
