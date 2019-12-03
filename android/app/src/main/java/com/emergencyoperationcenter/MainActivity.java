@@ -1,4 +1,4 @@
-package com.emergencyoperationcenter;
+package org.ilab.instedd.eoc;
 
 import com.facebook.react.ReactActivity;
 

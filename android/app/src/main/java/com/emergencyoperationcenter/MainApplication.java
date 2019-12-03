@@ -1,4 +1,4 @@
-package com.emergencyoperationcenter;
+package org.ilab.instedd.eoc;
 
 import android.app.Application;
 import android.util.Log;
