@@ -3,6 +3,7 @@ import { YellowBox, View, StyleSheet } from "react-native"
 import { H3, Button, Icon } from "native-base"
 import { service } from "../services"
 import RenderComponent from './RenderComponent'
+import Root from '../components/Root'
 
 // TOREMV
 YellowBox.ignoreWarnings(["Remote debugger", "Warning", "Require cycle"])
@@ -64,7 +65,9 @@ class HomeScreen extends Component {
   }
 
   render() {
-    return <RenderComponent q="" shouldLoad={true} />
+    return <Root>
+          <RenderComponent q="*" shouldLoad={true} />
+        </Root>
   } 
 };
 

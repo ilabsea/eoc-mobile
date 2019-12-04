@@ -40,7 +40,7 @@ class RenderComponent extends React.Component {
       let data = await axios.get(uri, { params })
                     .then( resp => resp.data )
                     .catch( error => error)
-
+      console.log('data', data)
       if( data.length > 0 ) {
         this.setState( (prev) => {
           return {
@@ -62,15 +62,15 @@ class RenderComponent extends React.Component {
   }
 
   renderRow = (item) => {
-    let { typeIcon, actionIcon, action, color } = iconMapping(item._index)
+    let { typeIcon, actionIcon, action, color } = iconMapping(item.model_name)
 
     const Action = (action == "download") ? DownloadComponent : NavigateComponent
     return <ListComponent 
-                item={item._source} 
+                item={item} 
                 typeIcon={typeIcon}
                 actionIcon={actionIcon}
                 color={color}
-                actionComponent={<Action item={item._source} />}
+                actionComponent={<Action item={item} />}
                 action={action} />
   }
 
@@ -92,7 +92,7 @@ class RenderComponent extends React.Component {
         this.state.data.length > 0 ?
         <FlatList
           data={this.state.data}
-          keyExtractor={item => `${item._index}-${item._source.id.toString()}`}
+          keyExtractor={item => `${item._index}-${item.id.toString()}`}
           onEndReached={this.loadMore}
           onEndReachedThreshold={0.5}
           renderItem={({item}) => this.renderRow(item)}

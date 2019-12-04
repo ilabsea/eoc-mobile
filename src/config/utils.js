@@ -21,19 +21,22 @@ export const fileInfo = (source) => {
 export const iconMapping = (docType) => {
   const type = 'MaterialIcons'
 
-  let doc = { sops: { 
+  let doc = { 
+              Sop: { 
                 type, 
                 typeIcon: 'picture-as-pdf', 
                 actionIcon: "file-download", 
                 action: "download",
                 color: '#b1090c' }, 
-              categories: { 
+
+              Category: { 
                 type, 
                 typeIcon: 'folder', 
                 actionIcon: "arrow-forward", 
                 action: "navigate",
                 color: '#f39c24' 
-              } }
+              } 
+            }
   return doc[docType]
 }
 export const appVersion = VersionNumber.appVersion

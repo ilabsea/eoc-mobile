@@ -64,8 +64,6 @@ const store = createStore( reducer )
 
 export const createNavigation = () => {
   return <Provider store={store}>
-    <Root>
-      <Navigate />
-    </Root>
-  </Provider>
+            <Navigate />
+          </Provider>
 }

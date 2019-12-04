@@ -2,15 +2,9 @@ import React from 'react'
 import { service } from '../services'
 import firebase from 'react-native-firebase'
 import AsyncStorage from '@react-native-community/async-storage'
+import {withNavigation} from 'react-navigation'
 
 class Root extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      keyword: ''
-    }
-  }
 
   async componentDidMount() {
     this.checkPermission()
@@ -52,6 +46,7 @@ class Root extends React.Component {
   }
 
   componentWillUnmount() {
+    this.removeMessageListener();
     this.removeNotificationListener();
     this.removeNotificationOpenedListener();
   }
@@ -80,6 +75,19 @@ class Root extends React.Component {
     this.removeNotificationOpenedListener = firebase.notifications().onNotificationOpened((notificationOpen) => {
       this.handleDetailNavigate(notificationOpen)
     });
+
+
+    /*
+    * subscribe to a topic
+    * */
+    this.removeMessageListener = firebase.messaging().onMessage((notification) => {
+      const { data } = notification;
+
+      console.log('props: ', this.props)
+
+      let params = { payload: data, navigation: this.props.navigation }
+      service.toastManager.show("New notification!!", params)
+    });
   
     /*
     * app is closed
@@ -95,4 +103,4 @@ class Root extends React.Component {
   }
 }
 
-export default Root
+export default withNavigation(Root)
