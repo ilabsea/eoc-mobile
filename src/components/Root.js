@@ -32,6 +32,11 @@ class Root extends React.Component {
       if (fcmToken) {
         await AsyncStorage.setItem("fcmToken", fcmToken);
         service.apiManager.saveToken(fcmToken)
+
+        const channel = new firebase.notifications.Android.Channel('test-channel', 'Test Channel', firebase.notifications.Android.Importance.Max)
+                              .setDescription('My apps test channel');
+        
+        firebase.notifications().android.createChannel(channel);
       }
     }
   }
@@ -73,6 +78,7 @@ class Root extends React.Component {
     * app is in background
     * */
     this.removeNotificationOpenedListener = firebase.notifications().onNotificationOpened((notificationOpen) => {
+      console.log('onBackground notify', notificationOpen)
       this.handleDetailNavigate(notificationOpen)
     });
 
@@ -94,6 +100,7 @@ class Root extends React.Component {
     * */
     firebase.notifications().getInitialNotification()
       .then(notificationInitial => {
+        console.log('onClosed notify')
         this.handleDetailNavigate(notificationInitial)
       })
   }

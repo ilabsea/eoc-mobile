@@ -1,3 +1,4 @@
 <resources>
-<color name ='iconBackground'>#FFFFFF</color> 
+  <color name ='iconBackground'>#FFFFFF</color> 
+  <color name='colorAccent'>#333</color>
 </resources>
