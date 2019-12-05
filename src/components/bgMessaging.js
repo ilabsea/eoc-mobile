@@ -2,7 +2,6 @@
 import firebase from 'react-native-firebase';
 
 export default async (message) => {
-    
   if( message ) {
     const { data } = message
     let item = JSON.parse(data.item)

@@ -1,4 +1,4 @@
-package org.ilab.instedd.eoc;
+package kh.gov.cdcmoh.eoc;
 
 import android.app.Application;
 import android.util.Log;

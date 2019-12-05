@@ -40,7 +40,7 @@ class RenderComponent extends React.Component {
       let data = await axios.get(uri, { params })
                     .then( resp => resp.data )
                     .catch( error => error)
-      console.log('data', data)
+
       if( data.length > 0 ) {
         this.setState( (prev) => {
           return {

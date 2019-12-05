@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:939048060549:android:329f9b37a5a4d5d0d78bec",
+        "mobilesdk_app_id": "1:939048060549:android:9dab46da344c34c7d78bec",
         "android_client_info": {
-          "package_name": "org.ilab.instedd.eoc"
+          "package_name": "kh.gov.cdcmoh.eoc"
         }
       },
       "oauth_client": [
