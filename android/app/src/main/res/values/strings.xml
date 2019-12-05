@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Emergency Operation Center</string>
-    <string name="default_notification_channel_id">test-channel</string>
+    <string name="default_notification_channel_id">eoc-channel</string>
 </resources>
