@@ -34,7 +34,8 @@ class Root extends React.Component {
         service.apiManager.saveToken(fcmToken)
 
         const channel = new firebase.notifications.Android.Channel('eoc-channel', 'EOC Channel', firebase.notifications.Android.Importance.Max)
-                              .setDescription('ilabsoutheastasia.org/eoc');
+                              .setDescription('ilabsoutheastasia.org/eoc')
+                              .setSound('notif')
         
         firebase.notifications().android.createChannel(channel);
       }
