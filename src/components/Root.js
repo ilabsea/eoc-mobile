@@ -60,8 +60,8 @@ class Root extends React.Component {
   handleDetailNavigate(listener) {
     if( listener ) {
       const { data } = listener.notification
-      let item = JSON.parse(data.item)
-      this.props.navigation.navigate("SopDetail", { item })
+      let itemId = data.itemId
+      this.props.navigation.navigate("SopDetail", { itemId })
     }
   }
 
@@ -89,7 +89,7 @@ class Root extends React.Component {
     this.removeMessageListener = firebase.messaging().onMessage((notification) => {
       const { data } = notification;
       let params = { payload: data, navigation: this.props.navigation }
-      service.toastManager.show("New notification!!", params)
+      service.toastManager.show("New notification!", params)
     });
   
     /*

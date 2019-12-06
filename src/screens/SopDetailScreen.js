@@ -1,7 +1,7 @@
 import React from "react"
-import { View, Text } from "react-native"
+import { View, Text, ActivityIndicator } from "react-native"
 import { Container, Content, H1 } from "native-base"
-import { service } from "../services"
+import { Sop, service } from "../services"
 import { regexHtml } from "../config/utils" 
 
 class SopDetailScreen extends React.Component {
@@ -11,15 +11,31 @@ class SopDetailScreen extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      item: null
+    }
   }
 
-  componentDidMount() {
-    service.firebaseManager.setCurrentScreen("SopDetailScreen", "SopDetailScreen")
+  async componentDidMount() {
+    let item, { navigation } = this.props
+    let itemId = navigation.getParam("itemId")
+
+    if( itemId ) {
+      let response = await Sop.find(itemId)
+      item = response.data
+    } else {
+      item = navigation.getParam("item")
+    }
+
+    this.setState({ item })
+
+    service.firebaseManager
+      .setCurrentScreen("SopDetailScreen", "SopDetailScreen")
   }
 
   render() {
-    let { navigation } = this.props
-    let item = navigation.getParam('item')
+    let { item } = this.state
+    if(!item) return <ActivityIndicator />
 
     return <Container>
             <Content contentContainerStyle={{ justifyContent: "center", flex: 1 }}>

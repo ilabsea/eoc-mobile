@@ -2,8 +2,8 @@ import Toast from "react-native-root-toast"
 
 const viewDetail = ({ payload, navigation, android, path, mime }) => {
   if(payload) {
-    let item = JSON.parse(payload.item)
-    navigation.navigate("SopDetail", { item })
+    let itemId = payload.itemId
+    navigation.navigate("SopDetail", { itemId })
   } else if ( android ) {
     android.actionViewIntent(path, mime)
   }
