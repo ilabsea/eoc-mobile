@@ -9,7 +9,7 @@ const EmptyList = ({ isFetching, data }) => (
     <View testID="loading" style={{ flexDirection: 'row' }}>
       <ActivityIndicator 
         style={{opacity: isFetching ? 1.0 : 0.0}} 
-        size="large" color="#0000ff" animating={true} /> 
+        size={60} color="#0000ff" animating={true} /> 
     </View>
   </View>
   : 
