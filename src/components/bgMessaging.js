@@ -4,8 +4,8 @@ import { Sop } from '../services'
 
 export default async (message) => {
   if( message ) {
-    const { data } = message
-    const response = await Sop.find(data.itemId)
+    const { data: { itemId, title, body } } = message
+    const response = await Sop.find(itemId)
     const { id, name, description } = response.data
 
     const notification = new firebase.notifications.Notification({
@@ -13,8 +13,8 @@ export default async (message) => {
                               show_in_foreground: true,
                             })
                             .setNotificationId(`_instedd_ilab_eoc_${id}`)
-                            .setTitle(name)
-                            .setBody(description)
+                            .setTitle(title || name)
+                            .setBody(body || description)
                             .setData({ itemId: id })
                             .setSound('notif')
 
