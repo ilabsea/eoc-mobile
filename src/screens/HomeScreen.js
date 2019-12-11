@@ -4,6 +4,7 @@ import { H3, Button, Icon } from "native-base"
 import { service } from "../services"
 import RenderComponent from './RenderComponent'
 import Root from '../components/Root'
+import codePush from "react-native-code-push"
 
 // TOREMV
 YellowBox.ignoreWarnings(["Remote debugger", "Warning", "Require cycle"])
@@ -84,4 +85,8 @@ const styles = StyleSheet.create({
   }
 })
 
-export default HomeScreen;
+const codePushOptions = {
+  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
+  installMode: codePush.InstallMode.IMMEDIATE
+}
+export default codePush(codePushOptions)(HomeScreen);
