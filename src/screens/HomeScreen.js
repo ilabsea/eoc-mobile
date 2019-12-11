@@ -86,7 +86,6 @@ const styles = StyleSheet.create({
 })
 
 const codePushOptions = {
-  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
-  installMode: codePush.InstallMode.IMMEDIATE
+  checkFrequency: codePush.CheckFrequency.ON_APP_START
 }
 export default codePush(codePushOptions)(HomeScreen);

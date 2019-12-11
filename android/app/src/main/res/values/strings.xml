@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Emergency Operation Center</string>
-    <string name="default_notification_channel_id">eoc-channel</string>
-    <string name="reactNativeCodePush_androidDeploymentKey" moduleConfig="true" translatable="false">1eClwpz2YVKZCJD56fGbCEpF5Q9JAdWUy89fP</string>
+    <string name="default_notification_channel_id">@string/FIREBASE_CHANNEL_ID</string>
+    <string name="reactNativeCodePush_androidDeploymentKey" moduleConfig="true" translatable="false">@string/CODEPUSH_DEPLOYMENT_KEY</string>
 </resources>
