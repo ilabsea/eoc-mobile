@@ -1,81 +1,69 @@
 import React from 'react'
+
+// Navigation
 import { createAppContainer } from "react-navigation"
 import { createStackNavigator } from 'react-navigation-stack'
 import { createDrawerNavigator } from 'react-navigation-drawer'
-import { H1 } from 'native-base'
+
+import database from '../models/database'
+
+// State
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+
+// Screens
 import Root from '../components/Root' 
-
-const Notification = () => {
-  return <H1>Notification</H1>
-}
-
 import HomeScreen from './HomeScreen'
+import SearchScreen from './SearchScreen'
 import CategoryScreen from './CategoryScreen'
 import SopDetailScreen from './SopDetailScreen'
-import DownloadDirScreen from './DownloadDirScreen'
+import Notification from './NotificationScreen'
 
-const stack = (props) => createStackNavigator({
+const StackNavigator = createStackNavigator({
   Home: {
-    screen: ({ navigation }) => {
-      const { database } = props;
-      return <Root database={database} navigation={navigation}>
-                <HomeScreen database={database} navigation={navigation} />
-              </Root>
-    },
-    navigationOptions: { title: "Guidelines" }
+    screen: HomeScreen,
+  },
+  Search: {
+    screen: SearchScreen,
   },
   Category: {
-    screen: ({ navigation }) => {
-      const { database } = props;
-      return <Root database={database} navigation={navigation}>
-                <CategoryScreen database={database} navigation={navigation}/>
-              </Root>
-    },
-    navigationOptions: { title: "Category" }
+    screen: CategoryScreen,
   },
   SopDetail: {
-    screen: ({ navigation }) => {
-      const { database } = props;
-      return <Root database={database} navigation={navigation}>
-                <SopDetailScreen database={database} navigation={navigation}/>
-              </Root>
-    },
-    navigationOptions: { title: "Sop detail" }
+    screen: SopDetailScreen,
   },
-  DownloadDir: {
-    screen: ({ navigation }) => {
-      const { database } = props;
-      return <Root database={database} navigation={navigation}>
-                <DownloadDirScreen database={database} navigation={navigation}/>
-              </Root>
-    },
-    navigationOptions: { title: "Download directory" }
-  }
 }, {
-  initialRouteName: 'Home',
-  initialRouteParams: props,
-  mode: 'modal',
-  headerMode: 'none',
-  navigationOptions: {
-    title: "Guidelines"
+  initialRouteName: "Home",
+  mode: "modal",
+  headerMode: "float",
+  defaultNavigationOptions: {
+    headerStyle: {
+      backgroundColor: "#3F51B5",
+    },
+    headerTintColor: 'white'
   }
 })
 
-export const createNavigation = props => 
-  createAppContainer(
-    createDrawerNavigator({
-      Root: stack(props),
-      Notification: {
-        screen: ({ navigation }) => {
-          const { database } = props;
-          return <Root database={database} navigation={navigation}>
-                    <Notification />
-                  </Root>
-        },
-        navigationOptions: { title: "Notifications" }
-      }
-    }, {
-      initialRouteName: "Root",
-      initialRouteParams: props
-    })
-  )
+let Navigate = createAppContainer(
+      createDrawerNavigator({
+        Root: StackNavigator,
+        Notification: {
+          screen: Notification,
+          navigationOptions: { title: "Notifications" }
+        }
+      }, {
+        initialRouteName: "Root",
+      })
+    )
+
+const initialState = { database }
+const reducer = (state = initialState, action) => state
+const store = createStore( reducer )
+
+export const createNavigation = () => {
+  return <Provider store={store}>
+    <Root>
+      <Navigate />
+    </Root>
+  </Provider>
+}
