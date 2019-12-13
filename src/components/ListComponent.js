@@ -12,7 +12,7 @@ class ListComponent extends React.Component {
   constructor(props) {
     super(props);
 
-    this.show = this.show.bind(this);
+    this.showDetail = this.showDetail.bind(this);
   }
 
   showDetail() {
