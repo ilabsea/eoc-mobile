@@ -7,33 +7,6 @@ import RenderComponent from './RenderComponent';
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle']);
 
-const HeaderSearch = ({ handleSearch, handleQ }) => {
-  return <View style={{ flex: 1, 
-                flexDirection: 'row', 
-                justifyContent: 'space-between', 
-                alignItems: 'center' }}>
-
-      <TextInput 
-        onSubmitEditing={ handleSearch }
-        style={{ 
-          fontSize: 21, 
-          flex: 1,
-          margin:0, 
-          padding:0, 
-          width: '100%', }}
-        placeholder="Search"
-        autoFocus={true}
-        placeholderTextColor= "white"
-        onChangeText={(keyword) => handleQ(keyword) } />
-
-    <Button 
-      transparent 
-      onPress={() => Alert.alert('search') }>
-      <Icon name="ios-search" />
-    </Button>
-  </View>
-}
-
 class SearchScreen extends Component {
   static navigationOptions = ({navigation}) => {
     return {

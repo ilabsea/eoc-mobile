@@ -49,16 +49,24 @@ const StackNavigator = createStackNavigator(
 );
 
 let Navigate = createAppContainer(
-      createDrawerNavigator({
-        Root: StackNavigator,
-        Notification: {
-          screen: Notification,
-          navigationOptions: { title: "Notifications" }
-        }
-      }, {
-        initialRouteName: "Root",
-      })
-    )
+  createDrawerNavigator(
+    {
+      Root: {
+        screen: StackNavigator,
+        path: 'eoc://',
+      },
+    },
+    {
+      Notification: {
+        screen: Notification,
+        navigationOptions: {title: 'Notifications'},
+      },
+    },
+    {
+      initialRouteName: 'Root',
+    },
+  ),
+);
 
 const initialState = {database};
 const reducer = (state = initialState, action) => state;

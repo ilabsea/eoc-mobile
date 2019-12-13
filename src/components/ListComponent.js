@@ -36,7 +36,7 @@ class ListComponent extends React.Component {
                     <Button transparent style={styleUtils.btnIcon}>
                       <Icon 
                         type="MaterialIcons" 
-                        style={[styles.icon, { color: color }]} 
+                        style={[styles.icon, { color }]} 
                         name={typeIcon} />
                     </Button>
                   </View>
