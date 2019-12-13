@@ -1,49 +1,56 @@
-import * as utils from '../../src/config/utils'
+import * as utils from '../../src/config/utils';
 
 jest.mock('react-native-fs', () => ({
-  ExternalStorageDirectoryPath: "/test"
-}))
+  ExternalStorageDirectoryPath: '/test',
+}));
 
 it('render correctly', () => {
   const source = {
     name: 'sop name',
-    file: { 
-      url: '/file.pdf' 
-    }
-  }
+    file: {
+      url: '/file.pdf',
+    },
+  };
 
-  const expected = ["remoteUrl", "sopName", "fileName", "fileDigest", "localUrl", "mime"]
-  const response = utils.fileInfo(source)
+  const expected = [
+    'remoteUrl',
+    'sopName',
+    'fileName',
+    'fileDigest',
+    'localUrl',
+    'mime',
+  ];
+  const response = utils.fileInfo(source);
 
-  expect( response ).toHaveProperty('remoteUrl')
-  expect( response ).toHaveProperty('sopName', 'sop name')
-  expect( Object.keys(response) )
-    .toEqual( expect.arrayContaining(expected) )
-})
+  expect(response).toHaveProperty('remoteUrl');
+  expect(response).toHaveProperty('sopName', 'sop name');
+  expect(Object.keys(response)).toEqual(expect.arrayContaining(expected));
+});
 
 describe('#iconMapping', () => {
-  it('bases on `sops` type', () => {
-    expect( utils.iconMapping('sops') ).toMatchObject({
+  it('bases on `Sop` type', () => {
+    expect(utils.iconMapping('Sop')).toMatchObject({
       type: 'MaterialIcons',
       typeIcon: 'picture-as-pdf',
       actionIcon: 'file-download',
       action: 'download',
-      color: '#b1090c'
-    })
-  })
+      color: '#b1090c',
+    });
+  });
 
-  it('bases on `categories` type', () => {
-    expect( utils.iconMapping('categories') ).toMatchObject({
-      type: 'MaterialIcons', 
-      typeIcon: 'folder', 
-      actionIcon: "arrow-forward", 
-      action: "navigate",
-      color: '#f39c24'
-    })
-  })
-})
+  it('bases on `Category` type', () => {
+    expect(utils.iconMapping('Category')).toMatchObject({
+      type: 'MaterialIcons',
+      typeIcon: 'folder',
+      actionIcon: 'arrow-forward',
+      action: 'navigate',
+      color: '#f39c24',
+    });
+  });
+});
 
 it('returns real name', () => {
-  expect( utils.realname('digest_string-real-name.pdf') ).toEqual('real-name.pdf')
-})
-
+  expect(utils.realname('digest_string-real-name.pdf')).toEqual(
+    'real-name.pdf',
+  );
+});
