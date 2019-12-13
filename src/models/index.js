@@ -1,3 +1,3 @@
-import Downloads from './Download'
+import Downloads from './Download';
 
-export const modelClasses = [Downloads]
+export const modelClasses = [Downloads];

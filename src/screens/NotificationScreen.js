@@ -1,6 +1,6 @@
-import React from 'react'
-import { View, Text } from 'react-native'
-import { Icon } from 'native-base'
+import React from 'react';
+import {View, Text} from 'react-native';
+import {Icon} from 'native-base';
 
 class NotificationScreen extends React.Component {
   render() {
@@ -8,16 +8,14 @@ class NotificationScreen extends React.Component {
       <View>
         <Text>NotificationScreen</Text>
       </View>
-    )
+    );
   }
 }
 
 NotificationScreen.navigationOptions = {
-  header:null,
+  header: null,
   drawerLabel: 'Notification',
-  drawerIcon: ({ tintColor }) => (
-    <Icon name="md-notifications" />
-  ),
+  drawerIcon: ({tintColor}) => <Icon name="md-notifications" />,
 };
 
-export default NotificationScreen
+export default NotificationScreen;

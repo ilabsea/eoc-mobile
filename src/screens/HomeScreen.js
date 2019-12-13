@@ -7,7 +7,7 @@ import Root from '../components/Root'
 import codePush from "react-native-code-push"
 
 // TOREMV
-YellowBox.ignoreWarnings(["Remote debugger", "Warning", "Require cycle"])
+YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle']);
 
 const IconSearch = ({ navigation }) => {
   return <Button 
@@ -27,17 +27,18 @@ const HeaderSearch = ({ navigation }) => (
 )
 
 class HomeScreen extends Component {
-  static navigationOptions = ({ navigation }) => {
+  static navigationOptions = ({navigation}) => {
     return {
-      headerTitle: () => <View style={styles.headerTitle}>
-                            <H3 style={styles.headerText}>Guidelines</H3>
-                            <Button transparent 
-                                    onPress={() => navigation.navigate("Search") }>
-                              <Icon name="ios-search" style={styles.headerText} />
-                            </Button>
-                          </View>
-    }
-  }
+      headerTitle: () => (
+        <View style={styles.headerTitle}>
+          <H3 style={styles.headerText}>Guidelines</H3>
+          <Button transparent onPress={() => navigation.navigate('Search')}>
+            <Icon name="ios-search" style={styles.headerText} />
+          </Button>
+        </View>
+      ),
+    };
+  };
 
   componentDidMount() {
     service.firebaseManager.setCurrentScreen("HomeScreen", "HomeScreen")
@@ -66,26 +67,28 @@ class HomeScreen extends Component {
   }
 
   render() {
-    return <Root>
-          <RenderComponent q="*" shouldLoad={true} />
-        </Root>
-  } 
-};
+    return (
+      <Root>
+        <RenderComponent q="*" shouldLoad={true} />
+      </Root>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
-  headerTitle: { 
-    flex: 1, 
-    flexDirection: "row", 
-    justifyContent: "space-between", 
-    alignItems: "center",
-    paddingLeft: 15 
+  headerTitle: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingLeft: 15,
   },
   headerText: {
-    color: "#FFF"
-  }
-})
+    color: '#FFF',
+  },
+});
 
 const codePushOptions = {
-  checkFrequency: codePush.CheckFrequency.ON_APP_START
-}
+  checkFrequency: codePush.CheckFrequency.ON_APP_START,
+};
 export default codePush(codePushOptions)(HomeScreen);

@@ -24,13 +24,13 @@ class DownloadComponent extends React.Component {
   async handleDownload() {
     let granted = await service.permissionManager.requestStorage();
 
-    if( granted ) {
-      let { item } = this.props
-      let { remoteUrl, localUrl, fileName, mime } = fileInfo(item)
-      this.setState({ isDisabled: true, localUrl })
-      service.firebaseManager.logEvent('EVENT_DOWNLOAD', { fileName })
+    if (granted) {
+      let {item} = this.props;
+      let {remoteUrl, localUrl, fileName, mime} = fileInfo(item);
+      this.setState({isDisabled: true, localUrl});
+      service.firebaseManager.logEvent('EVENT_DOWNLOAD', {fileName});
 
-      service.downloadManager.inTrayDownload(remoteUrl, fileName, mime)
+      service.downloadManager.inTrayDownload(remoteUrl, fileName, mime);
     }
   }
 

@@ -1,19 +1,18 @@
-import React from "react"
-import styleUtils from "../config/styles"
-import { View, StyleSheet, Text,
-          TouchableWithoutFeedback } from "react-native"
-import { Button, H3, Icon } from "native-base"
-import CardView from "react-native-cardview"
-import { withNavigation } from 'react-navigation'
-import { regexHtml } from "../config/utils" 
+import React from 'react';
+import styleUtils from '../config/styles';
+import {View, StyleSheet, Text, TouchableWithoutFeedback} from 'react-native';
+import {Button, H3, Icon} from 'native-base';
+import CardView from 'react-native-cardview';
+import {withNavigation} from 'react-navigation';
+import {regexHtml} from '../config/utils';
 
 import Textile from "../components/TextileComponent"
 
 class ListComponent extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.show = this.show.bind(this)
+    this.show = this.show.bind(this);
   }
 
   showDetail() {
@@ -22,8 +21,8 @@ class ListComponent extends React.Component {
   }
 
   render() {
-    let { item, typeIcon, color } = this.props
-    let { parent_id, name, description } = item
+    let {item, typeIcon, color} = this.props;
+    let {parent_id, name, description} = item;
 
     return <TouchableWithoutFeedback 
               onPress={() => item.description && this.showDetail()}>
@@ -61,34 +60,46 @@ class ListComponent extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  wrapper: { 
-    flex: 1, 
-    flexDirection: "row" 
+  wrapper: {
+    flex: 1,
+    flexDirection: 'row',
   },
-  center: { 
-    flex: 1, 
-    justifyContent: "center", 
-    alignItems: "center" 
+  center: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   header: {
     fontSize: 17,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginTop: 5,
-    marginBottom: 5
+    marginBottom: 5,
+  },
+  card: {
+    margin: 10,
+    padding: 10,
+    marginBottom: 0,
   },
   cardview: {
-    margin: 10, 
-    paddingTop: 10, 
-    paddingBottom: 10, 
-    marginBottom: 0
+    margin: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
+    marginBottom: 0,
   },
-  descriptionWrapper: { 
-    flex: 3, 
-    justifyContent: "center" 
+  descriptionWrapper: {
+    flex: 3,
+    justifyContent: 'center',
   },
   icon: {
-    fontSize: 42
-  }
-})
+    fontSize: 42,
+  },
+  indicatorIcon: {
+    fontSize: 32,
+  },
+  content: {
+    flex: 3,
+    justifyContent: 'center',
+  },
+});
 
-export default withNavigation(ListComponent)
+export default withNavigation(ListComponent);
