@@ -39,6 +39,12 @@ On iOS:
 react-native run-ios
 ```
 
+# Test
+
+```
+npm run test
+```
+
 # Environment:
 ```
 Binaries:
