@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import { YellowBox, View, StyleSheet } from "react-native"
+import React, {Component} from 'react';
+import {YellowBox, View, StyleSheet} from 'react-native';
 import Config from 'react-native-config';
 
 import axios from 'axios';
 import * as config from '../config/connectionBase';
-import { H3, Button, Icon } from "native-base"
+import {H3, Button, Icon} from 'native-base';
 
-import { service } from "../services"
-import RenderComponent from './RenderComponent'
-import Root from '../components/Root'
-import codePush from "react-native-code-push"
+import {service} from '../services';
+import RenderComponent from './RenderComponent';
+import Root from '../components/Root';
+import codePush from 'react-native-code-push';
 
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle']);
@@ -99,7 +99,7 @@ class HomeScreen extends Component {
   };
 
   componentDidMount() {
-    service.firebaseManager.setCurrentScreen("HomeScreen", "HomeScreen")
+    service.firebaseManager.setCurrentScreen('HomeScreen', 'HomeScreen');
   }
 
   render() {

@@ -1,6 +1,6 @@
-import React from 'react'
-import { List } from 'native-base'
-import ListComponent from '../components/ListComponent'
+import React from 'react';
+import {List} from 'native-base';
+import ListComponent from '../components/ListComponent';
 
 const ListGroup = props => {
   let {Component} = props;
