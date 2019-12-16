@@ -1,33 +1,29 @@
-import React from 'react'
-import { service } from '../services'
-import firebase from 'react-native-firebase'
-import AsyncStorage from '@react-native-community/async-storage'
+import React from 'react';
+import {service} from '../services';
+import firebase from 'react-native-firebase';
+import AsyncStorage from '@react-native-community/async-storage';
+import {withNavigation} from 'react-navigation';
 
 class Root extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      keyword: ''
-    }
-  }
-
   async componentDidMount() {
-    this.checkPermission()
-    this.createNotificationListeners()
-    await service.permissionManager.requestStorage()
-    await firebase.analytics().setAnalyticsCollectionEnabled(true)
+    this.checkPermission();
+    this.createNotificationListeners();
+    await service.permissionManager.requestStorage();
+    await firebase.crashlytics().enableCrashlyticsCollection();
+    await firebase.analytics().setAnalyticsCollectionEnabled(true);
   }
 
   checkPermission() {
-    firebase.messaging().hasPermission()
-    .then(enabled => {
-      if (enabled) {
-        this.getToken();
-      } else {
-        this.requestPermission()
-      } 
-    });
+    firebase
+      .messaging()
+      .hasPermission()
+      .then(enabled => {
+        if (enabled) {
+          this.getToken();
+        } else {
+          this.requestPermission();
+        }
+      });
   }
 
   async getToken() {
@@ -36,7 +32,17 @@ class Root extends React.Component {
       fcmToken = await firebase.messaging().getToken();
       if (fcmToken) {
         await AsyncStorage.setItem('fcmToken', fcmToken);
-        service.apiManager.saveToken(fcmToken)
+        service.apiManager.saveToken(fcmToken);
+
+        const channel = new firebase.notifications.Android.Channel(
+          'eoc-channel',
+          'EOC Channel',
+          firebase.notifications.Android.Importance.Max,
+        )
+          .setDescription('ilabsoutheastasia.org/eoc')
+          .setSound('notif');
+
+        firebase.notifications().android.createChannel(channel);
       }
     }
   }
@@ -46,52 +52,70 @@ class Root extends React.Component {
       await firebase.messaging().requestPermission();
       this.getToken();
     } catch (e) {
-      service.toastManager.show(e)
+      service.toastManager.show(e);
     }
   }
 
   componentWillUnmount() {
-    this.notificationListener();
-    this.notificationOpenedListener();
+    this.removeMessageListener();
+    this.removeNotificationListener();
+    this.removeNotificationOpenedListener();
   }
 
-  async createNotificationListeners() {
-    /*
-    * Triggered when a particular notification has been received in foreground
-    * */
-    this.notificationListener = firebase.notifications().onNotification((notification) => {
-      const { title, body } = notification;
-      // service.toastManager.show('New notification!')
-    });
-  
-    /*
-    * If your app is in background, you can listen for when a notification is clicked / tapped / opened as follows:
-    * */
-    this.notificationOpenedListener = firebase.notifications().onNotificationOpened((notificationOpen) => {
-      const { title, body } = notificationOpen.notification;
-    });
-  
-    /*
-    * If your app is closed, you can check if it was opened by a notification being clicked / tapped / opened as follows:
-    * */
-    const notificationOpen = await firebase.notifications().getInitialNotification();
-    if (notificationOpen) {
-      const { title, body } = notificationOpen.notification;
+  handleDetailNavigate(listener) {
+    if (listener) {
+      const {data} = listener.notification;
+      let itemId = data.itemId;
+      this.props.navigation.navigate('SopDetail', {itemId});
     }
+  }
+
+  createNotificationListeners() {
+    /*
+     * app is in foreground
+     * */
+    this.removeNotificationListener = firebase
+      .notifications()
+      .onNotification(notification => {
+        const {data} = notification;
+        let params = {payload: data, navigation: this.props.navigation};
+        service.toastManager.show('New notification!', params);
+      });
 
     /*
-    * called by #notify_with_key
-    */
-    this.messageListener = firebase.messaging().onMessage((message) => {
-      let data = { payload: message._data }
-      service.toastManager.show('New notification!', data)
-    })
+     * app is in background
+     * */
+    this.removeNotificationOpenedListener = firebase
+      .notifications()
+      .onNotificationOpened(notificationOpen => {
+        this.handleDetailNavigate(notificationOpen);
+      });
 
+    /*
+     * subscribe to a topic
+     * */
+    this.removeMessageListener = firebase
+      .messaging()
+      .onMessage(notification => {
+        const {data} = notification;
+        let params = {payload: data, navigation: this.props.navigation};
+        service.toastManager.show('New notification!', params);
+      });
+
+    /*
+     * app is closed
+     * */
+    firebase
+      .notifications()
+      .getInitialNotification()
+      .then(notificationInitial => {
+        this.handleDetailNavigate(notificationInitial);
+      });
   }
 
   render() {
-    return this.props.children
+    return this.props.children;
   }
 }
 
-export default Root
+export default withNavigation(Root);

@@ -1,15 +1,15 @@
-import Toast from 'react-native-root-toast'
+import Toast from 'react-native-root-toast';
 
-const viewDetail = ({ payload, database, navigation, android, path, mime }) => {
-  if(payload) {
-    let item = JSON.parse(payload.item)
-    navigation.navigate('SopDetail', { item, database })
-  } else if ( android ) {
-    android.actionViewIntent(path, mime)
+const viewDetail = ({payload, navigation, android, path, mime}) => {
+  if (payload) {
+    let itemId = payload.itemId;
+    navigation.navigate('SopDetail', {itemId});
+  } else if (android) {
+    android.actionViewIntent(path, mime);
   }
-}
+};
 
-export const show = (msg, data={}) => {
+export const show = (msg, data = {}) => {
   let toast = Toast.show(msg, {
     duration: Toast.durations.LONG,
     position: Toast.positions.BOTTOM,
@@ -17,7 +17,7 @@ export const show = (msg, data={}) => {
     animation: true,
     hideOnPress: true,
     delay: 0,
-    onPress: () => viewDetail(data)
-  })
-  return toast
-}
+    onPress: () => viewDetail(data),
+  });
+  return toast;
+};

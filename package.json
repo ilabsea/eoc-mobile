@@ -1,5 +1,5 @@
 {
-  "name": "eocmobileapp",
+  "name": "EmergencyOperationCenter",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -22,8 +22,10 @@
     "react-native": "0.60.5",
     "react-native-background-downloader": "^2.2.0",
     "react-native-cardview": "^2.0.5",
+    "react-native-code-push": "^5.7.0",
+    "react-native-config": "^0.12.0",
     "react-native-file-viewer": "^2.0.0",
-    "react-native-firebase": "^5.5.6",
+    "react-native-firebase": "~5.5.6",
     "react-native-fs": "^2.14.1",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-highlight-words": "^1.0.1",
@@ -44,15 +46,22 @@
     "@babel/core": "^7.6.0",
     "@babel/plugin-proposal-decorators": "^7.6.0",
     "@babel/runtime": "^7.6.0",
+    "@bam.tech/react-native-make": "^1.0.3",
     "@react-native-community/eslint-config": "^0.0.5",
     "babel-jest": "^24.9.0",
+    "babel-preset-react-native": "^4.0.1",
     "eslint": "^6.4.0",
     "jest": "^24.9.0",
+    "jest-react-native": "^18.0.0",
     "metro-react-native-babel-preset": "^0.56.0",
-    "react-test-renderer": "16.8.6",
+    "react-test-renderer": "^16.8.6",
     "ws": ">=3.3.1"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|react-navigation|native-base|rn-fetch-blob|static-container)"
+    ],
+    "setupFiles": []
   }
 }

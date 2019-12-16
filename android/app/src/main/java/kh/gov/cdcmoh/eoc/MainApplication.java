@@ -1,4 +1,4 @@
-package com.eocmobileapp;
+package kh.gov.cdcmoh.eoc;
 
 import android.app.Application;
 import android.util.Log;
@@ -7,22 +7,16 @@ import com.facebook.react.PackageList;
 import com.facebook.hermes.reactexecutor.HermesExecutorFactory;
 import com.facebook.react.bridge.JavaScriptExecutorFactory;
 import com.facebook.react.ReactApplication;
-import com.RNFetchBlob.RNFetchBlobPackage;
-import com.kishanjvaghela.cardview.RNCardViewPackage;
-import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
-import com.apsl.versionnumber.RNVersionNumberPackage;
-import com.vinzscam.reactnativefileviewer.RNFileViewerPackage;
-import com.rnfs.RNFSPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.eko.RNBackgroundDownloaderPackage;
 import com.nozbe.watermelondb.WatermelonDBPackage;
 
-import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
+import io.invertase.firebase.fabric.crashlytics.RNFirebaseCrashlyticsPackage;
+import com.microsoft.codepush.react.CodePush;
 
 import java.util.List;
 
@@ -32,6 +26,11 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     public boolean getUseDeveloperSupport() {
       return BuildConfig.DEBUG;
+    }
+
+    @Override
+    protected String getJSBundleFile() {
+      return CodePush.getJSBundleFile();
     }
 
     @Override
@@ -46,6 +45,7 @@ public class MainApplication extends Application implements ReactApplication {
       packages.add(new RNFirebaseMessagingPackage());
       packages.add(new RNFirebaseNotificationsPackage());
       packages.add(new RNFirebaseAnalyticsPackage());
+      packages.add(new RNFirebaseCrashlyticsPackage());
 
       return packages;
     }
