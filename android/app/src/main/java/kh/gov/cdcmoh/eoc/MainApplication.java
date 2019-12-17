@@ -47,7 +47,6 @@ public class MainApplication extends Application implements ReactApplication {
       packages.add(new RNFirebaseNotificationsPackage());
       packages.add(new RNFirebaseAnalyticsPackage());
       packages.add(new RNFirebaseCrashlyticsPackage());
-      packages.add(new SplashScreenReactPackage());
 
       return packages;
     }

@@ -7,6 +7,7 @@ import SplashScreen from 'react-native-splash-screen';
 
 class Root extends React.Component {
   async componentDidMount() {
+    SplashScreen.hide();
     this.checkPermission();
     this.createNotificationListeners();
     await service.permissionManager.requestStorage();
