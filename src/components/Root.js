@@ -3,6 +3,7 @@ import {service} from '../services';
 import firebase from 'react-native-firebase';
 import AsyncStorage from '@react-native-community/async-storage';
 import {withNavigation} from 'react-navigation';
+import SplashScreen from 'react-native-splash-screen';
 
 class Root extends React.Component {
   async componentDidMount() {
