@@ -5,6 +5,12 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {withNavigation} from 'react-navigation';
 import SplashScreen from 'react-native-splash-screen';
 
+if (__DEV__) {
+  import('../../ReactotronConfig').then(() =>
+    console.log('Reactotron Configured'),
+  );
+}
+
 class Root extends React.Component {
   async componentDidMount() {
     SplashScreen.hide();
