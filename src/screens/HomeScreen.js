@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import {YellowBox, View, StyleSheet} from 'react-native';
+import Config from 'react-native-config';
+import {connectActionSheet} from '@expo/react-native-action-sheet';
+import i18n from 'i18n-js';
 
 import {H3, Button, Icon} from 'native-base';
 
@@ -11,15 +14,25 @@ import codePush from 'react-native-code-push';
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle']);
 
+const languages = {
+  en: () => require('../i18n/en.json'),
+  km: () => require('../i18n/km.json'),
+};
+
 class HomeScreen extends Component {
   static navigationOptions = ({navigation}) => {
     return {
       headerTitle: () => (
         <View style={styles.headerTitle}>
-          <H3 style={styles.headerText}>Guidelines</H3>
-          <Button transparent onPress={() => navigation.navigate('Search')}>
-            <Icon name="ios-search" style={styles.headerText} />
-          </Button>
+          <H3 style={styles.headerText}>{navigation.getParam('title')}</H3>
+          <View style={{flexDirection: 'row'}}>
+            <Button transparent onPress={() => navigation.navigate('Search')}>
+              <Icon name="ios-search" style={styles.headerText} />
+            </Button>
+            <Button transparent onPress={navigation.getParam('changeLanguage')}>
+              <Icon name="ios-globe" style={styles.headerText} />
+            </Button>
+          </View>
         </View>
       ),
     };
@@ -35,6 +48,30 @@ class HomeScreen extends Component {
       data: [],
     };
   }
+
+  _onOpenActionSheet = () => {
+    const options = ['English', 'ខ្មែរ', 'Cancel'];
+    const destructiveButtonIndex = 2;
+    const cancelButtonIndex = 2;
+    const getLang = {
+      0: 'en',
+      1: 'km',
+      2: 'en',
+    };
+    this.props.showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex,
+        destructiveButtonIndex,
+        title: 'ជ្រើសរើសភាសា/Choose language:',
+      },
+      buttonIndex => {
+        const lang = getLang[buttonIndex];
+        this.setI18n(lang);
+        this.props.navigation.setParams({title: i18n.t('guideline')});
+      },
+    );
+  };
 
   codePushStatusDidChange(status) {
     switch (status) {
@@ -63,7 +100,18 @@ class HomeScreen extends Component {
   }
 
   componentDidMount() {
+    this.setI18n(i18n.currentLocale());
+    this.props.navigation.setParams({
+      changeLanguage: this._onOpenActionSheet,
+      title: i18n.t('guideline'),
+    });
     service.firebaseManager.setCurrentScreen('HomeScreen', 'HomeScreen');
+  }
+
+  setI18n(lang) {
+    i18n.translations = {[lang]: languages[lang]()};
+    i18n.locale = lang;
+    this.forceUpdate();
   }
 
   render() {
@@ -91,4 +139,5 @@ const styles = StyleSheet.create({
 const codePushOptions = {
   checkFrequency: codePush.CheckFrequency.ON_APP_START,
 };
-export default codePush(codePushOptions)(HomeScreen);
+const HomeConnect = connectActionSheet(HomeScreen);
+export default codePush(codePushOptions)(HomeConnect);

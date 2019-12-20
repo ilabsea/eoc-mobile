@@ -5,6 +5,7 @@ import Reactotron from '../../ReactotronConfig';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createDrawerNavigator} from 'react-navigation-drawer';
+import {ActionSheetProvider} from '@expo/react-native-action-sheet';
 
 import database from '../models/database';
 
@@ -76,7 +77,9 @@ const store = createStore(reducer, Reactotron.createEnhancer());
 export const createNavigation = () => {
   return (
     <Provider store={store}>
-      <Navigate />
+      <ActionSheetProvider>
+        <Navigate />
+      </ActionSheetProvider>
     </Provider>
   );
 };
