@@ -3,6 +3,7 @@ import {YellowBox, View, StyleSheet} from 'react-native';
 import Config from 'react-native-config';
 import {connectActionSheet} from '@expo/react-native-action-sheet';
 import i18n from 'i18n-js';
+import {connect} from 'react-redux';
 
 import {H3, Button, Icon} from 'native-base';
 
@@ -11,13 +12,10 @@ import RenderComponent from './RenderComponent';
 import Root from '../components/Root';
 import codePush from 'react-native-code-push';
 
+import {setLang} from '../actions';
+
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle']);
-
-const languages = {
-  en: () => require('../i18n/en.json'),
-  km: () => require('../i18n/km.json'),
-};
 
 class HomeScreen extends Component {
   static navigationOptions = ({navigation}) => {
@@ -25,7 +23,7 @@ class HomeScreen extends Component {
       headerTitle: () => (
         <View style={styles.headerTitle}>
           <H3 style={styles.headerText}>{navigation.getParam('title')}</H3>
-          <View style={{flexDirection: 'row'}}>
+          <View style={styles.dirRow}>
             <Button transparent onPress={() => navigation.navigate('Search')}>
               <Icon name="ios-search" style={styles.headerText} />
             </Button>
@@ -67,7 +65,8 @@ class HomeScreen extends Component {
       },
       buttonIndex => {
         const lang = getLang[buttonIndex];
-        this.setI18n(lang);
+        this.props.setLang(lang);
+        service.translateManager.translate(lang);
         this.props.navigation.setParams({title: i18n.t('guideline')});
       },
     );
@@ -100,18 +99,13 @@ class HomeScreen extends Component {
   }
 
   componentDidMount() {
-    this.setI18n(i18n.currentLocale());
-    this.props.navigation.setParams({
+    const {navigation, lang} = this.props;
+    service.translateManager.translate(lang);
+    navigation.setParams({
       changeLanguage: this._onOpenActionSheet,
       title: i18n.t('guideline'),
     });
     service.firebaseManager.setCurrentScreen('HomeScreen', 'HomeScreen');
-  }
-
-  setI18n(lang) {
-    i18n.translations = {[lang]: languages[lang]()};
-    i18n.locale = lang;
-    this.forceUpdate();
   }
 
   render() {
@@ -134,10 +128,21 @@ const styles = StyleSheet.create({
   headerText: {
     color: '#FFF',
   },
+  dirRow: {
+    flexDirection: 'row',
+  },
 });
 
 const codePushOptions = {
   checkFrequency: codePush.CheckFrequency.ON_APP_START,
 };
 const HomeConnect = connectActionSheet(HomeScreen);
-export default codePush(codePushOptions)(HomeConnect);
+const mapStateToProps = state => {
+  let {lang} = state;
+  return {lang};
+};
+const mapDispatchToProps = {setLang};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(codePush(codePushOptions)(HomeConnect));

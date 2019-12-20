@@ -3,6 +3,7 @@ import * as downloadManager from './downloaders';
 import * as toastManager from './toasters';
 import * as apiManager from './apis';
 import * as firebaseManager from './firebase';
+import * as translateManager from './i18n';
 import {sop} from './sop';
 // import * as dbManager from './watermelondb'
 
@@ -16,5 +17,6 @@ export const service = {
   toastManager,
   apiManager,
   firebaseManager,
+  translateManager,
   // dbManager,
 };

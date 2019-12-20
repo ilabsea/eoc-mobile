@@ -1,5 +1,6 @@
 import React from 'react';
 import Reactotron from '../../ReactotronConfig';
+import i18n from 'i18n-js';
 
 // Navigation
 import {createAppContainer} from 'react-navigation';
@@ -70,9 +71,16 @@ let Navigate = createAppContainer(
   ),
 );
 
-const initialState = {database};
-const reducer = (state = initialState, action) => state;
-const store = createStore(reducer, Reactotron.createEnhancer());
+const initialState = {database, lang: i18n.currentLocale()};
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'SET_LANG':
+      return {lang: action.lang};
+    default:
+      return state;
+  }
+};
+const store = createStore(reducer);
 
 export const createNavigation = () => {
   return (

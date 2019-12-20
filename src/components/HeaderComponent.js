@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, TextInput, StyleSheet} from 'react-native';
 import {Button, Icon} from 'native-base';
+import i18n from 'i18n-js';
 
 const HeaderComponent = ({handleSearch, handleQ}) => {
   return (
@@ -8,7 +9,7 @@ const HeaderComponent = ({handleSearch, handleQ}) => {
       <TextInput
         onSubmitEditing={handleSearch}
         style={styles.searchInput}
-        placeholder="Search"
+        placeholder={i18n.t('search')}
         autoFocus={true}
         placeholderTextColor="white"
         onChangeText={keyword => handleQ(keyword)}
