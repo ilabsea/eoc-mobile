@@ -23,7 +23,8 @@ exports[`render correctly 1`] = `
     No related items
   </Text>
   <Text>
-    App version: 
+    App version
+    : 
   </Text>
 </View>
 `;

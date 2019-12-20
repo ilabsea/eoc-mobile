@@ -1,6 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import EmptyList from '../src/screens/EmptyList';
+import {translate} from '../src/services/i18n';
+translate('en');
 
 const isChildExist = (tree, type) => {
   let child;
