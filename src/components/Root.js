@@ -4,6 +4,7 @@ import firebase from 'react-native-firebase';
 import AsyncStorage from '@react-native-community/async-storage';
 import {withNavigation} from 'react-navigation';
 import SplashScreen from 'react-native-splash-screen';
+import i18n from 'i18n-js';
 
 class Root extends React.Component {
   async componentDidMount() {
@@ -81,7 +82,7 @@ class Root extends React.Component {
       .onNotification(notification => {
         const {data} = notification;
         let params = {payload: data, navigation: this.props.navigation};
-        service.toastManager.show('New notification!', params);
+        service.toastManager.show(i18n.t('new_sop'), params);
       });
 
     /*
@@ -101,7 +102,7 @@ class Root extends React.Component {
       .onMessage(notification => {
         const {data} = notification;
         let params = {payload: data, navigation: this.props.navigation};
-        service.toastManager.show('New notification!', params);
+        service.toastManager.show(i18n.t('new_sop'), params);
       });
 
     /*

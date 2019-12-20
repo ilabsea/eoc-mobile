@@ -3,7 +3,6 @@ import {YellowBox} from 'react-native';
 import {service} from '../services';
 import HeaderComponent from '../components/HeaderComponent';
 import RenderComponent from './RenderComponent';
-import {connect} from 'react-redux';
 
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle']);
@@ -34,7 +33,6 @@ class SearchScreen extends Component {
   };
 
   componentWillMount() {
-    service.translateManager.translate(this.props.lang);
     this.setNavigationParams();
   }
 
@@ -56,9 +54,4 @@ class SearchScreen extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  let {lang} = state;
-  return {lang};
-};
-
-export default connect(mapStateToProps)(SearchScreen);
+export default SearchScreen;

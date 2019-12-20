@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, ActivityIndicator, View, Text} from 'react-native';
 import {H1} from 'native-base';
 import {appVersion} from '../config/utils';
+import i18n from 'i18n-js';
 
 const Loading = ({isFetching}) => {
   const opacity = isFetching ? 1.0 : 0.0;
@@ -24,8 +25,10 @@ const EmptyList = ({isFetching, data}) => {
     <Loading isFetching={isFetching} />
   ) : data.length === 0 ? (
     <View style={styles.noItem}>
-      <H1 testID="emptyMsg">No related items</H1>
-      <Text>App version: {appVersion}</Text>
+      <H1 testID="emptyMsg">{i18n.t('no_item')}</H1>
+      <Text>
+        {i18n.t('app_version')}: {appVersion}
+      </Text>
     </View>
   ) : null;
 };

@@ -1,4 +1,7 @@
 {
   "guideline": "Guideline",
-  "search": "Search"
+  "search": "Search",
+  "no_item": "No related items",
+  "app_version": "App version",
+  "new_sop": "New SOP"
 }
