@@ -3,11 +3,12 @@ import {View, Text, ActivityIndicator, StyleSheet} from 'react-native';
 import {Container, Content, H1} from 'native-base';
 import {Sop, service} from '../services';
 import {regexHtml} from '../config/utils';
+import i18n from 'i18n-js';
 
 class SopDetailScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Detail',
-  };
+  static navigationOptions = () => ({
+    title: i18n.t('detail'),
+  });
 
   constructor(props) {
     super(props);
