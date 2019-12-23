@@ -13,6 +13,9 @@ import database from '../models/database';
 // State
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
+import {persistStore, persistReducer} from 'redux-persist';
+import AsyncStorage from '@react-native-community/async-storage';
+import {PersistGate} from 'redux-persist/integration/react';
 
 // Screens
 import HomeScreen from './HomeScreen';
@@ -20,6 +23,12 @@ import SearchScreen from './SearchScreen';
 import CategoryScreen from './CategoryScreen';
 import SopDetailScreen from './SopDetailScreen';
 import Notification from './NotificationScreen';
+
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage,
+  whitelist: ['lang'],
+};
 
 const StackNavigator = createStackNavigator(
   {
@@ -35,7 +44,7 @@ const StackNavigator = createStackNavigator(
     SopDetail: {
       screen: SopDetailScreen,
       path: 'eoc://detail/:sopId',
-      navigationOptions: {title: 'Sop detail'},
+      navigationOptions: {title: i18n.t('detail')},
     },
   },
   {
@@ -80,14 +89,18 @@ const reducer = (state = initialState, action) => {
       return state;
   }
 };
-const store = createStore(reducer);
+const persistedReducer = persistReducer(persistConfig, reducer);
+const store = createStore(persistedReducer);
+const persistor = persistStore(store);
 
 export const createNavigation = () => {
   return (
     <Provider store={store}>
-      <ActionSheetProvider>
-        <Navigate />
-      </ActionSheetProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <ActionSheetProvider>
+          <Navigate />
+        </ActionSheetProvider>
+      </PersistGate>
     </Provider>
   );
 };
