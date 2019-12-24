@@ -54,20 +54,21 @@ class HomeScreen extends Component {
     const getLang = {
       0: 'en',
       1: 'km',
-      2: 'en',
     };
     this.props.showActionSheetWithOptions(
       {
         options,
         cancelButtonIndex,
         destructiveButtonIndex,
-        title: 'ជ្រើសរើសភាសា/Choose language:',
+        title: i18n.t('choose_lang'),
       },
       buttonIndex => {
-        const lang = getLang[buttonIndex];
-        this.props.setLang(lang);
-        service.translateManager.translate(lang);
-        this.props.navigation.setParams({title: i18n.t('guideline')});
+        if (buttonIndex <= 1) {
+          const lang = getLang[buttonIndex];
+          this.props.setLang(lang);
+          service.translateManager.translate(lang);
+          this.props.navigation.setParams({title: i18n.t('guideline')});
+        }
       },
     );
   };
