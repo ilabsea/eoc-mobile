@@ -1,4 +1,5 @@
 import React from 'react';
+import Reactotron from '../../ReactotronConfig';
 
 // Navigation
 import {createAppContainer} from 'react-navigation';
@@ -70,7 +71,7 @@ let Navigate = createAppContainer(
 
 const initialState = {database};
 const reducer = (state = initialState, action) => state;
-const store = createStore(reducer);
+const store = createStore(reducer, Reactotron.createEnhancer());
 
 export const createNavigation = () => {
   return (

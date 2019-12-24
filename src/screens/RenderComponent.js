@@ -3,6 +3,7 @@ import {FlatList, StyleSheet} from 'react-native';
 import {Container} from 'native-base';
 import EmptyList from './EmptyList';
 import {service} from '../services';
+import Config from 'react-native-config';
 
 import {iconMapping} from '../config/utils';
 import axios from 'axios';
@@ -35,10 +36,11 @@ class RenderComponent extends React.Component {
     let {page} = this.state;
     let uri = `${config.uri}/${config.sops_path}`;
     let params = {q, page};
+    let headers = {Authorization: `bearer ${Config.SERVER_SECRET_KEY_BASE}`};
 
     try {
       let data = await axios
-        .get(uri, {params})
+        .get(uri, {params, headers})
         .then(resp => resp.data)
         .catch(error => error);
 

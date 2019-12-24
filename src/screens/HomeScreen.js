@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import {YellowBox, View, StyleSheet} from 'react-native';
-import Config from 'react-native-config';
 
-import axios from 'axios';
-import * as config from '../config/connectionBase';
 import {H3, Button, Icon} from 'native-base';
 
 import {service} from '../services';
@@ -37,10 +34,6 @@ class HomeScreen extends Component {
       q: '',
       data: [],
     };
-
-    // this.loadMore = this.loadMore.bind(this)
-    // this.renderRow = this.renderRow.bind(this)
-    this.handleFetch = this.handleFetch.bind(this);
   }
 
   codePushStatusDidChange(status) {
@@ -68,35 +61,6 @@ class HomeScreen extends Component {
       progress.receivedBytes + ' of ' + progress.totalBytes + ' received.',
     );
   }
-
-  handleFetch = async q => {
-    let {page} = this.state;
-    let uri = `${config.uri}/${config.sops_path}`;
-    let params = {q, page};
-    let headers = {Authorization: `bearer ${Config.SERVER_SECRET_KEY_BASE}`};
-
-    try {
-      let data = await axios
-        .get(uri, {params, headers})
-        .then(resp => resp.data)
-        .catch(error => error);
-
-      if (data.status === 'bad_request') {
-        service.toastManager.show(data.error);
-      } else if (data.length > 0) {
-        this.setState(prev => {
-          return {
-            data: [...prev.data, ...data],
-            page: prev.page + 1,
-          };
-        });
-      }
-
-      this.setState({isFetching: false});
-    } catch (error) {
-      service.toastManager.show(error);
-    }
-  };
 
   componentDidMount() {
     service.firebaseManager.setCurrentScreen('HomeScreen', 'HomeScreen');
