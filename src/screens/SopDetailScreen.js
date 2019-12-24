@@ -45,7 +45,7 @@ class SopDetailScreen extends React.Component {
 
     return (
       <Container>
-        <Content contentContainerStyle={styles.content}>
+        <Content>
           <View style={styles.wrapper}>
             <H1 style={styles.head}>{item.name}</H1>
             <Text>{item.tags}</Text>
@@ -60,13 +60,10 @@ class SopDetailScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  content: {
-    justifyContent: 'center',
-    flex: 1,
-  },
   wrapper: {
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 30,
     padding: 10,
   },
   head: {
