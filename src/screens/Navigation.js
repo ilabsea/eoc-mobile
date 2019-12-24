@@ -1,6 +1,4 @@
 import React from 'react';
-import Reactotron from '../../ReactotronConfig';
-import i18n from 'i18n-js';
 
 // Navigation
 import {createAppContainer} from 'react-navigation';

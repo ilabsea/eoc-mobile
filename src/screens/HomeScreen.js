@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {YellowBox, View, StyleSheet} from 'react-native';
-import Config from 'react-native-config';
+
 import {connectActionSheet} from '@expo/react-native-action-sheet';
 import i18n from 'i18n-js';
 import {connect} from 'react-redux';
