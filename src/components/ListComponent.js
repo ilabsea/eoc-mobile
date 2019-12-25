@@ -4,6 +4,7 @@ import {View, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {Button, H3, Icon} from 'native-base';
 import CardView from 'react-native-cardview';
 import {withNavigation} from 'react-navigation';
+import {service} from '../services';
 
 import Textile from '../components/TextileComponent';
 
@@ -17,6 +18,18 @@ class ListComponent extends React.Component {
   showDetail() {
     const {item, navigation} = this.props;
     navigation.navigate('SopDetail', {item});
+    service.firebaseManager.logEvent('SHOW_DETAIL', {id: item.id});
+  }
+
+  navigate() {
+    const {item, navigation} = this.props;
+    navigation.push('Category', {sopGuide: item});
+    service.firebaseManager.logEvent('EVENT_NAVIGATE', {id: item.id});
+  }
+
+  perform() {
+    const {item} = this.props;
+    item.description ? this.showDetail() : this.navigate();
   }
 
   render() {
@@ -24,8 +37,7 @@ class ListComponent extends React.Component {
     let {parent_id, name, description} = item;
 
     return (
-      <TouchableWithoutFeedback
-        onPress={() => item.description && this.showDetail()}>
+      <TouchableWithoutFeedback onPress={() => this.perform()}>
         <CardView
           cardElevation={5}
           cardMaxElevation={2}
