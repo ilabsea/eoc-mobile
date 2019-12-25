@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
   },
   headerText: {
+    lineHeight: 30,
     color: '#FFF',
   },
 });
