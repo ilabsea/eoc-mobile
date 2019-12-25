@@ -63,7 +63,7 @@ class SopDetailScreen extends React.Component {
             <H1 style={styles.head}>{item.name}</H1>
             <Text>{item.tags}</Text>
             <Text style={styles.description}>
-              {item.description.replace(regexHtml, '')}
+              {item.description && item.description.replace(regexHtml, '')}
             </Text>
           </View>
         </Content>

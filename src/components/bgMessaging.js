@@ -30,5 +30,7 @@ export default async message => {
       .notifications()
       .displayNotification(notification)
       .catch(err => console.error(err));
+
+    return Promise.resolve();
   }
 };
