@@ -103,7 +103,7 @@ class RenderComponent extends React.Component {
             data={this.state.data}
             keyExtractor={item => `${item._index}-${item.id.toString()}`}
             onEndReached={this.loadMore}
-            onEndReachedThreshold={0.5}
+            onEndReachedThreshold={0.01}
             renderItem={({item}) => this.renderRow(item)}
             contentContainerStyle={styles.list}
           />
