@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Icon, Text} from 'native-base';
+import {Button, Icon} from 'native-base';
 import {icons} from '../../constants/icons';
 
 const DownloadButton = ({handleDownload, isDisabled, isTransparent = true}) => {
@@ -8,14 +8,13 @@ const DownloadButton = ({handleDownload, isDisabled, isTransparent = true}) => {
       <Icon style={icons.styles} type={icons.type} name={icons.name.download} />
     </Button>
   ) : (
-    <Button
-      full
-      primary
-      iconLeft
-      disabled={isDisabled}
-      onPress={handleDownload}>
-      <Icon style={icons.styles} type={icons.type} name={icons.name.download} />
-      <Text>Download</Text>
+    <Button transparent disabled={isDisabled} onPress={handleDownload}>
+      <Icon
+        // eslint-disable-next-line react-native/no-inline-styles
+        style={[icons.styles, {color: '#fff'}]}
+        type={icons.type}
+        name={icons.name.download}
+      />
     </Button>
   );
 };

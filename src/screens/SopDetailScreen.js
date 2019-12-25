@@ -1,14 +1,25 @@
 import React from 'react';
 import {View, Text, ActivityIndicator, StyleSheet} from 'react-native';
-import {Container, Content, H1} from 'native-base';
+import {Container, Content, H1, H3} from 'native-base';
 import {Sop, service} from '../services';
 import {regexHtml} from '../config/utils';
 import i18n from 'i18n-js';
+import DownloadComponent from '../components/DownloadComponent';
 
 class SopDetailScreen extends React.Component {
-  static navigationOptions = () => ({
-    title: i18n.t('detail'),
-  });
+  static navigationOptions = ({navigation}) => {
+    return {
+      headerTitle: () => (
+        <View style={styles.headerTitle}>
+          <H3 style={styles.headerText}>{i18n.t('detail')}</H3>
+          <DownloadComponent
+            item={navigation.getParam('item')}
+            isTransparent={false}
+          />
+        </View>
+      ),
+    };
+  };
 
   constructor(props) {
     super(props);
@@ -35,6 +46,8 @@ class SopDetailScreen extends React.Component {
       'SopDetailScreen',
       'SopDetailScreen',
     );
+
+    navigation.setParams({item});
   }
 
   render() {
@@ -73,6 +86,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 30,
     textAlign: 'center',
+  },
+  headerTitle: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingLeft: 15,
+  },
+  headerText: {
+    color: '#FFF',
   },
 });
 
