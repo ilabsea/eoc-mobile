@@ -5,39 +5,21 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* eocmobileappTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* eocmobileappTests.m */; };
+		00E356F31AD99517003FC87E /* EmergencyOperationCenterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* EmergencyOperationCenterTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		1EF7EA1914BBFD7CB1C17E9E /* libPods-eocmobileapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1683DA6575FF8B54DCB5372C /* libPods-eocmobileapp.a */; };
+		25443E457E8656C86AAE1D19 /* libPods-EmergencyOperationCenter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 215474BBEEE7A6F8F5C85329 /* libPods-EmergencyOperationCenter.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2DCD954D1E0B4F2C00145EB5 /* eocmobileappTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* eocmobileappTests.m */; };
-		33539041D7CB0C8B4F6C8B76 /* libPods-eocmobileapp-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97A07FC994A9551DC02A230F /* libPods-eocmobileapp-tvOSTests.a */; };
-		68C770F7DF1CA2A4B5C49A57 /* libPods-eocmobileappTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82D7CFDFC0632926B9EB45BA /* libPods-eocmobileappTests.a */; };
-		AC641F00AA98421383F62519 /* libPods-eocmobileapp-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A1DBC64D324801B18C5091A /* libPods-eocmobileapp-tvOS.a */; };
-		2CC2388FDD4A4C95BB06A519 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07033521537242128C06BD31 /* AntDesign.ttf */; };
-		845051FC68264E77ADC2C662 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3134B57283A047958A8957D7 /* Entypo.ttf */; };
-		B12070C3F4EA44769FE328E3 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CFB16132D3E24811A771A44E /* EvilIcons.ttf */; };
-		158AC2D09FD14339847BCE76 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F8C29AF288E49D097B6C7B0 /* Feather.ttf */; };
-		64A5FD8812A243F5A33C5B6D /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C35ADCDE88154152ADFEFC05 /* FontAwesome.ttf */; };
-		51B5A7A5CD734821B8BA0EBC /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D52C40B52DDF47C9B2440BFD /* FontAwesome5_Brands.ttf */; };
-		4A65FF873045453A84F962C3 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBC9CDDAF4614790A01B87E1 /* FontAwesome5_Regular.ttf */; };
-		0EE0F7C7B62A4CCB8E81C7CE /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6706B836A7294AF0BDD7EBE0 /* FontAwesome5_Solid.ttf */; };
-		F152DFCF1F424352978743DA /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D004A68B1D84B65BE0AC446 /* Fontisto.ttf */; };
-		17D47B9388FA4A6FB78F1A0A /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 706E807CF6AD42B2ACECEFC7 /* Foundation.ttf */; };
-		FE126D768E9940F7A4ADF022 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9855241EA1FF45E69641938D /* Ionicons.ttf */; };
-		E694F8AB97504482837F6BE1 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58BEBA01C6EA43BDA7AA71D6 /* MaterialCommunityIcons.ttf */; };
-		657F7369843F4B74AEA1A156 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF03D936D44242049E1326BA /* MaterialIcons.ttf */; };
-		893B978BEB5F40FCA991F211 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F421436FDA474E14AEF78817 /* Octicons.ttf */; };
-		2088300D13F747A382922774 /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D7581FA992584E8B8B82FD67 /* Roboto_medium.ttf */; };
-		AC90195BAAEE4BE393770A70 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF9466AD4CEA45F68B6976D7 /* Roboto.ttf */; };
-		05B56B5590C0402C9EF2133A /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6F7E047D1BF04A2CA7457434 /* rubicon-icon-font.ttf */; };
-		260280E4EF3945E7AF1CE722 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F34564BBB8724EB99937768E /* SimpleLineIcons.ttf */; };
-		94D0DCFC910B47D58828EBD4 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A537E6416B04FDDA5D1C16B /* Zocial.ttf */; };
+		2DCD954D1E0B4F2C00145EB5 /* EmergencyOperationCenterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* EmergencyOperationCenterTests.m */; };
+		33948DEFA43FA702A79717AE /* libPods-EmergencyOperationCenter-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E22F0AD67E200361321EA45 /* libPods-EmergencyOperationCenter-tvOSTests.a */; };
+		B282A24CC20364AFC652CDB6 /* libPods-EmergencyOperationCenter-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 117AA679DF3C90E1709EDBB0 /* libPods-EmergencyOperationCenter-tvOS.a */; };
+		EEAD34B5872E7DA0C7052058 /* libPods-EmergencyOperationCenterTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D666225FAF907A21BEBE92A7 /* libPods-EmergencyOperationCenterTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,64 +28,45 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = eocmobileapp;
+			remoteInfo = EmergencyOperationCenter;
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
-			remoteInfo = "eocmobileapp-tvOS";
+			remoteInfo = "EmergencyOperationCenter-tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* eocmobileappTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = eocmobileappTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* EmergencyOperationCenterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmergencyOperationCenterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* eocmobileappTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = eocmobileappTests.m; sourceTree = "<group>"; };
-		0B18F7B49381EA3FC67AB3C8 /* Pods-eocmobileapp-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eocmobileapp-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-eocmobileapp-tvOSTests/Pods-eocmobileapp-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		0E581C9CDECEBE63C74898BC /* Pods-eocmobileapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eocmobileapp.debug.xcconfig"; path = "Target Support Files/Pods-eocmobileapp/Pods-eocmobileapp.debug.xcconfig"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* eocmobileapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eocmobileapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = eocmobileapp/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = eocmobileapp/AppDelegate.m; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* EmergencyOperationCenterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmergencyOperationCenterTests.m; sourceTree = "<group>"; };
+		00F83E955E6558AD172A124E /* Pods-EmergencyOperationCenter-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmergencyOperationCenter-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-EmergencyOperationCenter-tvOS/Pods-EmergencyOperationCenter-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		117AA679DF3C90E1709EDBB0 /* libPods-EmergencyOperationCenter-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EmergencyOperationCenter-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* EmergencyOperationCenter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmergencyOperationCenter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = EmergencyOperationCenter/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = EmergencyOperationCenter/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = eocmobileapp/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = eocmobileapp/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = eocmobileapp/main.m; sourceTree = "<group>"; };
-		1683DA6575FF8B54DCB5372C /* libPods-eocmobileapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-eocmobileapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E47B1E0B4A5D006451C7 /* eocmobileapp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "eocmobileapp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E4901E0B4A5D006451C7 /* eocmobileapp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "eocmobileapp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6A1DBC64D324801B18C5091A /* libPods-eocmobileapp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-eocmobileapp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		76298CBCCDC5580AF09EAEDE /* Pods-eocmobileappTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eocmobileappTests.debug.xcconfig"; path = "Target Support Files/Pods-eocmobileappTests/Pods-eocmobileappTests.debug.xcconfig"; sourceTree = "<group>"; };
-		82D7CFDFC0632926B9EB45BA /* libPods-eocmobileappTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-eocmobileappTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		97A07FC994A9551DC02A230F /* libPods-eocmobileapp-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-eocmobileapp-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A9AE070EEE69885FC27BF5EE /* Pods-eocmobileapp-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eocmobileapp-tvOS.release.xcconfig"; path = "Target Support Files/Pods-eocmobileapp-tvOS/Pods-eocmobileapp-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		C4F25DC514E4B08E07638743 /* Pods-eocmobileapp-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eocmobileapp-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-eocmobileapp-tvOSTests/Pods-eocmobileapp-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		CAEB8F74B5594513FEB1FB56 /* Pods-eocmobileappTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eocmobileappTests.release.xcconfig"; path = "Target Support Files/Pods-eocmobileappTests/Pods-eocmobileappTests.release.xcconfig"; sourceTree = "<group>"; };
-		D58D0913E149719C346CA4F4 /* Pods-eocmobileapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eocmobileapp.release.xcconfig"; path = "Target Support Files/Pods-eocmobileapp/Pods-eocmobileapp.release.xcconfig"; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = EmergencyOperationCenter/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = EmergencyOperationCenter/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = EmergencyOperationCenter/main.m; sourceTree = "<group>"; };
+		187B60B4AA1AF0F997D17FA5 /* Pods-EmergencyOperationCenterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmergencyOperationCenterTests.debug.xcconfig"; path = "Target Support Files/Pods-EmergencyOperationCenterTests/Pods-EmergencyOperationCenterTests.debug.xcconfig"; sourceTree = "<group>"; };
+		215474BBEEE7A6F8F5C85329 /* libPods-EmergencyOperationCenter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EmergencyOperationCenter.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E47B1E0B4A5D006451C7 /* EmergencyOperationCenter-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EmergencyOperationCenter-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* EmergencyOperationCenter-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "EmergencyOperationCenter-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EC093F5B37060462756C0E0 /* Pods-EmergencyOperationCenter-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmergencyOperationCenter-tvOS.release.xcconfig"; path = "Target Support Files/Pods-EmergencyOperationCenter-tvOS/Pods-EmergencyOperationCenter-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		55898B01D17E9B6AD72D4ECF /* Pods-EmergencyOperationCenter-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmergencyOperationCenter-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-EmergencyOperationCenter-tvOSTests/Pods-EmergencyOperationCenter-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		69A088D2A8A15FA4C53F2282 /* Pods-EmergencyOperationCenter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmergencyOperationCenter.release.xcconfig"; path = "Target Support Files/Pods-EmergencyOperationCenter/Pods-EmergencyOperationCenter.release.xcconfig"; sourceTree = "<group>"; };
+		6E22F0AD67E200361321EA45 /* libPods-EmergencyOperationCenter-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EmergencyOperationCenter-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E6C5BFDE02EFADC781A421A /* Pods-EmergencyOperationCenter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmergencyOperationCenter.debug.xcconfig"; path = "Target Support Files/Pods-EmergencyOperationCenter/Pods-EmergencyOperationCenter.debug.xcconfig"; sourceTree = "<group>"; };
+		A2BF36A6B00037206AB1522D /* Pods-EmergencyOperationCenterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmergencyOperationCenterTests.release.xcconfig"; path = "Target Support Files/Pods-EmergencyOperationCenterTests/Pods-EmergencyOperationCenterTests.release.xcconfig"; sourceTree = "<group>"; };
+		D666225FAF907A21BEBE92A7 /* libPods-EmergencyOperationCenterTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EmergencyOperationCenterTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB79D9AE6A9E9856508C6894 /* Pods-EmergencyOperationCenter-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmergencyOperationCenter-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-EmergencyOperationCenter-tvOSTests/Pods-EmergencyOperationCenter-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		F36D3F3EA4F12C5929C304EE /* Pods-eocmobileapp-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eocmobileapp-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-eocmobileapp-tvOS/Pods-eocmobileapp-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		07033521537242128C06BD31 /* AntDesign.ttf */ = {isa = PBXFileReference; name = "AntDesign.ttf"; path = "../node_modules/native-base/Fonts/AntDesign.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		3134B57283A047958A8957D7 /* Entypo.ttf */ = {isa = PBXFileReference; name = "Entypo.ttf"; path = "../node_modules/native-base/Fonts/Entypo.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		CFB16132D3E24811A771A44E /* EvilIcons.ttf */ = {isa = PBXFileReference; name = "EvilIcons.ttf"; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		2F8C29AF288E49D097B6C7B0 /* Feather.ttf */ = {isa = PBXFileReference; name = "Feather.ttf"; path = "../node_modules/native-base/Fonts/Feather.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		C35ADCDE88154152ADFEFC05 /* FontAwesome.ttf */ = {isa = PBXFileReference; name = "FontAwesome.ttf"; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		D52C40B52DDF47C9B2440BFD /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Brands.ttf"; path = "../node_modules/native-base/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		CBC9CDDAF4614790A01B87E1 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Regular.ttf"; path = "../node_modules/native-base/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		6706B836A7294AF0BDD7EBE0 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; name = "FontAwesome5_Solid.ttf"; path = "../node_modules/native-base/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		7D004A68B1D84B65BE0AC446 /* Fontisto.ttf */ = {isa = PBXFileReference; name = "Fontisto.ttf"; path = "../node_modules/native-base/Fonts/Fontisto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		706E807CF6AD42B2ACECEFC7 /* Foundation.ttf */ = {isa = PBXFileReference; name = "Foundation.ttf"; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		9855241EA1FF45E69641938D /* Ionicons.ttf */ = {isa = PBXFileReference; name = "Ionicons.ttf"; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		58BEBA01C6EA43BDA7AA71D6 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; name = "MaterialCommunityIcons.ttf"; path = "../node_modules/native-base/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		FF03D936D44242049E1326BA /* MaterialIcons.ttf */ = {isa = PBXFileReference; name = "MaterialIcons.ttf"; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F421436FDA474E14AEF78817 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		D7581FA992584E8B8B82FD67 /* Roboto_medium.ttf */ = {isa = PBXFileReference; name = "Roboto_medium.ttf"; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		AF9466AD4CEA45F68B6976D7 /* Roboto.ttf */ = {isa = PBXFileReference; name = "Roboto.ttf"; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		6F7E047D1BF04A2CA7457434 /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F34564BBB8724EB99937768E /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		0A537E6416B04FDDA5D1C16B /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68C770F7DF1CA2A4B5C49A57 /* libPods-eocmobileappTests.a in Frameworks */,
+				EEAD34B5872E7DA0C7052058 /* libPods-EmergencyOperationCenterTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1EF7EA1914BBFD7CB1C17E9E /* libPods-eocmobileapp.a in Frameworks */,
+				25443E457E8656C86AAE1D19 /* libPods-EmergencyOperationCenter.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,7 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC641F00AA98421383F62519 /* libPods-eocmobileapp-tvOS.a in Frameworks */,
+				B282A24CC20364AFC652CDB6 /* libPods-EmergencyOperationCenter-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,20 +98,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33539041D7CB0C8B4F6C8B76 /* libPods-eocmobileapp-tvOSTests.a in Frameworks */,
+				33948DEFA43FA702A79717AE /* libPods-EmergencyOperationCenter-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* eocmobileappTests */ = {
+		00E356EF1AD99517003FC87E /* EmergencyOperationCenterTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* eocmobileappTests.m */,
+				00E356F21AD99517003FC87E /* EmergencyOperationCenterTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = eocmobileappTests;
+			path = EmergencyOperationCenterTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -159,7 +122,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* eocmobileapp */ = {
+		13B07FAE1A68108700A75B9A /* EmergencyOperationCenter */ = {
 			isa = PBXGroup;
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -170,7 +133,23 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = eocmobileapp;
+			name = EmergencyOperationCenter;
+			sourceTree = "<group>";
+		};
+		1778FA13EAB3C27BE808CCC0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7E6C5BFDE02EFADC781A421A /* Pods-EmergencyOperationCenter.debug.xcconfig */,
+				69A088D2A8A15FA4C53F2282 /* Pods-EmergencyOperationCenter.release.xcconfig */,
+				00F83E955E6558AD172A124E /* Pods-EmergencyOperationCenter-tvOS.debug.xcconfig */,
+				2EC093F5B37060462756C0E0 /* Pods-EmergencyOperationCenter-tvOS.release.xcconfig */,
+				DB79D9AE6A9E9856508C6894 /* Pods-EmergencyOperationCenter-tvOSTests.debug.xcconfig */,
+				55898B01D17E9B6AD72D4ECF /* Pods-EmergencyOperationCenter-tvOSTests.release.xcconfig */,
+				187B60B4AA1AF0F997D17FA5 /* Pods-EmergencyOperationCenterTests.debug.xcconfig */,
+				A2BF36A6B00037206AB1522D /* Pods-EmergencyOperationCenterTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -178,10 +157,10 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				1683DA6575FF8B54DCB5372C /* libPods-eocmobileapp.a */,
-				6A1DBC64D324801B18C5091A /* libPods-eocmobileapp-tvOS.a */,
-				97A07FC994A9551DC02A230F /* libPods-eocmobileapp-tvOSTests.a */,
-				82D7CFDFC0632926B9EB45BA /* libPods-eocmobileappTests.a */,
+				215474BBEEE7A6F8F5C85329 /* libPods-EmergencyOperationCenter.a */,
+				117AA679DF3C90E1709EDBB0 /* libPods-EmergencyOperationCenter-tvOS.a */,
+				6E22F0AD67E200361321EA45 /* libPods-EmergencyOperationCenter-tvOSTests.a */,
+				D666225FAF907A21BEBE92A7 /* libPods-EmergencyOperationCenterTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -196,13 +175,12 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* eocmobileapp */,
+				13B07FAE1A68108700A75B9A /* EmergencyOperationCenter */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* eocmobileappTests */,
+				00E356EF1AD99517003FC87E /* EmergencyOperationCenterTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				CE8AEED56356C478ED4C3DFC /* Pods */,
-				16B47D23E35242DA836FA3B0 /* Resources */,
+				1778FA13EAB3C27BE808CCC0 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -212,65 +190,22 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* eocmobileapp.app */,
-				00E356EE1AD99517003FC87E /* eocmobileappTests.xctest */,
-				2D02E47B1E0B4A5D006451C7 /* eocmobileapp-tvOS.app */,
-				2D02E4901E0B4A5D006451C7 /* eocmobileapp-tvOSTests.xctest */,
+				13B07F961A680F5B00A75B9A /* EmergencyOperationCenter.app */,
+				00E356EE1AD99517003FC87E /* EmergencyOperationCenterTests.xctest */,
+				2D02E47B1E0B4A5D006451C7 /* EmergencyOperationCenter-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* EmergencyOperationCenter-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CE8AEED56356C478ED4C3DFC /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				0E581C9CDECEBE63C74898BC /* Pods-eocmobileapp.debug.xcconfig */,
-				D58D0913E149719C346CA4F4 /* Pods-eocmobileapp.release.xcconfig */,
-				F36D3F3EA4F12C5929C304EE /* Pods-eocmobileapp-tvOS.debug.xcconfig */,
-				A9AE070EEE69885FC27BF5EE /* Pods-eocmobileapp-tvOS.release.xcconfig */,
-				C4F25DC514E4B08E07638743 /* Pods-eocmobileapp-tvOSTests.debug.xcconfig */,
-				0B18F7B49381EA3FC67AB3C8 /* Pods-eocmobileapp-tvOSTests.release.xcconfig */,
-				76298CBCCDC5580AF09EAEDE /* Pods-eocmobileappTests.debug.xcconfig */,
-				CAEB8F74B5594513FEB1FB56 /* Pods-eocmobileappTests.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
-			sourceTree = "<group>";
-		};
-		16B47D23E35242DA836FA3B0 /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				07033521537242128C06BD31 /* AntDesign.ttf */,
-				3134B57283A047958A8957D7 /* Entypo.ttf */,
-				CFB16132D3E24811A771A44E /* EvilIcons.ttf */,
-				2F8C29AF288E49D097B6C7B0 /* Feather.ttf */,
-				C35ADCDE88154152ADFEFC05 /* FontAwesome.ttf */,
-				D52C40B52DDF47C9B2440BFD /* FontAwesome5_Brands.ttf */,
-				CBC9CDDAF4614790A01B87E1 /* FontAwesome5_Regular.ttf */,
-				6706B836A7294AF0BDD7EBE0 /* FontAwesome5_Solid.ttf */,
-				7D004A68B1D84B65BE0AC446 /* Fontisto.ttf */,
-				706E807CF6AD42B2ACECEFC7 /* Foundation.ttf */,
-				9855241EA1FF45E69641938D /* Ionicons.ttf */,
-				58BEBA01C6EA43BDA7AA71D6 /* MaterialCommunityIcons.ttf */,
-				FF03D936D44242049E1326BA /* MaterialIcons.ttf */,
-				F421436FDA474E14AEF78817 /* Octicons.ttf */,
-				D7581FA992584E8B8B82FD67 /* Roboto_medium.ttf */,
-				AF9466AD4CEA45F68B6976D7 /* Roboto.ttf */,
-				6F7E047D1BF04A2CA7457434 /* rubicon-icon-font.ttf */,
-				F34564BBB8724EB99937768E /* SimpleLineIcons.ttf */,
-				0A537E6416B04FDDA5D1C16B /* Zocial.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* eocmobileappTests */ = {
+		00E356ED1AD99517003FC87E /* EmergencyOperationCenterTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "eocmobileappTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "EmergencyOperationCenterTests" */;
 			buildPhases = (
-				C9496D886F4395A767E60392 /* [CP] Check Pods Manifest.lock */,
+				B217A796507EAD5D3F161005 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
@@ -280,16 +215,16 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = eocmobileappTests;
-			productName = eocmobileappTests;
-			productReference = 00E356EE1AD99517003FC87E /* eocmobileappTests.xctest */;
+			name = EmergencyOperationCenterTests;
+			productName = EmergencyOperationCenterTests;
+			productReference = 00E356EE1AD99517003FC87E /* EmergencyOperationCenterTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* eocmobileapp */ = {
+		13B07F861A680F5B00A75B9A /* EmergencyOperationCenter */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "eocmobileapp" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "EmergencyOperationCenter" */;
 			buildPhases = (
-				106EA627DE6744E53FC0586C /* [CP] Check Pods Manifest.lock */,
+				F5E63080E82AF36517E6A5F7 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
@@ -300,16 +235,16 @@
 			);
 			dependencies = (
 			);
-			name = eocmobileapp;
-			productName = eocmobileapp;
-			productReference = 13B07F961A680F5B00A75B9A /* eocmobileapp.app */;
+			name = EmergencyOperationCenter;
+			productName = EmergencyOperationCenter;
+			productReference = 13B07F961A680F5B00A75B9A /* EmergencyOperationCenter.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E47A1E0B4A5D006451C7 /* eocmobileapp-tvOS */ = {
+		2D02E47A1E0B4A5D006451C7 /* EmergencyOperationCenter-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "eocmobileapp-tvOS" */;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "EmergencyOperationCenter-tvOS" */;
 			buildPhases = (
-				377CB2B180E5DFA78B8C86F9 /* [CP] Check Pods Manifest.lock */,
+				EE63C671B52FDB04C54894FC /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
@@ -320,16 +255,16 @@
 			);
 			dependencies = (
 			);
-			name = "eocmobileapp-tvOS";
-			productName = "eocmobileapp-tvOS";
-			productReference = 2D02E47B1E0B4A5D006451C7 /* eocmobileapp-tvOS.app */;
+			name = "EmergencyOperationCenter-tvOS";
+			productName = "EmergencyOperationCenter-tvOS";
+			productReference = 2D02E47B1E0B4A5D006451C7 /* EmergencyOperationCenter-tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E48F1E0B4A5D006451C7 /* eocmobileapp-tvOSTests */ = {
+		2D02E48F1E0B4A5D006451C7 /* EmergencyOperationCenter-tvOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "eocmobileapp-tvOSTests" */;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "EmergencyOperationCenter-tvOSTests" */;
 			buildPhases = (
-				BF7E849FFCF302BA88689056 /* [CP] Check Pods Manifest.lock */,
+				056E5E42E34D23214C1D1EC3 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
@@ -339,9 +274,9 @@
 			dependencies = (
 				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
 			);
-			name = "eocmobileapp-tvOSTests";
-			productName = "eocmobileapp-tvOSTests";
-			productReference = 2D02E4901E0B4A5D006451C7 /* eocmobileapp-tvOSTests.xctest */;
+			name = "EmergencyOperationCenter-tvOSTests";
+			productName = "EmergencyOperationCenter-tvOSTests";
+			productReference = 2D02E4901E0B4A5D006451C7 /* EmergencyOperationCenter-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -350,7 +285,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 940;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -368,7 +303,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "eocmobileapp" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "EmergencyOperationCenter" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -381,10 +316,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* eocmobileapp */,
-				00E356ED1AD99517003FC87E /* eocmobileappTests */,
-				2D02E47A1E0B4A5D006451C7 /* eocmobileapp-tvOS */,
-				2D02E48F1E0B4A5D006451C7 /* eocmobileapp-tvOSTests */,
+				13B07F861A680F5B00A75B9A /* EmergencyOperationCenter */,
+				00E356ED1AD99517003FC87E /* EmergencyOperationCenterTests */,
+				2D02E47A1E0B4A5D006451C7 /* EmergencyOperationCenter-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* EmergencyOperationCenter-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -403,25 +338,6 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				2CC2388FDD4A4C95BB06A519 /* AntDesign.ttf in Resources */,
-				845051FC68264E77ADC2C662 /* Entypo.ttf in Resources */,
-				B12070C3F4EA44769FE328E3 /* EvilIcons.ttf in Resources */,
-				158AC2D09FD14339847BCE76 /* Feather.ttf in Resources */,
-				64A5FD8812A243F5A33C5B6D /* FontAwesome.ttf in Resources */,
-				51B5A7A5CD734821B8BA0EBC /* FontAwesome5_Brands.ttf in Resources */,
-				4A65FF873045453A84F962C3 /* FontAwesome5_Regular.ttf in Resources */,
-				0EE0F7C7B62A4CCB8E81C7CE /* FontAwesome5_Solid.ttf in Resources */,
-				F152DFCF1F424352978743DA /* Fontisto.ttf in Resources */,
-				17D47B9388FA4A6FB78F1A0A /* Foundation.ttf in Resources */,
-				FE126D768E9940F7A4ADF022 /* Ionicons.ttf in Resources */,
-				E694F8AB97504482837F6BE1 /* MaterialCommunityIcons.ttf in Resources */,
-				657F7369843F4B74AEA1A156 /* MaterialIcons.ttf in Resources */,
-				893B978BEB5F40FCA991F211 /* Octicons.ttf in Resources */,
-				2088300D13F747A382922774 /* Roboto_medium.ttf in Resources */,
-				AC90195BAAEE4BE393770A70 /* Roboto.ttf in Resources */,
-				05B56B5590C0402C9EF2133A /* rubicon-icon-font.ttf in Resources */,
-				260280E4EF3945E7AF1CE722 /* SimpleLineIcons.ttf in Resources */,
-				94D0DCFC910B47D58828EBD4 /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,7 +373,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		106EA627DE6744E53FC0586C /* [CP] Check Pods Manifest.lock */ = {
+		056E5E42E34D23214C1D1EC3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -472,7 +388,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-eocmobileapp-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-EmergencyOperationCenter-tvOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -493,7 +409,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		377CB2B180E5DFA78B8C86F9 /* [CP] Check Pods Manifest.lock */ = {
+		B217A796507EAD5D3F161005 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -508,14 +424,14 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-eocmobileapp-tvOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-EmergencyOperationCenterTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BF7E849FFCF302BA88689056 /* [CP] Check Pods Manifest.lock */ = {
+		EE63C671B52FDB04C54894FC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -530,14 +446,14 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-eocmobileapp-tvOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-EmergencyOperationCenter-tvOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C9496D886F4395A767E60392 /* [CP] Check Pods Manifest.lock */ = {
+		F5E63080E82AF36517E6A5F7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -552,7 +468,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-eocmobileappTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-EmergencyOperationCenter-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -604,7 +520,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* eocmobileappTests.m in Sources */,
+				00E356F31AD99517003FC87E /* EmergencyOperationCenterTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,7 +546,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DCD954D1E0B4F2C00145EB5 /* eocmobileappTests.m in Sources */,
+				2DCD954D1E0B4F2C00145EB5 /* EmergencyOperationCenterTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,12 +555,12 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* eocmobileapp */;
+			target = 13B07F861A680F5B00A75B9A /* EmergencyOperationCenter */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2D02E47A1E0B4A5D006451C7 /* eocmobileapp-tvOS */;
+			target = 2D02E47A1E0B4A5D006451C7 /* EmergencyOperationCenter-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -656,7 +572,7 @@
 				13B07FB21A68108700A75B9A /* Base */,
 			);
 			name = LaunchScreen.xib;
-			path = eocmobileapp;
+			path = EmergencyOperationCenter;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -664,14 +580,14 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 76298CBCCDC5580AF09EAEDE /* Pods-eocmobileappTests.debug.xcconfig */;
+			baseConfigurationReference = 187B60B4AA1AF0F997D17FA5 /* Pods-EmergencyOperationCenterTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = eocmobileappTests/Info.plist;
+				INFOPLIST_FILE = EmergencyOperationCenterTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -681,17 +597,17 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/eocmobileapp.app/eocmobileapp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EmergencyOperationCenter.app/EmergencyOperationCenter";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CAEB8F74B5594513FEB1FB56 /* Pods-eocmobileappTests.release.xcconfig */;
+			baseConfigurationReference = A2BF36A6B00037206AB1522D /* Pods-EmergencyOperationCenterTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = eocmobileappTests/Info.plist;
+				INFOPLIST_FILE = EmergencyOperationCenterTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -701,18 +617,18 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/eocmobileapp.app/eocmobileapp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EmergencyOperationCenter.app/EmergencyOperationCenter";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0E581C9CDECEBE63C74898BC /* Pods-eocmobileapp.debug.xcconfig */;
+			baseConfigurationReference = 7E6C5BFDE02EFADC781A421A /* Pods-EmergencyOperationCenter.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				INFOPLIST_FILE = eocmobileapp/Info.plist;
+				INFOPLIST_FILE = EmergencyOperationCenter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -720,18 +636,18 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = eocmobileapp;
+				PRODUCT_NAME = EmergencyOperationCenter;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D58D0913E149719C346CA4F4 /* Pods-eocmobileapp.release.xcconfig */;
+			baseConfigurationReference = 69A088D2A8A15FA4C53F2282 /* Pods-EmergencyOperationCenter.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 2;
-				INFOPLIST_FILE = eocmobileapp/Info.plist;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = EmergencyOperationCenter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -739,14 +655,14 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = eocmobileapp;
+				PRODUCT_NAME = EmergencyOperationCenter;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F36D3F3EA4F12C5929C304EE /* Pods-eocmobileapp-tvOS.debug.xcconfig */;
+			baseConfigurationReference = 00F83E955E6558AD172A124E /* Pods-EmergencyOperationCenter-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -757,14 +673,14 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "eocmobileapp-tvOS/Info.plist";
+				INFOPLIST_FILE = "EmergencyOperationCenter-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.eocmobileapp-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.EmergencyOperationCenter-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -774,7 +690,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A9AE070EEE69885FC27BF5EE /* Pods-eocmobileapp-tvOS.release.xcconfig */;
+			baseConfigurationReference = 2EC093F5B37060462756C0E0 /* Pods-EmergencyOperationCenter-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -785,14 +701,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "eocmobileapp-tvOS/Info.plist";
+				INFOPLIST_FILE = "EmergencyOperationCenter-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.eocmobileapp-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.EmergencyOperationCenter-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -802,7 +718,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C4F25DC514E4B08E07638743 /* Pods-eocmobileapp-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = DB79D9AE6A9E9856508C6894 /* Pods-EmergencyOperationCenter-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -812,24 +728,24 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "eocmobileapp-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "EmergencyOperationCenter-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.eocmobileapp-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.EmergencyOperationCenter-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/eocmobileapp-tvOS.app/eocmobileapp-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EmergencyOperationCenter-tvOS.app/EmergencyOperationCenter-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Debug;
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0B18F7B49381EA3FC67AB3C8 /* Pods-eocmobileapp-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = 55898B01D17E9B6AD72D4ECF /* Pods-EmergencyOperationCenter-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -839,17 +755,17 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "eocmobileapp-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "EmergencyOperationCenter-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.eocmobileapp-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.EmergencyOperationCenter-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/eocmobileapp-tvOS.app/eocmobileapp-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EmergencyOperationCenter-tvOS.app/EmergencyOperationCenter-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
@@ -956,7 +872,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "eocmobileappTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "EmergencyOperationCenterTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -965,7 +881,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "eocmobileapp" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "EmergencyOperationCenter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -974,7 +890,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "eocmobileapp-tvOS" */ = {
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "EmergencyOperationCenter-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4971E0B4A5E006451C7 /* Debug */,
@@ -983,7 +899,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "eocmobileapp-tvOSTests" */ = {
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "EmergencyOperationCenter-tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
@@ -992,7 +908,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "eocmobileapp" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "EmergencyOperationCenter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
