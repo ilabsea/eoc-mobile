@@ -48,7 +48,7 @@ class HomeScreen extends Component {
   }
 
   _onOpenActionSheet = () => {
-    const options = ['English', 'ខ្មែរ', 'Cancel'];
+    const options = ['English', 'ខ្មែរ'];
     const destructiveButtonIndex = 2;
     const cancelButtonIndex = 2;
     const getLang = {
