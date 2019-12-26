@@ -1,10 +1,17 @@
 import React from 'react';
-import {View, Text, ActivityIndicator, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  ActivityIndicator,
+  StyleSheet,
+  AppState,
+} from 'react-native';
 import {Container, Content, H1, H3} from 'native-base';
 import {Sop, service} from '../services';
 import {regexHtml} from '../config/utils';
 import i18n from 'i18n-js';
 import DownloadComponent from '../components/DownloadComponent';
+import Reactotron from 'reactotron-react-native';
 
 class SopDetailScreen extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -12,10 +19,13 @@ class SopDetailScreen extends React.Component {
       headerTitle: () => (
         <View style={styles.headerTitle}>
           <H3 style={styles.headerText}>{i18n.t('detail')}</H3>
-          <DownloadComponent
-            item={navigation.getParam('item')}
-            isTransparent={false}
-          />
+
+          {navigation.getParam('item') ? (
+            <DownloadComponent
+              item={navigation.getParam('item')}
+              isTransparent={false}
+            />
+          ) : null}
         </View>
       ),
     };
@@ -28,7 +38,46 @@ class SopDetailScreen extends React.Component {
     };
   }
 
+  state = {
+    appState: AppState.currentState,
+  };
+
   async componentDidMount() {
+    service.firebaseManager.setCurrentScreen(
+      'SopDetailScreen',
+      'SopDetailScreen',
+    );
+
+    this.getItem();
+    let {item} = this.state;
+    if (item && item.file) {
+      this.props.navigation.setParams({item: item});
+    }
+    AppState.addEventListener('change', this._handleAppStateChange);
+  }
+
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this._handleAppStateChange);
+  }
+
+  _backgroundState(state) {
+    if (state === undefined) {
+      return false;
+    }
+    return state.match(/inactive|background/);
+  }
+
+  _handleAppStateChange = nextAppState => {
+    if (
+      this._backgroundState(this.state.appState) &&
+      nextAppState === 'active'
+    ) {
+      this.getItem();
+    }
+    this.setState({appState: nextAppState});
+  };
+
+  async getItem() {
     let item,
       {navigation} = this.props;
     let itemId = navigation.getParam('itemId');
@@ -41,13 +90,6 @@ class SopDetailScreen extends React.Component {
     }
 
     this.setState({item});
-
-    service.firebaseManager.setCurrentScreen(
-      'SopDetailScreen',
-      'SopDetailScreen',
-    );
-
-    navigation.setParams({item});
   }
 
   render() {

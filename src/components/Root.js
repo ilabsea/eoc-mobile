@@ -40,7 +40,7 @@ class Root extends React.Component {
         const channel = new firebase.notifications.Android.Channel(
           'eoc-channel',
           'EOC Channel',
-          firebase.notifications.Android.Importance.Max,
+          firebase.notifications.Android.Priority.Max,
         )
           .setDescription('ilabsoutheastasia.org/eoc')
           .setSound('notif');

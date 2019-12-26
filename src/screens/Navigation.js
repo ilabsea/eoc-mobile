@@ -26,7 +26,7 @@ const StackNavigator = createStackNavigator(
     Category: CategoryScreen,
     SopDetail: {
       screen: SopDetailScreen,
-      path: 'eoc://detail/:sopId',
+      path: 'eoc://SopDetail/:sopId',
     },
   },
   {
