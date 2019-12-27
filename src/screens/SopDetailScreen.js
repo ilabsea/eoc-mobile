@@ -11,7 +11,6 @@ import {Sop, service} from '../services';
 import {regexHtml} from '../config/utils';
 import i18n from 'i18n-js';
 import DownloadComponent from '../components/DownloadComponent';
-import Reactotron from 'reactotron-react-native';
 
 class SopDetailScreen extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -68,12 +67,7 @@ class SopDetailScreen extends React.Component {
   }
 
   _handleAppStateChange = nextAppState => {
-    if (
-      this._backgroundState(this.state.appState) &&
-      nextAppState === 'active'
-    ) {
-      this.getItem();
-    }
+    this.getItem();
     this.setState({appState: nextAppState});
   };
 

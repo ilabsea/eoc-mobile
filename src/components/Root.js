@@ -4,7 +4,7 @@ import firebase from 'react-native-firebase';
 import AsyncStorage from '@react-native-community/async-storage';
 import {withNavigation} from 'react-navigation';
 import SplashScreen from 'react-native-splash-screen';
-import i18n from 'i18n-js';
+import bgMessaging from './bgMessaging';
 
 class Root extends React.Component {
   async componentDidMount() {
@@ -80,9 +80,7 @@ class Root extends React.Component {
     this.removeNotificationListener = firebase
       .notifications()
       .onNotification(notification => {
-        const {data} = notification;
-        let params = {payload: data, navigation: this.props.navigation};
-        service.toastManager.show(i18n.t('new_sop'), params);
+        bgMessaging(notification);
       });
 
     /*
@@ -100,9 +98,7 @@ class Root extends React.Component {
     this.removeMessageListener = firebase
       .messaging()
       .onMessage(notification => {
-        const {data} = notification;
-        let params = {payload: data, navigation: this.props.navigation};
-        service.toastManager.show(i18n.t('new_sop'), params);
+        bgMessaging(notification);
       });
 
     /*
