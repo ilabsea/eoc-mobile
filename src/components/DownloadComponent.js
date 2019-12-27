@@ -3,6 +3,7 @@ import {fileInfo} from '../config/utils';
 import {service} from '../services';
 import {connect} from 'react-redux';
 import DownloadControl from './DownloadController';
+import i18n from 'i18n-js';
 
 class DownloadComponent extends React.Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class DownloadComponent extends React.Component {
       let {remoteUrl, localUrl, fileName, mime} = fileInfo(item);
       this.setState({isDisabled: true, localUrl});
       service.firebaseManager.logEvent('EVENT_DOWNLOAD', {fileName});
-
+      service.toastManager.show(i18n.t('downloadMsg'));
       service.downloadManager.inTrayDownload(remoteUrl, fileName, mime);
     }
   }
