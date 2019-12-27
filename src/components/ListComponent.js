@@ -29,7 +29,7 @@ class ListComponent extends React.Component {
 
   perform() {
     const {item} = this.props;
-    item.model_name === 'Sop' ? this.showDetail() : this.navigate();
+    item.hasOwnProperty('description') ? this.showDetail() : this.navigate();
   }
 
   render() {
