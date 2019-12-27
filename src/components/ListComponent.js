@@ -55,7 +55,12 @@ class ListComponent extends React.Component {
             </View>
 
             <View style={styles.descriptionWrapper}>
-              <H3 style={styles.header}>{name}</H3>
+              <H3
+                style={styles.header}
+                numberOfLines={3}
+                ellipsizeMode={'tail'}>
+                {name}
+              </H3>
               {description ? (
                 <Textile parent_id={parent_id} text={description} />
               ) : null}
