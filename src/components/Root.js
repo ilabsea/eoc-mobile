@@ -4,6 +4,7 @@ import firebase from 'react-native-firebase';
 import AsyncStorage from '@react-native-community/async-storage';
 import {withNavigation} from 'react-navigation';
 import SplashScreen from 'react-native-splash-screen';
+import bgMessaging from './bgMessaging';
 
 class Root extends React.Component {
   async componentDidMount() {
@@ -39,7 +40,7 @@ class Root extends React.Component {
         const channel = new firebase.notifications.Android.Channel(
           'eoc-channel',
           'EOC Channel',
-          firebase.notifications.Android.Importance.Max,
+          firebase.notifications.Android.Priority.Max,
         )
           .setDescription('ilabsoutheastasia.org/eoc')
           .setSound('notif');
@@ -79,9 +80,7 @@ class Root extends React.Component {
     this.removeNotificationListener = firebase
       .notifications()
       .onNotification(notification => {
-        const {data} = notification;
-        let params = {payload: data, navigation: this.props.navigation};
-        service.toastManager.show('New notification!', params);
+        bgMessaging(notification);
       });
 
     /*
@@ -99,9 +98,7 @@ class Root extends React.Component {
     this.removeMessageListener = firebase
       .messaging()
       .onMessage(notification => {
-        const {data} = notification;
-        let params = {payload: data, navigation: this.props.navigation};
-        service.toastManager.show('New notification!', params);
+        bgMessaging(notification);
       });
 
     /*

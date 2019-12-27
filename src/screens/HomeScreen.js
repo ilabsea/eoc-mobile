@@ -1,12 +1,18 @@
 import React, {Component} from 'react';
 import {YellowBox, View, StyleSheet} from 'react-native';
 
+import {connectActionSheet} from '@expo/react-native-action-sheet';
+import i18n from 'i18n-js';
+import {connect} from 'react-redux';
+
 import {H3, Button, Icon} from 'native-base';
 
 import {service} from '../services';
 import RenderComponent from './RenderComponent';
 import Root from '../components/Root';
 import codePush from 'react-native-code-push';
+
+import {setLang} from '../actions';
 
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle']);
@@ -16,10 +22,15 @@ class HomeScreen extends Component {
     return {
       headerTitle: () => (
         <View style={styles.headerTitle}>
-          <H3 style={styles.headerText}>Guidelines</H3>
-          <Button transparent onPress={() => navigation.navigate('Search')}>
-            <Icon name="ios-search" style={styles.headerText} />
-          </Button>
+          <H3 style={styles.headerText}>{navigation.getParam('title')}</H3>
+          <View style={styles.dirRow}>
+            <Button transparent onPress={() => navigation.navigate('Search')}>
+              <Icon name="ios-search" style={styles.headerText} />
+            </Button>
+            <Button transparent onPress={navigation.getParam('changeLanguage')}>
+              <Icon name="ios-globe" style={styles.headerText} />
+            </Button>
+          </View>
         </View>
       ),
     };
@@ -35,6 +46,32 @@ class HomeScreen extends Component {
       data: [],
     };
   }
+
+  _onOpenActionSheet = () => {
+    const options = ['English', 'ខ្មែរ'];
+    const destructiveButtonIndex = 2;
+    const cancelButtonIndex = 2;
+    const getLang = {
+      0: 'en',
+      1: 'km',
+    };
+    this.props.showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex,
+        destructiveButtonIndex,
+        title: i18n.t('choose_lang'),
+      },
+      buttonIndex => {
+        if (buttonIndex <= 1) {
+          const lang = getLang[buttonIndex];
+          this.props.setLang(lang);
+          service.translateManager.translate(lang);
+          this.props.navigation.setParams({title: i18n.t('guideline')});
+        }
+      },
+    );
+  };
 
   codePushStatusDidChange(status) {
     switch (status) {
@@ -63,6 +100,12 @@ class HomeScreen extends Component {
   }
 
   componentDidMount() {
+    const {navigation, lang} = this.props;
+    service.translateManager.translate(lang);
+    navigation.setParams({
+      changeLanguage: this._onOpenActionSheet,
+      title: i18n.t('guideline'),
+    });
     service.firebaseManager.setCurrentScreen('HomeScreen', 'HomeScreen');
   }
 
@@ -84,11 +127,24 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
   },
   headerText: {
+    lineHeight: 30,
     color: '#FFF',
+  },
+  dirRow: {
+    flexDirection: 'row',
   },
 });
 
 const codePushOptions = {
   checkFrequency: codePush.CheckFrequency.ON_APP_START,
 };
-export default codePush(codePushOptions)(HomeScreen);
+const HomeConnect = connectActionSheet(HomeScreen);
+const mapStateToProps = state => {
+  let {lang} = state;
+  return {lang};
+};
+const mapDispatchToProps = {setLang};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(codePush(codePushOptions)(HomeConnect));

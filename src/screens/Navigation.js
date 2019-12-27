@@ -1,39 +1,32 @@
 import React from 'react';
-import Reactotron from '../../ReactotronConfig';
 
 // Navigation
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createDrawerNavigator} from 'react-navigation-drawer';
-
-import database from '../models/database';
+import {ActionSheetProvider} from '@expo/react-native-action-sheet';
 
 // State
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {PersistGate} from 'redux-persist/integration/react';
 
 // Screens
 import HomeScreen from './HomeScreen';
 import SearchScreen from './SearchScreen';
 import CategoryScreen from './CategoryScreen';
 import SopDetailScreen from './SopDetailScreen';
-import Notification from './NotificationScreen';
+
+import configureStore from '../config/configureStore';
+const {persistor, store} = configureStore();
 
 const StackNavigator = createStackNavigator(
   {
-    Home: {
-      screen: HomeScreen,
-    },
-    Search: {
-      screen: SearchScreen,
-    },
-    Category: {
-      screen: CategoryScreen,
-    },
+    Home: HomeScreen,
+    Search: SearchScreen,
+    Category: CategoryScreen,
     SopDetail: {
       screen: SopDetailScreen,
-      path: 'eoc://detail/:sopId',
-      navigationOptions: {title: 'Sop detail'},
+      path: 'eoc://SopDetail/:sopId',
     },
   },
   {
@@ -50,33 +43,22 @@ const StackNavigator = createStackNavigator(
 );
 
 let Navigate = createAppContainer(
-  createDrawerNavigator(
-    {
-      Root: {
-        screen: StackNavigator,
-        path: 'eoc://',
-      },
+  createDrawerNavigator({
+    Root: {
+      screen: StackNavigator,
+      path: 'eoc://',
     },
-    {
-      Notification: {
-        screen: Notification,
-        navigationOptions: {title: 'Notifications'},
-      },
-    },
-    {
-      initialRouteName: 'Root',
-    },
-  ),
+  }),
 );
-
-const initialState = {database};
-const reducer = (state = initialState, action) => state;
-const store = createStore(reducer, Reactotron.createEnhancer());
 
 export const createNavigation = () => {
   return (
     <Provider store={store}>
-      <Navigate />
+      <PersistGate loading={null} persistor={persistor}>
+        <ActionSheetProvider>
+          <Navigate />
+        </ActionSheetProvider>
+      </PersistGate>
     </Provider>
   );
 };

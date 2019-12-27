@@ -24,11 +24,13 @@ export default async message => {
       .setChannelId('eoc-channel')
       .android.setSmallIcon('ic_stat_notif')
       .android.setColor('#000000')
-      .android.setPriority(firebase.notifications.Android.Priority.High);
+      .android.setPriority(firebase.notifications.Android.Priority.Max);
 
     firebase
       .notifications()
       .displayNotification(notification)
       .catch(err => console.error(err));
+
+    return Promise.resolve();
   }
 };
