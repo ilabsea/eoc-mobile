@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {YellowBox} from 'react-native';
+import {YellowBox, Keyboard} from 'react-native';
 import {service} from '../services';
 import HeaderComponent from '../components/HeaderComponent';
 import RenderComponent from './RenderComponent';
@@ -43,6 +43,9 @@ class SearchScreen extends Component {
   handleSearch = () => {
     this.setState({shouldLoad: true}, () => {
       this.renderer.current.handleSearch();
+      if (this.state.q.length > 0) {
+        Keyboard.dismiss();
+      }
     });
   };
 
