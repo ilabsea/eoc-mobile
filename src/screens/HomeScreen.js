@@ -13,6 +13,7 @@ import Root from '../components/Root';
 import codePush from 'react-native-code-push';
 
 import {setLang} from '../actions';
+import Config from 'react-native-config';
 
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle']);
@@ -135,16 +136,20 @@ const styles = StyleSheet.create({
   },
 });
 
-const codePushOptions = {
-  checkFrequency: codePush.CheckFrequency.ON_APP_START,
-};
-const HomeConnect = connectActionSheet(HomeScreen);
+let HomeConnect = connectActionSheet(HomeScreen);
+if (Config.ENABLE_CODEPUSH_CHECK === 'true') {
+  HomeConnect = codePush({
+    checkFrequency: codePush.CheckFrequency.ON_APP_START,
+  })(HomeConnect);
+}
+
 const mapStateToProps = state => {
   let {lang} = state;
   return {lang};
 };
 const mapDispatchToProps = {setLang};
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(codePush(codePushOptions)(HomeConnect));
+)(HomeConnect);
