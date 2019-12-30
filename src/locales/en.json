@@ -5,5 +5,9 @@
   "app_version": "App version",
   "new_sop": "New SOP",
   "detail": "SOP Detail",
-  "choose_lang": "Choose language:"
+  "choose_lang": "Choose language:",
+  "downloadMsg": "1 item will be downloaded, see notification for detail",
+  "downloadComplete": "Download completed!",
+  "downloadTitle": "Download %{fileName}",
+  "downloadDescription": "Downloaded at %{time}"
 }

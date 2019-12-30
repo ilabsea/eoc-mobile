@@ -5,5 +5,9 @@
   "app_version": "កំណែកម្មវិធី",
   "new_sop": "ឯកសារថ្មី",
   "detail": "ពត៍មានលំអិត",
-  "choose_lang": "ជ្រើសរើសភាសា"
+  "choose_lang": "ជ្រើសរើសភាសា",
+  "downloadMsg": "ឯកសារ ១ នឹងត្រូវទាញយក។ មើល notification សំរាប់ពត៍មានលំអិត",
+  "downloadComplete": "ទាញយករួចរាល់",
+  "downloadTitle": "ទាញយក %{fileName}",
+  "downloadDescription": "កាលបរិច្ឆេទទាញយក %{time}"
 }

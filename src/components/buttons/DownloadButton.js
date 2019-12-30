@@ -11,7 +11,7 @@ const DownloadButton = ({handleDownload, isDisabled, isTransparent = true}) => {
     <Button transparent disabled={isDisabled} onPress={handleDownload}>
       <Icon
         // eslint-disable-next-line react-native/no-inline-styles
-        style={[icons.styles, {color: '#fff'}]}
+        style={[icons.styles, {color: isDisabled ? '#a6a6a6' : '#fff'}]}
         type={icons.type}
         name={icons.name.download}
       />
