@@ -18,6 +18,7 @@ import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
 import io.invertase.firebase.fabric.crashlytics.RNFirebaseCrashlyticsPackage;
 import com.microsoft.codepush.react.CodePush;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
+import io.invertase.firebase.perf.RNFirebasePerformancePackage;
 
 import java.util.List;
 
@@ -47,6 +48,7 @@ public class MainApplication extends Application implements ReactApplication {
       packages.add(new RNFirebaseNotificationsPackage());
       packages.add(new RNFirebaseAnalyticsPackage());
       packages.add(new RNFirebaseCrashlyticsPackage());
+      packages.add(new RNFirebasePerformancePackage());
 
       return packages;
     }
