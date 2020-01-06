@@ -1,6 +1,11 @@
 import React from 'react';
 import styleUtils from '../config/styles';
-import {View, StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  PixelRatio,
+} from 'react-native';
 import {Button, H3, Icon} from 'native-base';
 import CardView from 'react-native-cardview';
 import {withNavigation} from 'react-navigation';
@@ -106,7 +111,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   icon: {
-    fontSize: 42,
+    fontSize: (42 * 2.75) / PixelRatio.get(),
   },
   indicatorIcon: {
     fontSize: 32,

@@ -1,6 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: 'kotlin-android'
 apply plugin: "io.fabric"
+apply plugin: "com.google.firebase.firebase-perf"
 
 import com.android.build.OutputFile
 
@@ -135,7 +136,7 @@ android {
         applicationId "kh.gov.cdcmoh.eoc"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 2
+        versionCode 3
         versionName "0.0.1"
         resValue "string", "build_config_package", "kh.gov.cdcmoh.eoc"
         multiDexEnabled true
@@ -219,6 +220,7 @@ dependencies {
     implementation "com.google.firebase:firebase-core:16.0.9"
     implementation "com.google.firebase:firebase-messaging:18.0.0"
     implementation "com.google.firebase:firebase-analytics"
+    implementation "com.google.firebase:firebase-perf:17.0.2"
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.9@aar') {
       transitive = true
     }
