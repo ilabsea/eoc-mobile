@@ -12,6 +12,10 @@ import * as config from '../config/connectionBase';
 import ListComponent from '../components/ListComponent';
 import NavigateComponent from '../components/NavigateComponent';
 import DownloadComponent from '../components/DownloadComponent';
+import Reactotron from 'reactotron-react-native';
+
+import {connect} from 'react-redux';
+import {setAxiosErrConfig} from '../actions';
 
 class RenderComponent extends React.Component {
   constructor(props) {
@@ -33,6 +37,10 @@ class RenderComponent extends React.Component {
   }
 
   handleFetch = async q => {
+    if (!this.props.isConnected) {
+      return false;
+    }
+
     let {page} = this.state;
     let uri = `${config.uri}/${config.sops_path}`;
     let params = {q, page};
@@ -42,7 +50,7 @@ class RenderComponent extends React.Component {
       let data = await axios
         .get(uri, {params, headers})
         .then(resp => resp.data)
-        .catch(error => error);
+        .catch(error => Reactotron.log(error));
 
       if (data.length > 0) {
         this.setState(prev => {
@@ -51,11 +59,14 @@ class RenderComponent extends React.Component {
             page: prev.page + 1,
           };
         });
-      }
 
-      this.setState({isFetching: false});
+        this.setState({isFetching: false});
+      }
     } catch (error) {
-      service.toastManager.show(error);
+      Reactotron.log(error);
+      // axios.request(error.config);
+      this.props.setAxiosErrConfig(error.config);
+      // service.toastManager.show(error);
     }
   };
 
@@ -119,4 +130,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RenderComponent;
+const mapStateToProps = ({net}) => ({
+  isConnected: net.isConnected,
+});
+
+const mapDispatchToProps = {setAxiosErrConfig};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(RenderComponent);
