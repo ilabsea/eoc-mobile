@@ -1,12 +1,22 @@
 import React from 'react';
+import {Text} from 'react-native';
+import NetInfo from "@react-native-community/netinfo";
 import {service} from '../services';
 import firebase from 'react-native-firebase';
 import AsyncStorage from '@react-native-community/async-storage';
 import {withNavigation} from 'react-navigation';
 import SplashScreen from 'react-native-splash-screen';
 import bgMessaging from './bgMessaging';
+import {NetworkProvider, NetworkConsumer} from 'react-native-offline';
+import Toast from 'react-native-root-toast';
+import Reactotron from 'reactotron-react-native';
+import {connect} from 'react-redux';
 
 class Root extends React.Component {
+  constructor(props) {
+    super(props);
+    this.toaster = null;
+  }
   async componentDidMount() {
     SplashScreen.hide();
     this.checkPermission();
@@ -14,6 +24,22 @@ class Root extends React.Component {
     await service.permissionManager.requestStorage();
     await firebase.crashlytics().enableCrashlyticsCollection();
     await firebase.analytics().setAnalyticsCollectionEnabled(true);
+  }
+
+  toast() {
+    if (this.toaster === null) {
+      this.toaster = Toast.show('You are offline!', {
+        duration: -1,
+        position: Toast.positions.BOTTOM,
+        shadow: true,
+        animation: true,
+        hideOnPress: true,
+        delay: 0,
+      });
+    } else {
+      Toast.hide(this.toaster);
+      this.toaster = null;
+    }
   }
 
   checkPermission() {
@@ -113,8 +139,14 @@ class Root extends React.Component {
   }
 
   render() {
+    Reactotron.log('root: ' + this.props.is_connected);
+    this.toast();
     return this.props.children;
   }
 }
 
-export default withNavigation(Root);
+const mapStateToProps = ({net}) => ({
+  is_connected: net.is_connected,
+});
+
+export default connect(mapStateToProps)(withNavigation(Root));
