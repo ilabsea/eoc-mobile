@@ -12,6 +12,7 @@
   "downloadDescription": "កាលបរិច្ឆេទទាញយក %{time}",
   "noInternet": "មិនមានតំណភ្ជាប់ Internet",
   "noGrant": "ការអនុញ្ញាតមិនត្រូវបានផ្តល់",
-  "offline": "អ្នកមិន online",
-  "invalidRemoteUrl": "ទីតាំងឯកសារមិនត្រឹមត្រូវ"
+  "offline": "អ្នកមិន online ទេ",
+  "invalidRemoteUrl": "ទីតាំងឯកសារមិនត្រឹមត្រូវ",
+  "online": "អ្នកកំពុង online"
 }

@@ -28,7 +28,7 @@ class Root extends React.Component {
     if (!isConnected) {
       if (!this.toaster) {
         this.toaster = Toast.show(i18n.t('noInternet'), {
-          duration: Toast.durations.LONG,
+          duration: -1,
           position: Toast.positions.BOTTOM,
           shadow: true,
           animation: true,
@@ -38,6 +38,7 @@ class Root extends React.Component {
       }
     } else {
       if (this.toaster) {
+        Toast.show(i18n.t('online'));
         Toast.hide(this.toaster);
         this.toaster = null;
       }
