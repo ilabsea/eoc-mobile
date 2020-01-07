@@ -57,11 +57,11 @@ class RenderComponent extends React.Component {
             page: prev.page + 1,
           };
         });
-
-        this.setState({isFetching: false});
       }
     } catch (error) {
       service.toastManager.show(error.message);
+    } finally {
+      this.setState({isFetching: false});
     }
   };
 
@@ -101,11 +101,8 @@ class RenderComponent extends React.Component {
   };
 
   async resumeOffline() {
-    if (
-      this.props.isConnected &&
-      !_.isEmpty(this.props.axiosConfig) &&
-      this.state.isFetching
-    ) {
+    if (this.props.isConnected && !_.isEmpty(this.props.axiosConfig)) {
+      this.props.setAxiosErrConfig({});
       const {data} = await axios.request(this.props.axiosConfig);
       if (data.length > 0) {
         this.setState(prev => {
@@ -115,9 +112,7 @@ class RenderComponent extends React.Component {
             isFetching: false,
           };
         });
-        this.setState({isFetching: false});
       }
-      this.props.setAxiosErrConfig({});
     }
   }
 

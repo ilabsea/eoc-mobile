@@ -27,13 +27,13 @@ class DownloadComponent extends React.Component {
     let granted = await service.permissionManager.requestStorage();
     let {item} = this.props;
 
-    if (item.source) {
+    if (!item.file.url) {
       service.toastManager.show(i18n.t('invalidRemoteUrl'));
       return false;
     }
 
     if (granted) {
-      if (this.props.isConnected && item.source) {
+      if (this.props.isConnected) {
         let {remoteUrl, localUrl, fileName, mime} = fileInfo(item);
         this.setState({isDisabled: true, localUrl});
         service.firebaseManager.logEvent('EVENT_DOWNLOAD', {fileName});
