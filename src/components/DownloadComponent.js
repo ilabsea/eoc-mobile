@@ -4,6 +4,7 @@ import {service} from '../services';
 import {connect} from 'react-redux';
 import DownloadControl from './DownloadController';
 import i18n from 'i18n-js';
+import Reactotron from 'reactotron-react-native';
 
 class DownloadComponent extends React.Component {
   constructor(props) {
@@ -24,10 +25,15 @@ class DownloadComponent extends React.Component {
 
   async handleDownload() {
     let granted = await service.permissionManager.requestStorage();
+    let {item} = this.props;
+
+    if (item.source) {
+      service.toastManager.show(i18n.t('invalidRemoteUrl'));
+      return false;
+    }
 
     if (granted) {
-      let {item} = this.props;
-      if (this.props.isConnected) {
+      if (this.props.isConnected && item.source) {
         let {remoteUrl, localUrl, fileName, mime} = fileInfo(item);
         this.setState({isDisabled: true, localUrl});
         service.firebaseManager.logEvent('EVENT_DOWNLOAD', {fileName});

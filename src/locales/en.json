@@ -12,5 +12,6 @@
   "downloadDescription": "Downloaded at %{time}",
   "noInternet": "No internet connection",
   "noGrant": "Permission not granted",
-  "offline": "You are offline"
+  "offline": "You are offline",
+  "invalidRemoteUrl": "Invalid remote path"
 }
