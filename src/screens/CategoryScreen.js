@@ -8,6 +8,7 @@ import DownloadComponent from '../components/DownloadComponent';
 import NavigateComponent from '../components/NavigateComponent';
 import EmptyList from './EmptyList';
 import ListGroup from './ListGroup';
+import Reactotron from 'reactotron-react-native';
 
 class CategoryScreen extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -40,13 +41,14 @@ class CategoryScreen extends React.Component {
       let {navigation} = this.props;
       const sopGuide = navigation.getParam('sopGuide');
 
-      let {sops, children} = await service.apiManager.fetch_category_children(
-        sopGuide.id,
-      );
-      this.setState({
-        sops,
-        children,
-      });
+      let data = await service.apiManager.fetch_category_children(sopGuide.id);
+
+      if (data && data.name !== 'Error') {
+        this.setState({
+          sops: data.sops,
+          children: data.children,
+        });
+      }
     } finally {
       this.setState({
         isFetching: false,
