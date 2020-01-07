@@ -10,5 +10,7 @@
   "downloadComplete": "ទាញយករួចរាល់",
   "downloadTitle": "ទាញយក %{fileName}",
   "downloadDescription": "កាលបរិច្ឆេទទាញយក %{time}",
-  "noInternet": "មិនមានតំណភ្ជាប់ Internet"
+  "noInternet": "មិនមានតំណភ្ជាប់ Internet",
+  "noGrant": "ការអនុញ្ញាតមិនត្រូវបានផ្តល់",
+  "offline": "អ្នកមិន online"
 }

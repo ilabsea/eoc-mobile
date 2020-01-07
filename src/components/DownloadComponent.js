@@ -27,11 +27,17 @@ class DownloadComponent extends React.Component {
 
     if (granted) {
       let {item} = this.props;
-      let {remoteUrl, localUrl, fileName, mime} = fileInfo(item);
-      this.setState({isDisabled: true, localUrl});
-      service.firebaseManager.logEvent('EVENT_DOWNLOAD', {fileName});
-      service.toastManager.show(i18n.t('downloadMsg'));
-      service.downloadManager.inTrayDownload(remoteUrl, fileName, mime);
+      if (this.props.isConnected) {
+        let {remoteUrl, localUrl, fileName, mime} = fileInfo(item);
+        this.setState({isDisabled: true, localUrl});
+        service.firebaseManager.logEvent('EVENT_DOWNLOAD', {fileName});
+        service.toastManager.show(i18n.t('downloadMsg'));
+        service.downloadManager.inTrayDownload(remoteUrl, fileName, mime);
+      } else {
+        service.toastManager.show(i18n.t('offline'));
+      }
+    } else {
+      service.toastManager.show(i18n.t('noGrant'));
     }
   }
 
@@ -57,9 +63,9 @@ class DownloadComponent extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  let {database} = state;
-  return {database};
-};
+const mapStateToProps = ({database, net}) => ({
+  database,
+  isConnected: net.isConnected,
+});
 
 export default connect(mapStateToProps)(DownloadComponent);
