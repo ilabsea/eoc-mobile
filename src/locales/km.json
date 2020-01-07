@@ -9,5 +9,6 @@
   "downloadMsg": "ឯកសារ ១ នឹងត្រូវទាញយក។ មើល notification សំរាប់ពត៍មានលំអិត",
   "downloadComplete": "ទាញយករួចរាល់",
   "downloadTitle": "ទាញយក %{fileName}",
-  "downloadDescription": "កាលបរិច្ឆេទទាញយក %{time}"
+  "downloadDescription": "កាលបរិច្ឆេទទាញយក %{time}",
+  "noInternet": "មិនមានតំណភ្ជាប់ Internet"
 }

@@ -4,7 +4,6 @@ import {persistStore, persistReducer} from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 import Reactotron from '../../ReactotronConfig';
 import {offlineActionTypes, reducer as network} from 'react-native-offline';
-import NetInfo from "@react-native-community/netinfo";
 
 // database
 import database from '../models/database';
@@ -20,17 +19,11 @@ const langReducer = (state = initialState, action) => {
   }
 };
 
-const initialNet = {is_connected: true};
+const initialNet = {isConnected: true};
 const netReducer = (state = initialNet, action) => {
   switch (action.type) {
     case offlineActionTypes.CONNECTION_CHANGE:
-      Reactotron.log('store: ' + action.payload);
-      // if (network.is_connected !== action.payload && !action.payload) {
-      //   return {is_connected: true};
-      // } else {
-      //   return {is_connected: false};
-      // }
-      return {is_connected: action.payload};
+      return {isConnected: action.payload};
     default:
       return state;
   }
@@ -42,9 +35,20 @@ const persistConfig = {
   whitelist: ['lang'],
 };
 
+const initialReq = {config: {}};
+const reqReducer = (state = initialReq, action) => {
+  switch (action.type) {
+    case 'SET_AXIOS_ERROR_CONFIG':
+      return {config: action.config};
+    default:
+      return state;
+  }
+};
+
 const rootReducer = combineReducers({
   locale: persistReducer(persistConfig, langReducer),
   net: netReducer,
+  req: reqReducer,
   network,
 });
 

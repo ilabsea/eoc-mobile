@@ -9,5 +9,6 @@
   "downloadMsg": "1 item will be downloaded, see notification for detail",
   "downloadComplete": "Download completed!",
   "downloadTitle": "Download %{fileName}",
-  "downloadDescription": "Downloaded at %{time}"
+  "downloadDescription": "Downloaded at %{time}",
+  "noInternet": "No internet connection"
 }

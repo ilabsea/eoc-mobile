@@ -17,6 +17,8 @@ import Reactotron from 'reactotron-react-native';
 import {connect} from 'react-redux';
 import {setAxiosErrConfig} from '../actions';
 
+import _ from 'lodash';
+
 class RenderComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -37,10 +39,6 @@ class RenderComponent extends React.Component {
   }
 
   handleFetch = async q => {
-    if (!this.props.isConnected) {
-      return false;
-    }
-
     let {page} = this.state;
     let uri = `${config.uri}/${config.sops_path}`;
     let params = {q, page};
@@ -50,7 +48,7 @@ class RenderComponent extends React.Component {
       let data = await axios
         .get(uri, {params, headers})
         .then(resp => resp.data)
-        .catch(error => Reactotron.log(error));
+        .catch(error => this.props.setAxiosErrConfig(error.config));
 
       if (data.length > 0) {
         this.setState(prev => {
@@ -63,10 +61,7 @@ class RenderComponent extends React.Component {
         this.setState({isFetching: false});
       }
     } catch (error) {
-      Reactotron.log(error);
-      // axios.request(error.config);
-      this.props.setAxiosErrConfig(error.config);
-      // service.toastManager.show(error);
+      service.toastManager.show(error.message);
     }
   };
 
@@ -105,7 +100,30 @@ class RenderComponent extends React.Component {
     });
   };
 
+  async resumeOffline() {
+    if (
+      this.props.isConnected &&
+      !_.isEmpty(this.props.axiosConfig) &&
+      this.state.isFetching
+    ) {
+      const {data} = await axios.request(this.props.axiosConfig);
+      if (data.length > 0) {
+        this.setState(prev => {
+          return {
+            data: [...prev.data, ...data],
+            page: prev.page + 1,
+            isFetching: false,
+          };
+        });
+        this.setState({isFetching: false});
+      }
+      this.props.setAxiosErrConfig({});
+    }
+  }
+
   render() {
+    this.resumeOffline();
+
     return (
       <Container>
         <EmptyList {...this.state} />
@@ -130,8 +148,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = ({net}) => ({
+const mapStateToProps = ({net, req}) => ({
   isConnected: net.isConnected,
+  axiosConfig: req.config,
 });
 
 const mapDispatchToProps = {setAxiosErrConfig};

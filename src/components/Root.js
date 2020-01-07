@@ -1,16 +1,14 @@
 import React from 'react';
-import {Text} from 'react-native';
-import NetInfo from "@react-native-community/netinfo";
 import {service} from '../services';
 import firebase from 'react-native-firebase';
 import AsyncStorage from '@react-native-community/async-storage';
 import {withNavigation} from 'react-navigation';
 import SplashScreen from 'react-native-splash-screen';
 import bgMessaging from './bgMessaging';
-import {NetworkProvider, NetworkConsumer} from 'react-native-offline';
 import Toast from 'react-native-root-toast';
 import Reactotron from 'reactotron-react-native';
 import {connect} from 'react-redux';
+import i18n from 'i18n-js';
 
 class Root extends React.Component {
   constructor(props) {
@@ -26,19 +24,23 @@ class Root extends React.Component {
     await firebase.analytics().setAnalyticsCollectionEnabled(true);
   }
 
-  toast() {
-    if (this.toaster === null) {
-      this.toaster = Toast.show('You are offline!', {
-        duration: -1,
-        position: Toast.positions.BOTTOM,
-        shadow: true,
-        animation: true,
-        hideOnPress: true,
-        delay: 0,
-      });
+  toast(isConnected) {
+    if (!isConnected) {
+      if (!this.toaster) {
+        this.toaster = Toast.show(i18n.t('noInternet'), {
+          duration: -1,
+          position: Toast.positions.BOTTOM,
+          shadow: true,
+          animation: true,
+          hideOnPress: true,
+          delay: 0,
+        });
+      }
     } else {
-      Toast.hide(this.toaster);
-      this.toaster = null;
+      if (this.toaster) {
+        Toast.hide(this.toaster);
+        this.toaster = null;
+      }
     }
   }
 
@@ -139,14 +141,15 @@ class Root extends React.Component {
   }
 
   render() {
-    Reactotron.log('root: ' + this.props.is_connected);
-    this.toast();
+    // FIXME: maybe isConnected is being cache
+    const {isConnected} = this.props;
+    this.toast(isConnected);
     return this.props.children;
   }
 }
 
 const mapStateToProps = ({net}) => ({
-  is_connected: net.is_connected,
+  isConnected: net.isConnected,
 });
 
 export default connect(mapStateToProps)(withNavigation(Root));
