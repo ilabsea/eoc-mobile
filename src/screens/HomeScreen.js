@@ -15,6 +15,8 @@ import codePush from 'react-native-code-push';
 import {setLang} from '../actions';
 import Config from 'react-native-config';
 
+import Reactotron from 'reactotron-react-native';
+
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle']);
 
@@ -101,8 +103,8 @@ class HomeScreen extends Component {
   }
 
   componentDidMount() {
-    const {navigation, lang} = this.props;
-    service.translateManager.translate(lang);
+    const {navigation, locale} = this.props;
+    service.translateManager.translate(locale.lang);
     navigation.setParams({
       changeLanguage: this._onOpenActionSheet,
       title: i18n.t('guideline'),
@@ -143,9 +145,8 @@ if (Config.ENABLE_CODEPUSH_CHECK === 'true') {
   })(HomeConnect);
 }
 
-const mapStateToProps = state => {
-  let {lang} = state;
-  return {lang};
+const mapStateToProps = ({locale, network}) => {
+  return {locale, network};
 };
 const mapDispatchToProps = {setLang};
 

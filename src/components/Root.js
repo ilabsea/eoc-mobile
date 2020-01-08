@@ -5,8 +5,16 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {withNavigation} from 'react-navigation';
 import SplashScreen from 'react-native-splash-screen';
 import bgMessaging from './bgMessaging';
+import Toast from 'react-native-root-toast';
+import Reactotron from 'reactotron-react-native';
+import {connect} from 'react-redux';
+import i18n from 'i18n-js';
 
 class Root extends React.Component {
+  constructor(props) {
+    super(props);
+    this.toaster = null;
+  }
   async componentDidMount() {
     SplashScreen.hide();
     this.checkPermission();
@@ -14,6 +22,27 @@ class Root extends React.Component {
     await service.permissionManager.requestStorage();
     await firebase.crashlytics().enableCrashlyticsCollection();
     await firebase.analytics().setAnalyticsCollectionEnabled(true);
+  }
+
+  toast(isConnected) {
+    if (!isConnected) {
+      if (!this.toaster) {
+        this.toaster = Toast.show(i18n.t('noInternet'), {
+          duration: -1,
+          position: Toast.positions.BOTTOM,
+          shadow: true,
+          animation: true,
+          hideOnPress: true,
+          delay: 0,
+        });
+      }
+    } else {
+      if (this.toaster) {
+        Toast.show(i18n.t('online'));
+        Toast.hide(this.toaster);
+        this.toaster = null;
+      }
+    }
   }
 
   checkPermission() {
@@ -113,8 +142,15 @@ class Root extends React.Component {
   }
 
   render() {
+    // FIXME: maybe isConnected is being cache
+    const {isConnected} = this.props;
+    this.toast(isConnected);
     return this.props.children;
   }
 }
 
-export default withNavigation(Root);
+const mapStateToProps = ({net}) => ({
+  isConnected: net.isConnected,
+});
+
+export default connect(mapStateToProps)(withNavigation(Root));

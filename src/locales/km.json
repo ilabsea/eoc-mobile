@@ -1,5 +1,5 @@
 {
-  "guideline": "សេចក្ដីប្រកាស",
+  "guideline": "សេចក្ដីណែនាំ",
   "search": "ស្វែងរក",
   "no_item": "មិនមានពត៍មាន",
   "app_version": "កំណែកម្មវិធី",
@@ -9,5 +9,10 @@
   "downloadMsg": "ឯកសារ ១ នឹងត្រូវទាញយក។ មើល notification សំរាប់ពត៍មានលំអិត",
   "downloadComplete": "ទាញយករួចរាល់",
   "downloadTitle": "ទាញយក %{fileName}",
-  "downloadDescription": "កាលបរិច្ឆេទទាញយក %{time}"
+  "downloadDescription": "កាលបរិច្ឆេទទាញយក %{time}",
+  "noInternet": "មិនមានតំណភ្ជាប់ Internet",
+  "noGrant": "ការអនុញ្ញាតមិនត្រូវបានផ្តល់",
+  "offline": "អ្នកមិន online ទេ",
+  "invalidRemoteUrl": "ទីតាំងឯកសារមិនត្រឹមត្រូវ",
+  "online": "អ្នកកំពុង online"
 }

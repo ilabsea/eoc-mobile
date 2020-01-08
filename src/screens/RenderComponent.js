@@ -12,6 +12,12 @@ import * as config from '../config/connectionBase';
 import ListComponent from '../components/ListComponent';
 import NavigateComponent from '../components/NavigateComponent';
 import DownloadComponent from '../components/DownloadComponent';
+import Reactotron from 'reactotron-react-native';
+
+import {connect} from 'react-redux';
+import {setAxiosErrConfig} from '../actions';
+
+import _ from 'lodash';
 
 class RenderComponent extends React.Component {
   constructor(props) {
@@ -42,7 +48,7 @@ class RenderComponent extends React.Component {
       let data = await axios
         .get(uri, {params, headers})
         .then(resp => resp.data)
-        .catch(error => error);
+        .catch(error => this.props.setAxiosErrConfig(error.config));
 
       if (data.length > 0) {
         this.setState(prev => {
@@ -52,10 +58,10 @@ class RenderComponent extends React.Component {
           };
         });
       }
-
-      this.setState({isFetching: false});
     } catch (error) {
-      service.toastManager.show(error);
+      service.toastManager.show(error.message);
+    } finally {
+      this.setState({isFetching: false});
     }
   };
 
@@ -94,7 +100,25 @@ class RenderComponent extends React.Component {
     });
   };
 
+  async resumeOffline() {
+    if (this.props.isConnected && !_.isEmpty(this.props.axiosConfig)) {
+      this.props.setAxiosErrConfig({});
+      const {data} = await axios.request(this.props.axiosConfig);
+      if (data.length > 0) {
+        this.setState(prev => {
+          return {
+            data: [...prev.data, ...data],
+            page: prev.page + 1,
+            isFetching: false,
+          };
+        });
+      }
+    }
+  }
+
   render() {
+    this.resumeOffline();
+
     return (
       <Container>
         <EmptyList {...this.state} />
@@ -119,4 +143,15 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RenderComponent;
+const mapStateToProps = ({net, req}) => ({
+  isConnected: net.isConnected,
+  axiosConfig: req.config,
+});
+
+const mapDispatchToProps = {setAxiosErrConfig};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  null,
+  {forwardRef: true},
+)(RenderComponent);

@@ -1,4 +1,5 @@
 import React from 'react';
+import {ReduxNetworkProvider} from 'react-native-offline';
 
 // Navigation
 import {createAppContainer} from 'react-navigation';
@@ -54,11 +55,13 @@ let Navigate = createAppContainer(
 export const createNavigation = () => {
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <ActionSheetProvider>
-          <Navigate />
-        </ActionSheetProvider>
-      </PersistGate>
+      <ReduxNetworkProvider>
+        <PersistGate loading={null} persistor={persistor}>
+          <ActionSheetProvider>
+            <Navigate />
+          </ActionSheetProvider>
+        </PersistGate>
+      </ReduxNetworkProvider>
     </Provider>
   );
 };

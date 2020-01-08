@@ -3,6 +3,7 @@ import {YellowBox, Keyboard} from 'react-native';
 import {service} from '../services';
 import HeaderComponent from '../components/HeaderComponent';
 import RenderComponent from './RenderComponent';
+import Reactotron from 'reactotron-react-native';
 
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle']);
