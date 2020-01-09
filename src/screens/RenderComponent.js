@@ -13,6 +13,7 @@ import ListComponent from '../components/ListComponent';
 import NavigateComponent from '../components/NavigateComponent';
 import DownloadComponent from '../components/DownloadComponent';
 import Reactotron from 'reactotron-react-native';
+import {withNavigation} from 'react-navigation';
 
 import {connect} from 'react-redux';
 import {setAxiosErrConfig} from '../actions';
@@ -48,9 +49,16 @@ class RenderComponent extends React.Component {
       let data = await axios
         .get(uri, {params, headers})
         .then(resp => resp.data)
-        .catch(error => this.props.setAxiosErrConfig(error.config));
+        .catch(error => {
+          let {
+            state: {routeName},
+          } = this.props.navigation;
+          if (routeName === 'Home') {
+            this.props.setAxiosErrConfig(error.config);
+          }
+        });
 
-      if (data.length > 0) {
+      if (data && data.length > 0) {
         this.setState(prev => {
           return {
             data: [...prev.data, ...data],
@@ -118,7 +126,6 @@ class RenderComponent extends React.Component {
 
   render() {
     this.resumeOffline();
-
     return (
       <Container>
         <EmptyList {...this.state} />
@@ -152,6 +159,4 @@ const mapDispatchToProps = {setAxiosErrConfig};
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-  null,
-  {forwardRef: true},
-)(RenderComponent);
+)(withNavigation(RenderComponent));

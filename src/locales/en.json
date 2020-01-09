@@ -14,5 +14,6 @@
   "noGrant": "Permission not granted",
   "offline": "You are offline",
   "invalidRemoteUrl": "Invalid remote path",
-  "online": "You are online"
+  "online": "You are online",
+  "tryLater": "Please try again later"
 }
