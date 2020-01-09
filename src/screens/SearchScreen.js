@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import {YellowBox, Keyboard} from 'react-native';
+import {YellowBox, Keyboard, Alert} from 'react-native';
 import {service} from '../services';
 import HeaderComponent from '../components/HeaderComponent';
 import RenderComponent from './RenderComponent';
 import Reactotron from 'reactotron-react-native';
+import {connect} from 'react-redux';
+import i18n from 'i18n-js';
 
 // TOREMV
 YellowBox.ignoreWarnings(['Remote debugger', 'Warning', 'Require cycle']);
@@ -42,12 +44,17 @@ class SearchScreen extends Component {
   }
 
   handleSearch = () => {
-    this.setState({shouldLoad: true}, () => {
-      this.renderer.current.handleSearch();
-      if (this.state.q.length > 0) {
-        Keyboard.dismiss();
-      }
-    });
+    let {isConnected} = this.props;
+    if (isConnected) {
+      this.setState({shouldLoad: true}, () => {
+        this.renderer.current.handleSearch();
+        if (this.state.q.length > 0) {
+          Keyboard.dismiss();
+        }
+      });
+    } else {
+      Alert.alert(i18n.t('offline'), i18n.t('tryLater'));
+    }
   };
 
   render() {
@@ -58,4 +65,8 @@ class SearchScreen extends Component {
   }
 }
 
-export default SearchScreen;
+const mapStateToProps = ({net}) => ({
+  isConnected: net.isConnected,
+});
+
+export default connect(mapStateToProps)(SearchScreen);

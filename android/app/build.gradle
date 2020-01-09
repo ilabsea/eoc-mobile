@@ -136,7 +136,7 @@ android {
         applicationId "kh.gov.cdcmoh.eoc"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
+        versionCode 6
         versionName "0.0.1"
         resValue "string", "build_config_package", "kh.gov.cdcmoh.eoc"
         multiDexEnabled true
