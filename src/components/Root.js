@@ -37,7 +37,9 @@ class Root extends React.Component {
       }
     } else {
       if (this.toaster) {
-        Toast.show(i18n.t('online'));
+        Toast.show(i18n.t('online'), {
+          backgroundColor: '#006400',
+        });
         Toast.hide(this.toaster);
         this.toaster = null;
       }

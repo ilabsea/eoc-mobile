@@ -159,6 +159,4 @@ const mapDispatchToProps = {setAxiosErrConfig};
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-  null,
-  {forwardRef: true},
 )(withNavigation(RenderComponent));

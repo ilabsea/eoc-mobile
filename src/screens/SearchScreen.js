@@ -21,7 +21,7 @@ class SearchScreen extends Component {
     super(props);
     this.state = {q: '', shouldLoad: false};
     this.handleSearch = this.handleSearch.bind(this);
-    this.renderer = React.createRef();
+    this.renderer = null;
   }
 
   setNavigationParams = () => {
@@ -47,7 +47,7 @@ class SearchScreen extends Component {
     let {isConnected} = this.props;
     if (isConnected) {
       this.setState({shouldLoad: true}, () => {
-        this.renderer.current.handleSearch();
+        this.renderer.handleSearch();
         if (this.state.q.length > 0) {
           Keyboard.dismiss();
         }
@@ -60,7 +60,11 @@ class SearchScreen extends Component {
   render() {
     let {q, shouldLoad} = this.state;
     return (
-      <RenderComponent ref={this.renderer} q={q} shouldLoad={shouldLoad} />
+      <RenderComponent
+        onRef={elem => (this.renderer = elem)}
+        q={q}
+        shouldLoad={shouldLoad}
+      />
     );
   }
 }
