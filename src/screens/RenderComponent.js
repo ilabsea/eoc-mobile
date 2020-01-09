@@ -54,11 +54,11 @@ class RenderComponent extends React.Component {
             state: {routeName},
           } = this.props.navigation;
           if (routeName === 'Home') {
-            this.props.setAxiosErrConfig(routeName, error.config);
+            this.props.setAxiosErrConfig(error.config);
           }
         });
 
-      if (data.length > 0) {
+      if (data && data.length > 0) {
         this.setState(prev => {
           return {
             data: [...prev.data, ...data],
@@ -126,7 +126,6 @@ class RenderComponent extends React.Component {
 
   render() {
     this.resumeOffline();
-
     return (
       <Container>
         <EmptyList {...this.state} />
