@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^3.4.1",
-    "@nozbe/watermelondb": "^0.14.1",
+    "@nozbe/watermelondb": "^0.15.1",
     "@nozbe/with-observables": "^1.0.5",
     "@react-native-community/art": "^1.0.2",
     "@react-native-community/async-storage": "^1.6.2",
